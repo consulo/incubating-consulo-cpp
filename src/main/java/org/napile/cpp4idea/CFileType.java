@@ -19,6 +19,7 @@ package org.napile.cpp4idea;
 import javax.swing.Icon;
 
 import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.util.CIcons;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 
 /**
@@ -58,6 +59,6 @@ public class CFileType extends LanguageFileType
 	@Override
 	public Icon getIcon()
 	{
-		return null;
+		return CIcons.SOURCE_FILE;
 	}
 }

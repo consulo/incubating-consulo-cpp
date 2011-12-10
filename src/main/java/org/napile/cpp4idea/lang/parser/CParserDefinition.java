@@ -18,12 +18,12 @@ package org.napile.cpp4idea.lang.parser;
 
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CLanguage;
+import org.napile.cpp4idea.lang.lexer.CFlexLexer;
+import org.napile.cpp4idea.lang.lexer.CTokenType;
 import org.napile.cpp4idea.lang.psi.impl.CPsiFileImpl;
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
-import com.intellij.lexer.EmptyLexer;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
@@ -45,7 +45,7 @@ public class CParserDefinition implements ParserDefinition
 	@Override
 	public Lexer createLexer(Project project)
 	{
-		return new EmptyLexer();
+		return new CFlexLexer();
 	}
 
 	@Override
@@ -64,28 +64,33 @@ public class CParserDefinition implements ParserDefinition
 	@Override
 	public TokenSet getWhitespaceTokens()
 	{
-		return TokenSet.EMPTY;
+		return CTokenType.WHITE_SPACE_SET;
 	}
 
 	@NotNull
 	@Override
 	public TokenSet getCommentTokens()
 	{
-		return TokenSet.EMPTY;
+		return CTokenType.COMMENT_SET;
 	}
 
 	@NotNull
 	@Override
 	public TokenSet getStringLiteralElements()
 	{
-		return TokenSet.EMPTY;
+		return CTokenType.STRING_LITERAL_SET;
 	}
 
 	@NotNull
 	@Override
 	public PsiElement createElement(ASTNode node)
 	{
-		return new ASTWrapperPsiElement(node);
+		//System.out.println(node);
+		//if(node.getElementType() instanceof CReflectElementType)
+		//	return ((CReflectElementType) node.getElementType()).createPsi(node);
+
+		//throw new IllegalArgumentException("Illegal argument : " + node.getElementType());
+		return null;
 	}
 
 	@Override
