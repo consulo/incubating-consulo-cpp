@@ -1,0 +1,40 @@
+/*
+ * Copyright 2011 napile
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ *    limitations under the License.
+ */
+
+package org.napile.cpp4idea.ide;
+
+import javax.swing.Icon;
+
+import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.lang.psi.CPsiFile;
+import org.napile.cpp4idea.util.CIcons;
+import com.intellij.ide.IconProvider;
+import com.intellij.psi.PsiElement;
+
+/**
+ * @author VISTALL
+ * @date 1:05/10.12.2011
+ */
+public class IconProviderImpl extends IconProvider
+{
+	@Override
+	public Icon getIcon(@NotNull PsiElement element, int flags)
+	{
+		if(element instanceof CPsiFile)
+			return ((CPsiFile) element).isSourceFile() ? CIcons.SOURCE_FILE : CIcons.HEADER_FILE;
+		return null;
+	}
+}

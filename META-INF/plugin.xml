@@ -21,6 +21,7 @@
 	<vendor>napile.org</vendor>
 	<resource-bundle>org.napile.cpp4idea.Bundle</resource-bundle>
 	<idea-version since-build="8000"/>
+	<category>Custom Languages</category>
 
 	<application-components>
 		<!-- Add your application components here -->
@@ -35,6 +36,8 @@
 	</actions>
 
 	<extensions defaultExtensionNs="com.intellij">
-		<!-- Add your extensions here -->
+		<fileTypeFactory implementation="org.napile.cpp4idea.CFileTypeFactory" />
+		<iconProvider implementation="org.napile.cpp4idea.ide.IconProviderImpl" />
+		<lang.parserDefinition language="C" implementationClass="org.napile.cpp4idea.lang.parser.CParserDefinition" />
 	</extensions>
 </idea-plugin>
