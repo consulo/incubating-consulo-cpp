@@ -16,9 +16,13 @@
 
 package org.napile.cpp4idea.lang.parser;
 
+import org.napile.cpp4idea.lang.lexer.CPsiTokenImpl;
 import org.napile.cpp4idea.lang.lexer.CTokenType;
+import org.napile.cpp4idea.lang.psi.impl.CPsiCodeBlockImpl;
 import org.napile.cpp4idea.lang.psi.impl.CPsiMethodImpl;
-import com.intellij.psi.impl.source.PsiParameterImpl;
+import org.napile.cpp4idea.lang.psi.impl.CPsiParameterImpl;
+import org.napile.cpp4idea.lang.psi.impl.CPsiParameterListImpl;
+import org.napile.cpp4idea.lang.psi.impl.CReturnStatementImpl;
 import com.intellij.psi.tree.IElementType;
 
 /**
@@ -27,7 +31,16 @@ import com.intellij.psi.tree.IElementType;
  */
 public interface CElementType extends CTokenType
 {
-	IElementType METHOD_ELEMENT = new CReflectElementType("METHOD_ELEMENT", CPsiMethodImpl.class);
+	IElementType METHOD_ELEMENT = new CPsiTokenImpl("METHOD_ELEMENT", CPsiMethodImpl.class);
 
-	IElementType PARAMETER_LIST_ELEMENT = new CReflectElementType("PARAMETER_LIST_ELEMENT", PsiParameterImpl.class);
+	IElementType TYPE_REF_ELEMENT = new CPsiTokenImpl("TYPE_REF_ELEMENT", CPsiParameterImpl.class);
+
+	IElementType PARAMETER_LIST_ELEMENT = new CPsiTokenImpl("PARAMETER_LIST_ELEMENT", CPsiParameterListImpl.class);
+
+	IElementType PARAMETER_ELEMENT = new CPsiTokenImpl("PARAMETER_ELEMENT", CPsiParameterImpl.class);
+
+	IElementType CODE_BLOCK_ELEMENT = new CPsiTokenImpl("CODE_BLOCK_ELEMENT", CPsiCodeBlockImpl.class);
+
+	// statement
+	IElementType RETURN_ELEMENT = new CPsiTokenImpl("RETURN_ELEMENT", CReturnStatementImpl.class);
 }

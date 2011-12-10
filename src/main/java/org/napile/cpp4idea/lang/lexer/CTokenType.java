@@ -19,8 +19,6 @@ package org.napile.cpp4idea.lang.lexer;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
-import com.intellij.psi.tree.java.IJavaElementType;
-import com.intellij.psi.tree.java.IKeywordElementType;
 
 /**
  * @author VISTALL
@@ -28,86 +26,86 @@ import com.intellij.psi.tree.java.IKeywordElementType;
  */
 public interface CTokenType extends TokenType
 {
-	IElementType IDENTIFIER = new IJavaElementType("IDENTIFIER");
+	IElementType IDENTIFIER = new CTokenImpl("IDENTIFIER");
 	// comments
-	IElementType C_STYLE_COMMENT = new IJavaElementType("C_STYLE_COMMENT"); // // comment
-	IElementType END_OF_LINE_COMMENT = new IJavaElementType("END_OF_LINE_COMMENT");	 // /* comment
+	IElementType C_STYLE_COMMENT = new CTokenImpl("C_STYLE_COMMENT"); // // comment
+	IElementType END_OF_LINE_COMMENT = new CTokenImpl("END_OF_LINE_COMMENT");	 // /* comment
 	// keywords
-	IElementType VOID_KEYWORD = new IJavaElementType("VOID_KEYWORD"); // void
-	IElementType CASE_KEYWORD = new IKeywordElementType("CASE_KEYWORD"); // case
-	IElementType CONTINUE_KEYWORD = new IKeywordElementType("CONTINUE_KEYWORD");
-	IElementType DEFAULT_KEYWORD = new IKeywordElementType("DEFAULT_KEYWORD");
-	IElementType DO_KEYWORD = new IKeywordElementType("DO_KEYWORD");
+	IElementType VOID_KEYWORD = new CTokenImpl("VOID_KEYWORD"); // void
+	IElementType CASE_KEYWORD = new CTokenImpl("CASE_KEYWORD"); // case
+	IElementType CONTINUE_KEYWORD = new CTokenImpl("CONTINUE_KEYWORD");
+	IElementType DEFAULT_KEYWORD = new CTokenImpl("DEFAULT_KEYWORD");
+	IElementType DO_KEYWORD = new CTokenImpl("DO_KEYWORD");
 
 	// data
-	IElementType INTEGER_LITERAL = new IJavaElementType("INTEGER_LITERAL");
-	IElementType LONG_LITERAL = new IJavaElementType("LONG_LITERAL");
-	IElementType FLOAT_LITERAL = new IJavaElementType("FLOAT_LITERAL");
-	IElementType DOUBLE_LITERAL = new IJavaElementType("DOUBLE_LITERAL");
-	IElementType CHARACTER_LITERAL = new IJavaElementType("CHARACTER_LITERAL");
-	IElementType STRING_LITERAL = new IJavaElementType("STRING_LITERAL");
-	IElementType ELSE_KEYWORD = new IKeywordElementType("ELSE_KEYWORD");
-	IElementType BREAK_KEYWORD = new IKeywordElementType("BREAK_KEYWORD");
-	IElementType RETURN_KEYWORD = new IKeywordElementType("RETURN_KEYWORD");
-	IElementType WHILE_KEYWORD = new IKeywordElementType("WHILE_KEYWORD");
-	IElementType FOR_KEYWORD = new IKeywordElementType("FOR_KEYWORD");
-	IElementType GOTO_KEYWORD = new IKeywordElementType("GOTO_KEYWORD");
-	IElementType IF_KEYWORD = new IKeywordElementType("IF_KEYWORD");
-	IElementType NEW_KEYWORD = new IKeywordElementType("NEW_KEYWORD");
-	IElementType SWITCH_KEYWORD = new IKeywordElementType("SWITCH_KEYWORD");
-	IElementType PUBLIC_KEYWORD = new IKeywordElementType("PUBLIC_KEYWORD");
+	IElementType INTEGER_LITERAL = new CTokenImpl("INTEGER_LITERAL");
+	IElementType LONG_LITERAL = new CTokenImpl("LONG_LITERAL");
+	IElementType FLOAT_LITERAL = new CTokenImpl("FLOAT_LITERAL");
+	IElementType DOUBLE_LITERAL = new CTokenImpl("DOUBLE_LITERAL");
+	IElementType CHARACTER_LITERAL = new CTokenImpl("CHARACTER_LITERAL");
+	IElementType STRING_LITERAL = new CTokenImpl("STRING_LITERAL");
+	IElementType ELSE_KEYWORD = new CTokenImpl("ELSE_KEYWORD");
+	IElementType BREAK_KEYWORD = new CTokenImpl("BREAK_KEYWORD");
+	IElementType RETURN_KEYWORD = new CTokenImpl("RETURN_KEYWORD");
+	IElementType WHILE_KEYWORD = new CTokenImpl("WHILE_KEYWORD");
+	IElementType FOR_KEYWORD = new CTokenImpl("FOR_KEYWORD");
+	IElementType GOTO_KEYWORD = new CTokenImpl("GOTO_KEYWORD");
+	IElementType IF_KEYWORD = new CTokenImpl("IF_KEYWORD");
+	IElementType NEW_KEYWORD = new CTokenImpl("NEW_KEYWORD");
+	IElementType SWITCH_KEYWORD = new CTokenImpl("SWITCH_KEYWORD");
+	IElementType PUBLIC_KEYWORD = new CTokenImpl("PUBLIC_KEYWORD");
 
 	//
-	IElementType LPARENTH = new IJavaElementType("LPARENTH");
-	IElementType RPARENTH = new IJavaElementType("RPARENTH");
-	IElementType LBRACE = new IJavaElementType("LBRACE");
-	IElementType RBRACE = new IJavaElementType("RBRACE");
-	IElementType LBRACKET = new IJavaElementType("LBRACKET");
-	IElementType RBRACKET = new IJavaElementType("RBRACKET");
-	IElementType SEMICOLON = new IJavaElementType("SEMICOLON");
-	IElementType COMMA = new IJavaElementType("COMMA");
-	IElementType DOT = new IJavaElementType("DOT");
-	IElementType ELLIPSIS = new IJavaElementType("ELLIPSIS");
-	IElementType AT = new IJavaElementType("AT");
+	IElementType LPARENTH = new CTokenImpl("LPARENTH");
+	IElementType RPARENTH = new CTokenImpl("RPARENTH");
+	IElementType LBRACE = new CTokenImpl("LBRACE");
+	IElementType RBRACE = new CTokenImpl("RBRACE");
+	IElementType LBRACKET = new CTokenImpl("LBRACKET");
+	IElementType RBRACKET = new CTokenImpl("RBRACKET");
+	IElementType SEMICOLON = new CTokenImpl("SEMICOLON");
+	IElementType COMMA = new CTokenImpl("COMMA");
+	IElementType DOT = new CTokenImpl("DOT");
+	IElementType ELLIPSIS = new CTokenImpl("ELLIPSIS");
+	IElementType AT = new CTokenImpl("AT");
 
-	IElementType EQ = new IJavaElementType("EQ");
-	IElementType GT = new IJavaElementType("GT");
-	IElementType LT = new IJavaElementType("LT");
-	IElementType EXCL = new IJavaElementType("EXCL");
-	IElementType TILDE = new IJavaElementType("TILDE");
-	IElementType QUEST = new IJavaElementType("QUEST");
-	IElementType COLON = new IJavaElementType("COLON");
-	IElementType PLUS = new IJavaElementType("PLUS");
-	IElementType MINUS = new IJavaElementType("MINUS");
-	IElementType ASTERISK = new IJavaElementType("ASTERISK");
-	IElementType DIV = new IJavaElementType("DIV");
-	IElementType AND = new IJavaElementType("AND");
-	IElementType OR = new IJavaElementType("OR");
-	IElementType XOR = new IJavaElementType("XOR");
-	IElementType PERC = new IJavaElementType("PERC");
+	IElementType EQ = new CTokenImpl("EQ");
+	IElementType GT = new CTokenImpl("GT");
+	IElementType LT = new CTokenImpl("LT");
+	IElementType EXCL = new CTokenImpl("EXCL");
+	IElementType TILDE = new CTokenImpl("TILDE");
+	IElementType QUEST = new CTokenImpl("QUEST");
+	IElementType COLON = new CTokenImpl("COLON");
+	IElementType PLUS = new CTokenImpl("PLUS");
+	IElementType MINUS = new CTokenImpl("MINUS");
+	IElementType ASTERISK = new CTokenImpl("ASTERISK");
+	IElementType DIV = new CTokenImpl("DIV");
+	IElementType AND = new CTokenImpl("AND");
+	IElementType OR = new CTokenImpl("OR");
+	IElementType XOR = new CTokenImpl("XOR");
+	IElementType PERC = new CTokenImpl("PERC");
 
-	IElementType EQEQ = new IJavaElementType("EQEQ");
-	IElementType LE = new IJavaElementType("LE");
-	IElementType GE = new IJavaElementType("GE");
-	IElementType NE = new IJavaElementType("NE");
-	IElementType ANDAND = new IJavaElementType("ANDAND");
-	IElementType OROR = new IJavaElementType("OROR");
-	IElementType PLUSPLUS = new IJavaElementType("PLUSPLUS");
-	IElementType MINUSMINUS = new IJavaElementType("MINUSMINUS");
-	IElementType LTLT = new IJavaElementType("LTLT");
-	IElementType GTGT = new IJavaElementType("GTGT");
-	IElementType GTGTGT = new IJavaElementType("GTGTGT");
-	IElementType PLUSEQ = new IJavaElementType("PLUSEQ");
-	IElementType MINUSEQ = new IJavaElementType("MINUSEQ");
-	IElementType ASTERISKEQ = new IJavaElementType("ASTERISKEQ");
-	IElementType DIVEQ = new IJavaElementType("DIVEQ");
-	IElementType ANDEQ = new IJavaElementType("ANDEQ");
-	IElementType OREQ = new IJavaElementType("OREQ");
-	IElementType XOREQ = new IJavaElementType("XOREQ");
-	IElementType PERCEQ = new IJavaElementType("PERCEQ");
-	IElementType LTLTEQ = new IJavaElementType("LTLTEQ");
-	IElementType GTGTEQ = new IJavaElementType("GTGTEQ");
-	IElementType GTGTGTEQ = new IJavaElementType("GTGTGTEQ");
+	IElementType EQEQ = new CTokenImpl("EQEQ");
+	IElementType LE = new CTokenImpl("LE");
+	IElementType GE = new CTokenImpl("GE");
+	IElementType NE = new CTokenImpl("NE");
+	IElementType ANDAND = new CTokenImpl("ANDAND");
+	IElementType OROR = new CTokenImpl("OROR");
+	IElementType PLUSPLUS = new CTokenImpl("PLUSPLUS");
+	IElementType MINUSMINUS = new CTokenImpl("MINUSMINUS");
+	IElementType LTLT = new CTokenImpl("LTLT");
+	IElementType GTGT = new CTokenImpl("GTGT");
+	IElementType GTGTGT = new CTokenImpl("GTGTGT");
+	IElementType PLUSEQ = new CTokenImpl("PLUSEQ");
+	IElementType MINUSEQ = new CTokenImpl("MINUSEQ");
+	IElementType ASTERISKEQ = new CTokenImpl("ASTERISKEQ");
+	IElementType DIVEQ = new CTokenImpl("DIVEQ");
+	IElementType ANDEQ = new CTokenImpl("ANDEQ");
+	IElementType OREQ = new CTokenImpl("OREQ");
+	IElementType XOREQ = new CTokenImpl("XOREQ");
+	IElementType PERCEQ = new CTokenImpl("PERCEQ");
+	IElementType LTLTEQ = new CTokenImpl("LTLTEQ");
+	IElementType GTGTEQ = new CTokenImpl("GTGTEQ");
+	IElementType GTGTGTEQ = new CTokenImpl("GTGTGTEQ");
 
 	TokenSet WHITE_SPACE_SET = TokenSet.create(WHITE_SPACE);
 	TokenSet STRING_LITERAL_SET = TokenSet.create(STRING_LITERAL);

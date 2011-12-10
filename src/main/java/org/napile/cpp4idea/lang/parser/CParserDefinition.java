@@ -19,6 +19,7 @@ package org.napile.cpp4idea.lang.parser;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.lexer.CFlexLexer;
+import org.napile.cpp4idea.lang.lexer.CPsiTokenImpl;
 import org.napile.cpp4idea.lang.lexer.CTokenType;
 import org.napile.cpp4idea.lang.psi.impl.CPsiFileImpl;
 import com.intellij.lang.ASTNode;
@@ -85,12 +86,10 @@ public class CParserDefinition implements ParserDefinition
 	@Override
 	public PsiElement createElement(ASTNode node)
 	{
-		//System.out.println(node);
-		//if(node.getElementType() instanceof CReflectElementType)
-		//	return ((CReflectElementType) node.getElementType()).createPsi(node);
+		if(node.getElementType() instanceof CPsiTokenImpl)
+			return ((CPsiTokenImpl) node.getElementType()).createPsi(node);
 
-		//throw new IllegalArgumentException("Illegal argument : " + node.getElementType());
-		return null;
+		throw new IllegalArgumentException("Illegal argument : " + node.getElementType());
 	}
 
 	@Override

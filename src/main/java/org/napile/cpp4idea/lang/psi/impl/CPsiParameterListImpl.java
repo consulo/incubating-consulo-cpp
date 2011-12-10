@@ -16,31 +16,17 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
-import org.napile.cpp4idea.lang.psi.CPsiCodeBlock;
-import org.napile.cpp4idea.lang.psi.CPsiMethod;
 import org.napile.cpp4idea.lang.psi.CPsiParameterList;
 import com.intellij.lang.ASTNode;
 
 /**
  * @author VISTALL
- * @date 22:57/10.12.2011
+ * @date 22:59/10.12.2011
  */
-public class CPsiMethodImpl extends CPsiElementBaseImpl implements CPsiMethod
+public class CPsiParameterListImpl extends CPsiElementBaseImpl implements CPsiParameterList
 {
-	public CPsiMethodImpl(@org.jetbrains.annotations.NotNull ASTNode node)
+	public CPsiParameterListImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{
 		super(node);
-	}
-
-	@Override
-	public CPsiParameterList getParameterList()
-	{
-		return findChildByClass(CPsiParameterList.class);
-	}
-
-	@Override
-	public CPsiCodeBlock getCodeBlock()
-	{
-		return findChildByClass(CPsiCodeBlock.class);
 	}
 }

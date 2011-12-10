@@ -14,23 +14,22 @@
  *    limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.parser;
+package org.napile.cpp4idea.lang.lexer;
 
 import java.lang.reflect.Constructor;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.java.IJavaElementType;
 
 /**
  * @author VISTALL
  * @date 5:34/10.12.2011
  */
-public class CReflectElementType extends IJavaElementType
+public class CPsiTokenImpl extends CTokenImpl
 {
 	private Constructor<? extends PsiElement> _clazz;
 
-	public CReflectElementType(@org.jetbrains.annotations.NonNls String debugName, Class<? extends PsiElement> clazz)
+	public CPsiTokenImpl(@org.jetbrains.annotations.NonNls String debugName, Class<? extends PsiElement> clazz)
 	{
 		super(debugName);
 

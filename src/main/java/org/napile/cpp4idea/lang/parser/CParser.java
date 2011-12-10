@@ -37,22 +37,16 @@ public class CParser implements PsiParser, CTokenType, CElementType
 		PsiBuilder.Marker rootMarker = builder.mark();
 
 		while(!builder.eof())
-			parseMethodOfExpression(builder);
-
-		// todo remove it
-		while(!builder.eof())
-			builder.advanceLexer();
+			parseMethodOrExpression(builder);
 
 		rootMarker.done(root);
 
 		return builder.getTreeBuilt();
 	}
 
-	private static void parseMethodOfExpression(PsiBuilder builder)
+	private static void parseMethodOrExpression(PsiBuilder builder)
 	{
 		PsiBuilder.Marker maker = builder.mark();
-
-		System.out.println(builder.getTokenType());
 
 		builder.advanceLexer();
 
@@ -67,6 +61,8 @@ public class CParser implements PsiParser, CTokenType, CElementType
 			builder.advanceLexer();
 
 		parseParameterList(builder);
+
+		parseMethodBody(builder);
 
 		maker.done(METHOD_ELEMENT);
 	}
@@ -88,6 +84,89 @@ public class CParser implements PsiParser, CTokenType, CElementType
 			builder.advanceLexer();
 		}
 
+		if(builder.getTokenType() != RPARENTH)
+		{
+			parserParameter(builder);
+
+			if(builder.getTokenType() != RPARENTH)
+				builder.error(") expected");
+		}
+		else
+			builder.advanceLexer();
+
 		maker.done(PARAMETER_LIST_ELEMENT);
+	}
+
+
+	private static void parserParameter(PsiBuilder builder)
+	{
+		System.out.println("parserParameter " + builder.getTokenType());
+
+
+	}
+
+	private static void parseMethodBody(PsiBuilder builder)
+	{
+		PsiBuilder.Marker maker;
+
+		if(builder.getTokenType() != LBRACE)
+		{
+			builder.error("{ expected");
+			maker = builder.mark();
+			maker.done(PARAMETER_LIST_ELEMENT);
+			return;
+		}
+		else
+		{
+			maker = builder.mark();
+			builder.advanceLexer();
+		}
+
+		if(builder.getTokenType() != RBRACE)
+		{
+			while(!builder.eof())
+			{
+				parseStatement(builder);
+
+				if(builder.getTokenType() == RBRACE)
+					break;
+			}
+
+			if(builder.getTokenType() != RBRACE)
+				builder.error("} expected");
+		}
+
+		maker.done(CODE_BLOCK_ELEMENT);
+
+		builder.advanceLexer();
+	}
+
+	private static void parseStatement(PsiBuilder builder)
+	{
+		if(builder.getTokenType() == RETURN_KEYWORD)
+		{
+			PsiBuilder.Marker marker = builder.mark();
+
+			builder.advanceLexer(); 
+
+			parseExpression(builder);
+
+			builder.advanceLexer();
+
+			if(builder.getTokenType() != SEMICOLON)
+				builder.error("; expected");
+
+			marker.done(RETURN_ELEMENT);
+		}
+
+		builder.advanceLexer();
+	}
+
+	private static void parseExpression(PsiBuilder builder)
+	{
+		if(builder.getTokenType() == INTEGER_LITERAL)
+		{
+
+		}
 	}
 }
