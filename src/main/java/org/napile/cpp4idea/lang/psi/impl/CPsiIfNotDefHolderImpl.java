@@ -14,15 +14,26 @@
  *    limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.psi;
+package org.napile.cpp4idea.lang.psi.impl;
 
-import com.intellij.psi.PsiFile;
+import org.napile.cpp4idea.lang.psi.CPsiElement;
+import org.napile.cpp4idea.lang.psi.CPsiIfNotDefHolder;
+import com.intellij.lang.ASTNode;
 
 /**
  * @author VISTALL
- * @date 1:07/10.12.2011
+ * @date 14:07/11.12.2011
  */
-public interface CPsiFile extends PsiFile, CPsiElementHolder
+public class CPsiIfNotDefHolderImpl extends CPsiElementBaseImpl implements CPsiIfNotDefHolder
 {
-	boolean isSourceFile();
+	public CPsiIfNotDefHolderImpl(@org.jetbrains.annotations.NotNull ASTNode node)
+	{
+		super(node);
+	}
+
+	@Override
+	public CPsiElement[] getElements()
+	{
+		return findChildrenByClass(CPsiElement.class);
+	}
 }

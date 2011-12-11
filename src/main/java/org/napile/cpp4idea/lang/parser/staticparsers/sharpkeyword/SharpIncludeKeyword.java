@@ -18,24 +18,25 @@ package org.napile.cpp4idea.lang.parser.staticparsers.sharpkeyword;
 
 import org.napile.cpp4idea.lang.lexer.CTokenType;
 import org.napile.cpp4idea.lang.parser.CElementType;
+import org.napile.cpp4idea.lang.parser.staticparsers.CommonParser;
 import com.intellij.lang.PsiBuilder;
 
 /**
  * @author VISTALL
  * @date 7:19/11.12.2011
  */
-public class SharpIncludeKeyword implements CTokenType, CElementType
+public class SharpIncludeKeyword extends CommonParser implements CTokenType, CElementType
 {
 	public static void parse(PsiBuilder builder)
 	{
 		PsiBuilder.Marker maker = builder.mark();
 
-		builder.advanceLexer();
+		advanceLexerAndSkipLines(builder);
 
-		if(builder.getTokenType() != STRING_LITERAL)
+		if(builder.getTokenType() != STRING_LITERAL && builder.getTokenType() != STRING_INCLUDE_LITERAL)
 			builder.error("Incorrect include name");
 
-		builder.advanceLexer();
+		advanceLexerAndSkipLines(builder);
 
 		maker.done(INCLUDE_ELEMENT);
 	}

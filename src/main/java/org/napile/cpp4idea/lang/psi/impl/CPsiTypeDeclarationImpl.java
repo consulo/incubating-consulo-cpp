@@ -14,15 +14,19 @@
  *    limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.psi;
+package org.napile.cpp4idea.lang.psi.impl;
 
-import com.intellij.psi.PsiFile;
+import org.napile.cpp4idea.lang.psi.CPsiTypeDeclaration;
+import com.intellij.lang.ASTNode;
 
 /**
  * @author VISTALL
- * @date 1:07/10.12.2011
+ * @date 14:49/11.12.2011
  */
-public interface CPsiFile extends PsiFile, CPsiElementHolder
+public class CPsiTypeDeclarationImpl extends CPsiElementBaseImpl implements CPsiTypeDeclaration
 {
-	boolean isSourceFile();
+	public CPsiTypeDeclarationImpl(@org.jetbrains.annotations.NotNull ASTNode node)
+	{
+		super(node);
+	}
 }

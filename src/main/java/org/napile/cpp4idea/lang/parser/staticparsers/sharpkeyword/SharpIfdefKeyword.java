@@ -24,31 +24,31 @@ import com.intellij.psi.tree.IElementType;
 
 /**
  * @author VISTALL
- * @date 7:21/11.12.2011
+ * @date 14:05/11.12.2011
  */
-public class SharpDefineKeyword extends CommonParser implements CTokenType, CElementType
+public class SharpIfdefKeyword extends CommonParser implements CElementType, CTokenType
 {
 	public static void parse(PsiBuilder builder)
 	{
-		PsiBuilder.Marker maker = builder.mark();
+		PsiBuilder.Marker marker = builder.mark();
 
-		// def name
+		IElementType elementType = builder.getTokenType();
+
+		advanceLexerAndSkipLines(builder);
+
+		//TODO [VISTALL] parse declaration
 		advanceLexerAndSkipLines(builder);
 
 		while(!builder.eof())
 		{
-			IElementType prev = builder.getTokenType();
-
-			builder.advanceLexer();
-
-			if(builder.getTokenType() == NEW_LINE && prev != NEXT_LINE)
+			if(builder.getTokenType() == S_ENDIF_KEYWORD)
 				break;
+
+			CommonParser.parseElement(builder);
 		}
 
-		builder.advanceLexer();
+		advanceLexerAndSkipLines(builder);
 
-		maker.done(DEFINE_ELEMENT);
-
-		skipLines(builder);
+		marker.done(elementType == S_IFDEF_KEYWORD ? IF_DEF_ELEMENT : IF_NOT_DEF_ELEMENT);
 	}
 }

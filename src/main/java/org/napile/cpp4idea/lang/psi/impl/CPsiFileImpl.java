@@ -20,6 +20,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CFileType;
 import org.napile.cpp4idea.CLanguage;
+import org.napile.cpp4idea.lang.psi.CPsiElement;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
@@ -55,5 +56,11 @@ public class CPsiFileImpl extends PsiFileBase implements CPsiFile
 	public boolean isSourceFile()
 	{
 		return _isSourceFile;
+	}
+
+	@Override
+	public CPsiElement[] getElements()
+	{
+		return findChildrenByClass(CPsiElement.class);
 	}
 }

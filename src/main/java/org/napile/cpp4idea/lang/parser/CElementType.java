@@ -18,14 +18,7 @@ package org.napile.cpp4idea.lang.parser;
 
 import org.napile.cpp4idea.lang.lexer.CPsiTokenImpl;
 import org.napile.cpp4idea.lang.lexer.CTokenType;
-import org.napile.cpp4idea.lang.psi.impl.CPsiCodeBlockImpl;
-import org.napile.cpp4idea.lang.psi.impl.CPsiDefineImpl;
-import org.napile.cpp4idea.lang.psi.impl.CPsiIncludeImpl;
-import org.napile.cpp4idea.lang.psi.impl.CPsiMethodImpl;
-import org.napile.cpp4idea.lang.psi.impl.CPsiParameterImpl;
-import org.napile.cpp4idea.lang.psi.impl.CPsiParameterListImpl;
-import org.napile.cpp4idea.lang.psi.impl.CPsiReturnStatementImpl;
-import org.napile.cpp4idea.lang.psi.impl.CPsiTypeRefImpl;
+import org.napile.cpp4idea.lang.psi.impl.*;
 import com.intellij.psi.tree.IElementType;
 
 /**
@@ -52,4 +45,12 @@ public interface CElementType extends CTokenType
 
 	// #define
 	IElementType DEFINE_ELEMENT = new CPsiTokenImpl("DEFINE_ELEMENT", CPsiDefineImpl.class);
+
+	// #ifdef
+	IElementType IF_DEF_ELEMENT = new CPsiTokenImpl("IF_DEF_ELEMENT", CPsiIfDefHolderImpl.class);
+	// #ifndef
+	IElementType IF_NOT_DEF_ELEMENT = new CPsiTokenImpl("IF_NOT_DEF_ELEMENT", CPsiIfNotDefHolderImpl.class);
+
+	// typedef
+	IElementType TYPEDEF_ELEMENT = new CPsiTokenImpl("TYPEDEF_ELEMENT", CPsiTypeDeclarationImpl.class);
 }

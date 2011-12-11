@@ -27,7 +27,8 @@ import com.intellij.psi.tree.IElementType;
 %eof{  return;
 %eof}
 
-WHITE_SPACE_CHAR=[\ \n\r\t\f]
+WHITE_SPACE_CHAR=[\ \r\t\f]
+NEW_LINE_CHAR=[\n]
 
 IDENTIFIER=[:jletter:] [:jletterdigit:]*
 
@@ -70,11 +71,13 @@ HEX_SIGNIFICAND={HEX_INTEGER_LITERAL}|{HEX_INTEGER_LITERAL}.|0[Xx]{HEX_DIGITS}?.
 
 CHARACTER_LITERAL="'"([^\\\'\r\n]|{ESCAPE_SEQUENCE})*("'"|\\)?
 STRING_LITERAL=\"([^\\\"\r\n]|{ESCAPE_SEQUENCE})*(\"|\\)?
+STRING_INCLUDE_LITERAL=\<([^\\\<\r\n]|{ESCAPE_SEQUENCE})*(\>|\\)?
 ESCAPE_SEQUENCE=\\[^\r\n]
 
 %%
 
 <YYINITIAL> {WHITE_SPACE_CHAR}+ { return CTokenType.WHITE_SPACE; }
+<YYINITIAL> {NEW_LINE_CHAR} { return CTokenType.NEW_LINE; }
 
 <YYINITIAL> {C_STYLE_COMMENT} { return CTokenType.C_STYLE_COMMENT; }
 <YYINITIAL> {END_OF_LINE_COMMENT} { return CTokenType.END_OF_LINE_COMMENT; }
@@ -89,8 +92,11 @@ ESCAPE_SEQUENCE=\\[^\r\n]
 <YYINITIAL> {CHARACTER_LITERAL} { return CTokenType.CHARACTER_LITERAL; }
 <YYINITIAL> {STRING_LITERAL} { return CTokenType.STRING_LITERAL; }
 
-<YYINITIAL> "#include" { return CTokenType.INCLUDE_KEYWORD; }
-<YYINITIAL> "#define" { return CTokenType.DEFINE_KEYWORD; }
+<YYINITIAL> "#include" { return CTokenType.S_INCLUDE_KEYWORD; }
+<YYINITIAL> "#define" { return CTokenType.S_DEFINE_KEYWORD; }
+<YYINITIAL> "#ifdef" { return CTokenType.S_IFDEF_KEYWORD; }
+<YYINITIAL> "#ifndef" { return CTokenType.S_IFNDEF_KEYWORD; }
+<YYINITIAL> "#endif" { return CTokenType.S_ENDIF_KEYWORD; }
 <YYINITIAL> "break" { return CTokenType.BREAK_KEYWORD; }
 <YYINITIAL> "case" { return CTokenType.CASE_KEYWORD; }
 <YYINITIAL> "continue" { return CTokenType.CONTINUE_KEYWORD; }
@@ -107,6 +113,9 @@ ESCAPE_SEQUENCE=\\[^\r\n]
 <YYINITIAL> "void" { return CTokenType.VOID_KEYWORD; }
 <YYINITIAL> "while" { return CTokenType.WHILE_KEYWORD; }
 <YYINITIAL> "const" { return CTokenType.CONST_KEYWORD; }
+<YYINITIAL> "typedef" { return CTokenType.TYPEDEF_KEYWORD; }
+<YYINITIAL> "signed" { return CTokenType.SIGNED_KEYWORD; }
+<YYINITIAL> "unsigned" { return CTokenType.UNSIGNED_KEYWORD; }
 
 <YYINITIAL> {IDENTIFIER} { return CTokenType.IDENTIFIER; }
 
@@ -153,10 +162,12 @@ ESCAPE_SEQUENCE=\\[^\r\n]
 <YYINITIAL> "-" { return CTokenType.MINUS; }
 <YYINITIAL> "*" { return CTokenType.ASTERISK; }
 <YYINITIAL> "/" { return CTokenType.DIV; }
+<YYINITIAL> "\\" { return CTokenType.NEXT_LINE; }
 <YYINITIAL> "|" { return CTokenType.OR; }
 <YYINITIAL> "^" { return CTokenType.XOR; }
 <YYINITIAL> "%" { return CTokenType.PERC; }
 <YYINITIAL> "@" { return CTokenType.AT; }
 
-<YYINITIAL> . { return CTokenType.BAD_CHARACTER; }
+<YYINITIAL> {STRING_INCLUDE_LITERAL} { return CTokenType.STRING_INCLUDE_LITERAL; }
 
+<YYINITIAL> . { return CTokenType.BAD_CHARACTER; }

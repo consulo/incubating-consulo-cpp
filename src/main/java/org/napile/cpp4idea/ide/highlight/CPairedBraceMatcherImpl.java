@@ -34,6 +34,8 @@ public class CPairedBraceMatcherImpl implements PairedBraceMatcher
 	{
 			new BracePair(CTokenType.LPARENTH, CTokenType.RPARENTH, true),
 			new BracePair(CTokenType.LBRACE, CTokenType.RBRACE, false),
+			new BracePair(CTokenType.S_IFDEF_KEYWORD, CTokenType.S_ENDIF_KEYWORD, false),
+			new BracePair(CTokenType.S_IFNDEF_KEYWORD, CTokenType.S_ENDIF_KEYWORD, false)
 	};
 
 	@Override
