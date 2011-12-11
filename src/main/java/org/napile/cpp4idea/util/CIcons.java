@@ -24,7 +24,7 @@ import com.intellij.openapi.util.IconLoader;
  * @author VISTALL
  * @date 2:29/10.12.2011
  */
-public class CIcons
+public interface CIcons
 {
 	public static final Icon SOURCE_FILE = IconLoader.getIcon("/org/napile/cpp4idea/icons/types/c.png");
 	public static final Icon HEADER_FILE = IconLoader.getIcon("/org/napile/cpp4idea/icons/types/h.png");

@@ -31,11 +31,14 @@ public interface CTokenType extends TokenType
 	IElementType C_STYLE_COMMENT = new CTokenImpl("C_STYLE_COMMENT"); // // comment
 	IElementType END_OF_LINE_COMMENT = new CTokenImpl("END_OF_LINE_COMMENT");	 // /* comment
 	// keywords
+	IElementType INCLUDE_KEYWORD = new CTokenImpl("INCLUDE_KEYWORD"); // #include
+	IElementType DEFINE_KEYWORD = new CTokenImpl("DEFINE_KEYWORD"); // #include
 	IElementType VOID_KEYWORD = new CTokenImpl("VOID_KEYWORD"); // void
 	IElementType CASE_KEYWORD = new CTokenImpl("CASE_KEYWORD"); // case
 	IElementType CONTINUE_KEYWORD = new CTokenImpl("CONTINUE_KEYWORD");
 	IElementType DEFAULT_KEYWORD = new CTokenImpl("DEFAULT_KEYWORD");
 	IElementType DO_KEYWORD = new CTokenImpl("DO_KEYWORD");
+	IElementType CONST_KEYWORD = new CTokenImpl("CONST_KEYWORD");
 
 	// data
 	IElementType INTEGER_LITERAL = new CTokenImpl("INTEGER_LITERAL");
@@ -122,6 +125,8 @@ public interface CTokenType extends TokenType
 		DEFAULT_KEYWORD, DO_KEYWORD, ELSE_KEYWORD,
 		FOR_KEYWORD, GOTO_KEYWORD, IF_KEYWORD,
 		NEW_KEYWORD, PUBLIC_KEYWORD, RETURN_KEYWORD,
-		SWITCH_KEYWORD, VOID_KEYWORD, WHILE_KEYWORD
+		SWITCH_KEYWORD, VOID_KEYWORD, WHILE_KEYWORD,
+		INCLUDE_KEYWORD, DEFINE_KEYWORD,      // # keyword
+		CONST_KEYWORD
 	);
 }

@@ -18,6 +18,8 @@ package org.napile.cpp4idea.lang.parser;
 
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.lexer.CTokenType;
+import org.napile.cpp4idea.lang.parser.staticparsers.sharpkeyword.SharpDefineKeyword;
+import org.napile.cpp4idea.lang.parser.staticparsers.sharpkeyword.SharpIncludeKeyword;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
@@ -37,18 +39,28 @@ public class CParser implements PsiParser, CTokenType, CElementType
 		PsiBuilder.Marker rootMarker = builder.mark();
 
 		while(!builder.eof())
-			parseMethodOrExpression(builder);
+		{
+			if(builder.getTokenType() == INCLUDE_KEYWORD)
+				SharpIncludeKeyword.parse(builder);
+			else if(builder.getTokenType() == DEFINE_KEYWORD)
+				SharpDefineKeyword.parse(builder);
+			else
+				parseMethodOrExpression(builder);
+		}
 
 		rootMarker.done(root);
 
 		return builder.getTreeBuilt();
 	}
 
+
+
+
 	private static void parseMethodOrExpression(PsiBuilder builder)
 	{
 		PsiBuilder.Marker maker = builder.mark();
 
-		builder.advanceLexer();
+		parseTypeRef(builder);
 
 		IElementType methodName = builder.getTokenType();
 		if(methodName != IDENTIFIER)
@@ -62,7 +74,10 @@ public class CParser implements PsiParser, CTokenType, CElementType
 
 		parseParameterList(builder);
 
-		parseMethodBody(builder);
+		if(builder.getTokenType() != SEMICOLON)
+			parseCodeBlock(builder);
+		else
+			builder.advanceLexer();
 
 		maker.done(METHOD_ELEMENT);
 	}
@@ -90,6 +105,8 @@ public class CParser implements PsiParser, CTokenType, CElementType
 
 			if(builder.getTokenType() != RPARENTH)
 				builder.error(") expected");
+
+			builder.advanceLexer();
 		}
 		else
 			builder.advanceLexer();
@@ -97,15 +114,52 @@ public class CParser implements PsiParser, CTokenType, CElementType
 		maker.done(PARAMETER_LIST_ELEMENT);
 	}
 
-
 	private static void parserParameter(PsiBuilder builder)
 	{
-		System.out.println("parserParameter " + builder.getTokenType());
+		PsiBuilder.Marker marker = builder.mark();
 
+		final IElementType curToken = builder.getTokenType();
 
+		// goto parameter name
+		parseTypeRef(builder);
+
+		if(builder.getTokenType() == IDENTIFIER)
+			builder.advanceLexer();
+
+		marker.done(PARAMETER_ELEMENT);
+
+		if(builder.getTokenType() == COMMA)
+		{
+			builder.advanceLexer();  // skip COMMA
+
+			parserParameter(builder);
+		}
 	}
 
-	private static void parseMethodBody(PsiBuilder builder)
+	private static void parseTypeRef(PsiBuilder builder)
+	{
+		PsiBuilder.Marker marker = builder.mark();
+
+		if(builder != ELLIPSIS)
+		{
+			// *char
+			// const char
+			if(builder.getTokenType() == ASTERISK || builder.getTokenType() == CONST_KEYWORD)
+				builder.advanceLexer();
+
+			builder.advanceLexer();
+
+			// char**
+			while(builder.getTokenType() == ASTERISK)
+				builder.advanceLexer();
+		}
+		else
+			builder.advanceLexer();
+
+		marker.done(TYPE_REF_ELEMENT);
+	}
+
+	private static void parseCodeBlock(PsiBuilder builder)
 	{
 		PsiBuilder.Marker maker;
 
@@ -136,9 +190,9 @@ public class CParser implements PsiParser, CTokenType, CElementType
 				builder.error("} expected");
 		}
 
-		maker.done(CODE_BLOCK_ELEMENT);
-
 		builder.advanceLexer();
+
+		maker.done(CODE_BLOCK_ELEMENT);
 	}
 
 	private static void parseStatement(PsiBuilder builder)

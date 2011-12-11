@@ -38,6 +38,8 @@
 	<extensions defaultExtensionNs="com.intellij">
 		<fileTypeFactory implementation="org.napile.cpp4idea.CFileTypeFactory" />
 		<iconProvider implementation="org.napile.cpp4idea.ide.IconProviderImpl" />
+		<sdkType implementation="org.napile.cpp4idea.config.sdk.CSdkType" />
+		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.ide.highlight.CPairedBraceMatcherImpl" />
 		<lang.parserDefinition language="C" implementationClass="org.napile.cpp4idea.lang.parser.CParserDefinition" />
 	</extensions>
 </idea-plugin>

@@ -89,6 +89,8 @@ ESCAPE_SEQUENCE=\\[^\r\n]
 <YYINITIAL> {CHARACTER_LITERAL} { return CTokenType.CHARACTER_LITERAL; }
 <YYINITIAL> {STRING_LITERAL} { return CTokenType.STRING_LITERAL; }
 
+<YYINITIAL> "#include" { return CTokenType.INCLUDE_KEYWORD; }
+<YYINITIAL> "#define" { return CTokenType.DEFINE_KEYWORD; }
 <YYINITIAL> "break" { return CTokenType.BREAK_KEYWORD; }
 <YYINITIAL> "case" { return CTokenType.CASE_KEYWORD; }
 <YYINITIAL> "continue" { return CTokenType.CONTINUE_KEYWORD; }
@@ -104,6 +106,7 @@ ESCAPE_SEQUENCE=\\[^\r\n]
 <YYINITIAL> "return" { return CTokenType.RETURN_KEYWORD; }
 <YYINITIAL> "void" { return CTokenType.VOID_KEYWORD; }
 <YYINITIAL> "while" { return CTokenType.WHILE_KEYWORD; }
+<YYINITIAL> "const" { return CTokenType.CONST_KEYWORD; }
 
 <YYINITIAL> {IDENTIFIER} { return CTokenType.IDENTIFIER; }
 

@@ -23,9 +23,9 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 23:40/10.12.2011
  */
-public class CReturnStatementImpl extends CPsiElementBaseImpl implements CPsiReturnStatement
+public class CPsiReturnStatementImpl extends CPsiElementBaseImpl implements CPsiReturnStatement
 {
-	public CReturnStatementImpl(@org.jetbrains.annotations.NotNull ASTNode node)
+	public CPsiReturnStatementImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{
 		super(node);
 	}
