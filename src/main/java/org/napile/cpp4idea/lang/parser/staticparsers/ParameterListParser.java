@@ -17,7 +17,6 @@
 package org.napile.cpp4idea.lang.parser.staticparsers;
 
 import com.intellij.lang.PsiBuilder;
-import com.intellij.psi.tree.IElementType;
 
 /**
  * @author VISTALL
@@ -55,13 +54,13 @@ public class ParameterListParser extends CommonParser
 			advanceLexerAndSkipLines(builder);
 
 		maker.done(PARAMETER_LIST_ELEMENT);
+
+		//skipLines(builder);
 	}
 
 	private static void parserParameter(PsiBuilder builder)
 	{
 		PsiBuilder.Marker marker = builder.mark();
-
-		final IElementType curToken = builder.getTokenType();
 
 		// goto parameter name
 		parseTypeRef(builder);

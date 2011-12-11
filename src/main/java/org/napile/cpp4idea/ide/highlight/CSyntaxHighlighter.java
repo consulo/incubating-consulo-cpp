@@ -16,6 +16,8 @@
 
 package org.napile.cpp4idea.ide.highlight;
 
+import java.awt.Color;
+import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +28,7 @@ import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.SyntaxHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.JavaTokenType;
 import com.intellij.psi.tree.IElementType;
@@ -34,8 +37,10 @@ import com.intellij.psi.tree.IElementType;
  * @author VISTALL
  * @date 5:06/10.12.2011
  */
-public class CSyntaxHighlighter extends SyntaxHighlighterBase implements CTokenType
+public class CSyntaxHighlighter extends SyntaxHighlighterBase
 {
+	public static final TextAttributesKey COMPILER_VARIABLE = TextAttributesKey.createTextAttributesKey("C.COMPILER_VARIABLE", new TextAttributes(new Color(150, 0, 0), null, null, null, Font.PLAIN));
+
 	private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey>();
 
 	static

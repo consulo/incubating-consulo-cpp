@@ -20,7 +20,6 @@ import org.napile.cpp4idea.lang.lexer.CTokenType;
 import org.napile.cpp4idea.lang.parser.CElementType;
 import org.napile.cpp4idea.lang.parser.staticparsers.CommonParser;
 import com.intellij.lang.PsiBuilder;
-import com.intellij.psi.tree.IElementType;
 
 /**
  * @author VISTALL
@@ -32,20 +31,22 @@ public class SharpDefineKeyword extends CommonParser implements CTokenType, CEle
 	{
 		PsiBuilder.Marker maker = builder.mark();
 
-		// def name
+		// #define
 		advanceLexerAndSkipLines(builder);
+
+		// var name
+		parseCompilerVariable(builder);
 
 		while(!builder.eof())
 		{
-			IElementType prev = builder.getTokenType();
+			if(builder.getTokenType() == NEW_LINE)
+				break;
+
+			if(builder.getTokenType() == NEXT_LINE)
+				builder.advanceLexer();
 
 			builder.advanceLexer();
-
-			if(builder.getTokenType() == NEW_LINE && prev != NEXT_LINE)
-				break;
 		}
-
-		builder.advanceLexer();
 
 		maker.done(DEFINE_ELEMENT);
 

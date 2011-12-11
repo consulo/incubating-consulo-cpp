@@ -16,13 +16,15 @@
 
 package org.napile.cpp4idea.lang.psi;
 
+import org.jetbrains.annotations.NotNull;
+import com.intellij.psi.PsiIdentifier;
+
 /**
  * @author VISTALL
- * @date 1:53/11.12.2011
+ * @date 17:13/11.12.2011
  */
-public interface CPsiInclude extends CPsiElement
+public interface CPsiCompilerVariable extends CPsiElement
 {
-	boolean isIndependentPath();
-
-	String getIncludeName();
+	@NotNull
+	PsiIdentifier getVariableIdentifier();
 }

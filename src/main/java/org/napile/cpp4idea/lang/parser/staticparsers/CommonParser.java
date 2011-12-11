@@ -32,16 +32,16 @@ public class CommonParser implements CElementType, CTokenType
 {
 	public static void parseElement(PsiBuilder builder)
 	{
-		skipLines(builder);
-
 		while(!builder.eof())
 		{
+			skipLines(builder);
+
 			if(builder.getTokenType() == S_INCLUDE_KEYWORD)
 				SharpIncludeKeyword.parse(builder);
 			else if(builder.getTokenType() == S_DEFINE_KEYWORD)
 				SharpDefineKeyword.parse(builder);
-			else if(builder.getTokenType() == S_IFNDEF_KEYWORD)
-				SharpIfdefKeyword.parse(builder);
+			else if(builder.getTokenType() == S_IFNDEF_KEYWORD || builder.getTokenType() == S_IFDEF_KEYWORD)
+				SharpIfdefKeyword.parseIf(builder);
 			else if(builder.getTokenType() == TYPEDEF_KEYWORD)
 				TypeDefParser.parse(builder);
 			else if(builder.getTokenType() == S_ENDIF_KEYWORD)
@@ -74,6 +74,15 @@ public class CommonParser implements CElementType, CTokenType
 		marker.done(TYPE_REF_ELEMENT);
 
 		skipLines(builder);
+	}
+
+	public static void parseCompilerVariable(PsiBuilder builder)
+	{
+		PsiBuilder.Marker marker = builder.mark();
+
+		builder.advanceLexer();
+
+		marker.done(COMPILER_VARIABLE_ELEMENT);
 	}
 
 	public static void advanceLexerAndSkipLines(PsiBuilder builder)

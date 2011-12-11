@@ -51,7 +51,7 @@ public class CSdkType extends SdkType
 	@Override
 	public boolean isValidSdkHome(String path)
 	{
-		return false;
+		return true;
 	}
 
 	@Override
@@ -76,6 +76,12 @@ public class CSdkType extends SdkType
 	public String getPresentableName()
 	{
 		return "C/C++ SDK";
+	}
+
+	@Override
+	public Icon getIcon()
+	{
+		return getIconForAddAction();
 	}
 
 	@Override

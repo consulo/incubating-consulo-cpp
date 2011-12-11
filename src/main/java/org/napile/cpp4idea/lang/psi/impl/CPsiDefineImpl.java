@@ -16,7 +16,10 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import org.napile.cpp4idea.lang.parser.CElementType;
+import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
 import org.napile.cpp4idea.lang.psi.CPsiDefine;
+import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
 import com.intellij.lang.ASTNode;
 
 /**
@@ -28,5 +31,17 @@ public class CPsiDefineImpl extends CPsiElementBaseImpl implements CPsiDefine
 	public CPsiDefineImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{
 		super(node);
+	}
+
+	@Override
+	public void accept(CPsiVisitor visitor)
+	{
+		visitor.visitDefine(this);
+	}
+
+	@Override
+	public CPsiCompilerVariable getVariable()
+	{
+		return (CPsiCompilerVariable)findChildByType(CElementType.COMPILER_VARIABLE_ELEMENT);
 	}
 }

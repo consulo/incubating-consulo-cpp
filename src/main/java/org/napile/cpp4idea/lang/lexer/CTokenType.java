@@ -60,6 +60,11 @@ public interface CTokenType extends TokenType
 	IElementType PUBLIC_KEYWORD = new CTokenImpl("PUBLIC_KEYWORD");
 	IElementType TYPEDEF_KEYWORD = new CTokenImpl("TYPEDEF_KEYWORD"); // typedef
 
+	// types
+	IElementType CHAR_KEYWORD = new CTokenImpl("CHAR_KEYWORD"); // char
+	IElementType LONG_KEYWORD = new CTokenImpl("LONG_KEYWORD"); // long
+	IElementType __INT64_KEYWORD = new CTokenImpl("__INT64_KEYWORD"); // __int64
+
 	// data
 	IElementType INTEGER_LITERAL = new CTokenImpl("INTEGER_LITERAL");
 	IElementType LONG_LITERAL = new CTokenImpl("LONG_LITERAL");
@@ -139,6 +144,7 @@ public interface CTokenType extends TokenType
 		NEW_KEYWORD, PUBLIC_KEYWORD, RETURN_KEYWORD,
 		SWITCH_KEYWORD, VOID_KEYWORD, WHILE_KEYWORD,
 		CONST_KEYWORD, TYPEDEF_KEYWORD, SIGNED_KEYWORD, UNSIGNED_KEYWORD,
+		CHAR_KEYWORD, __INT64_KEYWORD, LONG_KEYWORD,
 		S_INCLUDE_KEYWORD, S_DEFINE_KEYWORD, S_IFDEF_KEYWORD, S_IFNDEF_KEYWORD, S_ENDIF_KEYWORD
 	);
 }

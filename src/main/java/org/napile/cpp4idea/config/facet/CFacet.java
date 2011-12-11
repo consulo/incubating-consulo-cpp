@@ -14,15 +14,20 @@
  *    limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.psi;
+package org.napile.cpp4idea.config.facet;
+
+import com.intellij.facet.Facet;
+import com.intellij.facet.FacetType;
+import com.intellij.openapi.module.Module;
 
 /**
  * @author VISTALL
- * @date 1:53/11.12.2011
+ * @date 16:34/11.12.2011
  */
-public interface CPsiInclude extends CPsiElement
+public class CFacet extends Facet<CFacetConfiguration>
 {
-	boolean isIndependentPath();
-
-	String getIncludeName();
+	public CFacet(@org.jetbrains.annotations.NotNull FacetType facetType, @org.jetbrains.annotations.NotNull Module module, @org.jetbrains.annotations.NotNull String name, @org.jetbrains.annotations.NotNull CFacetConfiguration configuration, Facet underlyingFacet)
+	{
+		super(facetType, module, name, configuration, underlyingFacet);
+	}
 }

@@ -38,7 +38,12 @@
 	<extensions defaultExtensionNs="com.intellij">
 		<fileTypeFactory implementation="org.napile.cpp4idea.CFileTypeFactory" />
 		<iconProvider implementation="org.napile.cpp4idea.ide.IconProviderImpl" />
+		<!--settings-->
+		<colorSettingsPage implementation="org.napile.cpp4idea.ide.highlight.CColorSettingsPageImpl"/>
 		<sdkType implementation="org.napile.cpp4idea.config.sdk.CSdkType" />
+		<facetType implementation="org.napile.cpp4idea.config.facet.CFacetType"/>
+		<!--lang-->
+		<annotator language="C" implementationClass="org.napile.cpp4idea.annotator.CHighlighterAnnotator"/>
 		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.ide.highlight.CPairedBraceMatcherImpl" />
 		<lang.parserDefinition language="C" implementationClass="org.napile.cpp4idea.lang.parser.CParserDefinition" />
 	</extensions>

@@ -28,7 +28,7 @@ import com.intellij.psi.tree.IElementType;
  */
 public class SharpIfdefKeyword extends CommonParser implements CElementType, CTokenType
 {
-	public static void parse(PsiBuilder builder)
+	public static void parseIf(PsiBuilder builder)
 	{
 		PsiBuilder.Marker marker = builder.mark();
 
@@ -36,8 +36,7 @@ public class SharpIfdefKeyword extends CommonParser implements CElementType, CTo
 
 		advanceLexerAndSkipLines(builder);
 
-		//TODO [VISTALL] parse declaration
-		advanceLexerAndSkipLines(builder);
+		parseCompilerVariable(builder);
 
 		while(!builder.eof())
 		{

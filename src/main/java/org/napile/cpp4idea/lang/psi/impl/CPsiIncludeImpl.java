@@ -16,6 +16,7 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import org.napile.cpp4idea.lang.lexer.CTokenType;
 import org.napile.cpp4idea.lang.psi.CPsiInclude;
 import com.intellij.lang.ASTNode;
 
@@ -28,5 +29,17 @@ public class CPsiIncludeImpl extends CPsiElementBaseImpl implements CPsiInclude
 	public CPsiIncludeImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{
 		super(node);
+	}
+
+	@Override
+	public boolean isIndependentPath()
+	{
+		return findChildByType(CTokenType.STRING_INCLUDE_LITERAL) != null;
+	}
+
+	@Override
+	public String getIncludeName()
+	{
+		return null;
 	}
 }

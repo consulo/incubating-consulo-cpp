@@ -33,6 +33,8 @@ public interface CElementType extends CTokenType
 
 	IElementType PARAMETER_LIST_ELEMENT = new CPsiTokenImpl("PARAMETER_LIST_ELEMENT", CPsiParameterListImpl.class);
 
+	IElementType COMPILER_VARIABLE_ELEMENT = new CPsiTokenImpl("COMPILER_VARIABLE_ELEMENT", CPsiCompilerVariableImpl.class);
+
 	IElementType PARAMETER_ELEMENT = new CPsiTokenImpl("PARAMETER_ELEMENT", CPsiParameterImpl.class);
 
 	IElementType CODE_BLOCK_ELEMENT = new CPsiTokenImpl("CODE_BLOCK_ELEMENT", CPsiCodeBlockImpl.class);

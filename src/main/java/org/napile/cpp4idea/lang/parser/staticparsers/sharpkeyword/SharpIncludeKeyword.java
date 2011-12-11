@@ -36,8 +36,10 @@ public class SharpIncludeKeyword extends CommonParser implements CTokenType, CEl
 		if(builder.getTokenType() != STRING_LITERAL && builder.getTokenType() != STRING_INCLUDE_LITERAL)
 			builder.error("Incorrect include name");
 
-		advanceLexerAndSkipLines(builder);
+		builder.advanceLexer();
 
 		maker.done(INCLUDE_ELEMENT);
+
+		skipLines(builder);
 	}
 }

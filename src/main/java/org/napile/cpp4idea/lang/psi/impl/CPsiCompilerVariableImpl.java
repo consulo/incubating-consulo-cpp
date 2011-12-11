@@ -14,15 +14,28 @@
  *    limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.psi;
+package org.napile.cpp4idea.lang.psi.impl;
+
+import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiIdentifier;
 
 /**
  * @author VISTALL
- * @date 1:53/11.12.2011
+ * @date 17:30/11.12.2011
  */
-public interface CPsiInclude extends CPsiElement
+public class CPsiCompilerVariableImpl extends CPsiElementBaseImpl implements CPsiCompilerVariable
 {
-	boolean isIndependentPath();
+	public CPsiCompilerVariableImpl(@org.jetbrains.annotations.NotNull ASTNode node)
+	{
+		super(node);
+	}
 
-	String getIncludeName();
+	@Override
+	@NotNull
+	public PsiIdentifier getVariableIdentifier()
+	{
+		return findNotNullChildByClass(PsiIdentifier.class);
+	}
 }

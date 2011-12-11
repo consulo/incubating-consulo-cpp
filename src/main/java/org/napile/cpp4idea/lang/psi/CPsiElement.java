@@ -16,6 +16,7 @@
 
 package org.napile.cpp4idea.lang.psi;
 
+import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
 import com.intellij.psi.PsiElement;
 
 /**
@@ -24,5 +25,7 @@ import com.intellij.psi.PsiElement;
  */
 public interface CPsiElement extends PsiElement
 {
+	void accept(CPsiVisitor visitor);
 
+	void acceptChild(CPsiVisitor visitor);
 }

@@ -22,10 +22,12 @@ import org.napile.cpp4idea.CFileType;
 import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.psi.CPsiElement;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
+import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiElement;
 
 /**
  * @author VISTALL
@@ -62,5 +64,24 @@ public class CPsiFileImpl extends PsiFileBase implements CPsiFile
 	public CPsiElement[] getElements()
 	{
 		return findChildrenByClass(CPsiElement.class);
+	}
+
+	@Override
+	public void accept(CPsiVisitor visitor)
+	{
+		visitor.visitFile(this);
+	}
+
+	@Override
+	public void acceptChild(CPsiVisitor visitor)
+	{
+		PsiElement child = getFirstChild();
+		while(child != null)
+		{
+			if(child instanceof CPsiElement)
+				((CPsiElement) child).accept(visitor);
+
+			child = child.getNextSibling();
+		}
 	}
 }

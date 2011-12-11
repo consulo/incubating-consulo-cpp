@@ -22,5 +22,5 @@ package org.napile.cpp4idea.lang.psi;
  */
 public interface CPsiDefine extends CPsiElement
 {
-
+	CPsiCompilerVariable getVariable();
 }

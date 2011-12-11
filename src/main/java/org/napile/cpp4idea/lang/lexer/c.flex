@@ -116,6 +116,9 @@ ESCAPE_SEQUENCE=\\[^\r\n]
 <YYINITIAL> "typedef" { return CTokenType.TYPEDEF_KEYWORD; }
 <YYINITIAL> "signed" { return CTokenType.SIGNED_KEYWORD; }
 <YYINITIAL> "unsigned" { return CTokenType.UNSIGNED_KEYWORD; }
+<YYINITIAL> "long" { return CTokenType.LONG_KEYWORD; }
+<YYINITIAL> "char" { return CTokenType.CHAR_KEYWORD; }
+<YYINITIAL> "__int64" { return CTokenType.__INT64_KEYWORD; }
 
 <YYINITIAL> {IDENTIFIER} { return CTokenType.IDENTIFIER; }
 

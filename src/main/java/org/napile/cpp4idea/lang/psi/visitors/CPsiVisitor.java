@@ -14,15 +14,35 @@
  *    limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.psi;
+package org.napile.cpp4idea.lang.psi.visitors;
+
+import org.napile.cpp4idea.lang.psi.CPsiDefine;
+import org.napile.cpp4idea.lang.psi.CPsiElement;
+import org.napile.cpp4idea.lang.psi.CPsiFile;
+import org.napile.cpp4idea.lang.psi.CPsiInclude;
 
 /**
  * @author VISTALL
- * @date 1:53/11.12.2011
+ * @date 17:36/11.12.2011
  */
-public interface CPsiInclude extends CPsiElement
+public class CPsiVisitor
 {
-	boolean isIndependentPath();
+	public void visitElement(CPsiElement element)
+	{
+	}
 
-	String getIncludeName();
+	public void visitFile(CPsiFile file)
+	{
+		visitElement(file);
+	}
+
+	public void visitDefine(CPsiDefine define)
+	{
+		visitElement(define);
+	}
+
+	public void visitInclude(CPsiInclude include)
+	{
+		visitElement(include);
+	}
 }

@@ -14,15 +14,19 @@
  *    limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.psi;
+package org.napile.cpp4idea.lang.psi.visitors;
+
+import org.napile.cpp4idea.lang.psi.CPsiElement;
 
 /**
  * @author VISTALL
- * @date 1:53/11.12.2011
+ * @date 17:42/11.12.2011
  */
-public interface CPsiInclude extends CPsiElement
+public class CPsiRecursiveVisitor extends CPsiVisitor
 {
-	boolean isIndependentPath();
-
-	String getIncludeName();
+	@Override
+	public void visitElement(CPsiElement element)
+	{
+		element.acceptChild(this);
+	}
 }
