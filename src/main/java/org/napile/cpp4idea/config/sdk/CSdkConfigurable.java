@@ -16,48 +16,73 @@
 
 package org.napile.cpp4idea.config.sdk;
 
-import javax.swing.Icon;
+import java.awt.BorderLayout;
 
-import org.jetbrains.annotations.Nls;
-import org.napile.cpp4idea.util.CIcons;
+import javax.swing.JComponent;
+import javax.swing.JPanel;
+
+import org.napile.cpp4idea.config.sdk.ui.GeneralTabSdkPanel;
+import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.projectRoots.AdditionalDataConfigurable;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.ui.MasterDetailsComponent;
+import com.intellij.openapi.util.Disposer;
+import com.intellij.ui.tabs.TabInfo;
+import com.intellij.ui.tabs.impl.JBTabsImpl;
 
 /**
  * @author VISTALL
  * @date 16:56/11.12.2011
  */
-public class CSdkConfigurable extends MasterDetailsComponent implements AdditionalDataConfigurable
+public class CSdkConfigurable implements AdditionalDataConfigurable
 {
-	@Override
-	protected void processRemovedItems()
-	{
+	private JBTabsImpl _tabs;
 
-	}
-
-	@Override
-	protected boolean wasObjectStored(Object editableObject)
+	public CSdkConfigurable()
 	{
-		return false;
-	}
+		_tabs = new JBTabsImpl(null, null, null, Disposer.newDisposable());
+		//_tabs.setTabSidePaintBorder(5);
+		//_tabs.setPaintBorder(1, 1, 1, 1);
 
-	@Nls
-	@Override
-	public String getDisplayName()
-	{
-		return "C/C++";
-	}
-
-	@Override
-	public Icon getIcon()
-	{
-		return CIcons.SOURCE_FILE;
+		_tabs.addTab(new TabInfo(new GeneralTabSdkPanel()).setText("General"));
+		_tabs.addTab(new TabInfo(new JPanel()).setText("Include"));
+		_tabs.addTab(new TabInfo(new JPanel()).setText("Lib"));
 	}
 
 	@Override
 	public void setSdk(Sdk sdk)
 	{
 
+	}
+
+	@Override
+	public JComponent createComponent()
+	{
+		JPanel panel = new JPanel(new BorderLayout());
+		panel.add(_tabs.getComponent(), BorderLayout.NORTH);
+		return panel;
+	}
+
+	@Override
+	public boolean isModified()
+	{
+		return false;
+	}
+
+	@Override
+	public void apply() throws ConfigurationException
+	{
+
+	}
+
+	@Override
+	public void reset()
+	{
+
+	}
+
+	@Override
+	public void disposeUIResources()
+	{
+		
 	}
 }

@@ -14,34 +14,29 @@
  *    limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.parser;
+package org.napile.cpp4idea.lang.parser.staticparsers;
 
-import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.lexer.CTokenType;
-import org.napile.cpp4idea.lang.parser.staticparsers.CommonParser;
-import com.intellij.lang.ASTNode;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.PsiParser;
 import com.intellij.psi.tree.IElementType;
 
 /**
  * @author VISTALL
- * @date 2:19/10.12.2011
+ * @date 10:28/13.12.2011
  */
-public class CParser implements PsiParser, CTokenType, CElementType
+public class LiteralParser extends CommonParser
 {
-	@NotNull
-	@Override
-	public ASTNode parse(IElementType root, PsiBuilder builder)
+	@Nullable
+	public static IElementType parseIntegerLiteral(PsiBuilder builder)
 	{
-		builder.setDebugMode(true);
+		PsiBuilder.Marker marker = builder.mark();
 
-		PsiBuilder.Marker rootMarker = builder.mark();
+		builder.advanceLexer();
 
-		CommonParser.parseElement(builder);
+		marker.done(LITERAL_EXPRESSION_ELEMENT);
 
-		rootMarker.done(root);
+		skipLines(builder);
 
-		return builder.getTreeBuilt();
+		return LITERAL_EXPRESSION_ELEMENT;
 	}
 }

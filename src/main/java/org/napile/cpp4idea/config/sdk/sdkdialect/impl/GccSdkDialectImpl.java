@@ -14,33 +14,26 @@
  *    limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.psi.impl;
+package org.napile.cpp4idea.config.sdk.sdkdialect.impl;
 
-import org.napile.cpp4idea.lang.psi.CPsiCodeBlock;
-import org.napile.cpp4idea.lang.psi.CPsiMethod;
-import org.napile.cpp4idea.lang.psi.CPsiParameterList;
-import com.intellij.lang.ASTNode;
+import org.napile.cpp4idea.config.sdk.sdkdialect.SdkDialect;
 
 /**
  * @author VISTALL
- * @date 22:57/10.12.2011
+ * @date 16:45/12.12.2011
  */
-public class CPsiMethodImpl extends CPsiElementBaseImpl implements CPsiMethod
+public class GccSdkDialectImpl extends SdkDialect
 {
-	public CPsiMethodImpl(@org.jetbrains.annotations.NotNull ASTNode node)
+	public GccSdkDialectImpl(String name)
 	{
-		super(node);
+		super(name);
 	}
 
 	@Override
-	public CPsiParameterList getParameterList()
+	public boolean isSupported(String path)
 	{
-		return findChildByClass(CPsiParameterList.class);
+		return false;
 	}
 
-	@Override
-	public CPsiCodeBlock getCodeBlock()
-	{
-		return findChildByClass(CPsiCodeBlock.class);
-	}
+	//TODO [VISTALL]
 }

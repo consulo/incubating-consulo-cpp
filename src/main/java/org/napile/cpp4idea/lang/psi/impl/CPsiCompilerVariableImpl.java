@@ -18,6 +18,7 @@ package org.napile.cpp4idea.lang.psi.impl;
 
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
+import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiIdentifier;
 
@@ -30,6 +31,12 @@ public class CPsiCompilerVariableImpl extends CPsiElementBaseImpl implements CPs
 	public CPsiCompilerVariableImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{
 		super(node);
+	}
+
+	@Override
+	public void accept(CPsiVisitor visitor)
+	{
+		visitor.visitCompilerVariable(this);
 	}
 
 	@Override

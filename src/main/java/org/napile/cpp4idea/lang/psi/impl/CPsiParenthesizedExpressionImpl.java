@@ -16,37 +16,17 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
-import org.napile.cpp4idea.lang.lexer.CTokenType;
-import org.napile.cpp4idea.lang.psi.CPsiInclude;
-import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
+import org.napile.cpp4idea.lang.psi.CPsiParenthesizedExpression;
 import com.intellij.lang.ASTNode;
 
 /**
  * @author VISTALL
- * @date 1:53/11.12.2011
+ * @date 13:29/13.12.2011
  */
-public class CPsiIncludeImpl extends CPsiElementBaseImpl implements CPsiInclude
+public class CPsiParenthesizedExpressionImpl extends CPsiElementBaseImpl implements CPsiParenthesizedExpression
 {
-	public CPsiIncludeImpl(@org.jetbrains.annotations.NotNull ASTNode node)
+	public CPsiParenthesizedExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{
 		super(node);
-	}
-
-	@Override
-	public void accept(CPsiVisitor visitor)
-	{
-		visitor.visitInclude(this);
-	}
-
-	@Override
-	public boolean isIndependentPath()
-	{
-		return findChildByType(CTokenType.STRING_INCLUDE_LITERAL) != null;
-	}
-
-	@Override
-	public String getIncludeName()
-	{
-		return null;
 	}
 }

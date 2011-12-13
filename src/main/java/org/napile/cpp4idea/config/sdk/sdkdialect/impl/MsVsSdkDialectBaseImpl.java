@@ -14,15 +14,18 @@
  *    limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.psi;
+package org.napile.cpp4idea.config.sdk.sdkdialect.impl;
+
+import org.napile.cpp4idea.config.sdk.sdkdialect.SdkDialect;
 
 /**
  * @author VISTALL
- * @date 23:18/10.12.2011
+ * @date 16:43/12.12.2011
  */
-public interface CPsiMethod extends CPsiElement
+public abstract class MsVsSdkDialectBaseImpl extends SdkDialect
 {
-	CPsiParameterList getParameterList();
-
-	CPsiCodeBlock getCodeBlock();
+	protected MsVsSdkDialectBaseImpl(String name)
+	{
+		super("Microsoft Visual Studio " + name);
+	}
 }

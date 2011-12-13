@@ -46,5 +46,6 @@
 		<annotator language="C" implementationClass="org.napile.cpp4idea.annotator.CHighlighterAnnotator"/>
 		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.ide.highlight.CPairedBraceMatcherImpl" />
 		<lang.parserDefinition language="C" implementationClass="org.napile.cpp4idea.lang.parser.CParserDefinition" />
+
 	</extensions>
 </idea-plugin>

@@ -16,6 +16,7 @@
 
 package org.napile.cpp4idea.lang.psi.visitors;
 
+import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
 import org.napile.cpp4idea.lang.psi.CPsiDefine;
 import org.napile.cpp4idea.lang.psi.CPsiElement;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
@@ -44,5 +45,10 @@ public class CPsiVisitor
 	public void visitInclude(CPsiInclude include)
 	{
 		visitElement(include);
+	}
+
+	public void visitCompilerVariable(CPsiCompilerVariable element)
+	{
+		visitElement(element);
 	}
 }

@@ -19,12 +19,14 @@ package org.napile.cpp4idea.config.sdk;
 import javax.swing.Icon;
 
 import org.jdom.Element;
+import org.napile.cpp4idea.config.sdk.sdkdialect.SdkDialect;
 import org.napile.cpp4idea.util.CIcons;
 import com.intellij.openapi.projectRoots.AdditionalDataConfigurable;
 import com.intellij.openapi.projectRoots.SdkAdditionalData;
 import com.intellij.openapi.projectRoots.SdkModel;
 import com.intellij.openapi.projectRoots.SdkModificator;
 import com.intellij.openapi.projectRoots.SdkType;
+import com.intellij.openapi.roots.OrderRootType;
 
 /**
  * @author VISTALL
@@ -51,7 +53,10 @@ public class CSdkType extends SdkType
 	@Override
 	public boolean isValidSdkHome(String path)
 	{
-		return true;
+		for(SdkDialect dialect : SdkDialect.DIALECTS)
+			if(dialect.isSupported(path))
+				return true;
+		return false;
 	}
 
 	@Override
@@ -63,7 +68,7 @@ public class CSdkType extends SdkType
 	@Override
 	public AdditionalDataConfigurable createAdditionalDataConfigurable(SdkModel sdkModel, SdkModificator sdkModificator)
 	{
-		return null;
+		return new CSdkConfigurable();
 	}
 
 	@Override
@@ -88,5 +93,11 @@ public class CSdkType extends SdkType
 	public Icon getIconForAddAction()
 	{
 		return CIcons.SOURCE_FILE;
+	}
+
+	@Override
+	public boolean isRootTypeApplicable(final OrderRootType type)
+	{
+		return false;
 	}
 }

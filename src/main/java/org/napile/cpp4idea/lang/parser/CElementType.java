@@ -27,15 +27,25 @@ import com.intellij.psi.tree.IElementType;
  */
 public interface CElementType extends CTokenType
 {
-	IElementType METHOD_ELEMENT = new CPsiTokenImpl("METHOD_ELEMENT", CPsiMethodImpl.class);
+	// method with code block
+	IElementType IMPLEMENTING_METHOD_ELEMENT = new CPsiTokenImpl("IMPLEMENTING_METHOD_ELEMENT", CPsiImplentingMethodImpl.class);
 
+	// method without code block
+	IElementType DECLARATION_METHOD_ELEMENT = new CPsiTokenImpl("DECLARATION_METHOD_ELEMENT", CPsiDeclarationMethodImpl.class);
+
+	// field
+	IElementType FIELD_ELEMENT = new CPsiTokenImpl("FIELD_ELEMENT", CPsiFieldImpl.class);
+
+	// type define
 	IElementType TYPE_REF_ELEMENT = new CPsiTokenImpl("TYPE_REF_ELEMENT", CPsiTypeRefImpl.class);
 
+	// parameter list ()
 	IElementType PARAMETER_LIST_ELEMENT = new CPsiTokenImpl("PARAMETER_LIST_ELEMENT", CPsiParameterListImpl.class);
 
-	IElementType COMPILER_VARIABLE_ELEMENT = new CPsiTokenImpl("COMPILER_VARIABLE_ELEMENT", CPsiCompilerVariableImpl.class);
-
+	// parameter element
 	IElementType PARAMETER_ELEMENT = new CPsiTokenImpl("PARAMETER_ELEMENT", CPsiParameterImpl.class);
+
+	IElementType COMPILER_VARIABLE_ELEMENT = new CPsiTokenImpl("COMPILER_VARIABLE_ELEMENT", CPsiCompilerVariableImpl.class);
 
 	IElementType CODE_BLOCK_ELEMENT = new CPsiTokenImpl("CODE_BLOCK_ELEMENT", CPsiCodeBlockImpl.class);
 
@@ -55,4 +65,9 @@ public interface CElementType extends CTokenType
 
 	// typedef
 	IElementType TYPEDEF_ELEMENT = new CPsiTokenImpl("TYPEDEF_ELEMENT", CPsiTypeDeclarationImpl.class);
+
+	// literal expression
+	IElementType LITERAL_EXPRESSION_ELEMENT = new CPsiTokenImpl("LITERAL_EXPRESSION_ELEMENT", CPsiLiteralExpressionImpl.class);
+	// (...) expression
+	IElementType PARENTHESIZED_EXPRESSION_ELEMENT = new CPsiTokenImpl("PARENTHESIZED_EXPRESSION_ELEMENT", CPsiParenthesizedExpressionImpl.class);
 }

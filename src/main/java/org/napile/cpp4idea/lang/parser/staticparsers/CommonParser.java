@@ -18,11 +18,11 @@ package org.napile.cpp4idea.lang.parser.staticparsers;
 
 import org.napile.cpp4idea.lang.lexer.CTokenType;
 import org.napile.cpp4idea.lang.parser.CElementType;
-import org.napile.cpp4idea.lang.parser.CParser;
 import org.napile.cpp4idea.lang.parser.staticparsers.sharpkeyword.SharpDefineKeyword;
 import org.napile.cpp4idea.lang.parser.staticparsers.sharpkeyword.SharpIfdefKeyword;
 import org.napile.cpp4idea.lang.parser.staticparsers.sharpkeyword.SharpIncludeKeyword;
 import com.intellij.lang.PsiBuilder;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * @author VISTALL
@@ -47,7 +47,7 @@ public class CommonParser implements CElementType, CTokenType
 			else if(builder.getTokenType() == S_ENDIF_KEYWORD)
 				advanceLexerAndSkipLines(builder);
 			else
-				CParser.parseMethodOrExpression(builder);
+				parseMethodOrField(builder);
 		}
 	}
 
@@ -83,6 +83,66 @@ public class CommonParser implements CElementType, CTokenType
 		builder.advanceLexer();
 
 		marker.done(COMPILER_VARIABLE_ELEMENT);
+	}
+
+	public static void parseMethodOrField(PsiBuilder builder)
+	{
+		PsiBuilder.Marker maker = builder.mark();
+
+		parseTypeRef(builder);
+
+		IElementType methodName = builder.getTokenType();
+		if(methodName != IDENTIFIER)
+		{
+			builder.error("Field name expected");
+			maker.done(FIELD_ELEMENT);
+			return;
+		}
+		else
+			advanceLexerAndSkipLines(builder);
+
+		if(builder.getTokenType() == LPARENTH)
+		{
+			ParameterListParser.parseParameterList(builder);
+	
+			if(builder.getTokenType() != SEMICOLON)
+			{
+				CodeBlockParser.parseCodeBlock(builder);
+	
+				maker.done(IMPLEMENTING_METHOD_ELEMENT);
+			}
+			else
+			{
+				builder.advanceLexer();
+	
+				maker.done(DECLARATION_METHOD_ELEMENT);
+
+				skipLines(builder);
+			}
+		}
+		else
+		{
+			if(builder.getTokenType() != SEMICOLON)
+			{
+				if(builder.getTokenType() != EQ)
+					builder.error("';' expected");
+				else
+				{
+					advanceLexerAndSkipLines(builder);
+
+					CodeBlockParser.parseExpression(builder, maker);
+
+					if(builder.getTokenType() != SEMICOLON)
+						builder.error("';' expected");
+				}
+			}
+			else
+				builder.advanceLexer();
+
+			maker.done(FIELD_ELEMENT);
+
+			skipLines(builder);
+		}
 	}
 
 	public static void advanceLexerAndSkipLines(PsiBuilder builder)
