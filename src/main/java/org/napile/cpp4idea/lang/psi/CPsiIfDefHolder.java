@@ -20,7 +20,7 @@ package org.napile.cpp4idea.lang.psi;
  * @author VISTALL
  * @date 14:06/11.12.2011
  */
-public interface CPsiIfDefHolder extends CPsiElementHolder
+public interface CPsiIfDefHolder extends CPsiElementHolder, CPsiCompilerVariableHolder
 {
 
 }

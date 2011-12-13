@@ -16,6 +16,7 @@
 
 package org.napile.cpp4idea.lang.parser.staticparsers;
 
+import org.napile.cpp4idea.CBundle;
 import org.napile.cpp4idea.lang.lexer.CTokenType;
 import org.napile.cpp4idea.lang.parser.CElementType;
 import org.napile.cpp4idea.lang.parser.staticparsers.sharpkeyword.SharpDefineKeyword;
@@ -125,15 +126,17 @@ public class CommonParser implements CElementType, CTokenType
 			if(builder.getTokenType() != SEMICOLON)
 			{
 				if(builder.getTokenType() != EQ)
-					builder.error("';' expected");
+					builder.error(CBundle.message("EQ.expected"));
 				else
 				{
 					advanceLexerAndSkipLines(builder);
 
-					CodeBlockParser.parseExpression(builder, maker);
+					CodeBlockParser.parseExpressionBlock(builder, builder.getTokenType(), SEMICOLON);
 
 					if(builder.getTokenType() != SEMICOLON)
-						builder.error("';' expected");
+						builder.error(CBundle.message("SEMICOLON.expected"));
+
+					builder.advanceLexer();
 				}
 			}
 			else
@@ -156,5 +159,16 @@ public class CommonParser implements CElementType, CTokenType
 	{
 		while(builder.getTokenType() == NEW_LINE)
 			builder.advanceLexer();
+	}
+
+	public static void doneAndSkipLines(IElementType elementType, PsiBuilder builder)
+	{
+		PsiBuilder.Marker marker = builder.mark();
+
+		builder.advanceLexer();
+
+		marker.done(elementType);
+
+		skipLines(builder);
 	}
 }

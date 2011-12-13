@@ -16,8 +16,11 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
 import org.napile.cpp4idea.lang.psi.CPsiElement;
 import org.napile.cpp4idea.lang.psi.CPsiIfNotDefHolder;
+import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
 import com.intellij.lang.ASTNode;
 
 /**
@@ -32,8 +35,21 @@ public class CPsiIfNotDefHolderImpl extends CPsiElementBaseImpl implements CPsiI
 	}
 
 	@Override
+	public void accept(CPsiVisitor visitor)
+	{
+		visitor.visitIfNotDefHolder(this);
+	}
+
+	@Override
 	public CPsiElement[] getElements()
 	{
 		return findChildrenByClass(CPsiElement.class);
+	}
+
+	@Override
+	@NotNull
+	public CPsiCompilerVariable getVariable()
+	{
+		return findNotNullChildByClass(CPsiCompilerVariable.class);
 	}
 }

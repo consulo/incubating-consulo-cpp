@@ -16,6 +16,8 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import javax.swing.Icon;
+
 import org.apache.commons.lang.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CFileType;
@@ -23,6 +25,7 @@ import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.psi.CPsiElement;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
+import org.napile.cpp4idea.util.CIcons;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VirtualFile;
@@ -83,5 +86,11 @@ public class CPsiFileImpl extends PsiFileBase implements CPsiFile
 
 			child = child.getNextSibling();
 		}
+	}
+
+	@Override
+	public Icon getElementIcon(int flag)
+	{
+		return isSourceFile() ? CIcons.SOURCE_FILE : CIcons.HEADER_FILE;
 	}
 }

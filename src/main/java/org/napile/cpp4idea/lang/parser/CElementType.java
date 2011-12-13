@@ -70,4 +70,6 @@ public interface CElementType extends CTokenType
 	IElementType LITERAL_EXPRESSION_ELEMENT = new CPsiTokenImpl("LITERAL_EXPRESSION_ELEMENT", CPsiLiteralExpressionImpl.class);
 	// (...) expression
 	IElementType PARENTHESIZED_EXPRESSION_ELEMENT = new CPsiTokenImpl("PARENTHESIZED_EXPRESSION_ELEMENT", CPsiParenthesizedExpressionImpl.class);
+	// +/-/*// - expression
+	IElementType BINARY_EXPRESSION_ELEMENT = new CPsiTokenImpl("BINARY_EXPRESSION_ELEMENT", CPsiBinaryExpressionImpl.class);
 }

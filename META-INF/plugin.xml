@@ -19,7 +19,7 @@
 	<description>Support for C/C++ language. Worked on napile project</description>
 	<version>1.0</version>
 	<vendor>napile.org</vendor>
-	<resource-bundle>org.napile.cpp4idea.Bundle</resource-bundle>
+	<resource-bundle>org.napile.cpp4idea.CBundle</resource-bundle>
 	<idea-version since-build="8000"/>
 	<category>Custom Languages</category>
 
@@ -37,7 +37,6 @@
 
 	<extensions defaultExtensionNs="com.intellij">
 		<fileTypeFactory implementation="org.napile.cpp4idea.CFileTypeFactory" />
-		<iconProvider implementation="org.napile.cpp4idea.ide.IconProviderImpl" />
 		<!--settings-->
 		<colorSettingsPage implementation="org.napile.cpp4idea.ide.highlight.CColorSettingsPageImpl"/>
 		<sdkType implementation="org.napile.cpp4idea.config.sdk.CSdkType" />

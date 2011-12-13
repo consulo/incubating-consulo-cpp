@@ -16,6 +16,7 @@
 
 package org.napile.cpp4idea.lang.parser.staticparsers;
 
+import org.napile.cpp4idea.CBundle;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
 
@@ -31,7 +32,7 @@ public class CodeBlockParser extends CommonParser
 
 		if(builder.getTokenType() != LBRACE)
 		{
-			builder.error("{ expected");
+			builder.error(CBundle.message("LBRACE.expected"));
 			maker = builder.mark();
 			maker.done(PARAMETER_LIST_ELEMENT);
 			return;
@@ -53,7 +54,7 @@ public class CodeBlockParser extends CommonParser
 			}
 
 			if(builder.getTokenType() != RBRACE)
-				builder.error("} expected");
+				builder.error(CBundle.message("RBRACE.expected"));
 		}
 
 		builder.advanceLexer();
@@ -69,12 +70,12 @@ public class CodeBlockParser extends CommonParser
 
 			builder.advanceLexer();
 
-			parseExpression(builder, marker);
+			parseExpressionBlock(builder, builder.getTokenType(), SEMICOLON);
 
 			builder.advanceLexer();
 
 			if(builder.getTokenType() != SEMICOLON)
-				builder.error("; expected");
+				builder.error(CBundle.message("SEMICOLON.expected"));
 
 			marker.done(RETURN_ELEMENT);
 		}
@@ -82,47 +83,85 @@ public class CodeBlockParser extends CommonParser
 		builder.advanceLexer();
 	}
 
-	public static void parseExpressionBlock(PsiBuilder builder)
+	public static boolean parseExpressionBlock(PsiBuilder builder, IElementType elementType, IElementType needEndElement)
 	{
-
-	}
-
-	public static void parseExpression(PsiBuilder builder, PsiBuilder.Marker rootMaker)
-	{
-		IElementType last = null;
-
-		PsiBuilder.Marker marker = builder.mark();
-		while(!builder.eof())
+		if(LITERAL_EXPRESSION_SET.contains(builder.getTokenType()))
 		{
-			if(builder.getTokenType() == INTEGER_LITERAL)
-				last = LiteralParser.parseIntegerLiteral(builder);
-			else if(builder.getTokenType() == PLUS)
+			PsiBuilder.Marker marker = builder.mark();
+
+			doneAndSkipLines(LITERAL_EXPRESSION_ELEMENT, builder);
+
+			if(BINARY_EXPRESSION_SET.contains(builder.getTokenType()))
 			{
-				System.out.println(builder.lookAhead(-2));
+				IElementType prev = builder.getTokenType();
 
 				advanceLexerAndSkipLines(builder);
-			}
-			else if(builder.getTokenType() == LPARENTH)
-			{
-				throw new IllegalArgumentException();
-			}
-			else if(builder.getTokenType() == SEMICOLON)
-			{
-				if(last == null)
-					marker.error("Expression expected");
-				else
-					marker.drop();
 
-				builder.advanceLexer();
-				return;
+				if(!parseExpressionBlock(builder, prev, needEndElement))
+					builder.error(CBundle.message("expression.expected"));
+
+				marker.done(BINARY_EXPRESSION_ELEMENT);
+
+				return true;
 			}
+			/*else if(builder.getTokenType() == LPARENTH)
+			{
+				IElementType prev = builder.getTokenType();
+
+				advanceLexerAndSkipLines(builder);
+
+				if(!parseExpressionBlock(builder, prev))
+					builder.error(CBundle.message("expression.expected") + " " + builder.getTokenType());
+
+				marker.done(PARENTHESIZED_EXPRESSION_ELEMENT);
+
+				return true;
+			} */
 			else
-				break;
+			{
+				marker.drop();
+
+				return needEndElement == null || builder.getTokenType() == needEndElement;
+			}
+		}
+		else if(BINARY_EXPRESSION_SET.contains(builder.getTokenType()))
+		{
+			IElementType prev = builder.getTokenType();
+
+			advanceLexerAndSkipLines(builder);
+
+			return parseExpressionBlock(builder, prev, SEMICOLON);
+		}
+		else if(builder.getTokenType() == LPARENTH)
+		{
+			IElementType prev = builder.getTokenType();
+
+			PsiBuilder.Marker marker = builder.mark();
+
+			advanceLexerAndSkipLines(builder);
+
+			if(!parseExpressionBlock(builder, prev, RPARENTH))
+				builder.error(CBundle.message("expression.expected"));
+
+			if(builder.getTokenType() != RPARENTH)
+				builder.error(CBundle.message("RPARENTH.expected"));
+
+			builder.advanceLexer();
+
+			marker.done(PARENTHESIZED_EXPRESSION_ELEMENT);
+
+			skipLines(builder);
+
+			parseExpressionBlock(builder, prev, SEMICOLON);
+			return true;
+		}
+		else if(builder.getTokenType() == SEMICOLON)
+		{
+			if(elementType == null || !BINARY_EXPRESSION_SET.contains(elementType))
+				return true;
 		}
 
-		builder.error(last == null ? "Expression expected" : "; expected");
-
-		marker.drop();
-		advanceLexerAndSkipLines(builder);
+		builder.error(CBundle.message("expression.expected"));
+		return false;
 	}
 }

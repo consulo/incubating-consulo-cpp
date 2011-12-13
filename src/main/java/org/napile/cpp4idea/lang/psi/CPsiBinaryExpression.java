@@ -14,27 +14,13 @@
  *    limitations under the License.
  */
 
-package org.napile.cpp4idea.ide;
-
-import javax.swing.Icon;
-
-import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.psi.CPsiFile;
-import org.napile.cpp4idea.util.CIcons;
-import com.intellij.ide.IconProvider;
-import com.intellij.psi.PsiElement;
+package org.napile.cpp4idea.lang.psi;
 
 /**
  * @author VISTALL
- * @date 1:05/10.12.2011
+ * @date 19:55/13.12.2011
  */
-public class IconProviderImpl extends IconProvider
+public interface CPsiBinaryExpression extends CPsiExpression
 {
-	@Override
-	public Icon getIcon(@NotNull PsiElement element, int flags)
-	{
-		if(element instanceof CPsiFile)
-			return ((CPsiFile) element).isSourceFile() ? CIcons.SOURCE_FILE : CIcons.HEADER_FILE;
-		return null;
-	}
+
 }

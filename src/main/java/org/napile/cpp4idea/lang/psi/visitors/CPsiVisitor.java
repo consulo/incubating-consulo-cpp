@@ -20,6 +20,8 @@ import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
 import org.napile.cpp4idea.lang.psi.CPsiDefine;
 import org.napile.cpp4idea.lang.psi.CPsiElement;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
+import org.napile.cpp4idea.lang.psi.CPsiIfDefHolder;
+import org.napile.cpp4idea.lang.psi.CPsiIfNotDefHolder;
 import org.napile.cpp4idea.lang.psi.CPsiInclude;
 
 /**
@@ -45,6 +47,16 @@ public class CPsiVisitor
 	public void visitInclude(CPsiInclude include)
 	{
 		visitElement(include);
+	}
+
+	public void visitIfDefHolder(CPsiIfDefHolder element)
+	{
+		visitElement(element);
+	}
+
+	public void visitIfNotDefHolder(CPsiIfNotDefHolder element)
+	{
+		visitElement(element);
 	}
 
 	public void visitCompilerVariable(CPsiCompilerVariable element)

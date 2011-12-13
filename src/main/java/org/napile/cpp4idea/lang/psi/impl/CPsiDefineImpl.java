@@ -16,7 +16,7 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
-import org.napile.cpp4idea.lang.parser.CElementType;
+import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
 import org.napile.cpp4idea.lang.psi.CPsiDefine;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
@@ -40,8 +40,9 @@ public class CPsiDefineImpl extends CPsiElementBaseImpl implements CPsiDefine
 	}
 
 	@Override
+	@NotNull
 	public CPsiCompilerVariable getVariable()
 	{
-		return (CPsiCompilerVariable)findChildByType(CElementType.COMPILER_VARIABLE_ELEMENT);
+		return findNotNullChildByClass(CPsiCompilerVariable.class);
 	}
 }

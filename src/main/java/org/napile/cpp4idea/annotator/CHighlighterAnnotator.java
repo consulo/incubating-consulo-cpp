@@ -19,7 +19,10 @@ package org.napile.cpp4idea.annotator;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.ide.highlight.CSyntaxHighlighter;
 import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
+import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
 import org.napile.cpp4idea.lang.psi.CPsiElement;
+import org.napile.cpp4idea.lang.psi.CPsiIfDefHolder;
+import org.napile.cpp4idea.lang.psi.CPsiIfNotDefHolder;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiRecursiveVisitor;
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
@@ -52,5 +55,22 @@ public class CHighlighterAnnotator extends CPsiRecursiveVisitor implements Annot
 		Annotation annotation = _annotationHolder.createInfoAnnotation(element, null);
 
 		annotation.setTextAttributes(CSyntaxHighlighter.COMPILER_VARIABLE);
+	}
+
+	@Override
+	public void visitIfDefHolder(CPsiIfDefHolder element)
+	{
+		paintIfCompilerBlock(element, true);
+	}
+
+	@Override
+	public void visitIfNotDefHolder(CPsiIfNotDefHolder element)
+	{
+		paintIfCompilerBlock(element, false);
+	}
+
+	private void paintIfCompilerBlock(CPsiCompilerVariableHolder holder, boolean val)
+	{
+
 	}
 }

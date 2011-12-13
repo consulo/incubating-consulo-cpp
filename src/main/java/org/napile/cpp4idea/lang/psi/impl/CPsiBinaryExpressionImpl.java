@@ -14,29 +14,19 @@
  *    limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.parser.staticparsers;
+package org.napile.cpp4idea.lang.psi.impl;
 
-import org.jetbrains.annotations.Nullable;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.psi.tree.IElementType;
+import org.napile.cpp4idea.lang.psi.CPsiBinaryExpression;
+import com.intellij.lang.ASTNode;
 
 /**
  * @author VISTALL
- * @date 10:28/13.12.2011
+ * @date 19:55/13.12.2011
  */
-public class LiteralParser extends CommonParser
+public class CPsiBinaryExpressionImpl extends CPsiElementBaseImpl implements CPsiBinaryExpression
 {
-	@Nullable
-	public static IElementType parseIntegerLiteral(PsiBuilder builder)
+	public CPsiBinaryExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{
-		PsiBuilder.Marker marker = builder.mark();
-
-		builder.advanceLexer();
-
-		marker.done(LITERAL_EXPRESSION_ELEMENT);
-
-		skipLines(builder);
-
-		return LITERAL_EXPRESSION_ELEMENT;
+		super(node);
 	}
 }
