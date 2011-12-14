@@ -16,20 +16,20 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
-import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.lexer.CTokenType;
-import org.napile.cpp4idea.lang.psi.CPsiInclude;
+import org.napile.cpp4idea.lang.psi.CPsiEnum;
+import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 
 /**
  * @author VISTALL
- * @date 1:53/11.12.2011
+ * @date 17:41/14.12.2011
  */
-public class CPsiIncludeImpl extends CPsiElementBaseImpl implements CPsiInclude
+public class CPsiEnumImpl extends CPsiElementBaseImpl implements CPsiEnum
 {
-	public CPsiIncludeImpl(@org.jetbrains.annotations.NotNull ASTNode node)
+	public CPsiEnumImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{
 		super(node);
 	}
@@ -37,24 +37,18 @@ public class CPsiIncludeImpl extends CPsiElementBaseImpl implements CPsiInclude
 	@Override
 	public void accept(CPsiVisitor visitor)
 	{
-		visitor.visitInclude(this);
+		visitor.visitEnum(this);
 	}
 
 	@Override
-	public PsiElement getIncludeElement()
+	public PsiElement getNameElement()
 	{
-		return findChildByType(CTokenType.STRING_LITERAL);
+		return findChildByType(CTokenType.IDENTIFIER);
 	}
 
 	@Override
-	@Nullable
-	public String getIncludeName()
+	public CPsiEnumConstant[] getConstants()
 	{
-		PsiElement element = getIncludeElement();
-		if(element == null)
-			return null;
-
-		String text = element.getText();
-		return text.substring(1, text.length() - 1);
+		return findChildrenByClass(CPsiEnumConstant.class);
 	}
 }

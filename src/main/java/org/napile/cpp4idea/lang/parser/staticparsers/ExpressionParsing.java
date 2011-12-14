@@ -16,6 +16,7 @@
 package org.napile.cpp4idea.lang.parser.staticparsers;
 
 import org.jetbrains.annotations.Nullable;
+import org.napile.cpp4idea.CBundle;
 import org.napile.cpp4idea.lang.psi.*;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.openapi.diagnostic.Logger;
@@ -127,7 +128,7 @@ public class ExpressionParsing extends CommonParsing
 				break;
 			}
 		}
-		checkMatches(builder, RBRACKET, "] expected");
+		checkMatches(builder, RBRACKET, "RBRACKET.expected");
 		done(expr, CPsiArrayLiteralExpression.class);
 	}
 
@@ -139,7 +140,7 @@ public class ExpressionParsing extends CommonParsing
 
 		parseExpression(builder);
 
-		checkMatches(builder, RPARENTH, ") expected");
+		checkMatches(builder, RPARENTH, "RPARENTH.expected");
 
 		done(expr, CPsiParenthesizedExpression.class);
 	}
@@ -169,7 +170,7 @@ public class ExpressionParsing extends CommonParsing
 			if(tokenType == DOT)
 			{
 				builder.advanceLexer();
-				checkMatches(builder, IDENTIFIER, "name expected");
+				checkMatches(builder, IDENTIFIER, "name.expected");
 				done(expr, CPsiReferenceExpression.class);
 				expr = expr.precede();
 			}
@@ -177,7 +178,7 @@ public class ExpressionParsing extends CommonParsing
 			{
 				builder.advanceLexer();
 				parseExpression(builder);
-				checkMatches(builder, RBRACKET, "] expected");
+				checkMatches(builder, RBRACKET, "RBRACKET.expected");
 				done(expr, CPsiIndexedPropertyAccessExpression.class);
 				expr = expr.precede();
 			}
@@ -239,7 +240,7 @@ public class ExpressionParsing extends CommonParsing
 			}
 		}
 
-		checkMatches(builder, RPARENTH, ") expected");
+		checkMatches(builder, RPARENTH, "RPARENTH.expected");
 
 		done(arglist, CPsiArgumentList.class);
 	}
@@ -247,7 +248,7 @@ public class ExpressionParsing extends CommonParsing
 	public static void parseExpression(PsiBuilder builder)
 	{
 		if(!parseExpressionOptional(builder))
-			builder.error("expression expected");
+			builder.error(CBundle.message("expression.expected"));
 	}
 
 	public static boolean parseAssignmentExpressionNoIn(final PsiBuilder builder)
@@ -299,7 +300,7 @@ public class ExpressionParsing extends CommonParsing
 			if(!parseAssignmentExpression(builder, allowIn))
 				builder.error("expression expected");
 
-			checkMatches(builder, COLON, ": expected");
+			checkMatches(builder, COLON, "COLON.expected");
 
 			if(!parseAssignmentExpression(builder, allowIn))
 				builder.error("expression expected");

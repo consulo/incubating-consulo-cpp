@@ -33,7 +33,7 @@ public class CBundle
 	private static Reference<ResourceBundle> BUNDLE;
 
 	@NonNls
-	protected static final String PATH_TO_BUNDLE = "org.napile.cpp4idea.CBundle";
+	public static final String PATH_TO_BUNDLE = "org.napile.cpp4idea.CBundle";
 
 	private CBundle()
 	{

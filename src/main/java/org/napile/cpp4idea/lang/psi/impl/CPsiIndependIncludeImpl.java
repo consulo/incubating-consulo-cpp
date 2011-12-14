@@ -26,17 +26,11 @@ import com.intellij.psi.PsiElement;
  * @author VISTALL
  * @date 1:53/11.12.2011
  */
-public class CPsiIndependIncludeImpl extends CPsiElementBaseImpl implements CPsiIndependInclude
+public class CPsiIndependIncludeImpl extends CPsiIncludeImpl implements CPsiIndependInclude
 {
 	public CPsiIndependIncludeImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{
 		super(node);
-	}
-
-	@Override
-	public void accept(CPsiVisitor visitor)
-	{
-		visitor.visitIndependInclude(this);
 	}
 
 	@Override
@@ -46,8 +40,8 @@ public class CPsiIndependIncludeImpl extends CPsiElementBaseImpl implements CPsi
 	}
 
 	@Override
-	public String getIncludeName()
+	public void accept(CPsiVisitor visitor)
 	{
-		return null;
+		visitor.visitIndependInclude(this);
 	}
 }

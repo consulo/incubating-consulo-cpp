@@ -114,6 +114,8 @@ ESCAPE_SEQUENCE=\\[^\r\n]
 <YYINITIAL> "while" { return CTokenType.WHILE_KEYWORD; }
 <YYINITIAL> "const" { return CTokenType.CONST_KEYWORD; }
 <YYINITIAL> "typedef" { return CTokenType.TYPEDEF_KEYWORD; }
+<YYINITIAL> "extern" { return CTokenType.EXTERN_KEYWORD; }
+<YYINITIAL> "enum" { return CTokenType.ENUM_KEYWORD; }
 <YYINITIAL> "signed" { return CTokenType.SIGNED_KEYWORD; }
 <YYINITIAL> "unsigned" { return CTokenType.UNSIGNED_KEYWORD; }
 <YYINITIAL> "long" { return CTokenType.LONG_KEYWORD; }

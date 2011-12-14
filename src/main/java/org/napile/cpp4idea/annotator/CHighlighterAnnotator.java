@@ -17,19 +17,27 @@
 package org.napile.cpp4idea.annotator;
 
 import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.CBundle;
 import org.napile.cpp4idea.ide.highlight.CSyntaxHighlighter;
 import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
 import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
 import org.napile.cpp4idea.lang.psi.CPsiElement;
+import org.napile.cpp4idea.lang.psi.CPsiEnum;
+import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
 import org.napile.cpp4idea.lang.psi.CPsiIfDefHolder;
 import org.napile.cpp4idea.lang.psi.CPsiIfNotDefHolder;
+import org.napile.cpp4idea.lang.psi.CPsiInclude;
 import org.napile.cpp4idea.lang.psi.CPsiIndependInclude;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiRecursiveVisitor;
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.openapi.editor.SyntaxHighlighterColors;
+import com.intellij.openapi.editor.colors.CodeInsightColors;
+import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 
 /**
  * @author VISTALL
@@ -57,6 +65,51 @@ public class CHighlighterAnnotator extends CPsiRecursiveVisitor implements Annot
 		Annotation annotation = _annotationHolder.createInfoAnnotation(element, null);
 
 		annotation.setTextAttributes(CSyntaxHighlighter.COMPILER_VARIABLE);
+	}
+
+	@Override
+	public void visitInclude(CPsiInclude include)
+	{
+		PsiElement element = include.getIncludeElement();
+		if(element == null)
+			return;
+
+		PsiFile psiFile = include.getContainingFile();
+		VirtualFile virtualFile = psiFile.getVirtualFile();
+		if(virtualFile == null)
+			return;
+
+		VirtualFile parentDir = virtualFile.getParent();
+		if(parentDir == null)
+			return;
+
+		String includeName = include.getIncludeName();
+		VirtualFile includeFile = parentDir.findFileByRelativePath(FileUtil.toSystemIndependentName(includeName));
+		if(includeFile == null)
+			_annotationHolder.createErrorAnnotation(element, CBundle.message("not.find.header", includeName));
+	}
+
+	@Override
+	public void visitEnum(CPsiEnum psiEnum)
+	{
+		CPsiEnumConstant[] constants = psiEnum.getConstants();
+
+		for(CPsiEnumConstant constant : constants)
+			for(CPsiEnumConstant $constant : constants)
+				if(constant != $constant && constant.getNameElement().getText().equalsIgnoreCase($constant.getNameElement().getText()))
+					_annotationHolder.createErrorAnnotation(constant, CBundle.message("duplicate.enum.constant"));
+	}
+
+	@Override
+	public void visitEnumConstant(CPsiEnumConstant include)
+	{
+		PsiElement element = include.getNameElement();
+		if(element == null)
+			return;
+
+		Annotation annotation = _annotationHolder.createInfoAnnotation(element, null);
+
+		annotation.setTextAttributes(CodeInsightColors.STATIC_FIELD_ATTRIBUTES);
 	}
 
 	@Override

@@ -16,6 +16,7 @@
 
 package org.napile.cpp4idea.lang.parser.staticparsers;
 
+import org.jetbrains.annotations.PropertyKey;
 import org.napile.cpp4idea.CBundle;
 import org.napile.cpp4idea.lang.lexer.CTokenType;
 import org.napile.cpp4idea.lang.parser.CTokenElements;
@@ -53,6 +54,15 @@ public class CommonParsing implements CTokenType
 				TypeDefParsing.parse(builder);
 			else if(builder.getTokenType() == S_ENDIF_KEYWORD)
 				advanceLexerAndSkipLines(builder);
+			else if(builder.getTokenType() == RBRACE)
+				advanceLexerAndSkipLines(builder);
+			else if(builder.getTokenType() == EXTERN_KEYWORD)
+			{
+				//TODO [VISTALL]
+				advanceLexerAndSkipLines(builder);
+			}
+			else if(builder.getTokenType() == ENUM_KEYWORD)
+				EnumParsing.parse(builder);
 			else
 				parseMethodOrField(builder);
 		}
@@ -167,12 +177,28 @@ public class CommonParsing implements CTokenType
 			builder.advanceLexer();
 	}
 
-	protected static void checkMatches(final PsiBuilder builder, final IElementType token, final String message)
+	public static IElementType lookAheadIgnoreLines(PsiBuilder builder, int step)
+	{
+		while(!builder.eof())
+		{
+			IElementType elementType = builder.lookAhead(step);
+			if(elementType == null)
+				break;
+
+			if(elementType == NEW_LINE)
+				step ++;
+			else
+				return elementType;
+		}
+		return null;
+	}
+
+	protected static void checkMatches(final PsiBuilder builder, final IElementType token, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message)
 	{
 		if(builder.getTokenType() == token)
-			builder.advanceLexer();
+			advanceLexerAndSkipLines(builder);
 		else
-			builder.error(message);
+			builder.error(CBundle.message(message));
 	}
 
 	public static void done(PsiBuilder.Marker marker, Class<? extends CPsiElement> clazz)
