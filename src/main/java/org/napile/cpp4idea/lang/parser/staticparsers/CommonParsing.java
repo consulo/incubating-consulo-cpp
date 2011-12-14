@@ -18,10 +18,16 @@ package org.napile.cpp4idea.lang.parser.staticparsers;
 
 import org.napile.cpp4idea.CBundle;
 import org.napile.cpp4idea.lang.lexer.CTokenType;
-import org.napile.cpp4idea.lang.parser.CElementType;
+import org.napile.cpp4idea.lang.parser.CTokenElements;
 import org.napile.cpp4idea.lang.parser.staticparsers.sharpkeyword.SharpDefineKeyword;
 import org.napile.cpp4idea.lang.parser.staticparsers.sharpkeyword.SharpIfdefKeyword;
 import org.napile.cpp4idea.lang.parser.staticparsers.sharpkeyword.SharpIncludeKeyword;
+import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
+import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
+import org.napile.cpp4idea.lang.psi.CPsiElement;
+import org.napile.cpp4idea.lang.psi.CPsiField;
+import org.napile.cpp4idea.lang.psi.CPsiImplentingMethod;
+import org.napile.cpp4idea.lang.psi.CPsiTypeRef;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
 
@@ -29,7 +35,7 @@ import com.intellij.psi.tree.IElementType;
  * @author VISTALL
  * @date 14:26/11.12.2011
  */
-public class CommonParser implements CElementType, CTokenType
+public class CommonParsing implements CTokenType
 {
 	public static void parseElement(PsiBuilder builder)
 	{
@@ -44,7 +50,7 @@ public class CommonParser implements CElementType, CTokenType
 			else if(builder.getTokenType() == S_IFNDEF_KEYWORD || builder.getTokenType() == S_IFDEF_KEYWORD)
 				SharpIfdefKeyword.parseIf(builder);
 			else if(builder.getTokenType() == TYPEDEF_KEYWORD)
-				TypeDefParser.parse(builder);
+				TypeDefParsing.parse(builder);
 			else if(builder.getTokenType() == S_ENDIF_KEYWORD)
 				advanceLexerAndSkipLines(builder);
 			else
@@ -72,7 +78,7 @@ public class CommonParser implements CElementType, CTokenType
 		else
 			builder.advanceLexer();
 
-		marker.done(TYPE_REF_ELEMENT);
+		done(marker, CPsiTypeRef.class);
 
 		skipLines(builder);
 	}
@@ -83,12 +89,12 @@ public class CommonParser implements CElementType, CTokenType
 
 		builder.advanceLexer();
 
-		marker.done(COMPILER_VARIABLE_ELEMENT);
+		done(marker, CPsiCompilerVariable.class);
 	}
 
 	public static void parseMethodOrField(PsiBuilder builder)
 	{
-		PsiBuilder.Marker maker = builder.mark();
+		PsiBuilder.Marker marker = builder.mark();
 
 		parseTypeRef(builder);
 
@@ -96,7 +102,7 @@ public class CommonParser implements CElementType, CTokenType
 		if(methodName != IDENTIFIER)
 		{
 			builder.error("Field name expected");
-			maker.done(FIELD_ELEMENT);
+			done(marker, CPsiField.class);
 			return;
 		}
 		else
@@ -104,19 +110,19 @@ public class CommonParser implements CElementType, CTokenType
 
 		if(builder.getTokenType() == LPARENTH)
 		{
-			ParameterListParser.parseParameterList(builder);
-	
+			ParameterListParsing.parseParameterList(builder);
+
 			if(builder.getTokenType() != SEMICOLON)
 			{
-				CodeBlockParser.parseCodeBlock(builder);
-	
-				maker.done(IMPLEMENTING_METHOD_ELEMENT);
+				CodeBlockParsing.parseCodeBlock(builder);
+
+				done(marker, CPsiImplentingMethod.class);
 			}
 			else
 			{
 				builder.advanceLexer();
-	
-				maker.done(DECLARATION_METHOD_ELEMENT);
+
+				done(marker, CPsiDeclarationMethod.class);
 
 				skipLines(builder);
 			}
@@ -131,7 +137,7 @@ public class CommonParser implements CElementType, CTokenType
 				{
 					advanceLexerAndSkipLines(builder);
 
-					CodeBlockParser.parseExpressionBlock(builder, builder.getTokenType(), SEMICOLON);
+					ExpressionParsing.parseExpression(builder);
 
 					if(builder.getTokenType() != SEMICOLON)
 						builder.error(CBundle.message("SEMICOLON.expected"));
@@ -142,7 +148,7 @@ public class CommonParser implements CElementType, CTokenType
 			else
 				builder.advanceLexer();
 
-			maker.done(FIELD_ELEMENT);
+			done(marker, CPsiField.class);
 
 			skipLines(builder);
 		}
@@ -161,14 +167,16 @@ public class CommonParser implements CElementType, CTokenType
 			builder.advanceLexer();
 	}
 
-	public static void doneAndSkipLines(IElementType elementType, PsiBuilder builder)
+	protected static void checkMatches(final PsiBuilder builder, final IElementType token, final String message)
 	{
-		PsiBuilder.Marker marker = builder.mark();
+		if(builder.getTokenType() == token)
+			builder.advanceLexer();
+		else
+			builder.error(message);
+	}
 
-		builder.advanceLexer();
-
-		marker.done(elementType);
-
-		skipLines(builder);
+	public static void done(PsiBuilder.Marker marker, Class<? extends CPsiElement> clazz)
+	{
+		marker.done(CTokenElements.element(clazz));
 	}
 }

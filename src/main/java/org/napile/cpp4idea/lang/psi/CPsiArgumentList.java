@@ -18,9 +18,9 @@ package org.napile.cpp4idea.lang.psi;
 
 /**
  * @author VISTALL
- * @date 22:59/10.12.2011
+ * @date 11:23/14.12.2011
  */
-public interface CPsiParameterList extends CPsiElement
+public interface CPsiArgumentList extends CPsiElement
 {
 
 }

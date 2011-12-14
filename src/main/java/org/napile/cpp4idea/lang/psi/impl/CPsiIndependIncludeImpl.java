@@ -17,7 +17,7 @@
 package org.napile.cpp4idea.lang.psi.impl;
 
 import org.napile.cpp4idea.lang.lexer.CTokenType;
-import org.napile.cpp4idea.lang.psi.CPsiInclude;
+import org.napile.cpp4idea.lang.psi.CPsiIndependInclude;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
@@ -26,9 +26,9 @@ import com.intellij.psi.PsiElement;
  * @author VISTALL
  * @date 1:53/11.12.2011
  */
-public class CPsiIncludeImpl extends CPsiElementBaseImpl implements CPsiInclude
+public class CPsiIndependIncludeImpl extends CPsiElementBaseImpl implements CPsiIndependInclude
 {
-	public CPsiIncludeImpl(@org.jetbrains.annotations.NotNull ASTNode node)
+	public CPsiIndependIncludeImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{
 		super(node);
 	}
@@ -36,19 +36,18 @@ public class CPsiIncludeImpl extends CPsiElementBaseImpl implements CPsiInclude
 	@Override
 	public void accept(CPsiVisitor visitor)
 	{
-		visitor.visitInclude(this);
+		visitor.visitIndependInclude(this);
 	}
 
 	@Override
 	public PsiElement getIncludeElement()
 	{
-		return findChildByType(CTokenType.STRING_LITERAL);
+		return findChildByType(CTokenType.STRING_INCLUDE_LITERAL);
 	}
 
 	@Override
 	public String getIncludeName()
 	{
-		//TODO [VISTALL]
 		return null;
 	}
 }

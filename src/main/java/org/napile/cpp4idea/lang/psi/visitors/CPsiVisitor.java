@@ -23,6 +23,7 @@ import org.napile.cpp4idea.lang.psi.CPsiFile;
 import org.napile.cpp4idea.lang.psi.CPsiIfDefHolder;
 import org.napile.cpp4idea.lang.psi.CPsiIfNotDefHolder;
 import org.napile.cpp4idea.lang.psi.CPsiInclude;
+import org.napile.cpp4idea.lang.psi.CPsiIndependInclude;
 
 /**
  * @author VISTALL
@@ -45,6 +46,11 @@ public class CPsiVisitor
 	}
 
 	public void visitInclude(CPsiInclude include)
+	{
+		visitElement(include);
+	}
+
+	public void visitIndependInclude(CPsiIndependInclude include)
 	{
 		visitElement(include);
 	}

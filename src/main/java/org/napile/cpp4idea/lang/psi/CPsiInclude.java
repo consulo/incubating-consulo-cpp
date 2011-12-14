@@ -16,13 +16,15 @@
 
 package org.napile.cpp4idea.lang.psi;
 
+import com.intellij.psi.PsiElement;
+
 /**
  * @author VISTALL
  * @date 1:53/11.12.2011
  */
 public interface CPsiInclude extends CPsiElement
 {
-	boolean isIndependentPath();
+	PsiElement getIncludeElement();
 
 	String getIncludeName();
 }

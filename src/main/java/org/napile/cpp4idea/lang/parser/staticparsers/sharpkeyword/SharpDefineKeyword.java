@@ -17,15 +17,15 @@
 package org.napile.cpp4idea.lang.parser.staticparsers.sharpkeyword;
 
 import org.napile.cpp4idea.lang.lexer.CTokenType;
-import org.napile.cpp4idea.lang.parser.CElementType;
-import org.napile.cpp4idea.lang.parser.staticparsers.CommonParser;
+import org.napile.cpp4idea.lang.parser.staticparsers.CommonParsing;
+import org.napile.cpp4idea.lang.psi.CPsiDefine;
 import com.intellij.lang.PsiBuilder;
 
 /**
  * @author VISTALL
  * @date 7:21/11.12.2011
  */
-public class SharpDefineKeyword extends CommonParser implements CTokenType, CElementType
+public class SharpDefineKeyword extends CommonParsing implements CTokenType
 {
 	public static void parse(PsiBuilder builder)
 	{
@@ -48,7 +48,7 @@ public class SharpDefineKeyword extends CommonParser implements CTokenType, CEle
 			builder.advanceLexer();
 		}
 
-		maker.done(DEFINE_ELEMENT);
+		done(maker, CPsiDefine.class);
 
 		skipLines(builder);
 	}

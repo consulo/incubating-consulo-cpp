@@ -16,9 +16,9 @@
 
 package org.napile.cpp4idea.lang.parser.staticparsers.sharpkeyword;
 
-import org.napile.cpp4idea.lang.lexer.CTokenType;
-import org.napile.cpp4idea.lang.parser.CElementType;
-import org.napile.cpp4idea.lang.parser.staticparsers.CommonParser;
+import org.napile.cpp4idea.lang.parser.staticparsers.CommonParsing;
+import org.napile.cpp4idea.lang.psi.CPsiIfDefHolder;
+import org.napile.cpp4idea.lang.psi.CPsiIfNotDefHolder;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
 
@@ -26,7 +26,7 @@ import com.intellij.psi.tree.IElementType;
  * @author VISTALL
  * @date 14:05/11.12.2011
  */
-public class SharpIfdefKeyword extends CommonParser implements CElementType, CTokenType
+public class SharpIfdefKeyword extends CommonParsing
 {
 	public static void parseIf(PsiBuilder builder)
 	{
@@ -43,11 +43,11 @@ public class SharpIfdefKeyword extends CommonParser implements CElementType, CTo
 			if(builder.getTokenType() == S_ENDIF_KEYWORD)
 				break;
 
-			CommonParser.parseElement(builder);
+			CommonParsing.parseElement(builder);
 		}
 
 		advanceLexerAndSkipLines(builder);
 
-		marker.done(elementType == S_IFDEF_KEYWORD ? IF_DEF_ELEMENT : IF_NOT_DEF_ELEMENT);
+		done(marker, elementType == STRING_LITERAL ? CPsiIfDefHolder.class : CPsiIfNotDefHolder.class);
 	}
 }

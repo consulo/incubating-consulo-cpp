@@ -14,13 +14,19 @@
  *    limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.psi;
+package org.napile.cpp4idea.lang.psi.impl;
+
+import org.napile.cpp4idea.lang.psi.CPsiPostfixExpression;
+import com.intellij.lang.ASTNode;
 
 /**
  * @author VISTALL
- * @date 22:59/10.12.2011
+ * @date 11:36/14.12.2011
  */
-public interface CPsiParameterList extends CPsiElement
+public class CPsiPostfixExpressionImpl extends CPsiElementBaseImpl implements CPsiPostfixExpression
 {
-
+	public CPsiPostfixExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node)
+	{
+		super(node);
+	}
 }

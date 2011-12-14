@@ -51,4 +51,10 @@ public class CPsiElementBaseImpl extends ASTWrapperPsiElement implements CPsiEle
 			child = child.getNextSibling();
 		}
 	}
+
+	@Override
+	public String toString()
+	{
+		return getClass().getSimpleName() + ": " + getText();
+	}
 }

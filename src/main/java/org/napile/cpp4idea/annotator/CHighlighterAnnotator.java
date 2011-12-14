@@ -23,10 +23,12 @@ import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
 import org.napile.cpp4idea.lang.psi.CPsiElement;
 import org.napile.cpp4idea.lang.psi.CPsiIfDefHolder;
 import org.napile.cpp4idea.lang.psi.CPsiIfNotDefHolder;
+import org.napile.cpp4idea.lang.psi.CPsiIndependInclude;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiRecursiveVisitor;
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
+import com.intellij.openapi.editor.SyntaxHighlighterColors;
 import com.intellij.psi.PsiElement;
 
 /**
@@ -55,6 +57,18 @@ public class CHighlighterAnnotator extends CPsiRecursiveVisitor implements Annot
 		Annotation annotation = _annotationHolder.createInfoAnnotation(element, null);
 
 		annotation.setTextAttributes(CSyntaxHighlighter.COMPILER_VARIABLE);
+	}
+
+	@Override
+	public void visitIndependInclude(CPsiIndependInclude include)
+	{
+		PsiElement element = include.getIncludeElement();
+		if(element == null)
+			return;
+
+		Annotation annotation = _annotationHolder.createInfoAnnotation(element, null);
+
+		annotation.setTextAttributes(SyntaxHighlighterColors.STRING);
 	}
 
 	@Override

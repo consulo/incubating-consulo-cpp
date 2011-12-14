@@ -16,28 +16,31 @@
 
 package org.napile.cpp4idea.lang.parser.staticparsers;
 
+import org.napile.cpp4idea.CBundle;
+import org.napile.cpp4idea.lang.psi.CPsiParameter;
+import org.napile.cpp4idea.lang.psi.CPsiParameterList;
 import com.intellij.lang.PsiBuilder;
 
 /**
  * @author VISTALL
  * @date 14:38/11.12.2011
  */
-public class ParameterListParser extends CommonParser
+public class ParameterListParsing extends CommonParsing
 {
 	public static void parseParameterList(PsiBuilder builder)
 	{
-		PsiBuilder.Marker maker;
+		PsiBuilder.Marker marker;
 
 		if(builder.getTokenType() != LPARENTH)
 		{
-			builder.error("( expected");
-			maker = builder.mark();
-			maker.done(PARAMETER_LIST_ELEMENT);
+			builder.error(CBundle.message("LPARENTH.expected"));
+			marker = builder.mark();
+			done(marker, CPsiParameterList.class);
 			return;
 		}
 		else
 		{
-			maker = builder.mark();
+			marker = builder.mark();
 			advanceLexerAndSkipLines(builder);
 		}
 
@@ -46,14 +49,14 @@ public class ParameterListParser extends CommonParser
 			parserParameter(builder);
 
 			if(builder.getTokenType() != RPARENTH)
-				builder.error(") expected");
+				builder.error(CBundle.message("RPARENTH.expected"));
 
 			advanceLexerAndSkipLines(builder);
 		}
 		else
 			advanceLexerAndSkipLines(builder);
 
-		maker.done(PARAMETER_LIST_ELEMENT);
+		done(marker, CPsiParameterList.class);
 
 		//skipLines(builder);
 	}
@@ -68,7 +71,7 @@ public class ParameterListParser extends CommonParser
 		if(builder.getTokenType() == IDENTIFIER)
 			advanceLexerAndSkipLines(builder);
 
-		marker.done(PARAMETER_ELEMENT);
+		done(marker, CPsiParameter.class);
 
 		if(builder.getTokenType() == COMMA)
 		{

@@ -16,19 +16,19 @@
 
 package org.napile.cpp4idea.lang.parser.staticparsers;
 
-import org.napile.cpp4idea.lang.lexer.CTokenType;
-import org.napile.cpp4idea.lang.parser.CElementType;
+import org.napile.cpp4idea.CBundle;
+import org.napile.cpp4idea.lang.psi.CPsiTypeDeclaration;
 import com.intellij.lang.PsiBuilder;
 
 /**
  * @author VISTALL
  * @date 14:20/11.12.2011
  */
-public class TypeDefParser extends CommonParser implements CElementType, CTokenType
+public class TypeDefParsing extends CommonParsing
 {
 	public static void parse(PsiBuilder builder)
 	{
-		PsiBuilder.Marker maker = builder.mark();
+		PsiBuilder.Marker marker = builder.mark();
 
 		advanceLexerAndSkipLines(builder);
 
@@ -37,11 +37,11 @@ public class TypeDefParser extends CommonParser implements CElementType, CTokenT
 		parseTypeRef(builder);  // new type name
 
 		if(builder.getTokenType() != SEMICOLON)
-			builder.error("; expected");
+			builder.error(CBundle.message("SEMICOLON.expected"));
 		else
 			builder.advanceLexer();
 
-		maker.done(TYPEDEF_ELEMENT);
+		done(marker, CPsiTypeDeclaration.class);
 
 		skipLines(builder);
 	}
