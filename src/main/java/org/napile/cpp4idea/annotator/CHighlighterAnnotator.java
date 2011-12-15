@@ -136,6 +136,10 @@ public class CHighlighterAnnotator extends CPsiRecursiveVisitor implements Annot
 
 	private void paintIfCompilerBlock(CPsiCompilerVariableHolder holder, boolean val)
 	{
+		/*int startOffset = holder.getTextOffset();
+		int endOffset = startOffset + holder.getTextLength();
 
+		Annotation annotation = _annotationHolder.createInfoAnnotation(holder, "null");
+		annotation.setTextAttributes(CSyntaxHighlighter.LINE_COMMENT);        */
 	}
 }

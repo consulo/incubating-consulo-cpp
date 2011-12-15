@@ -17,20 +17,21 @@
 package org.napile.cpp4idea.lang.psi.visitors;
 
 import org.napile.cpp4idea.lang.psi.*;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * @author VISTALL
  * @date 17:36/11.12.2011
  */
-public class CPsiVisitor
+public class CPsiVisitor extends PsiElementVisitor
 {
 	public void visitElement(CPsiElement element)
 	{
 	}
 
-	public void visitFile(CPsiFile file)
+	public void visitFile(CPsiBinaryFile binaryFile)
 	{
-		visitElement(file);
+		visitElement(binaryFile);
 	}
 
 	public void visitDefine(CPsiDefine define)

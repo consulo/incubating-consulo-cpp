@@ -121,6 +121,7 @@ ESCAPE_SEQUENCE=\\[^\r\n]
 <YYINITIAL> "long" { return CTokenType.LONG_KEYWORD; }
 <YYINITIAL> "char" { return CTokenType.CHAR_KEYWORD; }
 <YYINITIAL> "__int64" { return CTokenType.__INT64_KEYWORD; }
+<YYINITIAL> "int" { return CTokenType.INT_KEYWORD; }
 
 <YYINITIAL> {IDENTIFIER} { return CTokenType.IDENTIFIER; }
 

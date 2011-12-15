@@ -25,6 +25,7 @@ import org.napile.cpp4idea.lang.lexer.CTokenType;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.SyntaxHighlighterColors;
+import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.JavaTokenType;
@@ -36,17 +37,20 @@ import com.intellij.psi.tree.IElementType;
  */
 public class CSyntaxHighlighter extends SyntaxHighlighterBase
 {
-	public static final TextAttributesKey KEYWORD = TextAttributesKey.createTextAttributesKey("C.KEYWORD");
-	public static final TextAttributesKey STRING = TextAttributesKey.createTextAttributesKey("C.STRING");
-	public static final TextAttributesKey CONSTANT = TextAttributesKey.createTextAttributesKey("C.CONSTANT");
+	public static final TextAttributesKey KEYWORD = TextAttributesKey.createTextAttributesKey("C.KEYWORD", SyntaxHighlighterColors.KEYWORD.getDefaultAttributes().clone());
+	public static final TextAttributesKey STRING = TextAttributesKey.createTextAttributesKey("C.STRING", SyntaxHighlighterColors.STRING.getDefaultAttributes().clone());
+	public static final TextAttributesKey CONSTANT = TextAttributesKey.createTextAttributesKey("C.CONSTANT", CodeInsightColors.STATIC_FIELD_ATTRIBUTES.getDefaultAttributes().clone());
 	public static final TextAttributesKey COMPILER_VARIABLE = TextAttributesKey.createTextAttributesKey("C.COMPILER_VARIABLE");
-	public static final TextAttributesKey NUMBER = TextAttributesKey.createTextAttributesKey("C.NUMBER");
+	public static final TextAttributesKey NUMBER = TextAttributesKey.createTextAttributesKey("C.NUMBER", SyntaxHighlighterColors.NUMBER.getDefaultAttributes().clone());
+	public static final TextAttributesKey COMMA = TextAttributesKey.createTextAttributesKey("C.COMMA", SyntaxHighlighterColors.COMMA.getDefaultAttributes().clone());
+	public static final TextAttributesKey DOT = TextAttributesKey.createTextAttributesKey("C.DOT", SyntaxHighlighterColors.DOT.getDefaultAttributes().clone());
+	public static final TextAttributesKey LINE_COMMENT = TextAttributesKey.createTextAttributesKey("C.LINE_COMMENT", SyntaxHighlighterColors.LINE_COMMENT.getDefaultAttributes().clone());
+	public static final TextAttributesKey BLOCK_COMMENT = TextAttributesKey.createTextAttributesKey("C.BLOCK_COMMENT", SyntaxHighlighterColors.JAVA_BLOCK_COMMENT.getDefaultAttributes().clone());
 
 	private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey>();
 
 	static
 	{
-		
 		ATTRIBUTES.put(CTokenType.LPARENTH, SyntaxHighlighterColors.PARENTHS);
 		ATTRIBUTES.put(CTokenType.RPARENTH, SyntaxHighlighterColors.PARENTHS);
 
@@ -56,12 +60,12 @@ public class CSyntaxHighlighter extends SyntaxHighlighterBase
 		ATTRIBUTES.put(CTokenType.LBRACKET, SyntaxHighlighterColors.BRACKETS);
 		ATTRIBUTES.put(CTokenType.RBRACKET, SyntaxHighlighterColors.BRACKETS);
 
-		ATTRIBUTES.put(CTokenType.COMMA, SyntaxHighlighterColors.COMMA);
-		ATTRIBUTES.put(CTokenType.DOT, SyntaxHighlighterColors.DOT);
+		ATTRIBUTES.put(CTokenType.COMMA, COMMA);
+		ATTRIBUTES.put(CTokenType.DOT, DOT);
 		ATTRIBUTES.put(JavaTokenType.SEMICOLON, SyntaxHighlighterColors.JAVA_SEMICOLON);
 
-		ATTRIBUTES.put(CTokenType.C_STYLE_COMMENT, SyntaxHighlighterColors.JAVA_BLOCK_COMMENT);
-		ATTRIBUTES.put(CTokenType.END_OF_LINE_COMMENT, SyntaxHighlighterColors.LINE_COMMENT);
+		ATTRIBUTES.put(CTokenType.C_STYLE_COMMENT, BLOCK_COMMENT);
+		ATTRIBUTES.put(CTokenType.END_OF_LINE_COMMENT, LINE_COMMENT);
 		ATTRIBUTES.put(CTokenType.BAD_CHARACTER, HighlighterColors.BAD_CHARACTER);
 
 		ATTRIBUTES.put(CTokenType.INTEGER_LITERAL, NUMBER);

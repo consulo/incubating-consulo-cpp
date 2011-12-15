@@ -60,6 +60,10 @@ public class CColorSettingsPageImpl implements ColorSettingsPage
 			new AttributesDescriptor(CBundle.message("string"), CSyntaxHighlighter.STRING),
 			new AttributesDescriptor(CBundle.message("constant"), CSyntaxHighlighter.CONSTANT),
 			new AttributesDescriptor(CBundle.message("compiler.variable"), CSyntaxHighlighter.COMPILER_VARIABLE),
+			new AttributesDescriptor(CBundle.message("comma"), CSyntaxHighlighter.COMMA),
+			new AttributesDescriptor(CBundle.message("dot"), CSyntaxHighlighter.DOT),
+			new AttributesDescriptor(CBundle.message("line.comment"), CSyntaxHighlighter.LINE_COMMENT),
+			new AttributesDescriptor(CBundle.message("block.comment"), CSyntaxHighlighter.BLOCK_COMMENT),
 		};
 	}
 
@@ -81,13 +85,18 @@ public class CColorSettingsPageImpl implements ColorSettingsPage
 	@Override
 	public String getDemoText()
 	{
-		return  "<kw>#include</kw> <string>\"example.h\"</string>\n\n" +
+		return  "<blockcomment>/*\n" +
+				" * This is block comment\n" +
+				" * napile project\n" +
+				"*/</blockcomment>\n" +
+				"<linecomment>//This is line comment</linecomment>\n" +
+				"<kw>#include</kw> <string>\"example.h\"</string>\n\n" +
 				"<kw>#ifdef</kw> <compilervar>VARTEST</compilervar>\n" +
 				"<kw>int</kw> testVar = <number>1</number>;\n" +
 				"<kw>#endif</kw>\n\n" +
 				"<kw>enum</kw> ExEnum\n" +
 				"{\n" +
-				"  <const>Constant0</const>,\n" +
+				"  <const>Constant0</const><comma>,</comma>\n" +
 				"  <const>Constant1</const> = <number>1</number>\n" +
 				"}\n";
 	}
@@ -101,6 +110,10 @@ public class CColorSettingsPageImpl implements ColorSettingsPage
 		map.put("kw", CSyntaxHighlighter.KEYWORD);
 		map.put("number", CSyntaxHighlighter.NUMBER);
 		map.put("const", CSyntaxHighlighter.CONSTANT);
+		map.put("comma", CSyntaxHighlighter.COMMA);
+		map.put("dot", CSyntaxHighlighter.DOT);
+		map.put("linecomment", CSyntaxHighlighter.LINE_COMMENT);
+		map.put("blockcomment", CSyntaxHighlighter.BLOCK_COMMENT);
 		return map;
 	}
 }
