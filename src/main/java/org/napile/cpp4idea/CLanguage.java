@@ -17,7 +17,7 @@
 package org.napile.cpp4idea;
 
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.ide.highlight.CSyntaxHighlighter;
+import org.napile.cpp4idea.ide.highlight.CBaseSyntaxHighlighter;
 import com.intellij.lang.Language;
 import com.intellij.openapi.fileTypes.SingleLazyInstanceSyntaxHighlighterFactory;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
@@ -39,7 +39,7 @@ public class CLanguage extends Language
 			@NotNull
 			protected SyntaxHighlighter createHighlighter()
 			{
-				return new CSyntaxHighlighter();
+				return new CBaseSyntaxHighlighter();
 			}
 		});
 	}

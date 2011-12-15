@@ -78,7 +78,7 @@ public class CColorSettingsPageImpl implements ColorSettingsPage
 	@Override
 	public SyntaxHighlighter getHighlighter()
 	{
-		return new CSyntaxHighlighter();
+		return new CBaseSyntaxHighlighter();
 	}
 
 	@NotNull

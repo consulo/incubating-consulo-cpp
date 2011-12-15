@@ -16,14 +16,11 @@
 
 package org.napile.cpp4idea.lang.psi;
 
-import org.jetbrains.annotations.NotNull;
-
 /**
  * @author VISTALL
  * @date 17:28/13.12.2011
  */
 public interface CPsiCompilerVariableHolder extends CPsiElement
 {
-	@NotNull
 	CPsiCompilerVariable getVariable();
 }

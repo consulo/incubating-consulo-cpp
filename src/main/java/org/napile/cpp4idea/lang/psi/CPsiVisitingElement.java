@@ -16,11 +16,13 @@
 
 package org.napile.cpp4idea.lang.psi;
 
+import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitorNew;
+
 /**
  * @author VISTALL
- * @date 14:04/11.12.2011
+ * @date 19:52/15.12.2011
  */
-public interface CPsiElementHolder extends CPsiElement
+public interface CPsiVisitingElement
 {
-	CPsiElement[] getElements();
+	void accept(CPsiVisitorNew visitorNew, boolean defined);
 }

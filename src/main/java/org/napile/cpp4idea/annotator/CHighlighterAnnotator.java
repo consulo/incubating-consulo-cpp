@@ -17,25 +17,11 @@
 package org.napile.cpp4idea.annotator;
 
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.CBundle;
-import org.napile.cpp4idea.ide.highlight.CSyntaxHighlighter;
-import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
-import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
 import org.napile.cpp4idea.lang.psi.CPsiElement;
-import org.napile.cpp4idea.lang.psi.CPsiEnum;
-import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
-import org.napile.cpp4idea.lang.psi.CPsiIfDefHolder;
-import org.napile.cpp4idea.lang.psi.CPsiIfNotDefHolder;
-import org.napile.cpp4idea.lang.psi.CPsiInclude;
-import org.napile.cpp4idea.lang.psi.CPsiIndependInclude;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiRecursiveVisitor;
-import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
-import com.intellij.openapi.util.io.FileUtil;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
 
 /**
  * @author VISTALL
@@ -54,10 +40,10 @@ public class CHighlighterAnnotator extends CPsiRecursiveVisitor implements Annot
 
 		CPsiElement cElement = (CPsiElement)element;
 
-		cElement.accept(this);
+		cElement.accept(this, null);
 	}
 
-	@Override
+/*	@Override
 	public void visitCompilerVariable(CPsiCompilerVariable element)
 	{
 		Annotation annotation = _annotationHolder.createInfoAnnotation(element, null);
@@ -136,10 +122,10 @@ public class CHighlighterAnnotator extends CPsiRecursiveVisitor implements Annot
 
 	private void paintIfCompilerBlock(CPsiCompilerVariableHolder holder, boolean val)
 	{
-		/*int startOffset = holder.getTextOffset();
+		int startOffset = holder.getTextOffset();
 		int endOffset = startOffset + holder.getTextLength();
 
 		Annotation annotation = _annotationHolder.createInfoAnnotation(holder, "null");
-		annotation.setTextAttributes(CSyntaxHighlighter.LINE_COMMENT);        */
-	}
+		annotation.setTextAttributes(CSyntaxHighlighter.LINE_COMMENT);
+	}    */
 }

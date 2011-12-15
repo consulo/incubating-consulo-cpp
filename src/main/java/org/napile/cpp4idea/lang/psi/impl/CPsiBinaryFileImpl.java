@@ -16,14 +16,16 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import java.util.List;
+
 import javax.swing.Icon;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CFileType;
 import org.napile.cpp4idea.CLanguage;
-import org.napile.cpp4idea.lang.psi.CPsiElement;
 import org.napile.cpp4idea.lang.psi.CPsiBinaryFile;
+import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
 import org.napile.cpp4idea.lang.psi.CPsiGenFile;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
 import org.napile.cpp4idea.util.CIcons;
@@ -31,7 +33,6 @@ import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElement;
 
 /**
  * @author VISTALL
@@ -65,28 +66,15 @@ public class CPsiBinaryFileImpl extends PsiFileBase implements CPsiBinaryFile
 	}
 
 	@Override
-	public CPsiElement[] getElements()
+	public void buildGen(List<String> list)
 	{
-		return findChildrenByClass(CPsiElement.class);
+
 	}
 
 	@Override
-	public void accept(CPsiVisitor visitor)
+	public void accept(CPsiVisitor visitor, CPsiCompilerVariableHolder variableHolder)
 	{
-		visitor.visitFile(this);
-	}
-
-	@Override
-	public void acceptChild(CPsiVisitor visitor)
-	{
-		PsiElement child = getFirstChild();
-		while(child != null)
-		{
-			if(child instanceof CPsiElement)
-				((CPsiElement) child).accept(visitor);
-
-			child = child.getNextSibling();
-		}
+		visitor.visitFile(this, variableHolder);
 	}
 
 	@Override

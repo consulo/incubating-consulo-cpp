@@ -16,6 +16,8 @@
 
 package org.napile.cpp4idea.lang.psi;
 
+import java.util.List;
+
 import com.intellij.psi.PsiFile;
 
 /**
@@ -25,4 +27,8 @@ import com.intellij.psi.PsiFile;
 public interface CPsiBinaryFile extends CPsiGenFile, PsiFile
 {
 	CPsiGenFile getGenFile();
+
+	boolean isSourceFile();
+
+	void buildGen(List<String> list);
 }

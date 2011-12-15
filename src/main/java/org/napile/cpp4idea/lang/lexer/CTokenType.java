@@ -38,6 +38,7 @@ public interface CTokenType extends TokenType
 	IElementType S_IFDEF_KEYWORD = new CTokenImpl("S_IFDEF_KEYWORD"); // #ifdef
 	IElementType S_IFNDEF_KEYWORD = new CTokenImpl("S_IFNDEF_KEYWORD"); // #ifndef
 	IElementType S_ENDIF_KEYWORD = new CTokenImpl("S_ENDIF_KEYWORD"); // #endif
+	IElementType S_PRAGMA_KEYWORD = new CTokenImpl("S_PRAGMA_KEYWORD"); // #pragma
 
 	// keywords
 	IElementType VOID_KEYWORD = new CTokenImpl("VOID_KEYWORD"); // void

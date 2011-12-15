@@ -17,6 +17,7 @@
 package org.napile.cpp4idea.lang.psi.impl;
 
 import org.napile.cpp4idea.lang.lexer.CTokenType;
+import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
 import org.napile.cpp4idea.lang.psi.CPsiIndependInclude;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
 import com.intellij.lang.ASTNode;
@@ -40,8 +41,8 @@ public class CPsiIndependIncludeImpl extends CPsiIncludeImpl implements CPsiInde
 	}
 
 	@Override
-	public void accept(CPsiVisitor visitor)
+	public void accept(CPsiVisitor visitor, CPsiCompilerVariableHolder variableHolder)
 	{
-		visitor.visitIndependInclude(this);
+		visitor.visitIndependInclude(this, variableHolder);
 	}
 }

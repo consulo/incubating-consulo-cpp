@@ -17,60 +17,66 @@
 package org.napile.cpp4idea.lang.psi.visitors;
 
 import org.napile.cpp4idea.lang.psi.*;
-import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiElement;
 
 /**
  * @author VISTALL
  * @date 17:36/11.12.2011
  */
-public class CPsiVisitor extends PsiElementVisitor
+@Deprecated
+public class CPsiVisitor
 {
-	public void visitElement(CPsiElement element)
+	public void visitElement(PsiElement element, CPsiCompilerVariableHolder variableHolder)
 	{
 	}
 
-	public void visitFile(CPsiBinaryFile binaryFile)
+	public void visitFile(CPsiGenFile genFile, CPsiCompilerVariableHolder variableHolder)
 	{
-		visitElement(binaryFile);
+		visitElement(genFile, variableHolder);
 	}
 
-	public void visitDefine(CPsiDefine define)
+	public void visitFile(CPsiBinaryFile binaryFile, CPsiCompilerVariableHolder variableHolder)
 	{
-		visitElement(define);
+		visitElement(binaryFile, variableHolder);
 	}
 
-	public void visitInclude(CPsiInclude include)
+	public void visitDefine(CPsiDefine define, CPsiCompilerVariableHolder variableHolder)
 	{
-		visitElement(include);
+		visitElement(define, variableHolder);
 	}
 
-	public void visitIndependInclude(CPsiIndependInclude include)
+	public void visitInclude(CPsiInclude include, CPsiCompilerVariableHolder variableHolder)
 	{
-		visitElement(include);
+		visitElement(include, variableHolder);
 	}
 
-	public void visitIfDefHolder(CPsiIfDefHolder element)
+	public void visitIndependInclude(CPsiIndependInclude include, CPsiCompilerVariableHolder variableHolder)
 	{
-		visitElement(element);
+		visitElement(include, variableHolder);
 	}
 
-	public void visitIfNotDefHolder(CPsiIfNotDefHolder element)
+	public void visitIfDefHolder(CPsiIfDefHolder element, CPsiCompilerVariableHolder variableHolder)
 	{
-		visitElement(element);
+		visitElement(element, variableHolder);
 	}
 
-	public void visitCompilerVariable(CPsiCompilerVariable element)
+	public void visitIfNotDefHolder(CPsiIfNotDefHolder element, CPsiCompilerVariableHolder variableHolder)
 	{
-		visitElement(element);
+		visitElement(element, variableHolder);
 	}
 
-	public void visitEnum(CPsiEnum element)
+	public void visitCompilerVariable(CPsiCompilerVariable element, CPsiCompilerVariableHolder variableHolder)
 	{
-		visitElement(element);
+		visitElement(element, variableHolder);
 	}
 
-	public void visitEnumConstant(CPsiEnumConstant element)
+	public void visitEnum(CPsiEnum element, CPsiCompilerVariableHolder variableHolder)
 	{
-		visitElement(element);
+		visitElement(element, variableHolder);
+	}
+
+	public void visitEnumConstant(CPsiEnumConstant element, CPsiCompilerVariableHolder variableHolder)
+	{
+		visitElement(element, variableHolder);
 	}
 }

@@ -17,6 +17,7 @@
 package org.napile.cpp4idea.lang.psi.impl;
 
 import org.napile.cpp4idea.lang.lexer.CTokenType;
+import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
 import org.napile.cpp4idea.lang.psi.CPsiEnum;
 import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
@@ -35,9 +36,9 @@ public class CPsiEnumImpl extends CPsiElementBaseImpl implements CPsiEnum
 	}
 
 	@Override
-	public void accept(CPsiVisitor visitor)
+	public void accept(CPsiVisitor visitor, CPsiCompilerVariableHolder variableHolder)
 	{
-		visitor.visitEnum(this);
+		visitor.visitEnum(this, variableHolder);
 	}
 
 	@Override

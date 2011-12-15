@@ -20,7 +20,7 @@ package org.napile.cpp4idea.lang.psi;
  * @author VISTALL
  * @date 16:32/15.12.2011
  */
-public interface CPsiGenFile extends CPsiElementHolder
+public interface CPsiGenFile extends CPsiElement
 {
-	boolean isSourceFile();
+
 }

@@ -19,25 +19,22 @@ package org.napile.cpp4idea.ide.highlight;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.lexer.CFlexLexer;
 import org.napile.cpp4idea.lang.lexer.CTokenType;
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.SyntaxHighlighterColors;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
-import com.intellij.psi.JavaTokenType;
 import com.intellij.psi.tree.IElementType;
+import com.intellij.psi.tree.TokenSet;
 
 /**
  * @author VISTALL
  * @date 5:06/10.12.2011
  */
-public class CSyntaxHighlighter extends SyntaxHighlighterBase
+public class CSyntaxHighlighter// extends SyntaxHighlighterBase
 {
 	public static final TextAttributesKey KEYWORD = TextAttributesKey.createTextAttributesKey("C.KEYWORD", SyntaxHighlighterColors.KEYWORD.getDefaultAttributes().clone());
+	public static final TextAttributesKey LIGHT_KEYWORD = TextAttributesKey.createTextAttributesKey("C.LIGHT_KEYWORD");
+
 	public static final TextAttributesKey STRING = TextAttributesKey.createTextAttributesKey("C.STRING", SyntaxHighlighterColors.STRING.getDefaultAttributes().clone());
 	public static final TextAttributesKey CONSTANT = TextAttributesKey.createTextAttributesKey("C.CONSTANT", CodeInsightColors.STATIC_FIELD_ATTRIBUTES.getDefaultAttributes().clone());
 	public static final TextAttributesKey COMPILER_VARIABLE = TextAttributesKey.createTextAttributesKey("C.COMPILER_VARIABLE");
@@ -47,48 +44,16 @@ public class CSyntaxHighlighter extends SyntaxHighlighterBase
 	public static final TextAttributesKey LINE_COMMENT = TextAttributesKey.createTextAttributesKey("C.LINE_COMMENT", SyntaxHighlighterColors.LINE_COMMENT.getDefaultAttributes().clone());
 	public static final TextAttributesKey BLOCK_COMMENT = TextAttributesKey.createTextAttributesKey("C.BLOCK_COMMENT", SyntaxHighlighterColors.JAVA_BLOCK_COMMENT.getDefaultAttributes().clone());
 
-	private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey>();
+	public static final Map<IElementType, TextAttributesKey[]> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey[]>();
 
 	static
 	{
-		ATTRIBUTES.put(CTokenType.LPARENTH, SyntaxHighlighterColors.PARENTHS);
-		ATTRIBUTES.put(CTokenType.RPARENTH, SyntaxHighlighterColors.PARENTHS);
-
-		ATTRIBUTES.put(CTokenType.LBRACE, SyntaxHighlighterColors.BRACES);
-		ATTRIBUTES.put(CTokenType.RBRACE, SyntaxHighlighterColors.BRACES);
-
-		ATTRIBUTES.put(CTokenType.LBRACKET, SyntaxHighlighterColors.BRACKETS);
-		ATTRIBUTES.put(CTokenType.RBRACKET, SyntaxHighlighterColors.BRACKETS);
-
-		ATTRIBUTES.put(CTokenType.COMMA, COMMA);
-		ATTRIBUTES.put(CTokenType.DOT, DOT);
-		ATTRIBUTES.put(JavaTokenType.SEMICOLON, SyntaxHighlighterColors.JAVA_SEMICOLON);
-
-		ATTRIBUTES.put(CTokenType.C_STYLE_COMMENT, BLOCK_COMMENT);
-		ATTRIBUTES.put(CTokenType.END_OF_LINE_COMMENT, LINE_COMMENT);
-		ATTRIBUTES.put(CTokenType.BAD_CHARACTER, HighlighterColors.BAD_CHARACTER);
-
-		ATTRIBUTES.put(CTokenType.INTEGER_LITERAL, NUMBER);
-		ATTRIBUTES.put(CTokenType.LONG_LITERAL, NUMBER);
-		ATTRIBUTES.put(CTokenType.FLOAT_LITERAL, NUMBER);
-		ATTRIBUTES.put(CTokenType.DOUBLE_LITERAL, NUMBER);
-		ATTRIBUTES.put(CTokenType.STRING_LITERAL, STRING);
-
-		fillMap(ATTRIBUTES, CTokenType.KEYWORD_SET, KEYWORD);
-		fillMap(ATTRIBUTES, CTokenType.OPERATION_SET, SyntaxHighlighterColors.OPERATION_SIGN);
+		fillMap(CTokenType.KEYWORD_SET, KEYWORD, LIGHT_KEYWORD);
 	}
 
-	@NotNull
-	@Override
-	public Lexer getHighlightingLexer()
+	private static void fillMap(TokenSet tokenSet, TextAttributesKey... keys)
 	{
-		return new CFlexLexer();
-	}
-
-	@NotNull
-	@Override
-	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
-	{
-		return pack(ATTRIBUTES.get(tokenType));
+		for(IElementType elementType : tokenSet.getTypes())
+			ATTRIBUTES.put(elementType, keys);
 	}
 }

@@ -16,11 +16,11 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
-import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
-import org.napile.cpp4idea.lang.psi.CPsiElement;
+import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
 import org.napile.cpp4idea.lang.psi.CPsiIfDefHolder;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
+import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitorNew;
 import com.intellij.lang.ASTNode;
 
 /**
@@ -35,21 +35,20 @@ public class CPsiIfDefHolderImpl extends CPsiElementBaseImpl implements CPsiIfDe
 	}
 
 	@Override
-	public void accept(CPsiVisitor visitor)
+	public void accept(CPsiVisitor visitor, CPsiCompilerVariableHolder variableHolder)
 	{
-		visitor.visitIfDefHolder(this);
+		visitor.visitIfDefHolder(this, this);
 	}
 
 	@Override
-	public CPsiElement[] getElements()
-	{
-		return findChildrenByClass(CPsiElement.class);
-	}
-
-	@Override
-	@NotNull
 	public CPsiCompilerVariable getVariable()
 	{
-		return findNotNullChildByClass(CPsiCompilerVariable.class);
+		return findChildByClass(CPsiCompilerVariable.class);
+	}
+
+	@Override
+	public void accept(CPsiVisitorNew visitorNew, boolean defined)
+	{
+		visitorNew.visitSharpIfElement(this, true, defined);
 	}
 }

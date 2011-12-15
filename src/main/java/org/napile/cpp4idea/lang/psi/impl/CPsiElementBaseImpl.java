@@ -16,11 +16,11 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
 import org.napile.cpp4idea.lang.psi.CPsiElement;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
 
 /**
  * @author VISTALL
@@ -34,22 +34,9 @@ public class CPsiElementBaseImpl extends ASTWrapperPsiElement implements CPsiEle
 	}
 
 	@Override
-	public void accept(CPsiVisitor visitor)
+	public void accept(CPsiVisitor visitor, CPsiCompilerVariableHolder variableHolder)
 	{
-		visitor.visitElement(this);
-	}
-
-	@Override
-	public void acceptChild(CPsiVisitor visitor)
-	{
-		PsiElement child = getFirstChild();
-		while(child != null)
-		{
-			if(child instanceof CPsiElement)
-				((CPsiElement) child).accept(visitor);
-
-			child = child.getNextSibling();
-		}
+		visitor.visitElement(this, variableHolder);
 	}
 
 	@Override

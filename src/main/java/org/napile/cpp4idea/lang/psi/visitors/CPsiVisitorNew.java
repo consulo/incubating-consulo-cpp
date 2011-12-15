@@ -14,27 +14,21 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.annotator;
+package org.napile.cpp4idea.lang.psi.visitors;
 
-import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiBinaryFile;
-import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
-import com.intellij.lang.annotation.AnnotationHolder;
-import com.intellij.lang.annotation.Annotator;
+import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
 import com.intellij.psi.PsiElement;
 
 /**
  * @author VISTALL
- * @date 16:27/15.12.2011
+ * @date 19:50/15.12.2011
  */
-public class CSecondStepAnnotator extends CPsiVisitor implements Annotator
+public interface CPsiVisitorNew
 {
-	@Override
-	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
-	{
-		if(!(element instanceof CPsiBinaryFile))
-			return;
+	void visitSharpIfElement(CPsiCompilerVariableHolder holder, boolean value, boolean defined);
 
-		CPsiBinaryFile psiBinaryFile = (CPsiBinaryFile)element;
-	}
+	void visitBinaryFile(CPsiBinaryFile element, boolean defined);
+
+	void visitElement(PsiElement element, boolean defined);
 }

@@ -16,17 +16,25 @@
 
 package org.napile.cpp4idea.lang.psi.visitors;
 
-import org.napile.cpp4idea.lang.psi.CPsiElement;
+import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
+import com.intellij.psi.PsiElement;
 
 /**
  * @author VISTALL
  * @date 17:42/11.12.2011
  */
+@Deprecated
 public class CPsiRecursiveVisitor extends CPsiVisitor
 {
 	@Override
-	public void visitElement(CPsiElement element)
+	public void visitElement(PsiElement element, CPsiCompilerVariableHolder variableHolder)
 	{
-		element.acceptChild(this);
+		visitChildren(element, variableHolder);
+	}
+
+	protected void visitChildren(PsiElement element, CPsiCompilerVariableHolder variableHolder)
+	{
+		for(PsiElement child : element.getChildren())
+			visitElement(child, variableHolder);
 	}
 }

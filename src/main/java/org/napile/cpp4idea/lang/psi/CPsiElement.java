@@ -16,6 +16,7 @@
 
 package org.napile.cpp4idea.lang.psi;
 
+import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
 import com.intellij.psi.PsiElement;
 
@@ -25,7 +26,6 @@ import com.intellij.psi.PsiElement;
  */
 public interface CPsiElement extends PsiElement
 {
-	void accept(CPsiVisitor visitor);
-
-	void acceptChild(CPsiVisitor visitor);
+	@Deprecated
+	void accept(CPsiVisitor visitor, @Nullable CPsiCompilerVariableHolder variableHolder);
 }

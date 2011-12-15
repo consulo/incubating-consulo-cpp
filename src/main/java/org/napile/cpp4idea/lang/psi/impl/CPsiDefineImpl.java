@@ -16,8 +16,8 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
-import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
+import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
 import org.napile.cpp4idea.lang.psi.CPsiDefine;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
 import com.intellij.lang.ASTNode;
@@ -34,15 +34,14 @@ public class CPsiDefineImpl extends CPsiElementBaseImpl implements CPsiDefine
 	}
 
 	@Override
-	public void accept(CPsiVisitor visitor)
+	public void accept(CPsiVisitor visitor, CPsiCompilerVariableHolder variableHolder)
 	{
-		visitor.visitDefine(this);
+		visitor.visitDefine(this, variableHolder);
 	}
 
 	@Override
-	@NotNull
 	public CPsiCompilerVariable getVariable()
 	{
-		return findNotNullChildByClass(CPsiCompilerVariable.class);
+		return findChildByClass(CPsiCompilerVariable.class);
 	}
 }

@@ -18,6 +18,7 @@ package org.napile.cpp4idea.lang.psi.impl;
 
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
+import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiIdentifier;
@@ -34,9 +35,9 @@ public class CPsiCompilerVariableImpl extends CPsiElementBaseImpl implements CPs
 	}
 
 	@Override
-	public void accept(CPsiVisitor visitor)
+	public void accept(CPsiVisitor visitor, CPsiCompilerVariableHolder variableHolder)
 	{
-		visitor.visitCompilerVariable(this);
+		visitor.visitCompilerVariable(this, variableHolder);
 	}
 
 	@Override
