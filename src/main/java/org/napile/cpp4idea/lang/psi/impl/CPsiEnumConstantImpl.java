@@ -11,7 +11,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- *    limitations under the License.
+ * limitations under the License.
  */
 
 package org.napile.cpp4idea.lang.psi.impl;
@@ -45,6 +45,7 @@ public class CPsiEnumConstantImpl extends CPsiElementBaseImpl implements CPsiEnu
 		return findChildByType(CTokenType.IDENTIFIER);
 	}
 
+	@Override
 	public boolean equals(Object o)
 	{
 		if(o == null || !(o instanceof CPsiEnumConstant))
