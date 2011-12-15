@@ -50,7 +50,7 @@ public class CTokenElements
 
 			IElementType elementType = _cache.get(implClass);
 			if(elementType == null)
-				_cache.put(clazz, elementType = new CPsiTokenImpl(clazz.getSimpleName(), implClass));
+				_cache.put(implClass, elementType = new CPsiTokenImpl(clazz.getSimpleName(), implClass));
 			return elementType;
 		}
 		catch(ClassNotFoundException e)

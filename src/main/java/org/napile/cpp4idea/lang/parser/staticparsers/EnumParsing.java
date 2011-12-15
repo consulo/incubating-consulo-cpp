@@ -38,74 +38,85 @@ public class EnumParsing extends CommonParsing
 		if(builder.getTokenType() == IDENTIFIER)
 			advanceLexerAndSkipLines(builder);
 
-		checkMatches(builder, LBRACE, "LBRACE.expected");
+		if(builder.getTokenType() != LBRACE)
+			builder.error(CBundle.message("LBRACE.expected"));
 
-		int i = 0;
 		while(!builder.eof())
 		{
-			skipLines(builder);
+			advanceLexerAndSkipLines(builder);
 
 			PsiBuilder.Marker constantMarker = builder.mark();
 			// name
 			IElementType idenf = builder.getTokenType();
-
 			if(idenf != IDENTIFIER)
 			{
-				builder.error(CBundle.message("name.expected"));
+				builder.advanceLexer();
 
-				advanceLexerAndSkipLines(builder);
+				constantMarker.error(CBundle.message("constant.expected"));
 			}
 			else
 			{
-				advanceLexerAndSkipLines(builder);
+				IElementType nextElement = lookAheadIgnoreLines(builder, 1);
 
-				IElementType elementType = builder.getTokenType();
-				if(elementType == EQ)
+				PsiBuilder.Marker expressionMarker = null;
+				if(nextElement == EQ)
 				{
+					// skip eq
+					advanceLexerAndSkipLines(builder);
+
 					if(!LITERAL_EXPRESSION_SET.contains(lookAheadIgnoreLines(builder, 1)))
-						builder.error(CBundle.message("index.expected") + " " + builder.getTokenType());
+					{
+						builder.error(CBundle.message("expression.expected"));
+
+						//advanceLexerAndSkipLines(builder);
+					}
 					else
 					{
 						advanceLexerAndSkipLines(builder);
 
-						PsiBuilder.Marker marker1 = builder.mark();
-
-						builder.advanceLexer();
-
-						done(marker1, CPsiLiteralExpression.class);
-
-						if(lookAheadIgnoreLines(builder, 1) != RBRACE)
-							skipLines(builder);
-
-						if(builder.getTokenType() == COMMA)
-						{
-							if(lookAheadIgnoreLines(builder, 1) != RBRACE)
-								builder.advanceLexer();
-							else
-								builder.error(CBundle.message("COMMA.expected"));
-						}
-						else
-						{
-							
-						}
+						expressionMarker = builder.mark();
 					}
+				}
+
+				nextElement = lookAheadIgnoreLines(builder, 1);
+				if(nextElement == COMMA)
+				{
+					// goto comma
+					advanceLexerAndSkipLines(builder);
+
+					if(expressionMarker != null)
+						done(expressionMarker, CPsiLiteralExpression.class);
+
+					// skip comma
+					builder.advanceLexer();
+				}
+				else if(nextElement == RBRACE)
+				{
+					// goto rbrace
+					builder.advanceLexer();
+
+					if(expressionMarker != null)
+						done(expressionMarker, CPsiLiteralExpression.class);
 				}
 				else
 				{
-					//if(elementType == COMMA)
+					if(lookAheadIgnoreLines(builder, 2) != RBRACE)
+						builder.error(CBundle.message("COMMA.expected"));
 
-					builder.advanceLexer();
+					advanceLexerAndSkipLines(builder);
+
+					if(expressionMarker != null)
+						done(expressionMarker, CPsiLiteralExpression.class);
 				}
+
+				done(constantMarker, CPsiEnumConstant.class);
 			}
 
-			done(constantMarker, CPsiEnumConstant.class);
-
-			i++;
-			if(i == 4)
-				break;
-			if(builder.getTokenType() == RBRACE)
+			if(lookAheadIgnoreLines(builder, 1) == RBRACE)
 				break;
 		}
+
+		advanceLexerAndSkipLines(builder); // goto RBRACE
 
 		checkMatches(builder, RBRACE, "RBRACE.expected");
 

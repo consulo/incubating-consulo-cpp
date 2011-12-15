@@ -16,11 +16,15 @@
 
 package org.napile.cpp4idea.lang.psi;
 
+import com.intellij.psi.PsiElement;
+
 /**
  * @author VISTALL
  * @date 17:51/14.12.2011
  */
 public interface CPsiEnumConstant extends CPsiNameElementOwner
 {
+	PsiElement getNameElement();
 
+	CPsiLiteralExpression getConstantExpression();
 }
