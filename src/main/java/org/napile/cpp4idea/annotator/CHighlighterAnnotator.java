@@ -32,8 +32,6 @@ import org.napile.cpp4idea.lang.psi.visitors.CPsiRecursiveVisitor;
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
-import com.intellij.openapi.editor.SyntaxHighlighterColors;
-import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.util.io.FileUtil;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
@@ -109,7 +107,7 @@ public class CHighlighterAnnotator extends CPsiRecursiveVisitor implements Annot
 
 		Annotation annotation = _annotationHolder.createInfoAnnotation(element, null);
 
-		annotation.setTextAttributes(CodeInsightColors.STATIC_FIELD_ATTRIBUTES);
+		annotation.setTextAttributes(CSyntaxHighlighter.CONSTANT);
 	}
 
 	@Override
@@ -121,7 +119,7 @@ public class CHighlighterAnnotator extends CPsiRecursiveVisitor implements Annot
 
 		Annotation annotation = _annotationHolder.createInfoAnnotation(element, null);
 
-		annotation.setTextAttributes(SyntaxHighlighterColors.STRING);
+		annotation.setTextAttributes(CSyntaxHighlighter.STRING);
 	}
 
 	@Override

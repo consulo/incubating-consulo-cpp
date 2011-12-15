@@ -16,8 +16,6 @@
 
 package org.napile.cpp4idea.ide.highlight;
 
-import java.awt.Color;
-import java.awt.Font;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -28,7 +26,6 @@ import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.SyntaxHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.editor.markup.TextAttributes;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.JavaTokenType;
 import com.intellij.psi.tree.IElementType;
@@ -39,12 +36,17 @@ import com.intellij.psi.tree.IElementType;
  */
 public class CSyntaxHighlighter extends SyntaxHighlighterBase
 {
-	public static final TextAttributesKey COMPILER_VARIABLE = TextAttributesKey.createTextAttributesKey("C.COMPILER_VARIABLE", new TextAttributes(new Color(150, 0, 0), null, null, null, Font.PLAIN));
+	public static final TextAttributesKey KEYWORD = TextAttributesKey.createTextAttributesKey("C.KEYWORD");
+	public static final TextAttributesKey STRING = TextAttributesKey.createTextAttributesKey("C.STRING");
+	public static final TextAttributesKey CONSTANT = TextAttributesKey.createTextAttributesKey("C.CONSTANT");
+	public static final TextAttributesKey COMPILER_VARIABLE = TextAttributesKey.createTextAttributesKey("C.COMPILER_VARIABLE");
+	public static final TextAttributesKey NUMBER = TextAttributesKey.createTextAttributesKey("C.NUMBER");
 
 	private static final Map<IElementType, TextAttributesKey> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey>();
 
 	static
 	{
+		
 		ATTRIBUTES.put(CTokenType.LPARENTH, SyntaxHighlighterColors.PARENTHS);
 		ATTRIBUTES.put(CTokenType.RPARENTH, SyntaxHighlighterColors.PARENTHS);
 
@@ -62,13 +64,13 @@ public class CSyntaxHighlighter extends SyntaxHighlighterBase
 		ATTRIBUTES.put(CTokenType.END_OF_LINE_COMMENT, SyntaxHighlighterColors.LINE_COMMENT);
 		ATTRIBUTES.put(CTokenType.BAD_CHARACTER, HighlighterColors.BAD_CHARACTER);
 
-		ATTRIBUTES.put(CTokenType.INTEGER_LITERAL, SyntaxHighlighterColors.NUMBER);
-		ATTRIBUTES.put(CTokenType.LONG_LITERAL, SyntaxHighlighterColors.NUMBER);
-		ATTRIBUTES.put(CTokenType.FLOAT_LITERAL, SyntaxHighlighterColors.NUMBER);
-		ATTRIBUTES.put(CTokenType.DOUBLE_LITERAL, SyntaxHighlighterColors.NUMBER);
-		ATTRIBUTES.put(CTokenType.STRING_LITERAL, SyntaxHighlighterColors.STRING);
+		ATTRIBUTES.put(CTokenType.INTEGER_LITERAL, NUMBER);
+		ATTRIBUTES.put(CTokenType.LONG_LITERAL, NUMBER);
+		ATTRIBUTES.put(CTokenType.FLOAT_LITERAL, NUMBER);
+		ATTRIBUTES.put(CTokenType.DOUBLE_LITERAL, NUMBER);
+		ATTRIBUTES.put(CTokenType.STRING_LITERAL, STRING);
 
-		fillMap(ATTRIBUTES, CTokenType.KEYWORD_SET, SyntaxHighlighterColors.KEYWORD);
+		fillMap(ATTRIBUTES, CTokenType.KEYWORD_SET, KEYWORD);
 		fillMap(ATTRIBUTES, CTokenType.OPERATION_SET, SyntaxHighlighterColors.OPERATION_SIGN);
 	}
 

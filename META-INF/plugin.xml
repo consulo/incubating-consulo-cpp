@@ -24,7 +24,10 @@
 	<category>Custom Languages</category>
 
 	<application-components>
-		<!-- Add your application components here -->
+		<component>
+			<interface-class>org.napile.cpp4idea.editor.color.CDefaultColorSchemeParser</interface-class>
+			<implementation-class>org.napile.cpp4idea.editor.color.CDefaultColorSchemeParser</implementation-class>
+		</component>
 	</application-components>
 
 	<project-components>
@@ -45,6 +48,5 @@
 		<annotator language="C" implementationClass="org.napile.cpp4idea.annotator.CHighlighterAnnotator"/>
 		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.ide.highlight.CPairedBraceMatcherImpl" />
 		<lang.parserDefinition language="C" implementationClass="org.napile.cpp4idea.lang.parser.CParserDefinition" />
-
 	</extensions>
 </idea-plugin>

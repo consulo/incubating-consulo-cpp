@@ -22,7 +22,7 @@ import java.util.Map;
 import javax.swing.Icon;
 
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.CFileType;
+import org.napile.cpp4idea.CBundle;
 import org.napile.cpp4idea.util.CIcons;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
@@ -55,7 +55,11 @@ public class CColorSettingsPageImpl implements ColorSettingsPage
 	{
 		return new AttributesDescriptor[]
 		{
-			new AttributesDescriptor("Compiler variable", CSyntaxHighlighter.COMPILER_VARIABLE),
+			new AttributesDescriptor(CBundle.message("keyword"), CSyntaxHighlighter.KEYWORD),
+			new AttributesDescriptor(CBundle.message("number"), CSyntaxHighlighter.NUMBER),
+			new AttributesDescriptor(CBundle.message("string"), CSyntaxHighlighter.STRING),
+			new AttributesDescriptor(CBundle.message("constant"), CSyntaxHighlighter.CONSTANT),
+			new AttributesDescriptor(CBundle.message("compiler.variable"), CSyntaxHighlighter.COMPILER_VARIABLE),
 		};
 	}
 
@@ -70,14 +74,22 @@ public class CColorSettingsPageImpl implements ColorSettingsPage
 	@Override
 	public SyntaxHighlighter getHighlighter()
 	{
-		return SyntaxHighlighter.PROVIDER.create(CFileType.INSTANCE, null, null);
+		return new CSyntaxHighlighter();
 	}
 
 	@NotNull
 	@Override
 	public String getDemoText()
 	{
-		return "#ifdef <compilervar>VARTEST</compilervar>";
+		return  "<kw>#include</kw> <string>\"example.h\"</string>\n\n" +
+				"<kw>#ifdef</kw> <compilervar>VARTEST</compilervar>\n" +
+				"<kw>int</kw> testVar = <number>1</number>;\n" +
+				"<kw>#endif</kw>\n\n" +
+				"<kw>enum</kw> ExEnum\n" +
+				"{\n" +
+				"  <const>Constant0</const>,\n" +
+				"  <const>Constant1</const> = <number>1</number>\n" +
+				"}\n";
 	}
 
 	@Override
@@ -85,6 +97,10 @@ public class CColorSettingsPageImpl implements ColorSettingsPage
 	{
 		Map<String, TextAttributesKey> map = new HashMap<String, TextAttributesKey>(1);
 		map.put("compilervar", CSyntaxHighlighter.COMPILER_VARIABLE);
+		map.put("string", CSyntaxHighlighter.STRING);
+		map.put("kw", CSyntaxHighlighter.KEYWORD);
+		map.put("number", CSyntaxHighlighter.NUMBER);
+		map.put("const", CSyntaxHighlighter.CONSTANT);
 		return map;
 	}
 }
