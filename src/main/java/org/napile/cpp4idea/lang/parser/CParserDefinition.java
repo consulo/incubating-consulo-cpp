@@ -21,7 +21,7 @@ import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.lexer.CFlexLexer;
 import org.napile.cpp4idea.lang.lexer.CPsiTokenImpl;
 import org.napile.cpp4idea.lang.lexer.CTokenType;
-import org.napile.cpp4idea.lang.psi.impl.CPsiBinaryFileImpl;
+import org.napile.cpp4idea.lang.psi.impl.CPsiRawFileImpl;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
@@ -95,7 +95,7 @@ public class CParserDefinition implements ParserDefinition
 	@Override
 	public PsiFile createFile(FileViewProvider viewProvider)
 	{
-		return new CPsiBinaryFileImpl(viewProvider);
+		return new CPsiRawFileImpl(viewProvider);
 	}
 
 	@Override

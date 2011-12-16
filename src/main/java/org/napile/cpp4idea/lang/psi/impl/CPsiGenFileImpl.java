@@ -17,13 +17,13 @@
 package org.napile.cpp4idea.lang.psi.impl;
 
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
 import org.napile.cpp4idea.lang.psi.CPsiGenFile;
-import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
+import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiManager;
 import com.intellij.psi.impl.PsiElementBase;
 import com.intellij.util.IncorrectOperationException;
@@ -34,19 +34,22 @@ import com.intellij.util.IncorrectOperationException;
  */
 public class CPsiGenFileImpl extends PsiElementBase implements CPsiGenFile
 {
-	private CPsiBinaryFileImpl _binaryFile;
+	private CPsiRawFileImpl _binaryFile;
 	private PsiElement[] _children;
 
-	public CPsiGenFileImpl(CPsiBinaryFileImpl binaryFile, PsiElement[] children)
+	public CPsiGenFileImpl(CPsiRawFileImpl binaryFile, PsiElement[] children)
 	{
 		_binaryFile = binaryFile;
 		_children = children;
 	}
 
 	@Override
-	public void accept(CPsiVisitor visitor, CPsiCompilerVariableHolder variableHolder)
+	public void accept(@NotNull PsiElementVisitor visitor)
 	{
-		visitor.visitFile(this, variableHolder);
+		if(visitor instanceof CPsiElementVisitor)
+			((CPsiElementVisitor)visitor).visitGenFile(this);
+		else
+			super.accept(visitor);
 	}
 
 	@NotNull

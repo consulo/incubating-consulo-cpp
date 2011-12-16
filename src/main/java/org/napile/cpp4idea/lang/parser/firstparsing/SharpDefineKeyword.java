@@ -18,7 +18,7 @@ package org.napile.cpp4idea.lang.parser.firstparsing;
 
 import org.napile.cpp4idea.lang.lexer.CTokenType;
 import org.napile.cpp4idea.lang.parser.secondparsing.CommonParsing;
-import org.napile.cpp4idea.lang.psi.CPsiDefine;
+import org.napile.cpp4idea.lang.psi.CPsiSharpDefine;
 import com.intellij.lang.PsiBuilder;
 
 /**
@@ -48,7 +48,7 @@ public class SharpDefineKeyword extends CommonParsing implements CTokenType
 			builder.advanceLexer();
 		}
 
-		done(maker, CPsiDefine.class);
+		done(maker, CPsiSharpDefine.class);
 
 		skipLines(builder);
 	}

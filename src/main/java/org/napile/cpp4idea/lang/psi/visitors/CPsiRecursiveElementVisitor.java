@@ -14,13 +14,19 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.psi;
+package org.napile.cpp4idea.lang.psi.visitors;
+
+import com.intellij.psi.PsiElement;
 
 /**
  * @author VISTALL
- * @date 17:28/13.12.2011
+ * @date 13:07/16.12.2011
  */
-public interface CPsiCompilerVariableHolder extends CPsiElement
+public class CPsiRecursiveElementVisitor extends CPsiElementVisitor
 {
-	CPsiCompilerVariable getVariable();
+	@Override
+	public void visitElement(PsiElement element)
+	{
+		element.acceptChildren(this);
+	}
 }

@@ -18,9 +18,9 @@ package org.napile.cpp4idea.lang.psi;
 
 /**
  * @author VISTALL
- * @date 23:18/10.12.2011
+ * @date 7:23/11.12.2011
  */
-public interface CPsiImplentingMethod extends CPsiDeclarationMethod
+public interface CPsiSharpDefine extends CPsiElement
 {
-	CPsiCodeBlock getCodeBlock();
+	CPsiCompilerVariable getVariable();
 }

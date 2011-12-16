@@ -27,7 +27,7 @@ import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
 import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
 import org.napile.cpp4idea.lang.psi.CPsiElement;
 import org.napile.cpp4idea.lang.psi.CPsiField;
-import org.napile.cpp4idea.lang.psi.CPsiImplentingMethod;
+import org.napile.cpp4idea.lang.psi.CPsiImplementingMethod;
 import org.napile.cpp4idea.lang.psi.CPsiTypeRef;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
@@ -126,7 +126,7 @@ public class CommonParsing implements CTokenType
 			{
 				CodeBlockParsing.parseCodeBlock(builder);
 
-				done(marker, CPsiImplentingMethod.class);
+				done(marker, CPsiImplementingMethod.class);
 			}
 			else
 			{

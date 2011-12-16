@@ -1,7 +1,17 @@
 <attributes>
 	<option name="C.COMPILER_VARIABLE">
 		<value>
-			<option name="FOREGROUND" value="800000"/>
+			<option name="FOREGROUND" value="5a02a5"/>
+			<option name="BACKGROUND"/>
+			<option name="EFFECT_COLOR"/>
+			<option name="FONT_TYPE" value="1"/>
+		</value>
+	</option>
+
+	<!--Light colors-->
+	<option name="C.LIGHT_COMPILER_VARIABLE">
+		<value>
+			<option name="FOREGROUND" value="775a90"/>
 			<option name="BACKGROUND"/>
 			<option name="EFFECT_COLOR"/>
 			<option name="FONT_TYPE" value="1"/>
@@ -9,7 +19,15 @@
 	</option>
 	<option name="C.LIGHT_KEYWORD">
 		<value>
-			<option name="FOREGROUND" value="5a5a80"/>
+			<option name="FOREGROUND" value="5555a8"/>
+			<option name="BACKGROUND"/>
+			<option name="EFFECT_COLOR"/>
+			<option name="FONT_TYPE" value="1"/>
+		</value>
+	</option>
+	<option name="C.LIGHT_STRING">
+		<value>
+			<option name="FOREGROUND" value="468e64"/>
 			<option name="BACKGROUND"/>
 			<option name="EFFECT_COLOR"/>
 			<option name="FONT_TYPE" value="1"/>

@@ -16,19 +16,11 @@
 
 package org.napile.cpp4idea.lang.psi;
 
-import java.util.List;
-
-import com.intellij.psi.PsiFile;
-
 /**
  * @author VISTALL
- * @date 1:07/10.12.2011
+ * @date 14:06/11.12.2011
  */
-public interface CPsiBinaryFile extends CPsiGenFile, PsiFile
+public interface CPsiSharpIfNotDef extends CPsiSharpVariableChecker
 {
-	CPsiGenFile getGenFile();
 
-	boolean isSourceFile();
-
-	void buildGen(List<String> list);
 }

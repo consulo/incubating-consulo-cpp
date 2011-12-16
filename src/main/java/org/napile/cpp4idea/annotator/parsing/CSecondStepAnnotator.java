@@ -20,14 +20,24 @@ import java.util.HashSet;
 import java.util.Set;
 
 import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.CBundle;
 import org.napile.cpp4idea.ide.highlight.CSyntaxHighlighter;
-import org.napile.cpp4idea.lang.psi.CPsiBinaryFile;
-import org.napile.cpp4idea.lang.psi.visitors.impl.CPsiVisitorNewImpl;
+import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
+import org.napile.cpp4idea.lang.psi.CPsiInclude;
+import org.napile.cpp4idea.lang.psi.CPsiRawFile;
+import org.napile.cpp4idea.lang.psi.CPsiSharpDefine;
+import org.napile.cpp4idea.lang.psi.CPsiSharpVariableChecker;
+import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
+import org.napile.cpp4idea.lang.psi.visitors.CPsiRecursiveElementVisitor;
+import org.napile.cpp4idea.util.CPsiUtil;
 import com.intellij.lang.annotation.Annotation;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.util.io.FileUtil;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
 
 /**
  * @author VISTALL
@@ -35,7 +45,7 @@ import com.intellij.psi.PsiElement;
  */
 public class CSecondStepAnnotator implements Annotator
 {
-	private static class CPsiRecursiveVisitorImpl extends CPsiVisitorNewImpl
+	private static class CPsiRecursiveVisitorImpl extends CPsiRecursiveElementVisitor
 	{
 		private AnnotationHolder _annotationHolder;
 		private Set<String> _defineList;
@@ -48,81 +58,104 @@ public class CSecondStepAnnotator implements Annotator
 		}
 
 		@Override
-		public void visitElement(PsiElement element, boolean defined)
+		public void visitElement(PsiElement element)
 		{
-			com.intellij.lang.ASTNode node = element.getNode();
-			if(node != null)
+			TextAttributesKey[] attributesKeys = CSyntaxHighlighter.ATTRIBUTES.get(element.getNode().getElementType());
+			if(attributesKeys != null)
 			{
-				TextAttributesKey[] attributesKeys = CSyntaxHighlighter.ATTRIBUTES.get(node.getElementType());
-				if(attributesKeys != null)
-				{
-					Annotation annotator = _annotationHolder.createInfoAnnotation(element, null);
-					annotator.setTextAttributes(attributesKeys[defined ? 0 : 1]);
-				}
+				Annotation annotator = _annotationHolder.createInfoAnnotation(element, null);
+
+				int val = isEqual(CPsiUtil.getLastParentChecker(element, null)) && isEqual(CPsiUtil.getFirstParentChecker(element)) ? 0 : 1;
+
+				annotator.setTextAttributes(attributesKeys[val]);
 			}
 
-			super.visitElement(element, defined);
+			super.visitElement(element);
 		}
-	
-		/*@Override
-		public void visitDefine(CPsiDefine element, CPsiCompilerVariableHolder variableHolder)
+
+		@Override
+		public void visitSDefine(CPsiSharpDefine element)
 		{
 			CPsiCompilerVariable var = element.getVariable();
 			if(var != null)
 				_defineList.add(var.getText());
 
-			super.visitDefine(element, variableHolder);
+			super.visitSDefine(element);
 		}
-           */
 
-		//@Override
-		//public void visitInclude(CPsiInclude include, CPsiCompilerVariableHolder variableHolder)
-		//{
-			/*PsiElement element = include.getIncludeElement();
-			if(element == null)
-				return;
-			PsiFile psiFile = include.getContainingFile();
-			VirtualFile virtualFile = psiFile.getVirtualFile();
-			if(virtualFile == null)
-				return;
-	
-			VirtualFile parentDir = virtualFile.getParent();
-			if(parentDir == null)
-				return;
-	
-			String includeName = include.getIncludeName();
-			VirtualFile includeFile = parentDir.findFileByRelativePath(FileUtil.toSystemIndependentName(includeName));
-			if(includeFile == null)
-				_annotationHolder.createErrorAnnotation(element, CBundle.message("not.find.header", includeName));
-			else
-			{
-				PsiFile file = include.getManager().findFile(virtualFile);
-				if(!(file instanceof CPsiBinaryFile))
-					visitFile((CPsiBinaryFile)file);
-			}  */
-		//}
-
-		/*private boolean isDefined(CPsiCompilerVariableHolder holder)
+		@Override
+		public void visitCompilerVariable(CPsiCompilerVariable variable)
 		{
-			if(holder == null)
+			Annotation annotator = _annotationHolder.createInfoAnnotation(variable, null);
+			annotator.setTextAttributes(getTextAttributesKey(variable, CSyntaxHighlighter.COMPILER_VARIABLE_CACHE));
+
+			super.visitCompilerVariable(variable);
+		}
+
+		@Override
+		public void visitSInclude(CPsiInclude include)
+		{
+			PsiElement element = include.getIncludeElement();
+			if(element != null)
+			{
+				CPsiSharpVariableChecker checker = CPsiUtil.getFirstParentChecker(element);
+				if(checker != null)
+				{
+					CPsiCompilerVariable var = checker.getVariable();
+					if(var != null && _defineList.contains(var.getText()) == checker.getEqualValue())
+					{
+						PsiFile psiFile = include.getContainingFile();
+						VirtualFile virtualFile = psiFile.getVirtualFile();
+						if(virtualFile != null)
+						{
+							VirtualFile parentDir = virtualFile.getParent();
+							if(parentDir != null)
+							{
+								String includeName = include.getIncludeName();
+								VirtualFile includeFile = parentDir.findFileByRelativePath(FileUtil.toSystemIndependentName(includeName));
+								if(includeFile == null)
+									_annotationHolder.createErrorAnnotation(element, CBundle.message("not.find.header", includeName));
+								else
+								{
+									PsiFile file = include.getManager().findFile(includeFile);
+									if(file instanceof CPsiRawFile)
+										visitRawFile((CPsiRawFile)file);
+								}
+							}
+						}
+					}
+				}
+			}
+			super.visitSInclude(include);
+		}
+
+		private TextAttributesKey getTextAttributesKey(final @NotNull PsiElement element, TextAttributesKey[] attributes)
+		{
+			return attributes[isEqual(CPsiUtil.getLastParentChecker(element, null)) ? 0 : 1];
+		}
+
+		private boolean isEqual(CPsiSharpVariableChecker checker)
+		{
+			if(checker == null)
 				return true;
 
-			CPsiCompilerVariable var = holder.getVariable();
-			return var != null && _defineList.contains(var.getText());
-		} */
+			CPsiCompilerVariable var = checker.getVariable();
+
+			return var != null && _defineList.contains(var.getText()) == checker.getEqualValue();
+		}
 	}
 
 	@Override
 	public void annotate(@NotNull PsiElement element, final @NotNull AnnotationHolder holder)
 	{
-		if(!(element instanceof CPsiBinaryFile))
+		if(!(element instanceof CPsiRawFile))
 			return;
 
 		final Set<String> defines = new HashSet<String> ();
 
 		// build define
-		CPsiVisitorNewImpl visitor = new CPsiRecursiveVisitorImpl(holder, defines);
+		CPsiElementVisitor visitor = new CPsiRecursiveVisitorImpl(holder, defines);
 
-		visitor.visitBinaryFile((CPsiBinaryFile)element, true);
+		visitor.visitRawFile((CPsiRawFile) element);
 	}
 }

@@ -16,8 +16,7 @@
 
 package org.napile.cpp4idea.lang.psi;
 
-import org.jetbrains.annotations.NotNull;
-import com.intellij.psi.PsiIdentifier;
+import com.intellij.psi.PsiElement;
 
 /**
  * @author VISTALL
@@ -25,6 +24,5 @@ import com.intellij.psi.PsiIdentifier;
  */
 public interface CPsiCompilerVariable extends CPsiElement
 {
-	@NotNull
-	PsiIdentifier getVariableIdentifier();
+	PsiElement getNameElement();
 }

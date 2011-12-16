@@ -16,13 +16,14 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.lexer.CTokenType;
-import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
 import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
 import org.napile.cpp4idea.lang.psi.CPsiLiteralExpression;
-import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
+import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * @author VISTALL
@@ -36,9 +37,12 @@ public class CPsiEnumConstantImpl extends CPsiElementBaseImpl implements CPsiEnu
 	}
 
 	@Override
-	public void accept(CPsiVisitor visitor, CPsiCompilerVariableHolder variableHolder)
+	public void accept(@NotNull PsiElementVisitor visitor)
 	{
-		visitor.visitEnumConstant(this, variableHolder);
+		if(visitor instanceof CPsiElementVisitor)
+			((CPsiElementVisitor)visitor).visitEnumConstant(this);
+		else
+			super.accept(visitor);
 	}
 
 	@Override

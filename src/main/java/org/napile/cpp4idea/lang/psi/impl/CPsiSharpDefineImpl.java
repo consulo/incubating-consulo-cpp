@@ -16,27 +16,31 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
-import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
-import org.napile.cpp4idea.lang.psi.CPsiDefine;
-import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
+import org.napile.cpp4idea.lang.psi.CPsiSharpDefine;
+import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * @author VISTALL
  * @date 7:23/11.12.2011
  */
-public class CPsiDefineImpl extends CPsiElementBaseImpl implements CPsiDefine
+public class CPsiSharpDefineImpl extends CPsiElementBaseImpl implements CPsiSharpDefine
 {
-	public CPsiDefineImpl(@org.jetbrains.annotations.NotNull ASTNode node)
+	public CPsiSharpDefineImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{
 		super(node);
 	}
 
 	@Override
-	public void accept(CPsiVisitor visitor, CPsiCompilerVariableHolder variableHolder)
+	public void accept(@NotNull PsiElementVisitor visitor)
 	{
-		visitor.visitDefine(this, variableHolder);
+		if(visitor instanceof CPsiElementVisitor)
+			((CPsiElementVisitor)visitor).visitSDefine(this);
+		else
+			super.accept(visitor);
 	}
 
 	@Override

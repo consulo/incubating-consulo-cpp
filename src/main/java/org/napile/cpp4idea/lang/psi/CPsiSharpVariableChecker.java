@@ -16,13 +16,13 @@
 
 package org.napile.cpp4idea.lang.psi;
 
-import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitorNew;
-
 /**
  * @author VISTALL
- * @date 19:52/15.12.2011
+ * @date 13:43/16.12.2011
  */
-public interface CPsiVisitingElement
+public interface CPsiSharpVariableChecker extends CPsiElement
 {
-	void accept(CPsiVisitorNew visitorNew, boolean defined);
+	boolean getEqualValue();
+
+	CPsiCompilerVariable getVariable();
 }

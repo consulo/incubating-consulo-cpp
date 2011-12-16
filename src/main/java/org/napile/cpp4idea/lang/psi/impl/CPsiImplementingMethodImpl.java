@@ -16,20 +16,32 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiCodeBlock;
-import org.napile.cpp4idea.lang.psi.CPsiImplentingMethod;
+import org.napile.cpp4idea.lang.psi.CPsiImplementingMethod;
 import org.napile.cpp4idea.lang.psi.CPsiParameterList;
+import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * @author VISTALL
  * @date 22:57/10.12.2011
  */
-public class CPsiImplentingMethodImpl extends CPsiElementBaseImpl implements CPsiImplentingMethod
+public class CPsiImplementingMethodImpl extends CPsiElementBaseImpl implements CPsiImplementingMethod
 {
-	public CPsiImplentingMethodImpl(@org.jetbrains.annotations.NotNull ASTNode node)
+	public CPsiImplementingMethodImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{
 		super(node);
+	}
+
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof CPsiElementVisitor)
+			((CPsiElementVisitor)visitor).visitImplementingMethod(this);
+		else
+			super.accept(visitor);
 	}
 
 	@Override
@@ -39,8 +51,9 @@ public class CPsiImplentingMethodImpl extends CPsiElementBaseImpl implements CPs
 	}
 
 	@Override
+	@NotNull
 	public CPsiCodeBlock getCodeBlock()
 	{
-		return findChildByClass(CPsiCodeBlock.class);
+		return findNotNullChildByClass(CPsiCodeBlock.class);
 	}
 }

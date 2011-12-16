@@ -16,31 +16,42 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
-import org.napile.cpp4idea.lang.psi.CPsiIfNotDefHolder;
-import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitorNew;
+import org.napile.cpp4idea.lang.psi.CPsiSharpIfNotDef;
+import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * @author VISTALL
  * @date 14:07/11.12.2011
  */
-public class CPsiIfNotDefHolderImpl extends CPsiElementBaseImpl implements CPsiIfNotDefHolder
+public class CPsiSharpIfNotDefImpl extends CPsiElementBaseImpl implements CPsiSharpIfNotDef
 {
-	public CPsiIfNotDefHolderImpl(@org.jetbrains.annotations.NotNull ASTNode node)
+	public CPsiSharpIfNotDefImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{
 		super(node);
-	}
-
-	@Override
-	public void accept(CPsiVisitorNew visitorNew, boolean defined)
-	{
-		visitorNew.visitSharpIfElement(this, false, defined);
 	}
 
 	@Override
 	public CPsiCompilerVariable getVariable()
 	{
 		return findChildByClass(CPsiCompilerVariable.class);
+	}
+
+	@Override
+	public boolean getEqualValue()
+	{
+		return false;
+	}
+
+	@Override
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof CPsiElementVisitor)
+			((CPsiElementVisitor)visitor).visitSIfNotDef(this);
+		else
+			super.accept(visitor);
 	}
 }

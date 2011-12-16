@@ -18,8 +18,8 @@ package org.napile.cpp4idea.lang.parser.firstparsing;
 
 import org.napile.cpp4idea.lang.parser.CParserUtil;
 import org.napile.cpp4idea.lang.parser.secondparsing.CommonParsing;
-import org.napile.cpp4idea.lang.psi.CPsiIfDefHolder;
-import org.napile.cpp4idea.lang.psi.CPsiIfNotDefHolder;
+import org.napile.cpp4idea.lang.psi.CPsiSharpIfDef;
+import org.napile.cpp4idea.lang.psi.CPsiSharpIfNotDef;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
 
@@ -41,7 +41,8 @@ public class SharpIfdefKeyword extends CommonParsing
 
 		while(!builder.eof())
 		{
-			builder.advanceLexer();
+			FirstParsing.parse(builder);
+
 			if(builder.getTokenType() == S_ENDIF_KEYWORD)
 				break;
 		}
@@ -51,6 +52,6 @@ public class SharpIfdefKeyword extends CommonParsing
 		else
 			builder.advanceLexer();
 
-		CParserUtil.done(marker, elementType == S_IFDEF_KEYWORD ? CPsiIfDefHolder.class : CPsiIfNotDefHolder.class);
+		CParserUtil.done(marker, elementType == S_IFDEF_KEYWORD ? CPsiSharpIfDef.class : CPsiSharpIfNotDef.class);
 	}
 }

@@ -18,9 +18,7 @@ package org.napile.cpp4idea.lang.parser;
 
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.lexer.CTokenType;
-import org.napile.cpp4idea.lang.parser.firstparsing.SharpDefineKeyword;
-import org.napile.cpp4idea.lang.parser.firstparsing.SharpIfdefKeyword;
-import org.napile.cpp4idea.lang.parser.firstparsing.SharpIncludeKeyword;
+import org.napile.cpp4idea.lang.parser.firstparsing.FirstParsing;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
@@ -43,16 +41,7 @@ public class CFirstStepParser implements PsiParser, CTokenType
 		PsiBuilder.Marker rootMarker = builder.mark();
 
 		while(!builder.eof())
-		{
-			if(builder.getTokenType() == S_INCLUDE_KEYWORD)
-				SharpIncludeKeyword.parse(builder);
-			else if(builder.getTokenType() == S_DEFINE_KEYWORD)
-				SharpDefineKeyword.parse(builder);
-			else if(builder.getTokenType() == S_IFNDEF_KEYWORD || builder.getTokenType() == S_IFDEF_KEYWORD)
-				SharpIfdefKeyword.parseIf(builder);
-			else 
-				builder.advanceLexer();
-		}
+			FirstParsing.parse(builder);
 
 		rootMarker.done(root);
 

@@ -14,15 +14,26 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.psi;
+package org.napile.cpp4idea.lang.parser.firstparsing;
 
-import com.intellij.psi.PsiElement;
+import org.napile.cpp4idea.lang.lexer.CTokenType;
+import com.intellij.lang.PsiBuilder;
 
 /**
  * @author VISTALL
- * @date 22:58/10.12.2011
+ * @date 15:14/16.12.2011
  */
-public interface CPsiElement extends PsiElement
+public class FirstParsing implements CTokenType
 {
-
+	public static void parse(PsiBuilder builder)
+	{
+		if(builder.getTokenType() == S_INCLUDE_KEYWORD)
+			SharpIncludeKeyword.parse(builder);
+		else if(builder.getTokenType() == S_DEFINE_KEYWORD)
+			SharpDefineKeyword.parse(builder);
+		else if(builder.getTokenType() == S_IFNDEF_KEYWORD || builder.getTokenType() == S_IFDEF_KEYWORD)
+			SharpIfdefKeyword.parseIf(builder);
+		else
+			builder.advanceLexer();
+	}
 }

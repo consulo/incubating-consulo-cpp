@@ -24,26 +24,26 @@ import org.apache.commons.lang.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CFileType;
 import org.napile.cpp4idea.CLanguage;
-import org.napile.cpp4idea.lang.psi.CPsiBinaryFile;
-import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
 import org.napile.cpp4idea.lang.psi.CPsiGenFile;
-import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
+import org.napile.cpp4idea.lang.psi.CPsiRawFile;
+import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
 import org.napile.cpp4idea.util.CIcons;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiElementVisitor;
 
 /**
  * @author VISTALL
  * @date 2:12/10.12.2011
  */
-public class CPsiBinaryFileImpl extends PsiFileBase implements CPsiBinaryFile
+public class CPsiRawFileImpl extends PsiFileBase implements CPsiRawFile
 {
 	private static final String[] SOURCE_FILES = new String[] {"c", "cpp"};
 	private boolean _isSourceFile;
 
-	public CPsiBinaryFileImpl(@NotNull FileViewProvider viewProvider)
+	public CPsiRawFileImpl(@NotNull FileViewProvider viewProvider)
 	{
 		super(viewProvider, CLanguage.INSTANCE);
 
@@ -72,9 +72,12 @@ public class CPsiBinaryFileImpl extends PsiFileBase implements CPsiBinaryFile
 	}
 
 	@Override
-	public void accept(CPsiVisitor visitor, CPsiCompilerVariableHolder variableHolder)
+	public void accept(@NotNull PsiElementVisitor visitor)
 	{
-		visitor.visitFile(this, variableHolder);
+		if(visitor instanceof CPsiElementVisitor)
+			((CPsiElementVisitor)visitor).visitRawFile(this);
+		else
+			super.accept(visitor);
 	}
 
 	@Override

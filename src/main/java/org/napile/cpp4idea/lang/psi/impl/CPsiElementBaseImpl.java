@@ -16,9 +16,7 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
-import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
 import org.napile.cpp4idea.lang.psi.CPsiElement;
-import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
 
@@ -31,12 +29,6 @@ public class CPsiElementBaseImpl extends ASTWrapperPsiElement implements CPsiEle
 	public CPsiElementBaseImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{
 		super(node);
-	}
-
-	@Override
-	public void accept(CPsiVisitor visitor, CPsiCompilerVariableHolder variableHolder)
-	{
-		visitor.visitElement(this, variableHolder);
 	}
 
 	@Override
