@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.ide.folding.impl;
+package org.napile.cpp4idea.lang;
 
 import java.util.ArrayList;
 import java.util.List;

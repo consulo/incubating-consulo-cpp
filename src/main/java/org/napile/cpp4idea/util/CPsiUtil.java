@@ -16,8 +16,10 @@
 
 package org.napile.cpp4idea.util;
 
+import java.util.Set;
+
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
 import org.napile.cpp4idea.lang.psi.CPsiSharpVariableChecker;
 import com.intellij.psi.PsiElement;
 
@@ -27,29 +29,24 @@ import com.intellij.psi.PsiElement;
  */
 public class CPsiUtil
 {
-	public static CPsiSharpVariableChecker getFirstParentChecker(final @NotNull PsiElement element)
+	public static boolean isBlockDefined(final @NotNull PsiElement element, Set<String> varSet)
 	{
 		PsiElement parent = element.getParent();
 		if(parent == null)
-			return null;
+			return true;
 
 		if(parent instanceof CPsiSharpVariableChecker)
-			return (CPsiSharpVariableChecker)parent;
-		else
-			return getFirstParentChecker(parent);
-	}
+		{
+			CPsiCompilerVariable variable = ((CPsiSharpVariableChecker) parent).getVariable();
+			if(variable == null)
+				return false;
 
-	public static CPsiSharpVariableChecker getLastParentChecker(final @NotNull PsiElement element, @Nullable CPsiSharpVariableChecker lastChecker)
-	{
-		PsiElement parent = element.getParent();
-		if(parent == null)
-			return lastChecker;
+			boolean eq = varSet.contains(variable.getText()) == ((CPsiSharpVariableChecker) parent).getEqualValue();
 
-		if(parent instanceof CPsiSharpVariableChecker)
-			lastChecker = (CPsiSharpVariableChecker)parent;
+			if(!eq)
+				return false;
+		}
 
-		lastChecker = getLastParentChecker(parent, lastChecker);
-
-		return lastChecker;
+		return isBlockDefined(parent, varSet);
 	}
 }

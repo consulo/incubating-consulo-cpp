@@ -26,7 +26,6 @@ import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
 import org.napile.cpp4idea.lang.psi.CPsiInclude;
 import org.napile.cpp4idea.lang.psi.CPsiRawFile;
 import org.napile.cpp4idea.lang.psi.CPsiSharpDefine;
-import org.napile.cpp4idea.lang.psi.CPsiSharpVariableChecker;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiRecursiveElementVisitor;
 import org.napile.cpp4idea.util.CPsiUtil;
@@ -65,7 +64,7 @@ public class CSecondStepAnnotator implements Annotator
 			{
 				Annotation annotator = _annotationHolder.createInfoAnnotation(element, null);
 
-				int val = isEqual(CPsiUtil.getLastParentChecker(element, null)) && isEqual(CPsiUtil.getFirstParentChecker(element)) ? 0 : 1;
+				int val = CPsiUtil.isBlockDefined(element, _defineList) ? 0 : 1;
 
 				annotator.setTextAttributes(attributesKeys[val]);
 			}
@@ -84,12 +83,12 @@ public class CSecondStepAnnotator implements Annotator
 		}
 
 		@Override
-		public void visitCompilerVariable(CPsiCompilerVariable variable)
+		public void visitCompilerVariable(CPsiCompilerVariable element)
 		{
-			Annotation annotator = _annotationHolder.createInfoAnnotation(variable, null);
-			annotator.setTextAttributes(getTextAttributesKey(variable, CSyntaxHighlighter.COMPILER_VARIABLE_CACHE));
+			Annotation annotator = _annotationHolder.createInfoAnnotation(element, null);
+			annotator.setTextAttributes(CSyntaxHighlighter.COMPILER_VARIABLE_CACHE[CPsiUtil.isBlockDefined(element, _defineList) ? 0 : 1]);
 
-			super.visitCompilerVariable(variable);
+			super.visitCompilerVariable(element);
 		}
 
 		@Override
@@ -98,50 +97,30 @@ public class CSecondStepAnnotator implements Annotator
 			PsiElement element = include.getIncludeElement();
 			if(element != null)
 			{
-				CPsiSharpVariableChecker checker = CPsiUtil.getFirstParentChecker(element);
-				if(checker != null)
+				if(CPsiUtil.isBlockDefined(include, _defineList))
 				{
-					CPsiCompilerVariable var = checker.getVariable();
-					if(var != null && _defineList.contains(var.getText()) == checker.getEqualValue())
+					PsiFile psiFile = include.getContainingFile();
+					VirtualFile virtualFile = psiFile.getVirtualFile();
+					if(virtualFile != null)
 					{
-						PsiFile psiFile = include.getContainingFile();
-						VirtualFile virtualFile = psiFile.getVirtualFile();
-						if(virtualFile != null)
+						VirtualFile parentDir = virtualFile.getParent();
+						if(parentDir != null)
 						{
-							VirtualFile parentDir = virtualFile.getParent();
-							if(parentDir != null)
+							String includeName = include.getIncludeName();
+							VirtualFile includeFile = parentDir.findFileByRelativePath(FileUtil.toSystemIndependentName(includeName));
+							if(includeFile == null)
+								_annotationHolder.createErrorAnnotation(element, CBundle.message("not.find.header", includeName));
+							else
 							{
-								String includeName = include.getIncludeName();
-								VirtualFile includeFile = parentDir.findFileByRelativePath(FileUtil.toSystemIndependentName(includeName));
-								if(includeFile == null)
-									_annotationHolder.createErrorAnnotation(element, CBundle.message("not.find.header", includeName));
-								else
-								{
-									PsiFile file = include.getManager().findFile(includeFile);
-									if(file instanceof CPsiRawFile)
-										visitRawFile((CPsiRawFile)file);
-								}
+								PsiFile file = include.getManager().findFile(includeFile);
+								if(file instanceof CPsiRawFile)
+									visitRawFile((CPsiRawFile)file);
 							}
 						}
 					}
 				}
 			}
 			super.visitSInclude(include);
-		}
-
-		private TextAttributesKey getTextAttributesKey(final @NotNull PsiElement element, TextAttributesKey[] attributes)
-		{
-			return attributes[isEqual(CPsiUtil.getLastParentChecker(element, null)) ? 0 : 1];
-		}
-
-		private boolean isEqual(CPsiSharpVariableChecker checker)
-		{
-			if(checker == null)
-				return true;
-
-			CPsiCompilerVariable var = checker.getVariable();
-
-			return var != null && _defineList.contains(var.getText()) == checker.getEqualValue();
 		}
 	}
 

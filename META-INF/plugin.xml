@@ -50,6 +50,7 @@
 
 		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.ide.highlight.CPairedBraceMatcherImpl" />
 		<lang.parserDefinition language="C" implementationClass="org.napile.cpp4idea.lang.parser.CParserDefinition" />
-		<lang.foldingBuilder language="C" implementationClass="org.napile.cpp4idea.ide.folding.impl.FoldingBuilderImpl"/>
+		<lang.foldingBuilder language="C" implementationClass="org.napile.cpp4idea.lang.FoldingBuilderImpl"/>
+		<lang.commenter language="C" implementationClass="org.napile.cpp4idea.lang.CommenterImpl" />
 	</extensions>
 </idea-plugin>
