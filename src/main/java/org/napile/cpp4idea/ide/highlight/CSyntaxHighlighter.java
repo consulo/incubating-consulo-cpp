@@ -42,8 +42,11 @@ public class CSyntaxHighlighter// extends SyntaxHighlighterBase
 	public static final TextAttributesKey LIGHT_COMPILER_VARIABLE = TextAttributesKey.createTextAttributesKey("C.LIGHT_COMPILER_VARIABLE");
 	public static final TextAttributesKey[] COMPILER_VARIABLE_CACHE = new TextAttributesKey[] {COMPILER_VARIABLE, LIGHT_COMPILER_VARIABLE};
 
-	public static final TextAttributesKey CONSTANT = TextAttributesKey.createTextAttributesKey("C.CONSTANT", CodeInsightColors.STATIC_FIELD_ATTRIBUTES.getDefaultAttributes().clone());
 	public static final TextAttributesKey NUMBER = TextAttributesKey.createTextAttributesKey("C.NUMBER", SyntaxHighlighterColors.NUMBER.getDefaultAttributes().clone());
+	public static final TextAttributesKey LIGHT_NUMBER = TextAttributesKey.createTextAttributesKey("C.LIGHT_NUMBER");
+
+	public static final TextAttributesKey CONSTANT = TextAttributesKey.createTextAttributesKey("C.CONSTANT", CodeInsightColors.STATIC_FIELD_ATTRIBUTES.getDefaultAttributes().clone());
+
 	public static final TextAttributesKey COMMA = TextAttributesKey.createTextAttributesKey("C.COMMA", SyntaxHighlighterColors.COMMA.getDefaultAttributes().clone());
 	public static final TextAttributesKey DOT = TextAttributesKey.createTextAttributesKey("C.DOT", SyntaxHighlighterColors.DOT.getDefaultAttributes().clone());
 	public static final TextAttributesKey LINE_COMMENT = TextAttributesKey.createTextAttributesKey("C.LINE_COMMENT", SyntaxHighlighterColors.LINE_COMMENT.getDefaultAttributes().clone());
@@ -56,6 +59,11 @@ public class CSyntaxHighlighter// extends SyntaxHighlighterBase
 		fillMap(CTokenType.KEYWORD_SET, KEYWORD, LIGHT_KEYWORD);
 		fillMap(CTokenType.STRING_LITERAL_SET, STRING, LIGHT_STRING);
 		fillMap(CTokenType.STRING_INCLUDE_LITERAL, STRING, LIGHT_STRING);
+		// numbers
+		fillMap(CTokenType.INTEGER_LITERAL, NUMBER, LIGHT_NUMBER);
+		fillMap(CTokenType.LONG_LITERAL, NUMBER, LIGHT_NUMBER);
+		fillMap(CTokenType.FLOAT_LITERAL, NUMBER, LIGHT_NUMBER);
+		fillMap(CTokenType.DOUBLE_LITERAL, NUMBER, LIGHT_NUMBER);
 	}
 
 	private static void fillMap(IElementType elementType, TextAttributesKey... keys)

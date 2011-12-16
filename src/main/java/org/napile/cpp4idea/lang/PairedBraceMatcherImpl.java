@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.ide.highlight;
+package org.napile.cpp4idea.lang;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -28,7 +28,7 @@ import com.intellij.psi.tree.IElementType;
  * @author VISTALL
  * @date 5:52/11.12.2011
  */
-public class CPairedBraceMatcherImpl implements PairedBraceMatcher
+public class PairedBraceMatcherImpl implements PairedBraceMatcher
 {
 	private static final BracePair[] PAIRS =
 	{

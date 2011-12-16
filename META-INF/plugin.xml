@@ -48,7 +48,7 @@
 		<annotator language="C" implementationClass="org.napile.cpp4idea.annotator.parsing.CSecondStepAnnotator"/>
 
 
-		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.ide.highlight.CPairedBraceMatcherImpl" />
+		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.lang.PairedBraceMatcherImpl" />
 		<lang.parserDefinition language="C" implementationClass="org.napile.cpp4idea.lang.parser.CParserDefinition" />
 		<lang.foldingBuilder language="C" implementationClass="org.napile.cpp4idea.lang.FoldingBuilderImpl"/>
 		<lang.commenter language="C" implementationClass="org.napile.cpp4idea.lang.CommenterImpl" />
