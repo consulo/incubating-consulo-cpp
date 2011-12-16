@@ -46,7 +46,7 @@
 		<facetType implementation="org.napile.cpp4idea.config.facet.CFacetType"/>
 		<!--lang-->
 		<annotator language="C" implementationClass="org.napile.cpp4idea.annotator.parsing.CSecondStepAnnotator"/>
-		<annotator language="C" implementationClass="org.napile.cpp4idea.annotator.CHighlighterAnnotator"/>
+		<!---<annotator language="C" implementationClass="org.napile.cpp4idea.annotator.CHighlighterAnnotator"/> -->
 
 		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.ide.highlight.CPairedBraceMatcherImpl" />
 		<lang.parserDefinition language="C" implementationClass="org.napile.cpp4idea.lang.parser.CParserDefinition" />

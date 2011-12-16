@@ -50,12 +50,17 @@ public class CSecondStepAnnotator implements Annotator
 		@Override
 		public void visitElement(PsiElement element, boolean defined)
 		{
-			TextAttributesKey[] attributesKeys = CSyntaxHighlighter.ATTRIBUTES.get(element.getNode().getElementType());
-			if(attributesKeys != null)
+			com.intellij.lang.ASTNode node = element.getNode();
+			if(node != null)
 			{
-				Annotation annotator = _annotationHolder.createInfoAnnotation(element, null);
-				annotator.setTextAttributes(attributesKeys[defined ? 0 : 1]);
+				TextAttributesKey[] attributesKeys = CSyntaxHighlighter.ATTRIBUTES.get(node.getElementType());
+				if(attributesKeys != null)
+				{
+					Annotation annotator = _annotationHolder.createInfoAnnotation(element, null);
+					annotator.setTextAttributes(attributesKeys[defined ? 0 : 1]);
+				}
 			}
+
 			super.visitElement(element, defined);
 		}
 	

@@ -17,9 +17,7 @@
 package org.napile.cpp4idea.lang.psi.impl;
 
 import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
-import org.napile.cpp4idea.lang.psi.CPsiCompilerVariableHolder;
 import org.napile.cpp4idea.lang.psi.CPsiIfDefHolder;
-import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitor;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiVisitorNew;
 import com.intellij.lang.ASTNode;
 
@@ -32,12 +30,6 @@ public class CPsiIfDefHolderImpl extends CPsiElementBaseImpl implements CPsiIfDe
 	public CPsiIfDefHolderImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{
 		super(node);
-	}
-
-	@Override
-	public void accept(CPsiVisitor visitor, CPsiCompilerVariableHolder variableHolder)
-	{
-		visitor.visitIfDefHolder(this, this);
 	}
 
 	@Override
