@@ -18,6 +18,7 @@ package org.napile.cpp4idea.lang.psi.impl;
 
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiGenFile;
+import org.napile.cpp4idea.lang.psi.CPsiRawFile;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.Language;
@@ -34,10 +35,10 @@ import com.intellij.util.IncorrectOperationException;
  */
 public class CPsiGenFileImpl extends PsiElementBase implements CPsiGenFile
 {
-	private CPsiRawFileImpl _binaryFile;
+	private CPsiRawFile _binaryFile;
 	private PsiElement[] _children;
 
-	public CPsiGenFileImpl(CPsiRawFileImpl binaryFile, PsiElement[] children)
+	public CPsiGenFileImpl(CPsiRawFile binaryFile, PsiElement[] children)
 	{
 		_binaryFile = binaryFile;
 		_children = children;
@@ -49,7 +50,14 @@ public class CPsiGenFileImpl extends PsiElementBase implements CPsiGenFile
 		if(visitor instanceof CPsiElementVisitor)
 			((CPsiElementVisitor)visitor).visitGenFile(this);
 		else
-			super.accept(visitor);
+			throw new IllegalArgumentException();
+	}
+
+	@Override
+	public void acceptChildren(@NotNull PsiElementVisitor visitor)
+	{
+		for(PsiElement child : _children)
+			child.accept(visitor);
 	}
 
 	@NotNull

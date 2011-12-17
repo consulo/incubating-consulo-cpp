@@ -16,7 +16,7 @@
 
 package org.napile.cpp4idea.lang.psi;
 
-import java.util.List;
+import java.util.Set;
 
 import com.intellij.psi.PsiFile;
 
@@ -30,5 +30,5 @@ public interface CPsiRawFile extends CPsiGenFile, PsiFile
 
 	boolean isSourceFile();
 
-	void buildGen(List<String> list);
+	void buildGen(Set<String> list);
 }

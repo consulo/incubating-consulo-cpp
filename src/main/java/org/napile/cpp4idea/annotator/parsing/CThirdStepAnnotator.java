@@ -14,32 +14,22 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea;
+package org.napile.cpp4idea.annotator.parsing;
 
-import com.intellij.lang.Language;
+import org.jetbrains.annotations.NotNull;
+import com.intellij.lang.annotation.AnnotationHolder;
+import com.intellij.lang.annotation.Annotator;
+import com.intellij.psi.PsiElement;
 
 /**
  * @author VISTALL
- * @date 0:57/10.12.2011
+ * @date 17:28/16.12.2011
  */
-public class CLanguage extends Language
+public class CThirdStepAnnotator implements Annotator
 {
-	public static final Language INSTANCE = new CLanguage();
-
-	public CLanguage()
-	{
-		super("C");
-	}
-
 	@Override
-	public String getDisplayName()
+	public void annotate(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
 	{
-		return "C/C++";
-	}
 
-	@Override
-	public boolean isCaseSensitive()
-	{
-		return true;
 	}
 }

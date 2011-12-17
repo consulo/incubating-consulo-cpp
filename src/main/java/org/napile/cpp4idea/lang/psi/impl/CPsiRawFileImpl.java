@@ -16,7 +16,7 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.swing.Icon;
 
@@ -27,6 +27,7 @@ import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.psi.CPsiGenFile;
 import org.napile.cpp4idea.lang.psi.CPsiRawFile;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
+import org.napile.cpp4idea.lang.psi.visitors.impl.CPsiGenFileVisitor;
 import org.napile.cpp4idea.util.CIcons;
 import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
@@ -42,6 +43,8 @@ public class CPsiRawFileImpl extends PsiFileBase implements CPsiRawFile
 {
 	private static final String[] SOURCE_FILES = new String[] {"c", "cpp"};
 	private boolean _isSourceFile;
+
+	private CPsiGenFile _genFile;
 
 	public CPsiRawFileImpl(@NotNull FileViewProvider viewProvider)
 	{
@@ -66,9 +69,15 @@ public class CPsiRawFileImpl extends PsiFileBase implements CPsiRawFile
 	}
 
 	@Override
-	public void buildGen(List<String> list)
+	public void buildGen(Set<String> list)
 	{
+		if(_genFile != null)
+			return;
 
+		CPsiGenFileVisitor visitor = new CPsiGenFileVisitor(list);
+		visitor.visitRawFile(this);
+
+		_genFile = visitor.getGenFile();
 	}
 
 	@Override
@@ -90,6 +99,8 @@ public class CPsiRawFileImpl extends PsiFileBase implements CPsiRawFile
 	@NotNull
 	public CPsiGenFile getGenFile()
 	{
-		return null;
+		if(_genFile == null)
+			throw new IllegalAccessError("Can't call it without CPsiRawFile.buildGen(Set<String>)");
+		return _genFile;
 	}
 }

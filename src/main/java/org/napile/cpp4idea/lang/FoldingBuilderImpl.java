@@ -89,9 +89,9 @@ public class FoldingBuilderImpl implements FoldingBuilder, DumbAware
 	{
 		PsiElement element = node.getPsi();
 		if(element instanceof CPsiSharpIfDef)
-			return "#ifdef: " + ((CPsiSharpIfDef) element).getVariable().getText();
+			return "#ifdef " + ((CPsiSharpIfDef) element).getVariable().getText();
 		else if(element instanceof CPsiSharpIfNotDef)
-			return "#ifndef: " + ((CPsiSharpIfNotDef) element).getVariable().getText();
+			return "#ifndef " + ((CPsiSharpIfNotDef) element).getVariable().getText();
 		//else if(element instanceof CPsiImplementingMethod)
 		//	return "{...}";
 

@@ -57,10 +57,10 @@ public class CBaseSyntaxHighlighter extends SyntaxHighlighterBase
 		ATTRIBUTES.put(CTokenType.END_OF_LINE_COMMENT, CSyntaxHighlighter.LINE_COMMENT);
 		ATTRIBUTES.put(CTokenType.BAD_CHARACTER, HighlighterColors.BAD_CHARACTER);
 
-		ATTRIBUTES.put(CTokenType.INTEGER_LITERAL, CSyntaxHighlighter.NUMBER);
+		/*ATTRIBUTES.put(CTokenType.INTEGER_LITERAL, CSyntaxHighlighter.NUMBER);
 		ATTRIBUTES.put(CTokenType.LONG_LITERAL, CSyntaxHighlighter.NUMBER);
 		ATTRIBUTES.put(CTokenType.FLOAT_LITERAL, CSyntaxHighlighter.NUMBER);
-		ATTRIBUTES.put(CTokenType.DOUBLE_LITERAL, CSyntaxHighlighter.NUMBER);
+		ATTRIBUTES.put(CTokenType.DOUBLE_LITERAL, CSyntaxHighlighter.NUMBER);  */
 
 		fillMap(ATTRIBUTES, CTokenType.OPERATION_SET, SyntaxHighlighterColors.OPERATION_SIGN);
 	}

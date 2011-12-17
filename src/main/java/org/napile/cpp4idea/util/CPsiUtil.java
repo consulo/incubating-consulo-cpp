@@ -31,22 +31,32 @@ public class CPsiUtil
 {
 	public static boolean isBlockDefined(final @NotNull PsiElement element, Set<String> varSet)
 	{
+		if(!checkVariableChecker(element, varSet))
+			return false;
+
 		PsiElement parent = element.getParent();
 		if(parent == null)
 			return true;
 
-		if(parent instanceof CPsiSharpVariableChecker)
+		if(!checkVariableChecker(parent, varSet))
+			return false;
+
+		return isBlockDefined(parent, varSet);
+	}
+
+	private static boolean checkVariableChecker(PsiElement element, Set<String> varSet)
+	{
+		if(element instanceof CPsiSharpVariableChecker)
 		{
-			CPsiCompilerVariable variable = ((CPsiSharpVariableChecker) parent).getVariable();
+			CPsiCompilerVariable variable = ((CPsiSharpVariableChecker) element).getVariable();
 			if(variable == null)
 				return false;
 
-			boolean eq = varSet.contains(variable.getText()) == ((CPsiSharpVariableChecker) parent).getEqualValue();
+			boolean eq = varSet.contains(variable.getText()) == ((CPsiSharpVariableChecker) element).getEqualValue();
 
 			if(!eq)
 				return false;
 		}
-
-		return isBlockDefined(parent, varSet);
+		return true;
 	}
 }
