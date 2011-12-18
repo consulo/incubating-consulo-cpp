@@ -16,7 +16,7 @@
 
 <idea-plugin version="2">
 	<name>C/C++ for IDEA</name>
-	<description>Support for C/C++ language. Worked on napile project</description>
+	<description>Support for C/C++ language. Based on napile project</description>
 	<version>1.0</version>
 	<vendor>napile.org</vendor>
 	<resource-bundle>org.napile.cpp4idea.CBundle</resource-bundle>
