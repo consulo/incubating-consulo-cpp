@@ -18,17 +18,19 @@ package org.napile.cpp4idea.lang.psi;
 
 import java.util.Set;
 
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import com.intellij.psi.PsiFile;
 
 /**
  * @author VISTALL
  * @date 1:07/10.12.2011
  */
-public interface CPsiRawFile extends CPsiGenFile, PsiFile
+public interface CPsiRawFile extends PsiFile
 {
-	CPsiGenFile getGenFile();
+	@Nullable CPsiGenFile getGenFile();
 
 	boolean isSourceFile();
 
-	void buildGen(Set<String> list);
+	void buildGen(@NotNull Set<String> list, @NotNull Set<PsiFile> includeFiles);
 }

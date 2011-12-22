@@ -16,11 +16,13 @@
 
 package org.napile.cpp4idea.lang.psi;
 
+import com.intellij.psi.PsiFile;
+
 /**
  * @author VISTALL
  * @date 16:32/15.12.2011
  */
-public interface CPsiGenFile extends CPsiElement
+public interface CPsiGenFile extends PsiFile
 {
-
+	CPsiRawFile getRawFile();
 }

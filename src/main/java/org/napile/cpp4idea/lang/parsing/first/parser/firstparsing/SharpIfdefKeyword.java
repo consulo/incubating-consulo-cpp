@@ -14,10 +14,10 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.parser.firstparsing;
+package org.napile.cpp4idea.lang.parsing.first.parser.firstparsing;
 
-import org.napile.cpp4idea.lang.parser.CParserUtil;
-import org.napile.cpp4idea.lang.parser.secondparsing.CommonParsing;
+import org.napile.cpp4idea.lang.parsing.CParserUtil;
+import org.napile.cpp4idea.lang.parsing.second.parser.secondparsing.CommonParsing;
 import org.napile.cpp4idea.lang.psi.CPsiSharpIfDef;
 import org.napile.cpp4idea.lang.psi.CPsiSharpIfNotDef;
 import com.intellij.lang.PsiBuilder;

@@ -17,31 +17,29 @@
 package org.napile.cpp4idea.lang.psi.impl;
 
 import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.CFileType;
+import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.psi.CPsiGenFile;
 import org.napile.cpp4idea.lang.psi.CPsiRawFile;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
-import com.intellij.openapi.util.TextRange;
-import com.intellij.psi.PsiElement;
+import com.intellij.extapi.psi.PsiFileBase;
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElementVisitor;
-import com.intellij.psi.PsiManager;
-import com.intellij.psi.impl.PsiElementBase;
-import com.intellij.util.IncorrectOperationException;
 
 /**
  * @author VISTALL
  * @date 16:34/15.12.2011
  */
-public class CPsiGenFileImpl extends PsiElementBase implements CPsiGenFile
+public class CPsiGenFileImpl extends PsiFileBase implements CPsiGenFile
 {
-	private CPsiRawFile _binaryFile;
-	private PsiElement[] _children;
+	private CPsiRawFile _rawFile;
 
-	public CPsiGenFileImpl(CPsiRawFile binaryFile, PsiElement[] children)
+	public CPsiGenFileImpl(@NotNull CPsiRawFile rawFile, @NotNull FileViewProvider viewProvider)
 	{
-		_binaryFile = binaryFile;
-		_children = children;
+		super(viewProvider, CLanguage.INSTANCE);
+
+		_rawFile = rawFile;
 	}
 
 	@Override
@@ -53,133 +51,16 @@ public class CPsiGenFileImpl extends PsiElementBase implements CPsiGenFile
 			throw new IllegalArgumentException();
 	}
 
-	@Override
-	public void acceptChildren(@NotNull PsiElementVisitor visitor)
-	{
-		for(PsiElement child : _children)
-			child.accept(visitor);
-	}
-
 	@NotNull
 	@Override
-	public Language getLanguage()
+	public FileType getFileType()
 	{
-		return _binaryFile.getLanguage();
+		return CFileType.INSTANCE;
 	}
 
 	@Override
-	public PsiManager getManager()
+	public CPsiRawFile getRawFile()
 	{
-		return _binaryFile.getManager();
-	}
-
-	@NotNull
-	@Override
-	public PsiElement[] getChildren()
-	{
-		return _children;
-	}
-
-	@Override
-	public PsiElement getParent()
-	{
-		return _binaryFile;
-	}
-
-	@Override
-	public TextRange getTextRange()
-	{
-		return null;
-	}
-
-	@Override
-	public int getStartOffsetInParent()
-	{
-		return 0;
-	}
-
-	@Override
-	public int getTextLength()
-	{
-		return 0;
-	}
-
-	@Override
-	public PsiElement findElementAt(int offset)
-	{
-		return null;
-	}
-
-	@Override
-	public int getTextOffset()
-	{
-		return 0;
-	}
-
-	@Override
-	public String getText()
-	{
-		return null;
-	}
-
-	@NotNull
-	@Override
-	public char[] textToCharArray()
-	{
-		return new char[0];
-	}
-
-	@Override
-	public PsiElement copy()
-	{
-		return null;
-	}
-
-	@Override
-	public PsiElement add(@NotNull PsiElement element) throws IncorrectOperationException
-	{
-		return null;
-	}
-
-	@Override
-	public PsiElement addBefore(@NotNull PsiElement element, PsiElement anchor) throws IncorrectOperationException
-	{
-		return null;
-	}
-
-	@Override
-	public PsiElement addAfter(@NotNull PsiElement element, PsiElement anchor) throws IncorrectOperationException
-	{
-		return null;
-	}
-
-	@Override
-	public void checkAdd(@NotNull PsiElement element) throws IncorrectOperationException
-	{
-
-	}
-
-	@Override
-	public void delete() throws IncorrectOperationException
-	{
-
-	}
-
-	@Override
-	public void checkDelete() throws IncorrectOperationException
-	{
-
-	}
-
-	@Override
-	public PsiElement replace(@NotNull PsiElement newElement) throws IncorrectOperationException
-	{
-		return null;
-	}
-
-	@Override
-	public ASTNode getNode()
-	{
-		return null;
+		return _rawFile;
 	}
 }

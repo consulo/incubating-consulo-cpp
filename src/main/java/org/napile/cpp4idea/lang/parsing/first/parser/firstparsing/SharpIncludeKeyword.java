@@ -14,41 +14,34 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.parser.firstparsing;
+package org.napile.cpp4idea.lang.parsing.first.parser.firstparsing;
 
-import org.napile.cpp4idea.lang.lexer.CTokenType;
-import org.napile.cpp4idea.lang.parser.secondparsing.CommonParsing;
-import org.napile.cpp4idea.lang.psi.CPsiSharpDefine;
+import org.napile.cpp4idea.lang.parsing.second.parser.secondparsing.CommonParsing;
+import org.napile.cpp4idea.lang.psi.CPsiInclude;
+import org.napile.cpp4idea.lang.psi.CPsiIndependInclude;
 import com.intellij.lang.PsiBuilder;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * @author VISTALL
- * @date 7:21/11.12.2011
+ * @date 7:19/11.12.2011
  */
-public class SharpDefineKeyword extends CommonParsing implements CTokenType
+public class SharpIncludeKeyword extends CommonParsing
 {
 	public static void parse(PsiBuilder builder)
 	{
-		PsiBuilder.Marker maker = builder.mark();
+		PsiBuilder.Marker marker = builder.mark();
 
-		// #define
-		advanceLexerAndSkipLines(builder);
+		IElementType nextElement = builder.lookAhead(1);
 
-		// var name
-		parseCompilerVariable(builder);
-
-		while(!builder.eof())
-		{
-			if(builder.getTokenType() == NEW_LINE)
-				break;
-
-			if(builder.getTokenType() == NEXT_LINE)
-				builder.advanceLexer();
-
+		if(nextElement != STRING_LITERAL && nextElement != STRING_INCLUDE_LITERAL)
+			builder.error("Incorrect include name");
+		else
 			builder.advanceLexer();
-		}
 
-		done(maker, CPsiSharpDefine.class);
+		builder.advanceLexer();
+
+		done(marker, nextElement == STRING_LITERAL ? CPsiInclude.class : CPsiIndependInclude.class);
 
 		skipLines(builder);
 	}

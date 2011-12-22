@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.parser.secondparsing;
+package org.napile.cpp4idea.lang.parsing.second.parser.secondparsing;
 
 import org.jetbrains.annotations.PropertyKey;
 import org.napile.cpp4idea.CBundle;
-import org.napile.cpp4idea.lang.lexer.CTokenType;
-import org.napile.cpp4idea.lang.parser.CTokenElements;
-import org.napile.cpp4idea.lang.parser.firstparsing.SharpDefineKeyword;
-import org.napile.cpp4idea.lang.parser.firstparsing.SharpIfdefKeyword;
-import org.napile.cpp4idea.lang.parser.firstparsing.SharpIncludeKeyword;
+import org.napile.cpp4idea.lang.parsing.CTokenType;
+import org.napile.cpp4idea.lang.parsing.CTokenElements;
+import org.napile.cpp4idea.lang.parsing.first.parser.firstparsing.SharpDefineKeyword;
+import org.napile.cpp4idea.lang.parsing.first.parser.firstparsing.SharpIfdefKeyword;
+import org.napile.cpp4idea.lang.parsing.first.parser.firstparsing.SharpIncludeKeyword;
 import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
 import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
 import org.napile.cpp4idea.lang.psi.CPsiElement;

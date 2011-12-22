@@ -45,11 +45,11 @@
 		<sdkType implementation="org.napile.cpp4idea.config.sdk.CSdkType" />
 		<facetType implementation="org.napile.cpp4idea.config.facet.CFacetType"/>
 		<!--lang-->
-		<annotator language="C" implementationClass="org.napile.cpp4idea.annotator.parsing.CSecondStepAnnotator"/>
+		<annotator language="C" implementationClass="org.napile.cpp4idea.annotator.parsing.CPsiGenFileAnnotator"/>
 
 
 		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.lang.PairedBraceMatcherImpl" />
-		<lang.parserDefinition language="C" implementationClass="org.napile.cpp4idea.lang.parser.CParserDefinition" />
+		<lang.parserDefinition language="C" implementationClass="org.napile.cpp4idea.lang.parsing.first.parser.CParserDefinitionImpl" />
 		<lang.foldingBuilder language="C" implementationClass="org.napile.cpp4idea.lang.FoldingBuilderImpl"/>
 		<lang.commenter language="C" implementationClass="org.napile.cpp4idea.lang.CommenterImpl" />
 	</extensions>

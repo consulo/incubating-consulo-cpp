@@ -14,13 +14,13 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.parser;
+package org.napile.cpp4idea.lang.parsing.first.parser;
 
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CLanguage;
-import org.napile.cpp4idea.lang.lexer.CFlexLexer;
-import org.napile.cpp4idea.lang.lexer.CPsiTokenImpl;
-import org.napile.cpp4idea.lang.lexer.CTokenType;
+import org.napile.cpp4idea.lang.parsing.CPsiTokenImpl;
+import org.napile.cpp4idea.lang.parsing.CTokenType;
+import org.napile.cpp4idea.lang.parsing.first.lexer.CFlexLexer;
 import org.napile.cpp4idea.lang.psi.impl.CPsiRawFileImpl;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
@@ -38,7 +38,7 @@ import com.intellij.psi.tree.TokenSet;
  * @author VISTALL
  * @date 1:54/10.12.2011
  */
-public class CParserDefinition implements ParserDefinition
+public class CParserDefinitionImpl implements ParserDefinition
 {
 	public static final IStubFileElementType C_FILE_TYPE = new IStubFileElementType(CLanguage.INSTANCE);
 
@@ -52,7 +52,7 @@ public class CParserDefinition implements ParserDefinition
 	@Override
 	public PsiParser createParser(Project project)
 	{
-		return new CFirstStepParser();
+		return new CParserImpl();
 	}
 
 	@Override
@@ -72,7 +72,7 @@ public class CParserDefinition implements ParserDefinition
 	@Override
 	public TokenSet getCommentTokens()
 	{
-		return CTokenType.COMMENT_SET;
+		return TokenSet.EMPTY ;
 	}
 
 	@NotNull

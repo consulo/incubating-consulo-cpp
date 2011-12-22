@@ -14,18 +14,19 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.lexer;
+package org.napile.cpp4idea.lang.parsing;
 
-import com.intellij.lexer.FlexAdapter;
+import org.napile.cpp4idea.CLanguage;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * @author VISTALL
- * @date 5:01/10.12.2011
+ * @date 8:57/10.12.2011
  */
-public class CFlexLexer extends FlexAdapter
+public class CTokenImpl extends IElementType
 {
-	public CFlexLexer()
+	public CTokenImpl(@org.jetbrains.annotations.NotNull @org.jetbrains.annotations.NonNls String debugName)
 	{
-		super(new _CLexer());
+		super(debugName, CLanguage.INSTANCE);
 	}
 }

@@ -42,12 +42,12 @@ import com.intellij.util.IncorrectOperationException;
  * @author VISTALL
  * @date 17:48/16.12.2011
  */
-public class CPsiDefineWrapper implements PsiElement
+public class PsiElementWrapper implements PsiElement
 {
 	private final PsiElement _target;
 	private final boolean _defined;
 
-	public CPsiDefineWrapper(PsiElement target, boolean def)
+	public PsiElementWrapper(PsiElement target, boolean def)
 	{
 		_target = target;
 		_defined = def;

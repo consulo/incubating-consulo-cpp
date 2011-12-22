@@ -22,6 +22,7 @@ import javax.swing.Icon;
 
 import org.apache.commons.lang.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.CFileType;
 import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.psi.CPsiGenFile;
@@ -34,6 +35,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiFile;
 
 /**
  * @author VISTALL
@@ -69,12 +71,14 @@ public class CPsiRawFileImpl extends PsiFileBase implements CPsiRawFile
 	}
 
 	@Override
-	public void buildGen(Set<String> list)
+	public void buildGen(@NotNull Set<String> list, @NotNull Set<PsiFile> includeFiles)
 	{
 		if(_genFile != null)
 			return;
 
-		CPsiGenFileVisitor visitor = new CPsiGenFileVisitor(list);
+		includeFiles.add(getContainingFile());
+
+		CPsiGenFileVisitor visitor = new CPsiGenFileVisitor(list, includeFiles);
 		visitor.visitRawFile(this);
 
 		_genFile = visitor.getGenFile();
@@ -96,11 +100,9 @@ public class CPsiRawFileImpl extends PsiFileBase implements CPsiRawFile
 	}
 
 	@Override
-	@NotNull
+	@Nullable
 	public CPsiGenFile getGenFile()
 	{
-		if(_genFile == null)
-			throw new IllegalAccessError("Can't call it without CPsiRawFile.buildGen(Set<String>)");
 		return _genFile;
 	}
 }

@@ -14,35 +14,26 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.parser.firstparsing;
+package org.napile.cpp4idea.lang.parsing.first.parser.firstparsing;
 
-import org.napile.cpp4idea.lang.parser.secondparsing.CommonParsing;
-import org.napile.cpp4idea.lang.psi.CPsiInclude;
-import org.napile.cpp4idea.lang.psi.CPsiIndependInclude;
+import org.napile.cpp4idea.lang.parsing.CTokenType;
 import com.intellij.lang.PsiBuilder;
-import com.intellij.psi.tree.IElementType;
 
 /**
  * @author VISTALL
- * @date 7:19/11.12.2011
+ * @date 15:14/16.12.2011
  */
-public class SharpIncludeKeyword extends CommonParsing
+public class FirstParsing implements CTokenType
 {
 	public static void parse(PsiBuilder builder)
 	{
-		PsiBuilder.Marker marker = builder.mark();
-
-		IElementType nextElement = builder.lookAhead(1);
-
-		if(nextElement != STRING_LITERAL && nextElement != STRING_INCLUDE_LITERAL)
-			builder.error("Incorrect include name");
+		if(builder.getTokenType() == S_INCLUDE_KEYWORD)
+			SharpIncludeKeyword.parse(builder);
+		else if(builder.getTokenType() == S_DEFINE_KEYWORD)
+			SharpDefineKeyword.parse(builder);
+		else if(builder.getTokenType() == S_IFNDEF_KEYWORD || builder.getTokenType() == S_IFDEF_KEYWORD)
+			SharpIfdefKeyword.parseIf(builder);
 		else
 			builder.advanceLexer();
-
-		builder.advanceLexer();
-
-		done(marker, nextElement == STRING_LITERAL ? CPsiInclude.class : CPsiIndependInclude.class);
-
-		skipLines(builder);
 	}
 }

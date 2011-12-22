@@ -20,8 +20,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.lexer.CFlexLexer;
-import org.napile.cpp4idea.lang.lexer.CTokenType;
+import org.napile.cpp4idea.lang.parsing.CTokenType;
+import org.napile.cpp4idea.lang.parsing.second.lexer.CFlexLexer;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.HighlighterColors;
 import com.intellij.openapi.editor.SyntaxHighlighterColors;

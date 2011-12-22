@@ -14,26 +14,34 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.parser.firstparsing;
+package org.napile.cpp4idea.lang.parsing.second.parser;
 
-import org.napile.cpp4idea.lang.lexer.CTokenType;
+import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.lang.parsing.CTokenType;
+import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.PsiParser;
+import com.intellij.psi.tree.IElementType;
 
 /**
  * @author VISTALL
- * @date 15:14/16.12.2011
+ * @date 14:28/18.12.2011
  */
-public class FirstParsing implements CTokenType
+public class CPsiParserImpl implements PsiParser, CTokenType
 {
-	public static void parse(PsiBuilder builder)
+	@NotNull
+	@Override
+	public ASTNode parse(IElementType root, PsiBuilder builder)
 	{
-		if(builder.getTokenType() == S_INCLUDE_KEYWORD)
-			SharpIncludeKeyword.parse(builder);
-		else if(builder.getTokenType() == S_DEFINE_KEYWORD)
-			SharpDefineKeyword.parse(builder);
-		else if(builder.getTokenType() == S_IFNDEF_KEYWORD || builder.getTokenType() == S_IFDEF_KEYWORD)
-			SharpIfdefKeyword.parseIf(builder);
-		else
+		builder.setDebugMode(true);
+
+		PsiBuilder.Marker rootMarker = builder.mark();
+
+		while(!builder.eof())
 			builder.advanceLexer();
+
+		rootMarker.done(root);
+
+		return builder.getTreeBuilt();
 	}
 }

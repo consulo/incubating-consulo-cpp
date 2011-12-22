@@ -14,11 +14,11 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.parser;
+package org.napile.cpp4idea.lang.parsing.first.parser;
 
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.lexer.CTokenType;
-import org.napile.cpp4idea.lang.parser.firstparsing.FirstParsing;
+import org.napile.cpp4idea.lang.parsing.CTokenType;
+import org.napile.cpp4idea.lang.parsing.first.parser.firstparsing.FirstParsing;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
@@ -30,7 +30,7 @@ import com.intellij.psi.tree.IElementType;
  *
  * 1 Step parsing - parsing all symbols to stacks, #ifdef/#ifndef - is parsed to it as CPsi*
  */
-public class CFirstStepParser implements PsiParser, CTokenType
+public class CParserImpl implements PsiParser, CTokenType
 {
 	@NotNull
 	@Override

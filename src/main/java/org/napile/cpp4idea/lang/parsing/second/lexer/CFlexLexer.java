@@ -14,18 +14,18 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.parser;
+package org.napile.cpp4idea.lang.parsing.second.lexer;
 
-import org.napile.cpp4idea.lang.lexer.CTokenType;
+import com.intellij.lexer.FlexAdapter;
 
 /**
  * @author VISTALL
- * @date 16:20/15.12.2011
+ * @date 5:01/10.12.2011
  */
-public class CSecondStepParser implements CTokenType
+public class CFlexLexer extends FlexAdapter
 {
-	public CSecondStepParser()
+	public CFlexLexer()
 	{
-
+		super(new _CLexer());
 	}
 }

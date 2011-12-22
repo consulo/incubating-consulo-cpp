@@ -19,7 +19,7 @@ package org.napile.cpp4idea.ide.highlight;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.napile.cpp4idea.lang.lexer.CTokenType;
+import org.napile.cpp4idea.lang.parsing.CTokenType;
 import com.intellij.openapi.editor.SyntaxHighlighterColors;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;

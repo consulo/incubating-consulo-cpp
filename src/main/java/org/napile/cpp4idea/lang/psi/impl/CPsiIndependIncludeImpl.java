@@ -17,7 +17,7 @@
 package org.napile.cpp4idea.lang.psi.impl;
 
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.lexer.CTokenType;
+import org.napile.cpp4idea.lang.parsing.CTokenType;
 import org.napile.cpp4idea.lang.psi.CPsiIndependInclude;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
 import com.intellij.lang.ASTNode;

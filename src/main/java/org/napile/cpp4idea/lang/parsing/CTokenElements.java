@@ -14,13 +14,12 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.parser;
+package org.napile.cpp4idea.lang.parsing;
 
 import java.util.HashMap;
 import java.util.Map;
 
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.lexer.CPsiTokenImpl;
 import org.napile.cpp4idea.lang.psi.CPsiElement;
 import com.intellij.psi.tree.IElementType;
 

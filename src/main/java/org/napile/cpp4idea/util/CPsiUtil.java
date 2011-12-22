@@ -31,8 +31,8 @@ public class CPsiUtil
 {
 	public static boolean isBlockDefined(final @NotNull PsiElement element, Set<String> varSet)
 	{
-		if(!checkVariableChecker(element, varSet))
-			return false;
+		//if(!checkVariableChecker(element, varSet))
+		//	return false;
 
 		PsiElement parent = element.getParent();
 		if(parent == null)

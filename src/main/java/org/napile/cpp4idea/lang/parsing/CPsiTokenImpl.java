@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.lexer;
+package org.napile.cpp4idea.lang.parsing;
 
 import java.lang.reflect.Constructor;
 

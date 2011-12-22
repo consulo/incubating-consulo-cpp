@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.parser.secondparsing;
+package org.napile.cpp4idea.lang.parsing.second.parser.secondparsing;
 
 import org.napile.cpp4idea.CBundle;
 import org.napile.cpp4idea.lang.psi.CPsiParameter;

@@ -21,12 +21,13 @@ import java.util.List;
 import java.util.Set;
 
 import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
+import org.napile.cpp4idea.lang.psi.CPsiElement;
 import org.napile.cpp4idea.lang.psi.CPsiGenFile;
 import org.napile.cpp4idea.lang.psi.CPsiInclude;
 import org.napile.cpp4idea.lang.psi.CPsiRawFile;
 import org.napile.cpp4idea.lang.psi.CPsiSharpDefine;
 import org.napile.cpp4idea.lang.psi.impl.CPsiGenFileImpl;
-import org.napile.cpp4idea.lang.psi.impl.wrapper.CPsiDefineWrapper;
+import org.napile.cpp4idea.lang.psi.impl.wrapper.PsiElementWrapper;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiRecursiveElementVisitor;
 import org.napile.cpp4idea.util.CPsiUtil;
 import com.intellij.openapi.util.io.FileUtil;
@@ -43,17 +44,21 @@ public class CPsiGenFileVisitor extends CPsiRecursiveElementVisitor
 	private List<PsiElement> _elements;
 
 	private CPsiRawFile _rawFile;
-	private Set<String> _vars;
 
-	public CPsiGenFileVisitor(Set<String> vars)
+	private Set<String> _vars;
+	private Set<PsiFile> _fileList;
+
+	public CPsiGenFileVisitor(Set<String> vars, Set<PsiFile> fileList)
 	{
 		_vars = vars;
+		_fileList = fileList;
 	}
 
 	@Override
 	public void visitElement(PsiElement element)
 	{
-		_elements.add(new CPsiDefineWrapper(element, CPsiUtil.isBlockDefined(element, _vars)));
+		if(!(element instanceof CPsiElement))
+			_elements.add(new PsiElementWrapper(element, CPsiUtil.isBlockDefined(element, _vars)));
 
 		super.visitElement(element);
 	}
@@ -101,18 +106,18 @@ public class CPsiGenFileVisitor extends CPsiRecursiveElementVisitor
 							{
 								CPsiRawFile rawFile = (CPsiRawFile)file;
 
-								rawFile.buildGen(_vars);
+								rawFile.buildGen(_vars, _fileList);
 							}
 						}
 					}
 				}
 			}
 		}
-		super.visitSInclude(include);
+		super.visitElement(include);
 	}
 
 	public CPsiGenFile getGenFile()
 	{
-		return new CPsiGenFileImpl(_rawFile, _elements.toArray(new PsiElement[_elements.size()]));
+		return new CPsiGenFileImpl(_rawFile, _rawFile.getViewProvider());
 	}
 }

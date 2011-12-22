@@ -14,9 +14,8 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.parser;
+package org.napile.cpp4idea.lang.parsing;
 
-import org.napile.cpp4idea.lang.lexer.CTokenType;
 import org.napile.cpp4idea.lang.psi.CPsiCompilerVariable;
 import org.napile.cpp4idea.lang.psi.CPsiElement;
 import com.intellij.lang.PsiBuilder;
