@@ -9,14 +9,9 @@ import com.intellij.psi.PsiElementVisitor;
  */
 public class CPsiElementVisitor extends PsiElementVisitor
 {
-	public void visitRawFile(CPsiRawFile file)
+	public void visitCFile(CPsiFile file)
 	{
-		visitElement(file);
-	}
-
-	public void visitGenFile(CPsiGenFile file)
-	{
-		visitElement(file);
+		visitFile(file);
 	}
 
 	public void visitSDefine(CPsiSharpDefine element)

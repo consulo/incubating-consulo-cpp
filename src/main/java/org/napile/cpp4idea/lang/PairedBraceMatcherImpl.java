@@ -18,7 +18,7 @@ package org.napile.cpp4idea.lang;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.lang.parsing.CTokenType;
+import org.napile.cpp4idea.lang.psi.CTokenType;
 import com.intellij.lang.BracePair;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;

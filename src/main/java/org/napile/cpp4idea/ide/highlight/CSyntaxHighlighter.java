@@ -19,10 +19,14 @@ package org.napile.cpp4idea.ide.highlight;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.napile.cpp4idea.lang.parsing.CTokenType;
+import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.lang.lexer.CFlexLexer;
+import org.napile.cpp4idea.lang.psi.CTokenType;
+import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.SyntaxHighlighterColors;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 
@@ -30,7 +34,7 @@ import com.intellij.psi.tree.TokenSet;
  * @author VISTALL
  * @date 5:06/10.12.2011
  */
-public class CSyntaxHighlighter// extends SyntaxHighlighterBase
+public class CSyntaxHighlighter extends SyntaxHighlighterBase
 {
 	public static final TextAttributesKey KEYWORD = TextAttributesKey.createTextAttributesKey("C.KEYWORD", SyntaxHighlighterColors.KEYWORD.getDefaultAttributes().clone());
 	public static final TextAttributesKey LIGHT_KEYWORD = TextAttributesKey.createTextAttributesKey("C.LIGHT_KEYWORD");
@@ -75,5 +79,25 @@ public class CSyntaxHighlighter// extends SyntaxHighlighterBase
 	{
 		for(IElementType elementType : tokenSet.getTypes())
 			ATTRIBUTES.put(elementType, keys);
+	}
+
+	@NotNull
+	@Override
+	public Lexer getHighlightingLexer()
+	{
+		return new CFlexLexer();
+	}
+
+	@NotNull
+	@Override
+	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
+	{
+		TextAttributesKey[] keys = ATTRIBUTES.get(tokenType);
+		return pack(keys == null ? null : keys[0]);
+	}
+
+	public TextAttributesKey[] getAttributes(IElementType e)
+	{
+		return ATTRIBUTES.get(e);
 	}
 }

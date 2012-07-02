@@ -21,7 +21,7 @@ import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiImplementingMethod;
-import org.napile.cpp4idea.lang.psi.CPsiRawFile;
+import org.napile.cpp4idea.lang.psi.CPsiFile;
 import org.napile.cpp4idea.lang.psi.CPsiSharpIfDef;
 import org.napile.cpp4idea.lang.psi.CPsiSharpIfNotDef;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiRecursiveElementVisitor;
@@ -45,7 +45,7 @@ public class FoldingBuilderImpl implements FoldingBuilder, DumbAware
 	public FoldingDescriptor[] buildFoldRegions(@NotNull ASTNode node, @NotNull Document document)
 	{
 		PsiElement element = node.getPsi();
-		if(element instanceof CPsiRawFile)
+		if(element instanceof CPsiFile)
 		{
 			final List<FoldingDescriptor> list = new ArrayList<FoldingDescriptor>();
 
@@ -76,7 +76,7 @@ public class FoldingBuilderImpl implements FoldingBuilder, DumbAware
 				}
 			};
 
-			visitor.visitRawFile((CPsiRawFile)element);
+			visitor.visitCFile((CPsiFile) element);
 
 			return list.toArray(new FoldingDescriptor[list.size()]);
 		}
