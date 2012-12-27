@@ -1,0 +1,671 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="9e6eccfb-d52a-462f-8558-369ce6da4f9b" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../resource/main/org/napile/cpp4idea/icons/types/c-248.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../resource/main/org/napile/cpp4idea/icons/types/c.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../resource/main/org/napile/cpp4idea/icons/types/h-450.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../resource/main/org/napile/cpp4idea/icons/types/h.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../cpp4idea.qt.impl/src/main/java/.gitignore" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/.name" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/CBundle.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../resource/main/org/napile/cpp4idea/CBundle.properties" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/ide/highlight/CColorSettingsPageImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/editor/CCompilerVariablesAnnotator.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/config/CConfiguration.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../resource/main/org/napile/cpp4idea/editor/color/CDefaultColorScheme.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/editor/color/CDefaultColorSchemeParser.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/config/facet/CFacet.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/config/facet/CFacetConfiguration.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/config/facet/CFacetType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/CFileType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/CFileTypeFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/lexer/CFlexLexer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/util/CIcons.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/CLanguage.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/CParserDefinitionImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CParserUtil.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiArgumentList.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiArgumentListImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiArrayLiteralExpression.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiArrayLiteralExpressionImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiAssignmentExpression.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiAssignmentExpressionImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiBinaryExpression.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiBinaryExpressionImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiCallExpression.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiCallExpressionImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiCodeBlock.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiCodeBlockImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiCommaExpression.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiCommaExpressionImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiCompilerVariable.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiCompilerVariableImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiConditionalExpression.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiConditionalExpressionImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiDeclarationMethod.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiDeclarationMethodImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiElement.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiElementBaseImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/visitors/CPsiElementVisitor.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiEnum.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiEnumConstant.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiEnumConstantImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiEnumImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiExpression.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiField.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiFieldImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiFile.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiFileImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiImplementingMethod.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiImplementingMethodImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiInclude.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiIncludeImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiIndependInclude.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiIndependIncludeImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiIndexedPropertyAccessExpression.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiIndexedPropertyAccessExpressionImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiLiteralExpression.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiLiteralExpressionImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiNameElementOwner.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiNewExpression.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiNewExpressionImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiParameter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiParameterImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiParameterList.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiParameterListImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiParenthesizedExpression.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiParenthesizedExpressionImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/CPsiParserImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiPostfixExpression.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiPostfixExpressionImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiPrefixExpression.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiPrefixExpressionImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/visitors/CPsiRecursiveElementVisitor.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiReferenceExpression.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiReferenceExpressionImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiReturnStatement.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiReturnStatementImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiSharpDefine.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiSharpDefineImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiSharpIfDef.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiSharpIfDefImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiSharpIfNotDef.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiSharpIfNotDefImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiSharpVariableChecker.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiStatement.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiTokenImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiTypeDeclaration.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiTypeDeclarationImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiTypeRef.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiTypeRefImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/util/CPsiUtil.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/config/sdk/CSdkConfigurable.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/config/sdk/CSdkType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/ide/highlight/CSyntaxHighlighter.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/ide/highlight/CSyntaxHighlighterFactory.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CTokenElements.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CTokenImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CTokenType.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/parserHelpers/CodeBlockParsing.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/CommenterImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/parserHelpers/CommonParsing.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/parserHelpers/EnumParsing.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/parserHelpers/ExpressionParsing.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/FoldingBuilderImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/config/sdk/sdkdialect/impl/GccSdkDialectImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/config/sdk/ui/GeneralTabSdkPanel.form" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/config/sdk/ui/GeneralTabSdkPanel.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/config/sdk/sdkdialect/impl/MsVs2010SdkDialectImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/config/sdk/sdkdialect/impl/MsVsSdkDialectBaseImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/PairedBraceMatcherImpl.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/parserHelpers/ParameterListParsing.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/config/sdk/sdkdialect/SdkDialect.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/parserHelpers/SharpDefineKeyword.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/parserHelpers/SharpIfdefKeyword.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/parserHelpers/SharpIncludeKeyword.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/parserHelpers/TypeDefParsing.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/lexer/_CLexer.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/lexer/c.flex" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/compiler.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../cpp4idea.api.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../cpp4idea.qt.impl/cpp4idea.qt.impl.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/encodings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/gradle.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/modules.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../META-INF/plugin.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../cpp4idea.qt.impl/META-INF/plugin.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/copyright/profiles_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/project1.iml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/qt.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/scopes/scope_settings.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../.idea/thermit.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\.idea\inspectionProfiles\Project_Default.xml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\.idea\inspectionProfiles\profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\.idea\runConfigurations\IDEA.xml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\META-INF\plugin.xml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.iml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\resource\main\org\napile\cpp4idea\CBundle.properties" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\resource\main\org\napile\cpp4idea\editor\color\CDefaultColorScheme.xml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\resource\main\org\napile\cpp4idea\icons\types\c-248.png" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\resource\main\org\napile\cpp4idea\icons\types\c.png" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\resource\main\org\napile\cpp4idea\icons\types\h-450.png" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\resource\main\org\napile\cpp4idea\icons\types\h.png" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\CBundle.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\CFileType.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\CFileTypeFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\CLanguage.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\config\CConfiguration.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\config\facet\CFacet.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\config\facet\CFacetConfiguration.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\config\facet\CFacetType.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\config\sdk\CSdkConfigurable.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\config\sdk\CSdkType.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\config\sdk\sdkdialect\SdkDialect.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\config\sdk\sdkdialect\impl\GccSdkDialectImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\config\sdk\sdkdialect\impl\MsVs2010SdkDialectImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\config\sdk\sdkdialect\impl\MsVsSdkDialectBaseImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\config\sdk\ui\GeneralTabSdkPanel.form" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\config\sdk\ui\GeneralTabSdkPanel.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\editor\CCompilerVariablesAnnotator.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\editor\color\CDefaultColorSchemeParser.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\ide\highlight\CColorSettingsPageImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\ide\highlight\CSyntaxHighlighter.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\ide\highlight\CSyntaxHighlighterFactory.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\CommenterImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\FoldingBuilderImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\PairedBraceMatcherImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\lexer\CFlexLexer.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\lexer\_CLexer.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\lexer\c.flex" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\parser\CParserDefinitionImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\parser\CPsiParserImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\parser\parserHelpers\CodeBlockParsing.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\parser\parserHelpers\CommonParsing.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\parser\parserHelpers\EnumParsing.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\parser\parserHelpers\ExpressionParsing.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\parser\parserHelpers\ParameterListParsing.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\parser\parserHelpers\SharpDefineKeyword.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\parser\parserHelpers\SharpIfdefKeyword.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\parser\parserHelpers\SharpIncludeKeyword.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\parser\parserHelpers\TypeDefParsing.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CParserUtil.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiArgumentList.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiArrayLiteralExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiAssignmentExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiBinaryExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiCallExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiCodeBlock.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiCommaExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiCompilerVariable.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiConditionalExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiDeclarationMethod.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiElement.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiEnum.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiEnumConstant.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiField.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiFile.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiImplementingMethod.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiInclude.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiIndependInclude.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiIndexedPropertyAccessExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiLiteralExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiNameElementOwner.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiNewExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiParameter.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiParameterList.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiParenthesizedExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiPostfixExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiPrefixExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiReferenceExpression.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiReturnStatement.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiSharpDefine.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiSharpIfDef.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiSharpIfNotDef.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiSharpVariableChecker.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiStatement.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiTokenImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiTypeDeclaration.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CPsiTypeRef.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CTokenElements.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CTokenImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\CTokenType.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiArgumentListImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiArrayLiteralExpressionImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiAssignmentExpressionImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiBinaryExpressionImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiCallExpressionImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiCodeBlockImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiCommaExpressionImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiCompilerVariableImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiConditionalExpressionImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiDeclarationMethodImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiElementBaseImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiEnumConstantImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiEnumImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiFieldImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiFileImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiImplementingMethodImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiIncludeImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiIndependIncludeImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiIndexedPropertyAccessExpressionImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiLiteralExpressionImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiNewExpressionImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiParameterImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiParameterListImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiParenthesizedExpressionImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiPostfixExpressionImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiPrefixExpressionImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiReferenceExpressionImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiReturnStatementImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiSharpDefineImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiSharpIfDefImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiSharpIfNotDefImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiTypeDeclarationImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\impl\CPsiTypeRefImpl.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\visitors\CPsiElementVisitor.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\lang\psi\visitors\CPsiRecursiveElementVisitor.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\util\CIcons.java" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\src\main\java\org\napile\cpp4idea\util\CPsiUtil.java" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../.idea/ant.xml" afterPath="$PROJECT_DIR$/../../../../.idea/ant.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../.idea/compiler.xml" afterPath="$PROJECT_DIR$/../../../../.idea/compiler.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../.idea/encodings.xml" afterPath="$PROJECT_DIR$/../../../../.idea/encodings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../.idea/misc.xml" afterPath="$PROJECT_DIR$/../../../../.idea/misc.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../.idea/modules.xml" afterPath="$PROJECT_DIR$/../../../../.idea/modules.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../.idea/copyright/profiles_settings.xml" afterPath="$PROJECT_DIR$/../../../../.idea/copyright/profiles_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../.idea/scopes/scope_settings.xml" afterPath="$PROJECT_DIR$/../../../../.idea/scopes/scope_settings.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../.idea/uiDesigner.xml" afterPath="$PROJECT_DIR$/../../../../.idea/uiDesigner.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../.idea/vcs.xml" afterPath="$PROJECT_DIR$/../../../../.idea/vcs.xml" />
+    </list>
+    <ignored path="project1.iws" />
+    <ignored path=".idea/workspace.xml" />
+    <file path="/Dummy.txt" changelist="9e6eccfb-d52a-462f-8558-369ce6da4f9b" time="1356629298916" ignored="false" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
+  <component name="CreatePatchCommitExecutor">
+    <option name="PATCH_PATH" value="" />
+  </component>
+  <component name="DaemonCodeAnalyzer">
+    <disable_hints />
+  </component>
+  <component name="DebuggerManager">
+    <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </breakpoint_any>
+    <breakpoint_rules />
+    <ui_properties />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
+  <component name="FavoritesManager">
+    <favorites_list name="project1" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf>
+      <file leaf-file-name="qt.h" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/qt.h">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FindManager">
+    <FindUsagesManager>
+      <setting name="OPEN_NEW_TAB" value="false" />
+    </FindUsagesManager>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="GitLogSettings">
+    <option name="myDateState">
+      <MyDateState />
+    </option>
+  </component>
+  <component name="ProjectFrameBounds">
+    <option name="x" value="288" />
+    <option name="y" value="66" />
+    <option name="width" value="1462" />
+    <option name="height" value="979" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <OptionsSetting value="true" id="Add" />
+    <OptionsSetting value="true" id="Remove" />
+    <OptionsSetting value="true" id="Checkout" />
+    <OptionsSetting value="true" id="Update" />
+    <OptionsSetting value="true" id="Status" />
+    <OptionsSetting value="true" id="Edit" />
+    <ConfirmationsSetting value="0" id="Add" />
+    <ConfirmationsSetting value="0" id="Remove" />
+  </component>
+  <component name="ProjectReloadState">
+    <option name="STATE" value="0" />
+  </component>
+  <component name="ProjectView">
+    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+      <flattenPackages />
+      <showMembers />
+      <showModules />
+      <showLibraryContents />
+      <hideEmptyPackages />
+      <abbreviatePackageNames />
+      <autoscrollToSource />
+      <autoscrollFromSource />
+      <sortByType />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="project1" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+        </subPane>
+      </pane>
+      <pane id="PackagesPane" />
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="options.lastSelected" value="preferences.pluginManager" />
+    <property name="MemberChooser.showClasses" value="true" />
+    <property name="GoToClass.includeLibraries" value="false" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
+  </component>
+  <component name="RunManager">
+    <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
+      <module name="" />
+      <option name="VM_PARAMETERS" value="-Xmx512m -Xms256m -XX:MaxPermSize=250m" />
+      <option name="PROGRAM_PARAMETERS" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Remote" factoryName="Remote">
+      <option name="USE_SOCKET_TRANSPORT" value="true" />
+      <option name="SERVER_MODE" value="false" />
+      <option name="SHMEM_ADDRESS" value="javadebug" />
+      <option name="HOST" value="localhost" />
+      <option name="PORT" value="5005" />
+      <method />
+    </configuration>
+    <configuration default="true" type="TestNG" factoryName="TestNG">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="SUITE_NAME" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="GROUP_NAME" />
+      <option name="TEST_OBJECT" value="CLASS" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="OUTPUT_DIRECTORY" />
+      <option name="ANNOTATION_TYPE" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <option name="USE_DEFAULT_REPORTERS" value="false" />
+      <option name="PROPERTIES_FILE" />
+      <envs />
+      <properties />
+      <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method />
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="VM_PARAMETERS" />
+      <option name="PROGRAM_PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
+    <configuration default="true" type="JUnit" factoryName="JUnit">
+      <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
+      <module name="" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <option name="PACKAGE_NAME" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="METHOD_NAME" />
+      <option name="TEST_OBJECT" value="class" />
+      <option name="VM_PARAMETERS" value="-ea" />
+      <option name="PARAMETERS" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="ENV_VARIABLES" />
+      <option name="PASS_PARENT_ENVS" value="true" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="moduleWithDependencies" />
+      </option>
+      <envs />
+      <patterns />
+      <method />
+    </configuration>
+    <list size="0" />
+    <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
+      <Host>localhost</Host>
+      <Port>5050</Port>
+    </configuration>
+  </component>
+  <component name="ShelveChangesManager" show_recycled="false" />
+  <component name="SvnConfiguration" maxAnnotateRevisions="500" myUseAcceleration="nothing" myAutoUpdateAfterCommit="false" cleanupOnStartRun="false">
+    <option name="USER" value="" />
+    <option name="PASSWORD" value="" />
+    <option name="mySSHConnectionTimeout" value="30000" />
+    <option name="mySSHReadTimeout" value="30000" />
+    <option name="LAST_MERGED_REVISION" />
+    <option name="MERGE_DRY_RUN" value="false" />
+    <option name="MERGE_DIFF_USE_ANCESTRY" value="true" />
+    <option name="UPDATE_LOCK_ON_DEMAND" value="false" />
+    <option name="IGNORE_SPACES_IN_MERGE" value="false" />
+    <option name="DETECT_NESTED_COPIES" value="true" />
+    <option name="CHECK_NESTED_FOR_QUICK_MERGE" value="false" />
+    <option name="IGNORE_SPACES_IN_ANNOTATE" value="true" />
+    <option name="SHOW_MERGE_SOURCES_IN_ANNOTATE" value="true" />
+    <option name="FORCE_UPDATE" value="false" />
+    <option name="IGNORE_EXTERNALS" value="false" />
+    <myIsUseDefaultProxy>false</myIsUseDefaultProxy>
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="9e6eccfb-d52a-462f-8558-369ce6da4f9b" name="Default" comment="" />
+      <created>1356629239789</created>
+      <updated>1356629239789</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="288" y="66" width="1462" height="979" extended-state="0" />
+    <editor active="true" />
+    <layout>
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Thermit Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Problems" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Napile" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+    </layout>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
+    <option name="CHECK_NEW_TODO" value="true" />
+    <option name="myTodoPanelSettings">
+      <value>
+        <are-packages-shown value="false" />
+        <are-modules-shown value="false" />
+        <flatten-packages value="false" />
+        <is-autoscroll-to-source value="false" />
+      </value>
+    </option>
+    <option name="PERFORM_UPDATE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_COMMIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_EDIT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
+    <option name="PERFORM_ROLLBACK_IN_BACKGROUND" value="false" />
+    <option name="CHECK_LOCALLY_CHANGED_CONFLICTS_IN_BACKGROUND" value="false" />
+    <option name="CHANGED_ON_SERVER_INTERVAL" value="60" />
+    <option name="SHOW_ONLY_CHANGED_IN_SELECTION_DIFF" value="true" />
+    <option name="CHECK_COMMIT_MESSAGE_SPELLING" value="true" />
+    <option name="DEFAULT_PATCH_EXTENSION" value="patch" />
+    <option name="SHORT_DIFF_HORISONTALLY" value="true" />
+    <option name="SHORT_DIFF_EXTRA_LINES" value="2" />
+    <option name="SOFT_WRAPS_IN_SHORT_DIFF" value="true" />
+    <option name="INCLUDE_TEXT_INTO_PATCH" value="false" />
+    <option name="INCLUDE_TEXT_INTO_SHELF" value="false" />
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="true" />
+    <option name="SHOW_VCS_ERROR_NOTIFICATIONS" value="true" />
+    <option name="SHOW_DIRTY_RECURSIVELY" value="false" />
+    <option name="LIMIT_HISTORY" value="true" />
+    <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
+    <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
+    <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
+    <option name="LAST_COMMIT_MESSAGE" />
+    <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
+    <option name="FILE_HISTORY_DIALOG_COMMENTS_SPLITTER_PROPORTION" value="0.8" />
+    <option name="FILE_HISTORY_DIALOG_SPLITTER_PROPORTION" value="0.5" />
+    <option name="ACTIVE_VCS_NAME" />
+    <option name="UPDATE_GROUP_BY_PACKAGES" value="false" />
+    <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
+    <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
+    <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager />
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/qt.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
+
