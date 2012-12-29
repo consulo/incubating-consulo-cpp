@@ -1,0 +1,46 @@
+<project name="build-lexer">
+	<property name="home" value="${basedir}"/>
+	<!--
+		  This script relies on a custom JFlex that is available in the sources of IntelliJ IDEA Community Edition
+		  put the idea.properties file to the root directory of the frontend module, and put the following property there:
+
+			 idea.home=../../../idea/src
+
+		  where "../../../idea/src" is the relative location of the sources of IntelliJ IDEA Community
+	  -->
+	<property file="${home}/idea.properties"/>
+
+	<property name="flex.base" value="${idea.home}/tools/lexer/jflex-1.4"/>
+	<property name="out.dir" value="${basedir}/tmpout"/>
+
+	<macrodef name="flex">
+		<attribute name="flexfile"/>
+		<attribute name="destdir"/>
+		<attribute name="skeleton" default="${idea.home}/tools/lexer/idea-flex.skeleton"/>
+		<sequential>
+			<delete dir="${out.dir}"/>
+			<mkdir dir="${out.dir}"/>
+			<java classname="JFlex.Main" jvmargs="-Xmx512M" fork="true" failonerror="true">
+				<arg value="-sliceandcharat"/>
+				<arg value="-skel"/>
+				<arg value="@{skeleton}"/>
+				<arg value="-d"/>
+				<arg value="${out.dir}"/>
+				<arg value="@{flexfile}"/>
+				<classpath>
+					<pathelement location="${flex.base}/lib/JFlex.jar"/>
+				</classpath>
+			</java>
+			<move todir="@{destdir}">
+				<fileset dir="${out.dir}">
+					<include name="*.java"/>
+				</fileset>
+			</move>
+			<delete dir="${out.dir}"/>
+		</sequential>
+	</macrodef>
+
+	<target name="qt-lexer">
+		<flex flexfile="${home}/cpp4idea.qt.impl/src/main/java/org/napile/cpp4idea/qt/lang/lexer/QtLexer.flex" destdir="${home}/cpp4idea.qt.impl/src/main/java/org/napile/cpp4idea/qt/lang/lexer/"/>
+	</target>
+</project>

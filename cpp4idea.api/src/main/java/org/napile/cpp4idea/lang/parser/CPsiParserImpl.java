@@ -17,18 +17,26 @@
 package org.napile.cpp4idea.lang.parser;
 
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.parser.parserHelpers.CommonParsing;
-import org.napile.cpp4idea.lang.psi.CTokenType;
+import org.napile.cpp4idea.CLanguage;
+import org.napile.cpp4idea.config.facet.CFacetUtil;
+import org.napile.cpp4idea.lang.CDialect;
+import org.napile.cpp4idea.lang.psi.CTokens;
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.LanguageParserDefinitions;
+import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.PsiBuilderFactory;
 import com.intellij.lang.PsiParser;
+import com.intellij.lexer.FlexAdapter;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.impl.source.resolve.FileContextUtil;
 import com.intellij.psi.tree.IElementType;
 
 /**
  * @author VISTALL
  * @date 14:28/18.12.2011
  */
-public class CPsiParserImpl implements PsiParser, CTokenType
+public class CPsiParserImpl implements PsiParser, CTokens
 {
 	@NotNull
 	@Override
@@ -36,12 +44,28 @@ public class CPsiParserImpl implements PsiParser, CTokenType
 	{
 		builder.setDebugMode(true);
 
+		FacetCheck:
+		{
+			PsiFile psiFile = builder.getUserDataUnprotected(FileContextUtil.CONTAINING_FILE_KEY);
+			if(psiFile != null)
+			{
+				CDialect dialect = CFacetUtil.findDialect(psiFile);
+
+				if(dialect == null)
+					break FacetCheck;
+
+				final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(CLanguage.INSTANCE);
+
+				PsiBuilder newBuilder = PsiBuilderFactory.getInstance().createBuilder(parserDefinition, new FlexAdapter(dialect.getLexer()), builder.getOriginalText());
+
+				return dialect.parseInitial(newBuilder, root);
+			}
+		}
+
 		PsiBuilder.Marker rootMarker = builder.mark();
-
-		CommonParsing.parseElement(builder, CommonParsing.EAT_LAST_END_IF);
-
+		while(!builder.eof())
+			builder.advanceLexer();
 		rootMarker.done(root);
-
 		return builder.getTreeBuilt();
 	}
 }

@@ -25,6 +25,7 @@ import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CBundle;
 import org.napile.cpp4idea.util.CIcons;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
+import com.intellij.openapi.fileTypes.PlainSyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 import com.intellij.openapi.options.colors.ColorDescriptor;
@@ -78,7 +79,7 @@ public class CColorSettingsPageImpl implements ColorSettingsPage
 	@Override
 	public SyntaxHighlighter getHighlighter()
 	{
-		return new CSyntaxHighlighter();
+		return new PlainSyntaxHighlighter();
 	}
 
 	@NotNull

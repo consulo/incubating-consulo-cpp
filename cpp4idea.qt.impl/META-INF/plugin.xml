@@ -24,4 +24,12 @@
 	<idea-version since-build="8000"/>
 	<category>Custom Languages</category>
 	<depends>org.napile.cpp4idea.api</depends>
+
+	<extensions defaultExtensionNs="org.napile.cpp4idea.api">
+		<cdialect implementation="org.napile.cpp4idea.qt.lang.QtDialectImpl" />
+	</extensions>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<facetType implementation="org.napile.cpp4idea.qt.config.facet.QtFacetType" />
+	</extensions>
 </idea-plugin>

@@ -1,6 +1,9 @@
 package org.napile.cpp4idea.lang.psi.visitors;
 
-import org.napile.cpp4idea.lang.psi.*;
+import org.napile.cpp4idea.lang.psi.CPsiEnum;
+import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
+import org.napile.cpp4idea.lang.psi.CPsiFile;
+import org.napile.cpp4idea.lang.psi.CPsiImplementingMethod;
 import com.intellij.psi.PsiElementVisitor;
 
 /**
@@ -11,37 +14,7 @@ public class CPsiElementVisitor extends PsiElementVisitor
 {
 	public void visitCFile(CPsiFile file)
 	{
-		visitFile(file);
-	}
-
-	public void visitSDefine(CPsiSharpDefine element)
-	{
-		visitElement(element);
-	}
-
-	public void visitSIfDef(CPsiSharpIfDef element)
-	{
-		visitElement(element);
-	}
-
-	public void visitSIfNotDef(CPsiSharpIfNotDef element)
-	{
-		visitElement(element);
-	}
-
-	public void visitSInclude(CPsiInclude element)
-	{
-		visitElement(element);
-	}
-
-	public void visitSIndependInclude(CPsiIndependInclude element)
-	{
-		visitElement(element);
-	}
-
-	public void visitCompilerVariable(CPsiCompilerVariable element)
-	{
-		visitElement(element);
+		visitElement(file);
 	}
 
 	public void visitImplementingMethod(CPsiImplementingMethod element)

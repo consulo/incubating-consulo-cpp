@@ -20,13 +20,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.lexer.CFlexLexer;
-import org.napile.cpp4idea.lang.psi.CTokenType;
+import org.jetbrains.annotations.Nullable;
+import org.napile.cpp4idea.config.facet.CFacetUtil;
+import org.napile.cpp4idea.lang.CDialect;
+import org.napile.cpp4idea.lang.psi.CTokens;
+import com.intellij.lexer.EmptyLexer;
+import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.SyntaxHighlighterColors;
 import com.intellij.openapi.editor.colors.CodeInsightColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
+import com.intellij.openapi.project.Project;
+import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 
@@ -49,6 +55,8 @@ public class CSyntaxHighlighter extends SyntaxHighlighterBase
 	public static final TextAttributesKey NUMBER = TextAttributesKey.createTextAttributesKey("C.NUMBER", SyntaxHighlighterColors.NUMBER.getDefaultAttributes().clone());
 	public static final TextAttributesKey LIGHT_NUMBER = TextAttributesKey.createTextAttributesKey("C.LIGHT_NUMBER");
 
+	public static final TextAttributesKey LIGHT_IDENTIFIER = TextAttributesKey.createTextAttributesKey("C.LIGHT_IDENTIFIER");
+
 	public static final TextAttributesKey CONSTANT = TextAttributesKey.createTextAttributesKey("C.CONSTANT", CodeInsightColors.STATIC_FIELD_ATTRIBUTES.getDefaultAttributes().clone());
 
 	public static final TextAttributesKey COMMA = TextAttributesKey.createTextAttributesKey("C.COMMA", SyntaxHighlighterColors.COMMA.getDefaultAttributes().clone());
@@ -60,14 +68,16 @@ public class CSyntaxHighlighter extends SyntaxHighlighterBase
 
 	static
 	{
-		fillMap(CTokenType.KEYWORD_SET, KEYWORD, LIGHT_KEYWORD);
-		fillMap(CTokenType.STRING_LITERAL_SET, STRING, LIGHT_STRING);
-		fillMap(CTokenType.STRING_INCLUDE_LITERAL, STRING, LIGHT_STRING);
+		fillMap(CTokens.END_OF_LINE_COMMENT, LINE_COMMENT, LINE_COMMENT);
+		fillMap(CTokens.C_STYLE_COMMENT, BLOCK_COMMENT, BLOCK_COMMENT);
+		fillMap(CTokens.KEYWORD_SET, KEYWORD, LIGHT_KEYWORD);
+		fillMap(CTokens.STRING_LITERAL_SET, STRING, LIGHT_STRING);
+		fillMap(CTokens.STRING_INCLUDE_LITERAL, STRING, LIGHT_STRING);
 		// numbers
-		fillMap(CTokenType.INTEGER_LITERAL, NUMBER, LIGHT_NUMBER);
-		fillMap(CTokenType.LONG_LITERAL, NUMBER, LIGHT_NUMBER);
-		fillMap(CTokenType.FLOAT_LITERAL, NUMBER, LIGHT_NUMBER);
-		fillMap(CTokenType.DOUBLE_LITERAL, NUMBER, LIGHT_NUMBER);
+		fillMap(CTokens.INTEGER_LITERAL, NUMBER, LIGHT_NUMBER);
+		fillMap(CTokens.LONG_LITERAL, NUMBER, LIGHT_NUMBER);
+		fillMap(CTokens.FLOAT_LITERAL, NUMBER, LIGHT_NUMBER);
+		fillMap(CTokens.DOUBLE_LITERAL, NUMBER, LIGHT_NUMBER);
 	}
 
 	private static void fillMap(IElementType elementType, TextAttributesKey... keys)
@@ -81,11 +91,21 @@ public class CSyntaxHighlighter extends SyntaxHighlighterBase
 			ATTRIBUTES.put(elementType, keys);
 	}
 
+	private final Project project;
+	private final VirtualFile virtualFile;
+
+	public CSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile)
+	{
+		this.project = project;
+		this.virtualFile = virtualFile;
+	}
+
 	@NotNull
 	@Override
 	public Lexer getHighlightingLexer()
 	{
-		return new CFlexLexer();
+		CDialect dialect = CFacetUtil.findDialect(virtualFile, project);
+		return dialect != null ? new FlexAdapter(dialect.getLexer()) : new EmptyLexer();
 	}
 
 	@NotNull

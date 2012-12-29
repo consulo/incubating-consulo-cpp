@@ -19,12 +19,14 @@ package org.napile.cpp4idea.lang.parser;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.psi.CPsiTokenImpl;
-import org.napile.cpp4idea.lang.psi.CTokenType;
-import org.napile.cpp4idea.lang.lexer.CFlexLexer;
+import org.napile.cpp4idea.lang.psi.CTokens;
 import org.napile.cpp4idea.lang.psi.impl.CPsiFileImpl;
+import org.napile.cpp4idea.lang.psiInitial.CPsiSharpTokenImpl;
+import org.napile.cpp4idea.lang.psiInitial.impl.CPsiSharpFileImpl;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
+import com.intellij.lexer.EmptyLexer;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
@@ -46,7 +48,7 @@ public class CParserDefinitionImpl implements ParserDefinition
 	@Override
 	public Lexer createLexer(Project project)
 	{
-		return new CFlexLexer();
+		return new EmptyLexer();
 	}
 
 	@Override
@@ -65,21 +67,21 @@ public class CParserDefinitionImpl implements ParserDefinition
 	@Override
 	public TokenSet getWhitespaceTokens()
 	{
-		return CTokenType.WHITE_SPACE_SET;
+		return CTokens.WHITE_SPACE_SET;
 	}
 
 	@NotNull
 	@Override
 	public TokenSet getCommentTokens()
 	{
-		return CTokenType.COMMENT_SET;
+		return CTokens.COMMENT_SET;
 	}
 
 	@NotNull
 	@Override
 	public TokenSet getStringLiteralElements()
 	{
-		return CTokenType.STRING_LITERAL_SET;
+		return CTokens.STRING_LITERAL_SET;
 	}
 
 	@NotNull
@@ -88,6 +90,10 @@ public class CParserDefinitionImpl implements ParserDefinition
 	{
 		if(node.getElementType() instanceof CPsiTokenImpl)
 			return ((CPsiTokenImpl) node.getElementType()).createPsi(node);
+		else if(node.getElementType() instanceof CPsiSharpTokenImpl)
+			return ((CPsiSharpTokenImpl) node.getElementType()).createPsi(node);
+		else if(node.getElementType() == CTokens.C_PROCESSED_FILE_TYPE)
+			return new CPsiFileImpl(node);
 
 		throw new IllegalArgumentException("Illegal argument : " + node.getElementType());
 	}
@@ -95,7 +101,7 @@ public class CParserDefinitionImpl implements ParserDefinition
 	@Override
 	public PsiFile createFile(FileViewProvider viewProvider)
 	{
-		return new CPsiFileImpl(viewProvider);
+		return new CPsiSharpFileImpl(viewProvider);
 	}
 
 	@Override

@@ -1,6 +1,7 @@
 package org.napile.cpp4idea.ide.highlight;
 
 import org.jetbrains.annotations.NotNull;
+import com.intellij.openapi.fileTypes.PlainSyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterFactory;
 import com.intellij.openapi.project.Project;
@@ -16,6 +17,9 @@ public class CSyntaxHighlighterFactory extends SyntaxHighlighterFactory
 	@Override
 	public SyntaxHighlighter getSyntaxHighlighter(Project project, VirtualFile virtualFile)
 	{
-		return new CSyntaxHighlighter();
+		if(project == null || virtualFile == null)
+			return new PlainSyntaxHighlighter();
+		else
+			return new CSyntaxHighlighter(project, virtualFile);
 	}
 }

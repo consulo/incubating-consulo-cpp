@@ -24,29 +24,18 @@
 	<idea-version since-build="8000"/>
 	<category>Custom Languages</category>
 
-	<application-components>
-		<component>
-			<interface-class>org.napile.cpp4idea.editor.color.CDefaultColorSchemeParser</interface-class>
-			<implementation-class>org.napile.cpp4idea.editor.color.CDefaultColorSchemeParser</implementation-class>
-		</component>
-	</application-components>
-
-	<project-components>
-		<!-- Add your project components here -->
-	</project-components>
-
-	<actions>
-		<!-- Add your actions here -->
-	</actions>
+	<extensionPoints>
+		<extensionPoint name="cdialect" interface="org.napile.cpp4idea.lang.CDialect" />
+	</extensionPoints>
 
 	<extensions defaultExtensionNs="com.intellij">
+		<additionalTextAttributes scheme="Default" file="/org/napile/cpp4idea/editor/color/Default.xml" />
 		<fileTypeFactory implementation="org.napile.cpp4idea.CFileTypeFactory" />
-		<!--settings-->
-		<colorSettingsPage implementation="org.napile.cpp4idea.ide.highlight.CColorSettingsPageImpl"/>
-		<sdkType implementation="org.napile.cpp4idea.config.sdk.CSdkType" />
-		<facetType implementation="org.napile.cpp4idea.config.facet.CFacetType"/>
-		<!--lang-->
-		<annotator language="C" implementationClass="org.napile.cpp4idea.editor.CCompilerVariablesAnnotator"/>
+
+		<toolWindow id="Cpp4Idea Debug" anchor="right" factoryClass="org.napile.cpp4idea.ide.debugToolWindow.DebugToolWindowFactory" />
+
+		<annotator language="C" implementationClass="org.napile.cpp4idea.editor.CProcessAnnotator" />
+		<annotator language="C" implementationClass="org.napile.cpp4idea.editor.CIfDefHighlightAnnotation" />
 
 		<!--lang-->
 		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.lang.PairedBraceMatcherImpl" />

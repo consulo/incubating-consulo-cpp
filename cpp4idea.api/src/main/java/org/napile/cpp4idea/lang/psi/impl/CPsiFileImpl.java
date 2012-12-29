@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 napile
+ * Copyright 2010-2012 napile.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,64 +16,40 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
-import javax.swing.Icon;
-
-import org.apache.commons.lang.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.CFileType;
-import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
-import org.napile.cpp4idea.util.CIcons;
-import com.intellij.extapi.psi.PsiFileBase;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.FileViewProvider;
+import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
+import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElementVisitor;
 
 /**
  * @author VISTALL
- * @date 2:12/10.12.2011
+ * @date 15:41/29.12.12
  */
-public class CPsiFileImpl extends PsiFileBase implements CPsiFile
+public class CPsiFileImpl extends CPsiElementBaseImpl implements CPsiFile
 {
-	private static final String[] SOURCE_FILES = new String[] {"c", "cpp"};
-	private boolean _isSourceFile;
+	private final CPsiSharpFile originalFile;
 
-	public CPsiFileImpl(@NotNull FileViewProvider viewProvider)
+	public CPsiFileImpl(@NotNull ASTNode node)
 	{
-		super(viewProvider, CLanguage.INSTANCE);
-
-		VirtualFile virtualFile = viewProvider.getVirtualFile();
-
-		_isSourceFile = ArrayUtils.contains(SOURCE_FILES, virtualFile.getExtension());
-	}
-
-	@NotNull
-	@Override
-	public FileType getFileType()
-	{
-		return CFileType.INSTANCE;
-	}
-
-	@Override
-	public boolean isSourceFile()
-	{
-		return _isSourceFile;
+		super(node);
+		originalFile = node.getUserData(C_SHARP_FILE);
 	}
 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor)
 	{
 		if(visitor instanceof CPsiElementVisitor)
-			((CPsiElementVisitor)visitor).visitCFile(this);
+			((CPsiElementVisitor) visitor).visitCFile(this);
 		else
-			super.accept(visitor);
+			visitor.visitElement(this);
 	}
 
+	@NotNull
 	@Override
-	public Icon getElementIcon(int flag)
+	public CPsiSharpFile getOriginalFile()
 	{
-		return isSourceFile() ? CIcons.SOURCE_FILE : CIcons.HEADER_FILE;
+		return originalFile;
 	}
 }

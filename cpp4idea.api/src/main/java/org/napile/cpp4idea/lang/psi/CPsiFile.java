@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 napile
+ * Copyright 2010-2012 napile.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,13 +16,19 @@
 
 package org.napile.cpp4idea.lang.psi;
 
+import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
+import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiFile;
 
 /**
  * @author VISTALL
- * @date 1:07/10.12.2011
+ * @date 15:40/29.12.12
  */
-public interface CPsiFile extends PsiFile
+public interface CPsiFile extends CPsiElement
 {
-	boolean isSourceFile();
+	Key<CPsiSharpFile> C_SHARP_FILE = Key.create("c-sharp-file");
+
+	@NotNull
+	CPsiSharpFile getOriginalFile();
 }
