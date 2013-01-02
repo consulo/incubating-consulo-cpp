@@ -41,6 +41,6 @@
 	</macrodef>
 
 	<target name="qt-lexer">
-		<flex flexfile="${home}/cpp4idea.qt.impl/src/main/java/org/napile/cpp4idea/qt/lang/lexer/QtLexer.flex" destdir="${home}/cpp4idea.qt.impl/src/main/java/org/napile/cpp4idea/qt/lang/lexer/"/>
+		<flex flexfile="${home}/cpp4idea.qt.impl/src/main/java/org/napile/cpp4idea/qt/lang/lexer/_QtLexer.flex" destdir="${home}/cpp4idea.qt.impl/src/main/java/org/napile/cpp4idea/qt/lang/lexer/"/>
 	</target>
 </project>

@@ -96,8 +96,8 @@ ESCAPE_SEQUENCE=\\[^\r\n]
 
 <YYINITIAL> "#include" { return CTokens.S_INCLUDE_KEYWORD; }
 <YYINITIAL> "#define" { return CTokens.S_DEFINE_KEYWORD; }
-<YYINITIAL> "#ifdef" { return CTokens.S_IFDEF_KEYWORD; }
 <YYINITIAL> "#ifndef" { return CTokens.S_IFNDEF_KEYWORD; }
+<YYINITIAL> "#ifdef" { return CTokens.S_IFDEF_KEYWORD; }
 <YYINITIAL> "#endif" { return CTokens.S_ENDIF_KEYWORD; }
 <YYINITIAL> "break" { return CTokens.BREAK_KEYWORD; }
 <YYINITIAL> "case" { return CTokens.CASE_KEYWORD; }
