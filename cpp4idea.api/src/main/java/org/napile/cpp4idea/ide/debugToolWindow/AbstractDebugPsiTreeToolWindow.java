@@ -124,7 +124,7 @@ public abstract class AbstractDebugPsiTreeToolWindow extends JPanel implements D
 	@Override
 	public void dispose()
 	{
-		alarm.dispose();
+		EditorFactory.getInstance().releaseEditor(editor);
 	}
 
 	public static class Location

@@ -20,6 +20,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.editor.HighlightUtil;
+import org.napile.cpp4idea.lang.preprocessor.CPreprocessor;
+import org.napile.cpp4idea.lang.psi.CPsiFile;
+import org.napile.cpp4idea.lang.psi.CPsiImplementingMethod;
+import org.napile.cpp4idea.lang.psi.visitors.CPsiRecursiveElementVisitor;
 import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
 import org.napile.cpp4idea.lang.psiInitial.CPsiSharpIfDef;
 import org.napile.cpp4idea.lang.psiInitial.visitors.CSharpPsiRecursiveElementVisitor;
@@ -45,9 +50,11 @@ public class FoldingBuilderImpl implements FoldingBuilder, DumbAware
 		PsiElement element = node.getPsi();
 		if(element instanceof CPsiSharpFile)
 		{
+			CPsiFile psiFile = CPreprocessor.getAfterProcessedFile(element);
+
 			final List<FoldingDescriptor> list = new ArrayList<FoldingDescriptor>();
 
-			CSharpPsiRecursiveElementVisitor visitor = new CSharpPsiRecursiveElementVisitor()
+			element.accept(new CSharpPsiRecursiveElementVisitor()
 			{
 				@Override
 				public void visitSIfDef(CPsiSharpIfDef element)
@@ -56,9 +63,19 @@ public class FoldingBuilderImpl implements FoldingBuilder, DumbAware
 						list.add(new FoldingDescriptor(element, element.getTextRange()));
 					super.visitSIfDef(element);
 				}
-			};
+			});
 
-			visitor.visitSFile((CPsiSharpFile) element);
+			if(psiFile != null)
+				psiFile.accept(new CPsiRecursiveElementVisitor()
+				{
+					@Override
+					public void visitImplementingMethod(CPsiImplementingMethod element)
+					{
+						list.add(new FoldingDescriptor(element, HighlightUtil.findOriginalRange(element)));
+
+						super.visitImplementingMethod(element);
+					}
+				});
 
 			return list.toArray(new FoldingDescriptor[list.size()]);
 		}
@@ -71,9 +88,9 @@ public class FoldingBuilderImpl implements FoldingBuilder, DumbAware
 	{
 		PsiElement element = node.getPsi();
 		if(element instanceof CPsiSharpIfDef)
-			return (((CPsiSharpIfDef) element).isReverted() ? "#ifndef " : "#ifdef ") + ((CPsiSharpIfDef) element).getVariable().getText();
-		//else if(element instanceof CPsiImplementingMethod)
-		//	return "{...}";
+			return (((CPsiSharpIfDef) element).isReverted() ? "#ifndef " : "#ifdef ") + ((CPsiSharpIfDef) element).getVariable().getText() + "\n";
+		else if(element instanceof CPsiImplementingMethod)
+			return "{....}";
 
 		throw new IllegalArgumentException();
 	}
@@ -81,6 +98,10 @@ public class FoldingBuilderImpl implements FoldingBuilder, DumbAware
 	@Override
 	public boolean isCollapsedByDefault(@NotNull ASTNode node)
 	{
+		PsiElement element = node.getPsi();
+		if(element instanceof CPsiSharpIfDef)
+			return element.getUserData(CPreprocessor.ACTIVE_BLOCK) == Boolean.FALSE;
+
 		return false;
 	}
 }

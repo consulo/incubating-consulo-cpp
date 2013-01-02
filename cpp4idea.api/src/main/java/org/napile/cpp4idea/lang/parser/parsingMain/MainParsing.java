@@ -19,12 +19,12 @@ package org.napile.cpp4idea.lang.parser.parsingMain;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CBundle;
 import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
+import org.napile.cpp4idea.lang.psi.CPsiElement;
 import org.napile.cpp4idea.lang.psi.CPsiField;
 import org.napile.cpp4idea.lang.psi.CPsiImplementingMethod;
 import org.napile.cpp4idea.lang.psi.CPsiTypeRef;
 import org.napile.cpp4idea.lang.psi.CTokens;
 import com.intellij.lang.PsiBuilder;
-import com.intellij.psi.tree.IElementType;
 
 /**
  * @author VISTALL
@@ -38,7 +38,7 @@ public class MainParsing extends MainParserHelper
 		{
 			skipLines(builder);
 
-			if(CTokens.TYPES.contains(builder.getTokenType()))
+			if(CTokens.TYPES.contains(builder.getTokenType()) || builder.getTokenType() == CTokens.IDENTIFIER)
 			{
 				parseMethodOrField(builder);
 			}
@@ -49,6 +49,7 @@ public class MainParsing extends MainParserHelper
 			}
 		}
 	}
+
 /*	public static void parseElement(@NotNull PsiBuilder builder, int flags)
 	{
 		while(!builder.eof())
@@ -116,10 +117,18 @@ public class MainParsing extends MainParserHelper
 
 		parseTypeRef(builder);
 
-		IElementType methodName = builder.getTokenType();
-		if(methodName != IDENTIFIER)
+		Class<? extends CPsiElement> clazz;
+
+		if(builder.getTokenType() == CTokens.DOUBLE_COLON)
 		{
-			builder.error("Field name expected");
+			builder.advanceLexer();
+
+			consumeIf(builder, CTokens.TILDE);
+		}
+
+		if(builder.getTokenType() != IDENTIFIER)
+		{
+			error(builder, "name.expected");
 			done(marker, CPsiField.class);
 			return;
 		}

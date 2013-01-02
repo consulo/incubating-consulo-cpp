@@ -118,9 +118,9 @@ public class EnumParsing extends MainParsing
 
 		advanceLexerAndSkipLines(builder); // goto RBRACE
 
-		checkMatches(builder, RBRACE, "RBRACE.expected");
+		expect(builder, RBRACE, "RBRACE.expected");
 
-		checkMatches(builder, SEMICOLON, "SEMICOLON.expected");
+		expect(builder, SEMICOLON, "SEMICOLON.expected");
 
 		done(marker, CPsiEnum.class);
 

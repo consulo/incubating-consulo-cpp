@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 napile
+ * Copyright 2010-2012 napile.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,17 +14,29 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.psiInitial;
+package org.napile.cpp4idea.editor;
 
 import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
+import com.intellij.lang.annotation.AnnotationHolder;
+import com.intellij.lang.annotation.Annotator;
 import com.intellij.psi.PsiElement;
 
 /**
  * @author VISTALL
- * @date 17:13/11.12.2011
+ * @date 15:39/29.12.12
  */
-public interface CPsiCompilerVariable extends CPsiSharpElement
+public class CHighlightAnnotator implements Annotator
 {
-	@NotNull
-	PsiElement getNameElement();
+
+	@Override
+	public void annotate(@NotNull PsiElement element, @NotNull final AnnotationHolder holder)
+	{
+		if(element instanceof CPsiSharpFile)
+		{
+			PreHighlighterVisitor visitor = new PreHighlighterVisitor(holder, (CPsiSharpFile) element);
+
+			visitor.start();
+		}
+	}
 }

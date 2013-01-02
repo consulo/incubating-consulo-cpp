@@ -50,7 +50,10 @@ public class InitialParsing extends InitialParserHelper
 			else if(builder.getTokenType() == S_ENDIF_KEYWORD)
 			{
 				if(isSet(f, EAT_LAST_END_IF))
+				{
+					error(builder, "S_IFDEF.or.S_IFNDEF.expected");
 					advanceLexerAndSkipLines(builder);
+				}
 				else
 					break;
 			}
@@ -135,7 +138,7 @@ public class InitialParsing extends InitialParserHelper
 
 		done(bodyMarker, CPsiSharpIfBody.class);
 
-		checkMatches(builder, S_ENDIF_KEYWORD, "S_END_IF.expected");
+		checkMatchesWithoutLines(builder, S_ENDIF_KEYWORD, "S_END_IF.expected");
 
 		done(marker, CPsiSharpIfDef.class);
 	}

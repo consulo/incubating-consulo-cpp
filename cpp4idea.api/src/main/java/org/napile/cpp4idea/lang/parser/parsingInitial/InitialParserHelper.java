@@ -81,6 +81,14 @@ public class InitialParserHelper implements CTokens
 			builder.error(CBundle.message(message));
 	}
 
+	protected static void checkMatchesWithoutLines(final PsiBuilder builder, final IElementType token, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message)
+	{
+		if(builder.getTokenType() == token)
+			builder.advanceLexer();
+		else
+			builder.error(CBundle.message(message));
+	}
+
 	protected static void error(final PsiBuilder builder, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message)
 	{
 		builder.error(CBundle.message(message));

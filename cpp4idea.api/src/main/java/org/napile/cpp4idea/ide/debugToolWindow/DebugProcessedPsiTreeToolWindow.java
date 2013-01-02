@@ -16,7 +16,7 @@
 
 package org.napile.cpp4idea.ide.debugToolWindow;
 
-import org.napile.cpp4idea.editor.CProcessAnnotator;
+import org.napile.cpp4idea.lang.preprocessor.CPreprocessor;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
@@ -35,7 +35,7 @@ public class DebugProcessedPsiTreeToolWindow extends AbstractDebugPsiTreeToolWin
 	@Override
 	protected String toText(PsiFile psiFile)
 	{
-		CPsiFile cPsiFile = psiFile.getUserData(CProcessAnnotator.C_PROCESSED_FILE);
+		CPsiFile cPsiFile = CPreprocessor.getAfterProcessedFile(psiFile);
 
 		if(cPsiFile == null)
 			return "null";

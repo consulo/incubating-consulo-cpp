@@ -128,7 +128,7 @@ public class ExpressionParsing extends MainParsing
 				break;
 			}
 		}
-		checkMatches(builder, RBRACKET, "RBRACKET.expected");
+		expect(builder, RBRACKET, "RBRACKET.expected");
 		done(expr, CPsiArrayLiteralExpression.class);
 	}
 
@@ -140,7 +140,7 @@ public class ExpressionParsing extends MainParsing
 
 		parseExpression(builder);
 
-		checkMatches(builder, RPARENTH, "RPARENTH.expected");
+		expect(builder, RPARENTH, "RPARENTH.expected");
 
 		done(expr, CPsiParenthesizedExpression.class);
 	}
@@ -170,7 +170,7 @@ public class ExpressionParsing extends MainParsing
 			if(tokenType == DOT)
 			{
 				builder.advanceLexer();
-				checkMatches(builder, IDENTIFIER, "name.expected");
+				expect(builder, IDENTIFIER, "name.expected");
 				done(expr, CPsiReferenceExpression.class);
 				expr = expr.precede();
 			}
@@ -178,7 +178,7 @@ public class ExpressionParsing extends MainParsing
 			{
 				builder.advanceLexer();
 				parseExpression(builder);
-				checkMatches(builder, RBRACKET, "RBRACKET.expected");
+				expect(builder, RBRACKET, "RBRACKET.expected");
 				done(expr, CPsiIndexedPropertyAccessExpression.class);
 				expr = expr.precede();
 			}
@@ -240,7 +240,7 @@ public class ExpressionParsing extends MainParsing
 			}
 		}
 
-		checkMatches(builder, RPARENTH, "RPARENTH.expected");
+		expect(builder, RPARENTH, "RPARENTH.expected");
 
 		done(arglist, CPsiArgumentList.class);
 	}
@@ -300,7 +300,7 @@ public class ExpressionParsing extends MainParsing
 			if(!parseAssignmentExpression(builder, allowIn))
 				builder.error("expression expected");
 
-			checkMatches(builder, COLON, "COLON.expected");
+			expect(builder, COLON, "COLON.expected");
 
 			if(!parseAssignmentExpression(builder, allowIn))
 				builder.error("expression expected");

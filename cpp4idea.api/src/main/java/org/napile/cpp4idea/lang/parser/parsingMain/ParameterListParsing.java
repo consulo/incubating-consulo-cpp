@@ -19,6 +19,7 @@ package org.napile.cpp4idea.lang.parser.parsingMain;
 import org.napile.cpp4idea.CBundle;
 import org.napile.cpp4idea.lang.psi.CPsiParameter;
 import org.napile.cpp4idea.lang.psi.CPsiParameterList;
+import org.napile.cpp4idea.lang.psi.CTokens;
 import com.intellij.lang.PsiBuilder;
 
 /**
@@ -71,9 +72,15 @@ public class ParameterListParsing extends MainParsing
 		if(builder.getTokenType() == IDENTIFIER)
 			advanceLexerAndSkipLines(builder);
 
+		if(builder.getTokenType() == CTokens.LBRACKET)
+		{
+			advanceLexerAndSkipLines(builder);
+			expect(builder, CTokens.RBRACKET, "RBRACKET.expected");
+		}
+
 		done(marker, CPsiParameter.class);
 
-		if(builder.getTokenType() == COMMA)
+		while(builder.getTokenType() == COMMA)
 		{
 			advanceLexerAndSkipLines(builder); // skip COMMA
 

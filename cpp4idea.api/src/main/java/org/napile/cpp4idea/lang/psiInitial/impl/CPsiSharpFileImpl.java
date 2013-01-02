@@ -22,6 +22,7 @@ import org.apache.commons.lang.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CFileType;
 import org.napile.cpp4idea.CLanguage;
+import org.napile.cpp4idea.lang.preprocessor.CPreprocessor;
 import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
 import org.napile.cpp4idea.lang.psiInitial.visitors.CSharpPsiElementVisitor;
 import org.napile.cpp4idea.util.CIcons;
@@ -47,6 +48,14 @@ public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile
 		VirtualFile virtualFile = viewProvider.getVirtualFile();
 
 		isSourceFile = ArrayUtils.contains(SOURCE_FILES, virtualFile.getExtension());
+	}
+
+	@Override
+	public void subtreeChanged()
+	{
+		super.subtreeChanged();
+
+		putUserData(CPreprocessor.C_PROCESSED_FILE, null);
 	}
 
 	@NotNull

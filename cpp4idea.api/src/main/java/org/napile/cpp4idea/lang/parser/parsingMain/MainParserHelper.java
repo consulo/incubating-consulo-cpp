@@ -73,12 +73,18 @@ public class MainParserHelper implements CTokens
 		done(marker, clazz);
 	}
 
-	protected static void checkMatches(final PsiBuilder builder, final IElementType token, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message)
+	protected static void expect(final PsiBuilder builder, final IElementType token, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message)
 	{
 		if(builder.getTokenType() == token)
 			advanceLexerAndSkipLines(builder);
 		else
 			builder.error(CBundle.message(message));
+	}
+
+	protected static void consumeIf(final PsiBuilder builder, final IElementType token)
+	{
+		if(builder.getTokenType() == token)
+			advanceLexerAndSkipLines(builder);
 	}
 
 	protected static void error(final PsiBuilder builder, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message)

@@ -21,7 +21,7 @@
 	<version>1.0</version>
 	<vendor>napile.org</vendor>
 	<resource-bundle>org.napile.cpp4idea.CBundle</resource-bundle>
-	<idea-version since-build="8000"/>
+	<idea-version since-build="124.9999"/>
 	<category>Custom Languages</category>
 
 	<extensionPoints>
@@ -34,8 +34,7 @@
 
 		<toolWindow id="Cpp4Idea Debug" anchor="right" factoryClass="org.napile.cpp4idea.ide.debugToolWindow.DebugToolWindowFactory" />
 
-		<annotator language="C" implementationClass="org.napile.cpp4idea.editor.CProcessAnnotator" />
-		<annotator language="C" implementationClass="org.napile.cpp4idea.editor.CIfDefHighlightAnnotation" />
+		<annotator language="C" implementationClass="org.napile.cpp4idea.editor.CHighlightAnnotator" />
 
 		<!--lang-->
 		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.lang.PairedBraceMatcherImpl" />

@@ -50,7 +50,6 @@ public class CSyntaxHighlighter extends SyntaxHighlighterBase
 
 	public static final TextAttributesKey COMPILER_VARIABLE = TextAttributesKey.createTextAttributesKey("C.COMPILER_VARIABLE");
 	public static final TextAttributesKey LIGHT_COMPILER_VARIABLE = TextAttributesKey.createTextAttributesKey("C.LIGHT_COMPILER_VARIABLE");
-	public static final TextAttributesKey[] COMPILER_VARIABLE_CACHE = new TextAttributesKey[] {COMPILER_VARIABLE, LIGHT_COMPILER_VARIABLE};
 
 	public static final TextAttributesKey NUMBER = TextAttributesKey.createTextAttributesKey("C.NUMBER", SyntaxHighlighterColors.NUMBER.getDefaultAttributes().clone());
 	public static final TextAttributesKey LIGHT_NUMBER = TextAttributesKey.createTextAttributesKey("C.LIGHT_NUMBER");

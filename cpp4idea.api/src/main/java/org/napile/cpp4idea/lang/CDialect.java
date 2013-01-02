@@ -41,7 +41,7 @@ public abstract class CDialect
 	{
 		PsiBuilder.Marker rootMarker = builder.mark();
 
-		InitialParsing.parse(builder, 0);
+		InitialParsing.parse(builder, InitialParsing.EAT_LAST_END_IF);
 
 		rootMarker.done(root);
 
