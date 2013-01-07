@@ -16,20 +16,13 @@
 
 package org.napile.cpp4idea.lang.parser.parsingMain;
 
-import org.napile.cpp4idea.CBundle;
-import org.napile.cpp4idea.lang.psi.CPsiEnum;
-import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
-import org.napile.cpp4idea.lang.psi.CPsiLiteralExpression;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.psi.tree.IElementType;
-
 /**
  * @author VISTALL
  * @date 18:01/14.12.2011
  */
 public class EnumParsing extends MainParsing
 {
-	public static void parse(PsiBuilder builder)
+	/*public static void parse(PsiBuilder builder)
 	{
 		PsiBuilder.Marker marker = builder.mark();
 
@@ -125,5 +118,5 @@ public class EnumParsing extends MainParsing
 		done(marker, CPsiEnum.class);
 
 		skipLines(builder);
-	}
+	}      */
 }

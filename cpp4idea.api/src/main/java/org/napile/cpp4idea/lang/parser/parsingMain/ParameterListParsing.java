@@ -36,6 +36,7 @@ public class ParameterListParsing extends MainParsing
 		{
 			builder.error(CBundle.message("LPARENTH.expected"));
 			marker = builder.mark();
+			builder.advanceLexer();
 			done(marker, CPsiParameterList.class);
 			return;
 		}
@@ -47,19 +48,23 @@ public class ParameterListParsing extends MainParsing
 
 		if(builder.getTokenType() != RPARENTH)
 		{
-			parserParameter(builder);
+			while(true)
+			{
+				if(builder.getTokenType() == ELLIPSIS)
+					doneOneToken(builder, CPsiParameter.class);
+				else
+					VariableParsing.parseVariable(CPsiParameter.class, builder);
 
-			if(builder.getTokenType() != RPARENTH)
-				builder.error(CBundle.message("RPARENTH.expected"));
+				if(!consumeIf(builder, COMMA))
+					break;
+			}
 
-			advanceLexerAndSkipLines(builder);
+			expect(builder, RPARENTH, "RPARENTH.expected");
 		}
 		else
 			advanceLexerAndSkipLines(builder);
 
 		done(marker, CPsiParameterList.class);
-
-		//skipLines(builder);
 	}
 
 	private static void parserParameter(PsiBuilder builder)

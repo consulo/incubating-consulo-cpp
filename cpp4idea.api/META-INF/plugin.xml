@@ -32,7 +32,7 @@
 		<additionalTextAttributes scheme="Default" file="/org/napile/cpp4idea/editor/color/Default.xml" />
 		<fileTypeFactory implementation="org.napile.cpp4idea.CFileTypeFactory" />
 
-		<toolWindow id="Cpp4Idea Debug" anchor="right" factoryClass="org.napile.cpp4idea.ide.debugToolWindow.DebugToolWindowFactory" />
+		<toolWindow id="Cpp4Idea Debug" icon="/org/napile/cpp4idea/napile-logo13.png" anchor="right" factoryClass="org.napile.cpp4idea.ide.debugToolWindow.DebugToolWindowFactory" />
 
 		<annotator language="C" implementationClass="org.napile.cpp4idea.editor.CHighlightAnnotator" />
 

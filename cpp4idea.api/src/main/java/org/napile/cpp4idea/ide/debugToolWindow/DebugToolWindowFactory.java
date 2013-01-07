@@ -35,5 +35,6 @@ public class DebugToolWindowFactory implements ToolWindowFactory
 		ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
 		contentManager.addContent(contentFactory.createContent(new DebugPsiTreeToolWindow(project), "Debug Psi", true));
 		contentManager.addContent(contentFactory.createContent(new DebugProcessedPsiTreeToolWindow(project), "Debug Processed Psi", true));
+		contentManager.addContent(contentFactory.createContent(new DebugProcessedPsiTextToolWindow(project), "Debug Processed Text", true));
 	}
 }

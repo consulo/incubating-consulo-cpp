@@ -20,7 +20,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.editor.HighlightUtil;
 import org.napile.cpp4idea.lang.preprocessor.CPreprocessor;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
 import org.napile.cpp4idea.lang.psi.CPsiImplementingMethod;
@@ -71,7 +70,7 @@ public class FoldingBuilderImpl implements FoldingBuilder, DumbAware
 					@Override
 					public void visitImplementingMethod(CPsiImplementingMethod element)
 					{
-						list.add(new FoldingDescriptor(element, HighlightUtil.findOriginalRange(element)));
+						//list.add(new FoldingDescriptor(element, HighlightUtil.findOriginalRange(element)));
 
 						super.visitImplementingMethod(element);
 					}

@@ -4,6 +4,7 @@ import org.napile.cpp4idea.lang.psi.CPsiEnum;
 import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
 import org.napile.cpp4idea.lang.psi.CPsiImplementingMethod;
+import org.napile.cpp4idea.lang.psi.CPsiModifierList;
 import com.intellij.psi.PsiElementVisitor;
 
 /**
@@ -30,5 +31,10 @@ public class CPsiElementVisitor extends PsiElementVisitor
 	public void visitEnumConstant(CPsiEnumConstant element)
 	{
 		visitElement(element);
+	}
+
+	public void visitModifierList(CPsiModifierList modifierList)
+	{
+		visitElement(modifierList);
 	}
 }

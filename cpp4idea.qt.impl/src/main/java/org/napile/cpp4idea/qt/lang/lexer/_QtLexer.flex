@@ -112,16 +112,19 @@ ESCAPE_SEQUENCE=\\[^\r\n]
 <YYINITIAL> "new" { return CTokens.NEW_KEYWORD; }
 <YYINITIAL> "public" { return CTokens.PUBLIC_KEYWORD; }
 <YYINITIAL> "private" { return CTokens.PRIVATE_KEYWORD; }
-<YYINITIAL> "static" { return CTokens.STATIC_KEYWORD; }
 <YYINITIAL> "switch" { return CTokens.SWITCH_KEYWORD; }
 <YYINITIAL> "return" { return CTokens.RETURN_KEYWORD; }
 <YYINITIAL> "namespace" { return CTokens.NAMESPACE_KEYWORD; }
 <YYINITIAL> "void" { return CTokens.VOID_KEYWORD; }
 <YYINITIAL> "while" { return CTokens.WHILE_KEYWORD; }
-<YYINITIAL> "const" { return CTokens.CONST_KEYWORD; }
 <YYINITIAL> "typedef" { return CTokens.TYPEDEF_KEYWORD; }
-<YYINITIAL> "extern" { return CTokens.EXTERN_KEYWORD; }
 <YYINITIAL> "enum" { return CTokens.ENUM_KEYWORD; }
+
+<YYINITIAL> "virtual" { return CTokens.VIRTUAL_KEYWORD; }
+<YYINITIAL> "explicit" { return CTokens.EXPLICIT_KEYWORD; }
+<YYINITIAL> "static" { return CTokens.STATIC_KEYWORD; }
+<YYINITIAL> "const" { return CTokens.CONST_KEYWORD; }
+<YYINITIAL> "extern" { return CTokens.EXTERN_KEYWORD; }
 <YYINITIAL> "signed" { return CTokens.SIGNED_KEYWORD; }
 <YYINITIAL> "unsigned" { return CTokens.UNSIGNED_KEYWORD; }
 
@@ -130,6 +133,9 @@ ESCAPE_SEQUENCE=\\[^\r\n]
 <YYINITIAL> "__int64" { return CTokens.__INT64_KEYWORD; }
 <YYINITIAL> "int" { return CTokens.INT_KEYWORD; }
 <YYINITIAL> "bool" { return CTokens.BOOL_KEYWORD; }
+
+<YYINITIAL> "true" { return CTokens.BOOL_LITERAL; }
+<YYINITIAL> "false" { return CTokens.BOOL_LITERAL; }
 
 <YYINITIAL> {IDENTIFIER} { return CTokens.IDENTIFIER; }
 

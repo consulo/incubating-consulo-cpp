@@ -30,7 +30,7 @@ public class ExpressionParsing extends MainParsing
 {
 	private static final Logger LOG = Logger.getInstance("#com.intellij.lang.javascript.parsing.ExpressionParsing");
 
-	private static boolean parsePrimaryExpression(PsiBuilder builder)
+	public static boolean parsePrimaryExpression(PsiBuilder builder)
 	{
 		final IElementType firstToken = builder.getTokenType();
 		if(firstToken == IDENTIFIER)

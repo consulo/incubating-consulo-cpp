@@ -77,6 +77,7 @@ public class CSyntaxHighlighter extends SyntaxHighlighterBase
 		fillMap(CTokens.LONG_LITERAL, NUMBER, LIGHT_NUMBER);
 		fillMap(CTokens.FLOAT_LITERAL, NUMBER, LIGHT_NUMBER);
 		fillMap(CTokens.DOUBLE_LITERAL, NUMBER, LIGHT_NUMBER);
+		fillMap(CTokens.BOOL_LITERAL, KEYWORD, LIGHT_KEYWORD);
 	}
 
 	private static void fillMap(IElementType elementType, TextAttributesKey... keys)

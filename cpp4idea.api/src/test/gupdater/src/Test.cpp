@@ -1,6 +1,6 @@
 #define BOOL bool
 
-BOOL test()
+BOOL test(int *a, int b)
 {
 
 }

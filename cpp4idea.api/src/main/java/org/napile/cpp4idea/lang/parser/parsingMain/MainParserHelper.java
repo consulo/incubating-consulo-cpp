@@ -81,10 +81,15 @@ public class MainParserHelper implements CTokens
 			builder.error(CBundle.message(message));
 	}
 
-	protected static void consumeIf(final PsiBuilder builder, final IElementType token)
+	protected static boolean consumeIf(final PsiBuilder builder, final IElementType token)
 	{
 		if(builder.getTokenType() == token)
+		{
 			advanceLexerAndSkipLines(builder);
+			return true;
+		}
+		else
+			return false;
 	}
 
 	protected static void error(final PsiBuilder builder, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message)

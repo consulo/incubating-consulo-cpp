@@ -36,6 +36,7 @@ public class CodeBlockParsing extends MainParsing
 		{
 			builder.error(CBundle.message("LBRACE.expected"));
 			marker = builder.mark();
+			builder.advanceLexer();
 
 			done(marker, CPsiParameterList.class);
 			return;
