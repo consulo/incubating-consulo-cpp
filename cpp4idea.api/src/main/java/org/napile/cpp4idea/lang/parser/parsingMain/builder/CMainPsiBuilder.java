@@ -80,6 +80,7 @@ import com.intellij.util.diff.ShallowNodeComparator;
 public class CMainPsiBuilder extends UserDataHolderBase implements PsiBuilder, ASTNodeBuilder
 {
 	public static final Key<TextRange> ORIGINAL_TEXT_RANGE = Key.create("c-original-text-range");
+	public static final Key<PsiElement> ORIGINAL_SINGLE_ELEMENT = Key.create("c-original-single-element");
 
 	private static final Logger LOG = Logger.getInstance(CMainPsiBuilder.class);
 
@@ -1748,8 +1749,7 @@ public class CMainPsiBuilder extends UserDataHolderBase implements PsiBuilder, A
 		else
 			element = ASTFactory.leaf(type, text);
 
-		int startOffset = elements[start].getStartOffsetInParent();
-		element.putUserData(ORIGINAL_TEXT_RANGE, new TextRange(startOffset, startOffset + text.length()));
+		element.putUserData(ORIGINAL_SINGLE_ELEMENT, elements[start]);
 		return element;
 	}
 

@@ -241,6 +241,8 @@ public class MainParsing extends MainParserHelper
 			}
 
 			expect(builder, RBRACE, "RBRACE.expected");
+
+			consumeIf(builder, SEMICOLON);
 		}
 
 		return CPsiClass.class;
@@ -275,6 +277,34 @@ public class MainParsing extends MainParserHelper
 			expect(builder, SEMICOLON, "SEMICOLON.expected");
 
 			return CPsiDeclarationConstructor.class;
+		}
+		else if(builder.getTokenType() == IDENTIFIER)
+		{
+			builder.advanceLexer();
+
+			ParameterListParsing.parseParameterList(builder);
+
+			expect(builder, SEMICOLON, "SEMICOLON.expected");
+
+			return CPsiDeclarationMethod.class;
+		}
+
+		if(builder.getTokenType() == ASTERISK)
+		{
+			builder.advanceLexer();
+
+			expect(builder, IDENTIFIER, "IDENTIFIER.expected");
+
+			while(consumeIf(builder, LBRACKET))
+			{
+				if(!consumeIf(builder, RBRACKET))
+				{
+					error(builder, "RBRACKET.expected");
+					break;
+				}
+			}
+			expect(builder, SEMICOLON, "SEMICOLON.expected");
+			return CPsiDeclarationField.class;
 		}
 
 		return null;

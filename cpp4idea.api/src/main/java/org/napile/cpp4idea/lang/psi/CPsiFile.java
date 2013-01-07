@@ -29,5 +29,5 @@ public interface CPsiFile extends CPsiElement
 	Key<CPsiSharpFile> C_SHARP_FILE = Key.create("c-sharp-file");
 
 	@NotNull
-	CPsiSharpFile getOriginalFile();
+	CPsiDeclaration[] getDeclarations();
 }

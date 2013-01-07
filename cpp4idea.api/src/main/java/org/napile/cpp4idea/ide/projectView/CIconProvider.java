@@ -14,20 +14,34 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.psi.impl;
+package org.napile.cpp4idea.ide.projectView;
+
+import javax.swing.Icon;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.psi.CPsiClass;
-import com.intellij.lang.ASTNode;
+import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
+import com.intellij.icons.AllIcons;
+import com.intellij.ide.IconProvider;
+import com.intellij.openapi.util.Iconable;
+import com.intellij.psi.PsiElement;
 
 /**
  * @author VISTALL
- * @date 12:59/02.01.13
+ * @date 17:34/07.01.13
  */
-public class CPsiClassImpl extends CPsiDeclarationImpl implements CPsiClass
+public class CIconProvider extends IconProvider
 {
-	public CPsiClassImpl(@NotNull ASTNode node)
+	@Nullable
+	@Override
+	public Icon getIcon(@NotNull PsiElement element, @Iconable.IconFlags int flags)
 	{
-		super(node);
+		if(element instanceof CPsiClass)
+			return AllIcons.Nodes.Class;
+		if(element instanceof CPsiDeclarationMethod)
+			return AllIcons.Nodes.Method;
+
+		return null;
 	}
 }

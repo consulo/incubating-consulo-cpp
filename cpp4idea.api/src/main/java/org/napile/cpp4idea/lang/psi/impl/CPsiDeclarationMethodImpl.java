@@ -24,7 +24,7 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 22:57/10.12.2011
  */
-public class CPsiDeclarationMethodImpl extends CPsiElementBaseImpl implements CPsiDeclarationMethod
+public class CPsiDeclarationMethodImpl extends CPsiDeclarationImpl implements CPsiDeclarationMethod
 {
 	public CPsiDeclarationMethodImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{

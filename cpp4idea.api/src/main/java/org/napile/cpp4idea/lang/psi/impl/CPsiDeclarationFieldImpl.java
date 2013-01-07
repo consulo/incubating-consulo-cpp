@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 napile
+ * Copyright 2010-2013 napile.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.psi;
+package org.napile.cpp4idea.lang.psi.impl;
 
-import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
-import com.intellij.psi.PsiElement;
+import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.lang.psi.CPsiDeclarationField;
+import com.intellij.lang.ASTNode;
 
 /**
  * @author VISTALL
- * @date 22:58/10.12.2011
+ * @date 17:01/07.01.13
  */
-public interface CPsiElement extends PsiElement
+public class CPsiDeclarationFieldImpl extends CPsiDeclarationImpl implements CPsiDeclarationField
 {
-	CPsiFile getCFile();
-
-	CPsiSharpFile getSharpCFile();
+	public CPsiDeclarationFieldImpl(@NotNull ASTNode node)
+	{
+		super(node);
+	}
 }

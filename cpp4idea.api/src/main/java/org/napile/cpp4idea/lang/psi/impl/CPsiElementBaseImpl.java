@@ -17,8 +17,13 @@
 package org.napile.cpp4idea.lang.psi.impl;
 
 import org.napile.cpp4idea.lang.psi.CPsiElement;
+import org.napile.cpp4idea.lang.psi.CPsiFile;
+import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiInvalidElementAccessException;
+import com.intellij.psi.impl.PsiManagerEx;
+import com.intellij.psi.util.PsiTreeUtil;
 
 /**
  * @author VISTALL
@@ -32,8 +37,31 @@ public class CPsiElementBaseImpl extends ASTWrapperPsiElement implements CPsiEle
 	}
 
 	@Override
+	public PsiManagerEx getManager()
+	{
+		CPsiFile file = PsiTreeUtil.getParentOfType(this, CPsiFile.class);
+		if(file == null)
+			throw new PsiInvalidElementAccessException(this);
+
+		return (PsiManagerEx) file.getManager();
+	}
+
+	@Override
 	public String toString()
 	{
 		return getClass().getSimpleName() + ": " + getText();
+	}
+
+	@Override
+	public CPsiFile getCFile()
+	{
+		return PsiTreeUtil.getParentOfType(this, CPsiFile.class);
+	}
+
+	@Override
+	public CPsiSharpFile getSharpCFile()
+	{
+		CPsiFile psiFile = getCFile();
+		return psiFile == null ? null : psiFile.getSharpCFile();
 	}
 }

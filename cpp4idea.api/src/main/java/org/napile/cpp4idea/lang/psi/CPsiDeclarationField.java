@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 napile
+ * Copyright 2010-2013 napile.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -16,16 +16,10 @@
 
 package org.napile.cpp4idea.lang.psi;
 
-import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
-import com.intellij.psi.PsiElement;
-
 /**
  * @author VISTALL
- * @date 22:58/10.12.2011
+ * @date 17:00/07.01.13
  */
-public interface CPsiElement extends PsiElement
+public interface CPsiDeclarationField extends CPsiDeclaration
 {
-	CPsiFile getCFile();
-
-	CPsiSharpFile getSharpCFile();
 }

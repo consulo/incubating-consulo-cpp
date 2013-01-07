@@ -28,7 +28,7 @@ import com.intellij.psi.PsiElementVisitor;
  * @author VISTALL
  * @date 22:57/10.12.2011
  */
-public class CPsiImplementingMethodImpl extends CPsiElementBaseImpl implements CPsiImplementingMethod
+public class CPsiImplementingMethodImpl extends CPsiDeclarationImpl implements CPsiImplementingMethod
 {
 	public CPsiImplementingMethodImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{

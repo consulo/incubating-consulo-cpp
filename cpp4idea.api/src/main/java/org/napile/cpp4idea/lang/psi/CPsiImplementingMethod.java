@@ -24,5 +24,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface CPsiImplementingMethod extends CPsiDeclarationMethod
 {
-	@NotNull CPsiCodeBlock getCodeBlock();
+	@NotNull
+	CPsiCodeBlock getCodeBlock();
 }

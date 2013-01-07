@@ -16,7 +16,12 @@
 
 package org.napile.cpp4idea.lang.psiInitial;
 
+import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.lang.preprocessor.CPreprocessor;
+import org.napile.cpp4idea.lang.psi.CPsiFile;
+import com.intellij.openapi.util.NotNullLazyKey;
 import com.intellij.psi.PsiFile;
+import com.intellij.util.NotNullFunction;
 
 /**
  * @author VISTALL
@@ -24,5 +29,16 @@ import com.intellij.psi.PsiFile;
  */
 public interface CPsiSharpFile extends PsiFile
 {
+	NotNullLazyKey<CPsiFile, CPsiSharpFile> AFTER_PROCESSED_FILE = NotNullLazyKey.create("after-processed-file", new NotNullFunction<CPsiSharpFile, CPsiFile>()
+	{
+		@NotNull
+		@Override
+		public CPsiFile fun(CPsiSharpFile dom)
+		{
+			return CPreprocessor.preProcess(dom);
+		}
+	});
+
+
 	boolean isSourceFile();
 }

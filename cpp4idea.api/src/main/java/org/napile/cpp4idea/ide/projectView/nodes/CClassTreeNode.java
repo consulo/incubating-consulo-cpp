@@ -14,27 +14,32 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.psi.impl;
+package org.napile.cpp4idea.ide.projectView.nodes;
+
+import java.util.Collection;
+import java.util.Collections;
 
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.psi.CPsiDeclarationConstructor;
-import org.napile.cpp4idea.lang.psi.CPsiParameterList;
-import com.intellij.lang.ASTNode;
+import org.napile.cpp4idea.lang.psi.CPsiClass;
+import com.intellij.ide.projectView.ViewSettings;
+import com.intellij.ide.util.treeView.AbstractTreeNode;
+import com.intellij.openapi.project.Project;
 
 /**
  * @author VISTALL
- * @date 15:28/07.01.13
+ * @date 17:25/07.01.13
  */
-public class CPsiDeclarationConstructorImpl extends CPsiDeclarationImpl implements CPsiDeclarationConstructor
+public class CClassTreeNode extends CBaseTreeNode<CPsiClass>
 {
-	public CPsiDeclarationConstructorImpl(@NotNull ASTNode node)
+	public CClassTreeNode(Project project, CPsiClass cPsiClass, ViewSettings viewSettings)
 	{
-		super(node);
+		super(project, cPsiClass, viewSettings);
 	}
 
+	@NotNull
 	@Override
-	public CPsiParameterList getParameterList()
+	public Collection<? extends AbstractTreeNode> getChildren()
 	{
-		return findChildByClass(CPsiParameterList.class);
+		return Collections.emptyList();
 	}
 }

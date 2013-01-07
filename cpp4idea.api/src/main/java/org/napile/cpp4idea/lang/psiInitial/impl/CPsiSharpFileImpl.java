@@ -22,7 +22,6 @@ import org.apache.commons.lang.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CFileType;
 import org.napile.cpp4idea.CLanguage;
-import org.napile.cpp4idea.lang.preprocessor.CPreprocessor;
 import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
 import org.napile.cpp4idea.lang.psiInitial.visitors.CSharpPsiElementVisitor;
 import org.napile.cpp4idea.util.CIcons;
@@ -38,6 +37,7 @@ import com.intellij.psi.PsiElementVisitor;
  */
 public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile
 {
+
 	private static final String[] SOURCE_FILES = new String[] {"c", "cpp"};
 	private boolean isSourceFile;
 
@@ -51,11 +51,11 @@ public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile
 	}
 
 	@Override
-	public void subtreeChanged()
+	public void clearCaches()
 	{
-		super.subtreeChanged();
+		super.clearCaches();
 
-		putUserData(CPreprocessor.C_PROCESSED_FILE, null);
+		putUserData(AFTER_PROCESSED_FILE, null);
 	}
 
 	@NotNull

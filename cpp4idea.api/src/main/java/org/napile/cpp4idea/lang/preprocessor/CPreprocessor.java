@@ -46,22 +46,17 @@ import com.intellij.psi.PsiElement;
  */
 public class CPreprocessor
 {
-	public static Key<CPsiFile> C_PROCESSED_FILE = Key.create("c-processed-file");
 	public static Key<Boolean> ACTIVE_BLOCK = Key.create("c-active-block");
 
 	@Nullable
 	public static CPsiFile getAfterProcessedFile(PsiElement psiElement)
 	{
-		return preProcess((CPsiSharpFile) psiElement.getContainingFile());
+		return CPsiSharpFile.AFTER_PROCESSED_FILE.getValue((CPsiSharpFile) psiElement.getContainingFile());
 	}
 
 	@Nullable
 	public static CPsiFile preProcess(CPsiSharpFile element)
 	{
-		CPsiFile psiFile = element.getUserData(C_PROCESSED_FILE);
-		if(psiFile != null)
-			return psiFile;
-
 		CDialect dialect = CFacetUtil.findDialect(element);
 		if(dialect == null)
 			return null;
@@ -139,9 +134,7 @@ public class CPreprocessor
 
 		node.putUserData(CPsiFile.C_SHARP_FILE, element);
 
-		psiFile = (CPsiFile) node.getPsi();
-		element.putUserData(C_PROCESSED_FILE, psiFile);
-		return psiFile;
+		return (CPsiFile) node.getPsi();
 	}
 
 	private static List<PsiElement> collectChildren(PsiElement e)

@@ -17,11 +17,14 @@
 package org.napile.cpp4idea.lang.psi.impl;
 
 import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.lang.psi.CPsiDeclaration;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
 import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElementVisitor;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.impl.PsiManagerEx;
 
 /**
  * @author VISTALL
@@ -46,10 +49,34 @@ public class CPsiFileImpl extends CPsiElementBaseImpl implements CPsiFile
 			visitor.visitElement(this);
 	}
 
-	@NotNull
 	@Override
-	public CPsiSharpFile getOriginalFile()
+	public PsiFile getContainingFile()
 	{
 		return originalFile;
+	}
+
+	@Override
+	public CPsiSharpFile getSharpCFile()
+	{
+		return originalFile;
+	}
+
+	@Override
+	public CPsiFile getCFile()
+	{
+		return this;
+	}
+
+	@Override
+	public PsiManagerEx getManager()
+	{
+		return (PsiManagerEx) originalFile.getManager();
+	}
+
+	@NotNull
+	@Override
+	public CPsiDeclaration[] getDeclarations()
+	{
+		return findChildrenByClass(CPsiDeclaration.class);
 	}
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 napile
+ * Copyright 2010-2013 napile.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.psi;
+package org.napile.cpp4idea.ide.projectView.nodes;
 
-import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
-import com.intellij.psi.PsiElement;
+import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
+import com.intellij.ide.projectView.ViewSettings;
+import com.intellij.openapi.project.Project;
 
 /**
  * @author VISTALL
- * @date 22:58/10.12.2011
+ * @date 19:08/07.01.13
  */
-public interface CPsiElement extends PsiElement
+public class CMethodTreeNode extends CBaseTreeNode<CPsiDeclarationMethod>
 {
-	CPsiFile getCFile();
-
-	CPsiSharpFile getSharpCFile();
+	public CMethodTreeNode(Project project, CPsiDeclarationMethod cPsiDeclarationMethod, ViewSettings viewSettings)
+	{
+		super(project, cPsiDeclarationMethod, viewSettings);
+	}
 }
