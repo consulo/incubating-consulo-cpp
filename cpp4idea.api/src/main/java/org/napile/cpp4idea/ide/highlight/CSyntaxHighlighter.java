@@ -27,8 +27,7 @@ import org.napile.cpp4idea.lang.psi.CTokens;
 import com.intellij.lexer.EmptyLexer;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
-import com.intellij.openapi.editor.SyntaxHighlighterColors;
-import com.intellij.openapi.editor.colors.CodeInsightColors;
+import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
 import com.intellij.openapi.project.Project;
@@ -42,26 +41,26 @@ import com.intellij.psi.tree.TokenSet;
  */
 public class CSyntaxHighlighter extends SyntaxHighlighterBase
 {
-	public static final TextAttributesKey KEYWORD = TextAttributesKey.createTextAttributesKey("C.KEYWORD", SyntaxHighlighterColors.KEYWORD.getDefaultAttributes().clone());
+	public static final TextAttributesKey KEYWORD = TextAttributesKey.createTextAttributesKey("C.KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
 	public static final TextAttributesKey LIGHT_KEYWORD = TextAttributesKey.createTextAttributesKey("C.LIGHT_KEYWORD");
 
-	public static final TextAttributesKey STRING = TextAttributesKey.createTextAttributesKey("C.STRING", SyntaxHighlighterColors.STRING.getDefaultAttributes().clone());
+	public static final TextAttributesKey STRING = TextAttributesKey.createTextAttributesKey("C.STRING", DefaultLanguageHighlighterColors.STRING);
 	public static final TextAttributesKey LIGHT_STRING = TextAttributesKey.createTextAttributesKey("C.LIGHT_STRING");
 
 	public static final TextAttributesKey COMPILER_VARIABLE = TextAttributesKey.createTextAttributesKey("C.COMPILER_VARIABLE");
 	public static final TextAttributesKey LIGHT_COMPILER_VARIABLE = TextAttributesKey.createTextAttributesKey("C.LIGHT_COMPILER_VARIABLE");
 
-	public static final TextAttributesKey NUMBER = TextAttributesKey.createTextAttributesKey("C.NUMBER", SyntaxHighlighterColors.NUMBER.getDefaultAttributes().clone());
+	public static final TextAttributesKey NUMBER = TextAttributesKey.createTextAttributesKey("C.NUMBER", DefaultLanguageHighlighterColors.NUMBER);
 	public static final TextAttributesKey LIGHT_NUMBER = TextAttributesKey.createTextAttributesKey("C.LIGHT_NUMBER");
 
 	public static final TextAttributesKey LIGHT_IDENTIFIER = TextAttributesKey.createTextAttributesKey("C.LIGHT_IDENTIFIER");
 
-	public static final TextAttributesKey CONSTANT = TextAttributesKey.createTextAttributesKey("C.CONSTANT", CodeInsightColors.STATIC_FIELD_ATTRIBUTES.getDefaultAttributes().clone());
+	public static final TextAttributesKey CONSTANT = TextAttributesKey.createTextAttributesKey("C.CONSTANT", DefaultLanguageHighlighterColors.STATIC_FIELD);
 
-	public static final TextAttributesKey COMMA = TextAttributesKey.createTextAttributesKey("C.COMMA", SyntaxHighlighterColors.COMMA.getDefaultAttributes().clone());
-	public static final TextAttributesKey DOT = TextAttributesKey.createTextAttributesKey("C.DOT", SyntaxHighlighterColors.DOT.getDefaultAttributes().clone());
-	public static final TextAttributesKey LINE_COMMENT = TextAttributesKey.createTextAttributesKey("C.LINE_COMMENT", SyntaxHighlighterColors.LINE_COMMENT.getDefaultAttributes().clone());
-	public static final TextAttributesKey BLOCK_COMMENT = TextAttributesKey.createTextAttributesKey("C.BLOCK_COMMENT", SyntaxHighlighterColors.JAVA_BLOCK_COMMENT.getDefaultAttributes().clone());
+	public static final TextAttributesKey COMMA = TextAttributesKey.createTextAttributesKey("C.COMMA", DefaultLanguageHighlighterColors.COMMA);
+	public static final TextAttributesKey DOT = TextAttributesKey.createTextAttributesKey("C.DOT", DefaultLanguageHighlighterColors.DOT);
+	public static final TextAttributesKey LINE_COMMENT = TextAttributesKey.createTextAttributesKey("C.LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
+	public static final TextAttributesKey BLOCK_COMMENT = TextAttributesKey.createTextAttributesKey("C.BLOCK_COMMENT", DefaultLanguageHighlighterColors.BLOCk_COMMENT);
 
 	public static final Map<IElementType, TextAttributesKey[]> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey[]>();
 

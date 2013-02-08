@@ -28,7 +28,6 @@ import com.intellij.psi.PsiElement;
  */
 public class CHighlightAnnotator implements Annotator
 {
-
 	@Override
 	public void annotate(@NotNull PsiElement element, @NotNull final AnnotationHolder holder)
 	{

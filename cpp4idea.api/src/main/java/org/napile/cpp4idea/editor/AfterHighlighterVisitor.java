@@ -16,10 +16,13 @@
 
 package org.napile.cpp4idea.editor;
 
+import org.napile.cpp4idea.ide.highlight.CSyntaxHighlighter;
 import org.napile.cpp4idea.lang.parser.parsingMain.builder.CMainPsiBuilder;
+import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiRecursiveElementVisitor;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.openapi.util.TextRange;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiErrorElement;
 
 /**
@@ -33,6 +36,14 @@ public class AfterHighlighterVisitor extends CPsiRecursiveElementVisitor
 	public AfterHighlighterVisitor(AnnotationHolder holder)
 	{
 		this.holder = holder;
+	}
+
+	@Override
+	public void visitEnumConstant(CPsiEnumConstant element)
+	{
+		PsiElement nameElement = element.getNameElement();
+		if(nameElement != null)
+			HighlightUtil.highlightOriginalElement(nameElement, holder, CSyntaxHighlighter.CONSTANT);
 	}
 
 	@Override

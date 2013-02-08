@@ -26,5 +26,5 @@ public interface CPsiEnumConstant extends CPsiNameElementOwner
 {
 	PsiElement getNameElement();
 
-	CPsiLiteralExpression getConstantExpression();
+	CPsiExpression getExpression();
 }

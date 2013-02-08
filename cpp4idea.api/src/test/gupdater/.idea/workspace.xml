@@ -2,40 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="49b18074-c935-4fec-9507-7df748b1f556" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/ide/projectView/nodes/CBaseTreeNode.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/ide/projectView/nodes/CClassTreeNode.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/ide/projectView/nodes/CFileTreeNode.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/ide/projectView/CIconProvider.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/ide/projectView/nodes/CMethodTreeNode.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/ide/projectView/CProjectViewProvider.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/ide/projectView/CProjectViewUtil.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiDeclaration.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiDeclarationField.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiDeclarationFieldImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiDeclarationImpl.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/util/CPsiUtil.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/parsingMain/builder/CMainPsiBuilder.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/parsingMain/builder/CMainPsiBuilder.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/preprocessor/CPreprocessor.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/preprocessor/CPreprocessor.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiClass.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiClass.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiClassImpl.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiClassImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiDeclarationConstructorImpl.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiDeclarationConstructorImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiDeclarationMethod.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiDeclarationMethod.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiDeclarationMethodImpl.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiDeclarationMethodImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiElement.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiElement.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiElementBaseImpl.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiElementBaseImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiFile.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiFile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiFileImpl.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiFileImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiImplementingMethod.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/CPsiImplementingMethod.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiImplementingMethodImpl.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psi/impl/CPsiImplementingMethodImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psiInitial/CPsiSharpFile.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psiInitial/CPsiSharpFile.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psiInitial/impl/CPsiSharpFileImpl.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/psiInitial/impl/CPsiSharpFileImpl.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/parsingMain/MainParsing.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/parsingMain/MainParsing.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../META-INF/plugin.xml" afterPath="$PROJECT_DIR$/../../../META-INF/plugin.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="gupdater.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="49b18074-c935-4fec-9507-7df748b1f556" time="1357578716005" ignored="false" />
+    <file path="/Dummy.txt" changelist="49b18074-c935-4fec-9507-7df748b1f556" time="1358427545926" ignored="false" />
     <file path="/mainwindow.h" changelist="49b18074-c935-4fec-9507-7df748b1f556" time="1357571605688" ignored="false" />
     <file path="/mainwindow.cpp" changelist="49b18074-c935-4fec-9507-7df748b1f556" time="1357118181108" ignored="false" />
     <file path="/main.cpp" changelist="49b18074-c935-4fec-9507-7df748b1f556" time="1357118126257" ignored="false" />
@@ -120,10 +91,37 @@
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="main.cpp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="9" column="20" selection-start="180" selection-end="180" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="qtwin.h" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/qtwin.h">
           <provider selected="true" editor-type-id="text-editor">
             <state line="20" column="6" selection-start="619" selection-end="619" vertical-scroll-proportion="0.4249668">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Test.cpp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Test.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="5" selection-start="24" selection-end="24" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Test2.cpp" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Test2.cpp">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="13" selection-start="13" selection-end="13" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -169,8 +167,8 @@
     <treeState />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="287" />
-    <option name="y" value="65" />
+    <option name="x" value="279" />
+    <option name="y" value="90" />
     <option name="width" value="1462" />
     <option name="height" value="935" />
   </component>
@@ -200,6 +198,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -289,7 +288,6 @@
         </subPane>
       </pane>
       <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -322,19 +320,6 @@
       <option name="PORT" value="5005" />
       <method />
     </configuration>
-    <configuration default="true" type="Applet" factoryName="Applet">
-      <module name="" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="HTML_FILE_NAME" />
-      <option name="HTML_USED" value="false" />
-      <option name="WIDTH" value="400" />
-      <option name="HEIGHT" value="300" />
-      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
-      <option name="VM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <method />
-    </configuration>
     <configuration default="true" type="TestNG" factoryName="TestNG">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea" />
       <module name="" />
@@ -361,6 +346,19 @@
       <envs />
       <properties />
       <listeners />
+      <method />
+    </configuration>
+    <configuration default="true" type="Applet" factoryName="Applet">
+      <module name="" />
+      <option name="MAIN_CLASS_NAME" />
+      <option name="HTML_FILE_NAME" />
+      <option name="HTML_USED" value="false" />
+      <option name="WIDTH" value="400" />
+      <option name="HEIGHT" value="300" />
+      <option name="POLICY_FILE" value="$APPLICATION_HOME_DIR$/bin/appletviewer.policy" />
+      <option name="VM_PARAMETERS" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" />
       <method />
     </configuration>
     <configuration default="true" type="Application" factoryName="Application">
@@ -433,8 +431,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="287" y="65" width="1462" height="935" extended-state="0" />
-    <editor active="true" />
+    <frame x="279" y="90" width="1462" height="935" extended-state="0" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Thermit Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -452,7 +450,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Cpp4Idea Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3157143" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Napile" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.67137355" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.67137355" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -563,9 +561,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Test2.cpp">
+    <entry file="file://$PROJECT_DIR$/src/mainwindow.ui">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="13" selection-start="13" selection-end="13" vertical-scroll-proportion="0.0">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/mainwindow.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="5" selection-start="5" selection-end="5" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -577,23 +580,9 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/mainwindow.ui">
+    <entry file="file://$PROJECT_DIR$/src/Test2.cpp">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/mainwindow.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="5" selection-start="5" selection-end="5" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main.cpp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="20" selection-start="180" selection-end="180" vertical-scroll-proportion="0.19123507">
+        <state line="0" column="13" selection-start="13" selection-end="13" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
@@ -608,6 +597,13 @@
     <entry file="file://$PROJECT_DIR$/src/mainwindow.h">
       <provider selected="true" editor-type-id="text-editor">
         <state line="9" column="6" selection-start="109" selection-end="109" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main.cpp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="9" column="20" selection-start="180" selection-end="180" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>

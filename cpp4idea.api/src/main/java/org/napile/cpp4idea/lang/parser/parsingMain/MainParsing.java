@@ -106,11 +106,7 @@ public class MainParsing extends MainParserHelper
 		if(token == CTokens.CLASS_KEYWORD)
 			return parseClass(builder);
 		else if(token == CTokens.ENUM_KEYWORD)
-		{
-			//TODO [VISTALL]
-			builder.advanceLexer();
-			return null;
-		}
+			return parseEnum(builder);
 		else if(token == CTokens.NAMESPACE_KEYWORD)
 			return parseNamespace(builder);
 		else if(token == CTokens.TYPEDEF_KEYWORD)
@@ -127,7 +123,7 @@ public class MainParsing extends MainParserHelper
 
 		parseTypeRef(builder);  // new type name
 
-		expect(builder, SEMICOLON, CBundle.message("SEMICOLON.expected"));
+		expect(builder, SEMICOLON, "SEMICOLON.expected");
 
 		return CPsiTypeDeclaration.class;
 	}
@@ -156,6 +152,46 @@ public class MainParsing extends MainParserHelper
 		expect(builder, RBRACE, "RBRACE.expected");
 
 		return CPsiNamespaceDeclaration.class;
+	}
+
+	private static Class<? extends CPsiElement> parseEnum(@NotNull PsiBuilder builder)
+	{
+		builder.advanceLexer();
+
+		consumeIf(builder, IDENTIFIER);  //name
+
+		if(builder.getTokenType() == LBRACE)
+		{
+			builder.advanceLexer();
+
+			while(builder.getTokenType() != RBRACE)
+			{
+				if(builder.getTokenType() == IDENTIFIER)
+				{
+					PsiBuilder.Marker constantBuilder = builder.mark();
+
+					builder.advanceLexer();
+					if(builder.getTokenType() == EQ)
+						ExpressionParsing.parse(builder);
+
+					done(constantBuilder,  CPsiEnumConstant.class);
+
+					if(builder.getTokenType() == COMMA)
+					{
+						builder.advanceLexer();
+					}
+					else
+						break;
+				}
+				else
+					break;
+			}
+
+			expect(builder, RBRACE, "RBRACE.expected");
+			consumeIf(builder, SEMICOLON);
+		}
+
+		return CPsiEnum.class;
 	}
 
 	private static Class<? extends CPsiElement> parseClass(@NotNull PsiBuilder builder)
