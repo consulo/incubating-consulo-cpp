@@ -21,9 +21,8 @@ import java.util.Map;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.config.facet.CFacetUtil;
+import org.napile.cpp4idea.config.facet.CDialectProvider;
 import org.napile.cpp4idea.lang.CDialect;
-import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import com.intellij.lexer.EmptyLexer;
 import com.intellij.lexer.FlexAdapter;
@@ -104,7 +103,7 @@ public class CSyntaxHighlighter extends SyntaxHighlighterBase
 	@Override
 	public Lexer getHighlightingLexer()
 	{
-		CDialect dialect = CFacetUtil.findDialect(virtualFile, project);
+		CDialect dialect = CDialectProvider.getInstance().findDialect(virtualFile, project);
 		return dialect != null ? new FlexAdapter(dialect.getLexer()) : new EmptyLexer();
 	}
 

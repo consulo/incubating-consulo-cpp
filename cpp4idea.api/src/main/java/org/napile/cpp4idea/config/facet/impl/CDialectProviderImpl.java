@@ -1,5 +1,5 @@
 /*
- * Copyright 2010-2012 napile.org
+ * Copyright 2010-2013 napile.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,9 +14,12 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.config.facet;
+package org.napile.cpp4idea.config.facet.impl;
 
 import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.config.facet.CBaseFacet;
+import org.napile.cpp4idea.config.facet.CBaseFacetType;
+import org.napile.cpp4idea.config.facet.CDialectProvider;
 import org.napile.cpp4idea.lang.CDialect;
 import com.intellij.facet.FacetManager;
 import com.intellij.openapi.module.Module;
@@ -27,11 +30,12 @@ import com.intellij.psi.PsiElement;
 
 /**
  * @author VISTALL
- * @date 13:06/29.12.12
+ * @date 13:49/08.02.13
  */
-public class CFacetUtil
+public class CDialectProviderImpl extends CDialectProvider
 {
-	public static CDialect findDialect(@NotNull VirtualFile file, @NotNull Project project)
+	@Override
+	public CDialect findDialect(@NotNull VirtualFile file, @NotNull Project project)
 	{
 		Module module = ModuleUtil.findModuleForFile(file, project);
 		if(module == null)
@@ -50,7 +54,8 @@ public class CFacetUtil
 		return dialect;
 	}
 
-	public static CDialect findDialect(@NotNull PsiElement element)
+	@Override
+	public CDialect findDialect(@NotNull PsiElement element)
 	{
 		Module module = ModuleUtil.findModuleForPsiElement(element);
 		if(module == null)

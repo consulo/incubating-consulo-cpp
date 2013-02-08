@@ -22,11 +22,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.config.facet.CFacetUtil;
+import org.napile.cpp4idea.config.facet.CDialectProvider;
 import org.napile.cpp4idea.lang.CDialect;
 import org.napile.cpp4idea.lang.parser.parsingMain.builder.CMainPsiBuilder;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
-import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import org.napile.cpp4idea.lang.psiInitial.CPsiCompilerVariable;
 import org.napile.cpp4idea.lang.psiInitial.CPsiSharpDefine;
@@ -58,7 +57,7 @@ public class CPreprocessor
 	@Nullable
 	public static CPsiFile preProcess(CPsiSharpFile element)
 	{
-		CDialect dialect = CFacetUtil.findDialect(element);
+		CDialect dialect = CDialectProvider.getInstance().findDialect(element);
 		if(dialect == null)
 			return null;
 

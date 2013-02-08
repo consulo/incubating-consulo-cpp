@@ -2,17 +2,64 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9e6eccfb-d52a-462f-8558-369ce6da4f9b" name="Default" comment="">
-      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\main\java\org\napile\cpp4idea\editor\color\CDefaultColorSchemeParser.java" afterPath="" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/config/facet/CDialectProvider.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/org/napile/cpp4idea/core/CoreCDialectProvider.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../cpp4idea.qt.impl/src/test/java/org/napile/cpp4idea/CppProjectTest.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../.idea/runConfigurations/CppProjectTest.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../java/org/napile/cpp4idea/CppProjectTestCase.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/../../../../.idea/runConfigurations/IDEA_12.xml" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/bytecode.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/funcalloc.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/opcode.h.after" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/opcode.h.before" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/opcode.h" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/runtime.h" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\.idea\.name" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\.idea\compiler.xml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\.idea\copyright\profiles_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\.idea\dictionaries\VISTALL.xml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\.idea\encodings.xml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\.idea\gradle.xml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\.idea\misc.xml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\.idea\modules.xml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\.idea\scopes\scope_settings.xml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\.idea\thermit.xml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\.idea\uiDesigner.xml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\.idea\vcs.xml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\.idea\workspace.xml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\gupdater.iml" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\src\GUpdater.pro" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\src\GUpdater.pro.user" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\src\Test.cpp" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\src\Test.h" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\src\Test2.cpp" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\src\main.cpp" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\src\mainwindow.cpp" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\src\mainwindow.h" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\src\mainwindow.ui" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\src\qtwin.cpp" afterPath="" />
+      <change type="DELETED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\src\qtwin.h" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/preprocessor/CPreprocessor.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/preprocessor/CPreprocessor.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/CPsiParserImpl.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/CPsiParserImpl.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/ide/highlight/CSyntaxHighlighter.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/ide/highlight/CSyntaxHighlighter.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/parsingMain/MainParsing.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/lang/parser/parsingMain/MainParsing.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../cpp4idea.api.iml" afterPath="$PROJECT_DIR$/../../../cpp4idea.api.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../../cpp4idea.qt.impl/cpp4idea.qt.impl.iml" afterPath="$PROJECT_DIR$/../../../../cpp4idea.qt.impl/cpp4idea.qt.impl.iml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/misc.xml" afterPath="$PROJECT_DIR$/.idea/misc.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../../../META-INF/plugin.xml" afterPath="$PROJECT_DIR$/../../../META-INF/plugin.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/project1.iml" afterPath="$PROJECT_DIR$/project1.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/qt.h" afterPath="$PROJECT_DIR$/src/qt.h" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MOVED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\resource\main\org\napile\cpp4idea\editor\color\CDefaultColorScheme.xml" afterPath="$PROJECT_DIR$/../../../resource/main/org/napile/cpp4idea/editor/color/Default.xml" />
+      <change type="MOVED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\main\java\org\napile\cpp4idea\config\facet\CFacetUtil.java" afterPath="$PROJECT_DIR$/../../main/java/org/napile/cpp4idea/config/facet/impl/CDialectProviderImpl.java" />
+      <change type="MOVED" beforePath="I:\github.com\VISTALL\cpp4idea\cpp4idea.api\src\test\gupdater\.idea\ant.xml" afterPath="$PROJECT_DIR$/.idea/ant.xml" />
     </list>
     <ignored path="project1.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="9e6eccfb-d52a-462f-8558-369ce6da4f9b" time="1356722902775" ignored="false" />
+    <file path="/Dummy.txt" changelist="9e6eccfb-d52a-462f-8558-369ce6da4f9b" time="1360325421903" ignored="false" />
     <file path="/project1.iml" changelist="9e6eccfb-d52a-462f-8558-369ce6da4f9b" time="1356633936327" ignored="false" />
-    <file path="/qt.h" changelist="9e6eccfb-d52a-462f-8558-369ce6da4f9b" time="1356722871561" ignored="false" />
+    <file path="/qt.h" changelist="9e6eccfb-d52a-462f-8558-369ce6da4f9b" time="1360321086619" ignored="false" />
+    <file path="/opcode.h" changelist="9e6eccfb-d52a-462f-8558-369ce6da4f9b" time="1360316664807" ignored="false" />
+    <file path="/funcalloc.h" changelist="9e6eccfb-d52a-462f-8558-369ce6da4f9b" time="1360320316822" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -71,10 +118,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="qt.h" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/qt.h">
+      <file leaf-file-name="funcalloc.h" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/funcalloc.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="1" column="21" selection-start="13" selection-end="13" vertical-scroll-proportion="0.021329988">
+            <state line="15" column="62" selection-start="359" selection-end="359" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="opcode.h.after" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/opcode.h.after">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="opcode.h.before" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/opcode.h.before">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -99,13 +164,20 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/project1.iml" />
+        <option value="$PROJECT_DIR$/src/opcode.h" />
+        <option value="$PROJECT_DIR$/src/bytecode.h" />
+        <option value="$PROJECT_DIR$/src/runtime.h" />
         <option value="$PROJECT_DIR$/src/qt.h" />
+        <option value="$PROJECT_DIR$/src/funcalloc.h" />
       </list>
     </option>
   </component>
+  <component name="MavenProjectNavigator">
+    <treeState />
+  </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="288" />
-    <option name="y" value="66" />
+    <option name="x" value="252" />
+    <option name="y" value="59" />
     <option name="width" value="1462" />
     <option name="height" value="979" />
   </component>
@@ -135,6 +207,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -169,21 +243,24 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="GoToFile.includeJavaFiles" value="false" />
-    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
-    <property name="options.lastSelected" value="preferences.pluginManager" />
+    <property name="options.lastSelected" value="reference.settingsdialog.IDE.editor.colors.Language Defaults" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.side.proportion" value="0.20000002" />
+    <property name="MemberChooser.copyJavadoc" value="false" />
+    <property name="GoToClass.toSaveIncludeLibraries" value="false" />
+    <property name="FullScreen" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="RunManager">
     <configuration default="true" type="#org.jetbrains.idea.devkit.run.PluginConfigurationType" factoryName="Plugin">
@@ -311,8 +388,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="288" y="66" width="1462" height="979" extended-state="0" />
-    <editor active="false" />
+    <frame x="252" y="59" width="1462" height="979" extended-state="0" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Thermit Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -328,8 +405,9 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Cpp4Idea Debug" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.46" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Napile" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.6707169" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.25" sideWeight="0.6707169" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -393,7 +471,32 @@
   <component name="XDebuggerManager">
     <breakpoint-manager />
   </component>
+  <component name="antWorkspaceConfiguration">
+    <option name="IS_AUTOSCROLL_TO_SOURCE" value="false" />
+    <option name="FILTER_TARGETS" value="false" />
+  </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/opcode.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="4" selection-start="4" selection-end="4" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/qt.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="7" column="12" selection-start="40" selection-end="40" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/qt.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="21" selection-start="13" selection-end="13" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/qt.h">
       <provider selected="true" editor-type-id="text-editor">
         <state line="1" column="21" selection-start="13" selection-end="13" vertical-scroll-proportion="0.0">
@@ -426,13 +529,141 @@
         <state line="4" column="17" selection-start="192" selection-end="192" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/qt.h">
+    <entry file="file://$PROJECT_DIR$/src/opcode.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="21" selection-start="13" selection-end="13" vertical-scroll-proportion="0.021329988">
+        <state line="17" column="47" selection-start="946" selection-end="946" vertical-scroll-proportion="0.3412798">
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/bytecode.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="21" column="15" selection-start="370" selection-end="370" vertical-scroll-proportion="0.42158094">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/runtime.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="44" column="41" selection-start="791" selection-end="791" vertical-scroll-proportion="0.020075282">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/qt.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="23" selection-start="68" selection-end="68" vertical-scroll-proportion="0.20075282">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/funcalloc.h">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="62" selection-start="359" selection-end="359" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/opcode.h.after">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/opcode.h.before">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20000002" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>1.6</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>Qt C++|project1</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20000002" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectJDKs.UI">
+        <settings>
+          <last-edited>1.6</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.20000002" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>
 

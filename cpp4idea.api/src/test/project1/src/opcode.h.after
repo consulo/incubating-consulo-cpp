@@ -1,0 +1,153 @@
+<CPsiFile text="enum {\n  //                                      ------- Stack -------\n  // Opcode                  Operands     before         after\n  /* 00 */ CALL,          // index, argc  [rcv, arg...]  [returned]\n  /* 01 */ PUSH_NUMBER,   // index        []             [number]\n  /* 02 */ PUSH_STRING,   // index        []             [string]\n  /* 03 */ PUSH_SELF,     //              []             [self]\n  /* 04 */ PUSH_NIL,      //              []             [nil]\n  /* 05 */ PUSH_BOOL,     // 1=t, 0=f     []             [true or false]\n  /* 06 */ GET_LOCAL,     // index        []             [value]\n  /* 07 */ SET_LOCAL,     // index        [value]        []\n  /* 08 */ JUMP_UNLESS,   // offset       [test]         []\n  /* 09 */ JUMP,          // offset       []             []\n  /* 10 */ ADD,           //              [a, b]         [result]\n  /* 11 */ RETURN         //              []             []\n};\n\ntypedef unsigned char byte; // 1 byte">
+	<CPsiEnum text="enum {\n  //                                      ------- Stack -------\n  // Opcode                  Operands     before         after\n  /* 00 */ CALL,          // index, argc  [rcv, arg...]  [returned]\n  /* 01 */ PUSH_NUMBER,   // index        []             [number]\n  /* 02 */ PUSH_STRING,   // index        []             [string]\n  /* 03 */ PUSH_SELF,     //              []             [self]\n  /* 04 */ PUSH_NIL,      //              []             [nil]\n  /* 05 */ PUSH_BOOL,     // 1=t, 0=f     []             [true or false]\n  /* 06 */ GET_LOCAL,     // index        []             [value]\n  /* 07 */ SET_LOCAL,     // index        [value]        []\n  /* 08 */ JUMP_UNLESS,   // offset       [test]         []\n  /* 09 */ JUMP,          // offset       []             []\n  /* 10 */ ADD,           //              [a, b]         [result]\n  /* 11 */ RETURN         //              []             []\n};">
+		<LeafPsiElement text="enum" />
+		<PsiWhiteSpace text=" " />
+		<LeafPsiElement text="{" />
+		<LeafPsiElement text="\n" />
+		<PsiWhiteSpace text="  " />
+		<PsiCoreComment text="//                                      ------- Stack -------" />
+		<LeafPsiElement text="\n" />
+		<PsiWhiteSpace text="  " />
+		<PsiCoreComment text="// Opcode                  Operands     before         after" />
+		<LeafPsiElement text="\n" />
+		<PsiWhiteSpace text="  " />
+		<PsiCoreComment text="/* 00 */" />
+		<PsiWhiteSpace text=" " />
+		<CPsiEnumConstant text="CALL">
+			<LeafPsiElement text="CALL" />
+		</CPsiEnumConstant>
+		<LeafPsiElement text="," />
+		<PsiWhiteSpace text="          " />
+		<PsiCoreComment text="// index, argc  [rcv, arg...]  [returned]" />
+		<LeafPsiElement text="\n" />
+		<PsiWhiteSpace text="  " />
+		<PsiCoreComment text="/* 01 */" />
+		<PsiWhiteSpace text=" " />
+		<CPsiEnumConstant text="PUSH_NUMBER">
+			<LeafPsiElement text="PUSH_NUMBER" />
+		</CPsiEnumConstant>
+		<LeafPsiElement text="," />
+		<PsiWhiteSpace text="   " />
+		<PsiCoreComment text="// index        []             [number]" />
+		<LeafPsiElement text="\n" />
+		<PsiWhiteSpace text="  " />
+		<PsiCoreComment text="/* 02 */" />
+		<PsiWhiteSpace text=" " />
+		<CPsiEnumConstant text="PUSH_STRING">
+			<LeafPsiElement text="PUSH_STRING" />
+		</CPsiEnumConstant>
+		<LeafPsiElement text="," />
+		<PsiWhiteSpace text="   " />
+		<PsiCoreComment text="// index        []             [string]" />
+		<LeafPsiElement text="\n" />
+		<PsiWhiteSpace text="  " />
+		<PsiCoreComment text="/* 03 */" />
+		<PsiWhiteSpace text=" " />
+		<CPsiEnumConstant text="PUSH_SELF">
+			<LeafPsiElement text="PUSH_SELF" />
+		</CPsiEnumConstant>
+		<LeafPsiElement text="," />
+		<PsiWhiteSpace text="     " />
+		<PsiCoreComment text="//              []             [self]" />
+		<LeafPsiElement text="\n" />
+		<PsiWhiteSpace text="  " />
+		<PsiCoreComment text="/* 04 */" />
+		<PsiWhiteSpace text=" " />
+		<CPsiEnumConstant text="PUSH_NIL">
+			<LeafPsiElement text="PUSH_NIL" />
+		</CPsiEnumConstant>
+		<LeafPsiElement text="," />
+		<PsiWhiteSpace text="      " />
+		<PsiCoreComment text="//              []             [nil]" />
+		<LeafPsiElement text="\n" />
+		<PsiWhiteSpace text="  " />
+		<PsiCoreComment text="/* 05 */" />
+		<PsiWhiteSpace text=" " />
+		<CPsiEnumConstant text="PUSH_BOOL">
+			<LeafPsiElement text="PUSH_BOOL" />
+		</CPsiEnumConstant>
+		<LeafPsiElement text="," />
+		<PsiWhiteSpace text="     " />
+		<PsiCoreComment text="// 1=t, 0=f     []             [true or false]" />
+		<LeafPsiElement text="\n" />
+		<PsiWhiteSpace text="  " />
+		<PsiCoreComment text="/* 06 */" />
+		<PsiWhiteSpace text=" " />
+		<CPsiEnumConstant text="GET_LOCAL">
+			<LeafPsiElement text="GET_LOCAL" />
+		</CPsiEnumConstant>
+		<LeafPsiElement text="," />
+		<PsiWhiteSpace text="     " />
+		<PsiCoreComment text="// index        []             [value]" />
+		<LeafPsiElement text="\n" />
+		<PsiWhiteSpace text="  " />
+		<PsiCoreComment text="/* 07 */" />
+		<PsiWhiteSpace text=" " />
+		<CPsiEnumConstant text="SET_LOCAL">
+			<LeafPsiElement text="SET_LOCAL" />
+		</CPsiEnumConstant>
+		<LeafPsiElement text="," />
+		<PsiWhiteSpace text="     " />
+		<PsiCoreComment text="// index        [value]        []" />
+		<LeafPsiElement text="\n" />
+		<PsiWhiteSpace text="  " />
+		<PsiCoreComment text="/* 08 */" />
+		<PsiWhiteSpace text=" " />
+		<CPsiEnumConstant text="JUMP_UNLESS">
+			<LeafPsiElement text="JUMP_UNLESS" />
+		</CPsiEnumConstant>
+		<LeafPsiElement text="," />
+		<PsiWhiteSpace text="   " />
+		<PsiCoreComment text="// offset       [test]         []" />
+		<LeafPsiElement text="\n" />
+		<PsiWhiteSpace text="  " />
+		<PsiCoreComment text="/* 09 */" />
+		<PsiWhiteSpace text=" " />
+		<CPsiEnumConstant text="JUMP">
+			<LeafPsiElement text="JUMP" />
+		</CPsiEnumConstant>
+		<LeafPsiElement text="," />
+		<PsiWhiteSpace text="          " />
+		<PsiCoreComment text="// offset       []             []" />
+		<LeafPsiElement text="\n" />
+		<PsiWhiteSpace text="  " />
+		<PsiCoreComment text="/* 10 */" />
+		<PsiWhiteSpace text=" " />
+		<CPsiEnumConstant text="ADD">
+			<LeafPsiElement text="ADD" />
+		</CPsiEnumConstant>
+		<LeafPsiElement text="," />
+		<PsiWhiteSpace text="           " />
+		<PsiCoreComment text="//              [a, b]         [result]" />
+		<LeafPsiElement text="\n" />
+		<PsiWhiteSpace text="  " />
+		<PsiCoreComment text="/* 11 */" />
+		<PsiWhiteSpace text=" " />
+		<CPsiEnumConstant text="RETURN">
+			<LeafPsiElement text="RETURN" />
+		</CPsiEnumConstant>
+		<PsiWhiteSpace text="         " />
+		<PsiCoreComment text="//              []             []" />
+		<LeafPsiElement text="\n" />
+		<LeafPsiElement text="}" />
+		<LeafPsiElement text=";" />
+	</CPsiEnum>
+	<LeafPsiElement text="\n" />
+	<LeafPsiElement text="\n" />
+	<CPsiTypeDeclaration text="typedef unsigned char byte;">
+		<LeafPsiElement text="typedef" />
+		<PsiWhiteSpace text=" " />
+		<CPsiTypeRef text="unsigned char">
+			<LeafPsiElement text="unsigned" />
+			<PsiWhiteSpace text=" " />
+			<LeafPsiElement text="char" />
+		</CPsiTypeRef>
+		<PsiWhiteSpace text=" " />
+		<CPsiTypeRef text="byte">
+			<LeafPsiElement text="byte" />
+		</CPsiTypeRef>
+		<LeafPsiElement text=";" />
+	</CPsiTypeDeclaration>
+	<PsiWhiteSpace text=" " />
+	<PsiCoreComment text="// 1 byte" />
+</CPsiFile>

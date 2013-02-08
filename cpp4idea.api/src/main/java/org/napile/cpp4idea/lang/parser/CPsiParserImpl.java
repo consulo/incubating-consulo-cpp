@@ -18,7 +18,7 @@ package org.napile.cpp4idea.lang.parser;
 
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CLanguage;
-import org.napile.cpp4idea.config.facet.CFacetUtil;
+import org.napile.cpp4idea.config.facet.CDialectProvider;
 import org.napile.cpp4idea.lang.CDialect;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import com.intellij.lang.ASTNode;
@@ -49,7 +49,7 @@ public class CPsiParserImpl implements PsiParser, CPsiTokens
 			PsiFile psiFile = builder.getUserDataUnprotected(FileContextUtil.CONTAINING_FILE_KEY);
 			if(psiFile != null)
 			{
-				CDialect dialect = CFacetUtil.findDialect(psiFile);
+				CDialect dialect = CDialectProvider.getInstance().findDialect(psiFile);
 
 				if(dialect == null)
 					break FacetCheck;

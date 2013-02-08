@@ -108,7 +108,7 @@ public class MainParsing extends MainParserHelper
 		if(token == CPsiTokens.CLASS_KEYWORD)
 			return parseClass(builder);
 		else if(token == CPsiTokens.ENUM_KEYWORD)
-			return parseEnum(builder);
+			return parseEnum(builder, true);
 		else if(token == CPsiTokens.NAMESPACE_KEYWORD)
 			return parseNamespace(builder);
 		else if(token == CPsiTokens.TYPEDEF_KEYWORD)
@@ -156,7 +156,7 @@ public class MainParsing extends MainParserHelper
 		return CPsiNamespaceDeclaration.class;
 	}
 
-	private static Class<? extends CPsiElement> parseEnum(@NotNull PsiBuilder builder)
+	private static Class<? extends CPsiElement> parseEnum(@NotNull PsiBuilder builder, boolean semicolon)
 	{
 		builder.advanceLexer();
 
@@ -190,7 +190,9 @@ public class MainParsing extends MainParserHelper
 			}
 
 			expect(builder, RBRACE, "RBRACE.expected");
-			consumeIf(builder, SEMICOLON);
+
+			if(semicolon)
+				expect(builder, SEMICOLON, "SEMICOLON.expected");
 		}
 
 		return CPsiEnum.class;
