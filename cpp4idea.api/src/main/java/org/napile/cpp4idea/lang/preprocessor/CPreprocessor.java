@@ -26,7 +26,8 @@ import org.napile.cpp4idea.config.facet.CFacetUtil;
 import org.napile.cpp4idea.lang.CDialect;
 import org.napile.cpp4idea.lang.parser.parsingMain.builder.CMainPsiBuilder;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
-import org.napile.cpp4idea.lang.psi.CTokens;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import org.napile.cpp4idea.lang.psiInitial.CPsiCompilerVariable;
 import org.napile.cpp4idea.lang.psiInitial.CPsiSharpDefine;
 import org.napile.cpp4idea.lang.psiInitial.CPsiSharpDefineValue;
@@ -75,7 +76,7 @@ public class CPreprocessor
 			@Override
 			public void visitElement(PsiElement element)
 			{
-				if(element.getNode().getElementType() == CTokens.IDENTIFIER)
+				if(element.getNode().getElementType() == CPsiTokens.IDENTIFIER)
 				{
 					List<PsiElement> defineElements = define.get(element.getText());
 					if(defineElements != null)
@@ -137,7 +138,7 @@ public class CPreprocessor
 
 		CMainPsiBuilder builder = new CMainPsiBuilder(element.getProject(), elements);
 
-		ASTNode node = dialect.parseMain(builder, CTokens.C_PROCESSED_FILE_TYPE);
+		ASTNode node = dialect.parseMain(builder, CPsiTokens.C_PROCESSED_FILE_TYPE);
 
 		node.putUserData(CPsiFile.C_SHARP_FILE, element);
 

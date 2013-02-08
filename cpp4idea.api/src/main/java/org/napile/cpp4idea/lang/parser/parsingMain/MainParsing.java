@@ -86,7 +86,7 @@ public class MainParsing extends MainParserHelper
 		consumeIf(builder, SIGNED_KEYWORD);
 
 		IElementType currentToken = builder.getTokenType();
-		if(!CTokens.TYPES.contains(currentToken) && currentToken != IDENTIFIER)
+		if(!CPsiTokens.TYPES.contains(currentToken) && currentToken != IDENTIFIER)
 		{
 			marker.drop();
 			return null;
@@ -103,13 +103,13 @@ public class MainParsing extends MainParserHelper
 	{
 		IElementType token = builder.getTokenType();
 
-		if(token == CTokens.CLASS_KEYWORD)
+		if(token == CPsiTokens.CLASS_KEYWORD)
 			return parseClass(builder);
-		else if(token == CTokens.ENUM_KEYWORD)
+		else if(token == CPsiTokens.ENUM_KEYWORD)
 			return parseEnum(builder);
-		else if(token == CTokens.NAMESPACE_KEYWORD)
+		else if(token == CPsiTokens.NAMESPACE_KEYWORD)
 			return parseNamespace(builder);
-		else if(token == CTokens.TYPEDEF_KEYWORD)
+		else if(token == CPsiTokens.TYPEDEF_KEYWORD)
 			return parseTypeDef(builder);
 
 		return parseMethodOrField(builder);
@@ -238,7 +238,7 @@ public class MainParsing extends MainParserHelper
 				if(classToken == RBRACE)
 					break;
 
-				if(CTokens.ACCESS_MODIFIERS.contains(classToken))
+				if(CPsiTokens.ACCESS_MODIFIERS.contains(classToken))
 				{
 					PsiBuilder.Marker memberMark = builder.mark();
 					builder.advanceLexer();
@@ -429,7 +429,7 @@ public class MainParsing extends MainParserHelper
 	{
 		PsiBuilder.Marker marker = builder.mark();
 
-		while(!builder.eof() && CTokens.MODIFIERS.contains(builder.getTokenType()))
+		while(!builder.eof() && CPsiTokens.MODIFIERS.contains(builder.getTokenType()))
 			advanceLexerAndSkipLines(builder);
 
 		done(marker, CPsiModifierList.class);

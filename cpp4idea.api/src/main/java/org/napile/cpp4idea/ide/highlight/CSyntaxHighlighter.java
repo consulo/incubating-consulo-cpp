@@ -23,7 +23,8 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.config.facet.CFacetUtil;
 import org.napile.cpp4idea.lang.CDialect;
-import org.napile.cpp4idea.lang.psi.CTokens;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import com.intellij.lexer.EmptyLexer;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
@@ -66,17 +67,17 @@ public class CSyntaxHighlighter extends SyntaxHighlighterBase
 
 	static
 	{
-		fillMap(CTokens.END_OF_LINE_COMMENT, LINE_COMMENT, LINE_COMMENT);
-		fillMap(CTokens.C_STYLE_COMMENT, BLOCK_COMMENT, BLOCK_COMMENT);
-		fillMap(CTokens.KEYWORD_SET, KEYWORD, LIGHT_KEYWORD);
-		fillMap(CTokens.STRING_LITERAL_SET, STRING, LIGHT_STRING);
-		fillMap(CTokens.STRING_INCLUDE_LITERAL, STRING, LIGHT_STRING);
+		fillMap(CPsiTokens.END_OF_LINE_COMMENT, LINE_COMMENT, LINE_COMMENT);
+		fillMap(CPsiTokens.C_STYLE_COMMENT, BLOCK_COMMENT, BLOCK_COMMENT);
+		fillMap(CPsiTokens.KEYWORD_SET, KEYWORD, LIGHT_KEYWORD);
+		fillMap(CPsiTokens.STRING_LITERAL_SET, STRING, LIGHT_STRING);
+		fillMap(CPsiTokens.STRING_INCLUDE_LITERAL, STRING, LIGHT_STRING);
 		// numbers
-		fillMap(CTokens.INTEGER_LITERAL, NUMBER, LIGHT_NUMBER);
-		fillMap(CTokens.LONG_LITERAL, NUMBER, LIGHT_NUMBER);
-		fillMap(CTokens.FLOAT_LITERAL, NUMBER, LIGHT_NUMBER);
-		fillMap(CTokens.DOUBLE_LITERAL, NUMBER, LIGHT_NUMBER);
-		fillMap(CTokens.BOOL_LITERAL, KEYWORD, LIGHT_KEYWORD);
+		fillMap(CPsiTokens.INTEGER_LITERAL, NUMBER, LIGHT_NUMBER);
+		fillMap(CPsiTokens.LONG_LITERAL, NUMBER, LIGHT_NUMBER);
+		fillMap(CPsiTokens.FLOAT_LITERAL, NUMBER, LIGHT_NUMBER);
+		fillMap(CPsiTokens.DOUBLE_LITERAL, NUMBER, LIGHT_NUMBER);
+		fillMap(CPsiTokens.BOOL_LITERAL, KEYWORD, LIGHT_KEYWORD);
 	}
 
 	private static void fillMap(IElementType elementType, TextAttributesKey... keys)

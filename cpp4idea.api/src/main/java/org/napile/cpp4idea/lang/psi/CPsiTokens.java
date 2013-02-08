@@ -26,7 +26,7 @@ import com.intellij.psi.tree.TokenSet;
  * @author VISTALL
  * @date 2:42/10.12.2011
  */
-public interface CTokens extends TokenType, CPsiSharpTokens
+public interface CPsiTokens extends TokenType, CPsiSharpTokens
 {
 	IElementType C_PROCESSED_FILE_TYPE = new IElementType("C_PROCESSED_FILE_TYPE", CLanguage.INSTANCE);
 
