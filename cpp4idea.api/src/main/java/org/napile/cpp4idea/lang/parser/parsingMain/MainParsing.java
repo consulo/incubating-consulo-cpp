@@ -94,6 +94,8 @@ public class MainParsing extends MainParserHelper
 
 		builder.advanceLexer();
 
+		consumeIf(builder, ASTERISK);
+
 		done(marker, CPsiTypeRef.class);
 
 		return marker;
