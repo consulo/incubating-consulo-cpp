@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.config.facet.CFacetUtil;
 import org.napile.cpp4idea.lang.CDialect;
-import org.napile.cpp4idea.lang.psi.CTokens;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.LanguageParserDefinitions;
 import com.intellij.lang.ParserDefinition;
@@ -36,7 +36,7 @@ import com.intellij.psi.tree.IElementType;
  * @author VISTALL
  * @date 14:28/18.12.2011
  */
-public class CPsiParserImpl implements PsiParser, CTokens
+public class CPsiParserImpl implements PsiParser, CPsiTokens
 {
 	@NotNull
 	@Override

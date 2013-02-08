@@ -26,7 +26,7 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.CLanguage;
-import org.napile.cpp4idea.lang.psi.CTokens;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import com.intellij.lang.*;
 import com.intellij.lang.impl.ASTNodeBuilder;
 import com.intellij.openapi.diagnostic.Logger;
@@ -792,7 +792,7 @@ public class CMainPsiBuilder extends UserDataHolderBase implements PsiBuilder, A
 
 	private boolean whitespaceOrComment(IElementType token)
 	{
-		return myWhitespaces.contains(token) || myComments.contains(token) || token == CTokens.NEW_LINE;
+		return myWhitespaces.contains(token) || myComments.contains(token) || token == CPsiTokens.NEW_LINE;
 	}
 
 	@Override

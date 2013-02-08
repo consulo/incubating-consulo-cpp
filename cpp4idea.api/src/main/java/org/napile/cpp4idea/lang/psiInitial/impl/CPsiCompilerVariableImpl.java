@@ -17,7 +17,7 @@
 package org.napile.cpp4idea.lang.psiInitial.impl;
 
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.psi.CTokens;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
 import org.napile.cpp4idea.lang.psiInitial.CPsiCompilerVariable;
 import org.napile.cpp4idea.lang.psiInitial.visitors.CSharpPsiElementVisitor;
@@ -49,6 +49,6 @@ public class CPsiCompilerVariableImpl extends CPsiElementBaseImpl implements CPs
 	@NotNull
 	public PsiElement getNameElement()
 	{
-		return findNotNullChildByType(CTokens.IDENTIFIER);
+		return findNotNullChildByType(CPsiTokens.IDENTIFIER);
 	}
 }

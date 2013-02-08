@@ -154,7 +154,7 @@ public interface CPsiTokens extends TokenType, CPsiSharpTokens
 
 	TokenSet TYPES = TokenSet.create
 	(
-		INT_KEYWORD, __INT64_KEYWORD, BOOL_KEYWORD, CHAR_KEYWORD, LONG_KEYWORD
+		INT_KEYWORD, __INT64_KEYWORD, BOOL_KEYWORD, CHAR_KEYWORD, LONG_KEYWORD, VOID_KEYWORD
 	);
 
 	TokenSet OPERATION_SET = TokenSet.create

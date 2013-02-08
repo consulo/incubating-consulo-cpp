@@ -18,7 +18,7 @@ package org.napile.cpp4idea.lang.psi.impl;
 
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiSuperClass;
-import org.napile.cpp4idea.lang.psi.CTokens;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
@@ -44,6 +44,6 @@ public class CPsiSuperClassImpl extends CPsiElementBaseImpl implements CPsiSuper
 	@Override
 	public PsiElement getAccessElement()
 	{
-		return findChildByType(CTokens.ACCESS_MODIFIERS);
+		return findChildByType(CPsiTokens.ACCESS_MODIFIERS);
 	}
 }

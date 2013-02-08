@@ -17,7 +17,7 @@
 package org.napile.cpp4idea.util;
 
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.psi.CTokens;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiElement;
 
@@ -32,7 +32,7 @@ public class CPsiUtil
 		if(element.getTextRange().equals(textRange))
 			return element;
 
-		if(element.getNode().getElementType() == CTokens.IDENTIFIER)
+		if(element.getNode().getElementType() == CPsiTokens.IDENTIFIER)
 		{
 			System.out.println(element.getText() + " " + element.getTextRange() + " " + textRange);
 		}

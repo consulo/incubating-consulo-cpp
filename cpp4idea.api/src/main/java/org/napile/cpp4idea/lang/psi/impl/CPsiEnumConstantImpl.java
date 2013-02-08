@@ -19,7 +19,7 @@ package org.napile.cpp4idea.lang.psi.impl;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
 import org.napile.cpp4idea.lang.psi.CPsiExpression;
-import org.napile.cpp4idea.lang.psi.CTokens;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
@@ -48,7 +48,7 @@ public class CPsiEnumConstantImpl extends CPsiElementBaseImpl implements CPsiEnu
 	@Override
 	public PsiElement getNameElement()
 	{
-		return findChildByType(CTokens.IDENTIFIER);
+		return findChildByType(CPsiTokens.IDENTIFIER);
 	}
 
 	@Override

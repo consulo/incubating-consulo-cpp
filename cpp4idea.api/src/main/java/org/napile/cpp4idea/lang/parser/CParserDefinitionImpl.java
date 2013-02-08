@@ -19,7 +19,7 @@ package org.napile.cpp4idea.lang.parser;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.psi.CPsiTokenImpl;
-import org.napile.cpp4idea.lang.psi.CTokens;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import org.napile.cpp4idea.lang.psi.impl.CPsiFileImpl;
 import org.napile.cpp4idea.lang.psiInitial.CPsiSharpTokenImpl;
 import org.napile.cpp4idea.lang.psiInitial.impl.CPsiSharpFileImpl;
@@ -67,21 +67,21 @@ public class CParserDefinitionImpl implements ParserDefinition
 	@Override
 	public TokenSet getWhitespaceTokens()
 	{
-		return CTokens.WHITE_SPACE_SET;
+		return CPsiTokens.WHITE_SPACE_SET;
 	}
 
 	@NotNull
 	@Override
 	public TokenSet getCommentTokens()
 	{
-		return CTokens.COMMENT_SET;
+		return CPsiTokens.COMMENT_SET;
 	}
 
 	@NotNull
 	@Override
 	public TokenSet getStringLiteralElements()
 	{
-		return CTokens.STRING_LITERAL_SET;
+		return CPsiTokens.STRING_LITERAL_SET;
 	}
 
 	@NotNull
@@ -92,7 +92,7 @@ public class CParserDefinitionImpl implements ParserDefinition
 			return ((CPsiTokenImpl) node.getElementType()).createPsi(node);
 		else if(node.getElementType() instanceof CPsiSharpTokenImpl)
 			return ((CPsiSharpTokenImpl) node.getElementType()).createPsi(node);
-		else if(node.getElementType() == CTokens.C_PROCESSED_FILE_TYPE)
+		else if(node.getElementType() == CPsiTokens.C_PROCESSED_FILE_TYPE)
 			return new CPsiFileImpl(node);
 
 		throw new IllegalArgumentException("Illegal argument : " + node.getElementType());

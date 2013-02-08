@@ -19,8 +19,8 @@ package org.napile.cpp4idea.lang.parser.parsingMain;
 import org.jetbrains.annotations.PropertyKey;
 import org.napile.cpp4idea.CBundle;
 import org.napile.cpp4idea.lang.psi.CPsiElement;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import org.napile.cpp4idea.lang.psi.CTokenElements;
-import org.napile.cpp4idea.lang.psi.CTokens;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.tree.IElementType;
 
@@ -28,7 +28,7 @@ import com.intellij.psi.tree.IElementType;
  * @author VISTALL
  * @date 15:26/29.12.12
  */
-public class MainParserHelper implements CTokens
+public class MainParserHelper implements CPsiTokens
 {
 	public static boolean isSet(int val, int constant)
 	{

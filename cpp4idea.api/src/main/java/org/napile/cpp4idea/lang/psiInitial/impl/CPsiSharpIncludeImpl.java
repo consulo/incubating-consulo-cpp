@@ -18,8 +18,7 @@ package org.napile.cpp4idea.lang.psiInitial.impl;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.lang.psi.CTokens;
-import org.napile.cpp4idea.lang.psi.CTokens;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
 import org.napile.cpp4idea.lang.psiInitial.CPsiSharpInclude;
 import org.napile.cpp4idea.lang.psiInitial.visitors.CSharpPsiElementVisitor;
@@ -50,7 +49,7 @@ public class CPsiSharpIncludeImpl extends CPsiElementBaseImpl implements CPsiSha
 	@Override
 	public PsiElement getIncludeElement()
 	{
-		return findChildByType(CTokens.STRING_LITERAL);
+		return findChildByType(CPsiTokens.STRING_LITERAL);
 	}
 
 	@Override

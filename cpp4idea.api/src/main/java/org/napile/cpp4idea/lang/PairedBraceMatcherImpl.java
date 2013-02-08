@@ -18,8 +18,7 @@ package org.napile.cpp4idea.lang;
 
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.lang.psi.CTokens;
-import org.napile.cpp4idea.lang.psi.CTokens;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import com.intellij.lang.BracePair;
 import com.intellij.lang.PairedBraceMatcher;
 import com.intellij.psi.PsiFile;
@@ -33,10 +32,10 @@ public class PairedBraceMatcherImpl implements PairedBraceMatcher
 {
 	private static final BracePair[] PAIRS =
 	{
-			new BracePair(CTokens.LPARENTH, CTokens.RPARENTH, true),
-			new BracePair(CTokens.LBRACE, CTokens.RBRACE, false),
-			new BracePair(CTokens.S_IFDEF_KEYWORD, CTokens.S_ENDIF_KEYWORD, false),
-			new BracePair(CTokens.S_IFNDEF_KEYWORD, CTokens.S_ENDIF_KEYWORD, false)
+			new BracePair(CPsiTokens.LPARENTH, CPsiTokens.RPARENTH, true),
+			new BracePair(CPsiTokens.LBRACE, CPsiTokens.RBRACE, false),
+			new BracePair(CPsiTokens.S_IFDEF_KEYWORD, CPsiTokens.S_ENDIF_KEYWORD, false),
+			new BracePair(CPsiTokens.S_IFNDEF_KEYWORD, CPsiTokens.S_ENDIF_KEYWORD, false)
 	};
 
 	@Override

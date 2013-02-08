@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.psi.CPsiDeclaration;
-import org.napile.cpp4idea.lang.psi.CTokens;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.IncorrectOperationException;
@@ -40,7 +40,7 @@ public class CPsiDeclarationImpl extends CPsiElementBaseImpl implements CPsiDecl
 	@Override
 	public PsiElement getNameIdentifier()
 	{
-		return findChildByType(CTokens.IDENTIFIER);
+		return findChildByType(CPsiTokens.IDENTIFIER);
 	}
 
 	@Override
