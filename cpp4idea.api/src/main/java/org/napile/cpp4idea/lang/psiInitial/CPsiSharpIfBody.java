@@ -22,4 +22,7 @@ package org.napile.cpp4idea.lang.psiInitial;
  */
 public interface CPsiSharpIfBody extends CPsiSharpElement
 {
+	boolean isElseBody();
+
+	CPsiSharpIfDef getIfDef();
 }

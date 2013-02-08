@@ -19,6 +19,7 @@ package org.napile.cpp4idea.lang.psiInitial.impl;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
 import org.napile.cpp4idea.lang.psiInitial.CPsiSharpIfBody;
+import org.napile.cpp4idea.lang.psiInitial.CPsiSharpIfDef;
 import org.napile.cpp4idea.lang.psiInitial.visitors.CSharpPsiElementVisitor;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElementVisitor;
@@ -41,5 +42,17 @@ public class CPsiSharpIfBodyImpl extends CPsiElementBaseImpl implements CPsiShar
 			((CSharpPsiElementVisitor)visitor).visitSIfBody(this);
 		else
 			super.accept(visitor);
+	}
+
+	@Override
+	public boolean isElseBody()
+	{
+		return getIfDef().getElseBody() == this;
+	}
+
+	@Override
+	public CPsiSharpIfDef getIfDef()
+	{
+		return (CPsiSharpIfDef) getParent();
 	}
 }

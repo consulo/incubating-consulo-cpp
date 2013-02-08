@@ -21,6 +21,7 @@ import org.napile.cpp4idea.lang.preprocessor.CPreprocessor;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
 import org.napile.cpp4idea.lang.psiInitial.CPsiCompilerVariable;
 import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
+import org.napile.cpp4idea.lang.psiInitial.CPsiSharpIfBody;
 import org.napile.cpp4idea.lang.psiInitial.CPsiSharpIfDef;
 import org.napile.cpp4idea.lang.psiInitial.visitors.CSharpPsiRecursiveElementVisitor;
 import com.intellij.lang.annotation.AnnotationHolder;
@@ -69,12 +70,18 @@ public class PreHighlighterVisitor extends CSharpPsiRecursiveElementVisitor
 	}
 
 	@Override
-	public void visitSIfDef(CPsiSharpIfDef element)
+	public void visitSIfBody(CPsiSharpIfBody element)
 	{
+		if(element.getTextLength() == 0)
+			return;
+
+		CPsiSharpIfDef def = element.getIfDef();
+
 		boolean defined = element.getUserData(CPreprocessor.ACTIVE_BLOCK) == Boolean.TRUE;
+
 		if(!defined)
 		{
-			holder.createWarningAnnotation(element, "Not active block");
+			//holder.createWarningAnnotation(element, "Not active block");
 
 			element.accept(new CSharpPsiRecursiveElementVisitor()
 			{
@@ -88,6 +95,6 @@ public class PreHighlighterVisitor extends CSharpPsiRecursiveElementVisitor
 			});
 		}
 		else
-			super.visitSIfDef(element);
+			super.visitSIfBody(element);
 	}
 }

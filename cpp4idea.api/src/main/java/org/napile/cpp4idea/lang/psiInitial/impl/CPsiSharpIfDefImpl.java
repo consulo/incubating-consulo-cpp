@@ -17,6 +17,7 @@
 package org.napile.cpp4idea.lang.psiInitial.impl;
 
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
 import org.napile.cpp4idea.lang.psiInitial.CPsiCompilerVariable;
 import org.napile.cpp4idea.lang.psiInitial.CPsiSharpIfBody;
@@ -24,6 +25,7 @@ import org.napile.cpp4idea.lang.psiInitial.CPsiSharpIfDef;
 import org.napile.cpp4idea.lang.psiInitial.CPsiSharpTokens;
 import org.napile.cpp4idea.lang.psiInitial.visitors.CSharpPsiElementVisitor;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
 
 /**
@@ -43,10 +45,36 @@ public class CPsiSharpIfDefImpl extends CPsiElementBaseImpl implements CPsiSharp
 		return findChildByClass(CPsiCompilerVariable.class);
 	}
 
+	@Nullable
 	@Override
 	public CPsiSharpIfBody getBody()
 	{
-		return findChildByClass(CPsiSharpIfBody.class);
+		return findNotNullChildByClass(CPsiSharpIfBody.class);
+	}
+
+	@Nullable
+	@Override
+	public PsiElement getElseKeyword()
+	{
+		return findChildByType(CPsiSharpTokens.S_ELSE_KEYWORD);
+	}
+
+	@Nullable
+	@Override
+	public CPsiSharpIfBody getElseBody()
+	{
+		CPsiSharpIfBody body = getBody();
+		if(body == null)
+			return null;
+
+		PsiElement element = body.getNextSibling();
+		while(element != null)
+		{
+			if(element instanceof CPsiSharpIfBody)
+				return (CPsiSharpIfBody) element;
+			element = element.getNextSibling();
+		}
+		return null;
 	}
 
 	@Override

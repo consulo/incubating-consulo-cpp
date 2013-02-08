@@ -47,7 +47,7 @@ public class InitialParsing extends InitialParserHelper
 				parseDefine(builder);
 			else if(builder.getTokenType() == S_IFNDEF_KEYWORD || builder.getTokenType() == S_IFDEF_KEYWORD)
 				parseIf(builder);
-			else if(builder.getTokenType() == S_ENDIF_KEYWORD)
+			else if(builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD)
 			{
 				if(isSet(f, EAT_LAST_END_IF))
 				{
@@ -126,18 +126,38 @@ public class InitialParsing extends InitialParserHelper
 		if(builder.getTokenType() == NEW_LINE)
 			builder.advanceLexer();
 
-		PsiBuilder.Marker bodyMarker = builder.mark();
+		skipLines(builder);
 
-		while(!builder.eof())
+		if(builder.getTokenType() != S_ENDIF_KEYWORD)
 		{
-			parse(builder, 0);
+			PsiBuilder.Marker bodyMarker = builder.mark();
 
-			if(builder.getTokenType() == S_ENDIF_KEYWORD)
-				break;
+			while(!builder.eof())
+			{
+				parse(builder, 0);
+
+				if(builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD)
+					break;
+			}
+
+			done(bodyMarker, CPsiSharpIfBody.class);
+
+			if(builder.getTokenType() == S_ELSE_KEYWORD)
+			{
+				builder.advanceLexer();
+
+				PsiBuilder.Marker elseBody = builder.mark();
+
+				while(!builder.eof())
+				{
+					parse(builder, 0);
+
+					if(builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD)
+						break;
+				}
+				done(elseBody, CPsiSharpIfBody.class);
+			}
 		}
-
-		done(bodyMarker, CPsiSharpIfBody.class);
-
 		checkMatchesWithoutLines(builder, S_ENDIF_KEYWORD, "S_END_IF.expected");
 
 		done(marker, CPsiSharpIfDef.class);

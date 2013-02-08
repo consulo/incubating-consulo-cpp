@@ -16,6 +16,9 @@
 
 package org.napile.cpp4idea.lang.psiInitial;
 
+import org.jetbrains.annotations.Nullable;
+import com.intellij.psi.PsiElement;
+
 /**
  * @author VISTALL
  * @date 14:06/11.12.2011
@@ -24,7 +27,14 @@ public interface CPsiSharpIfDef extends CPsiSharpElement
 {
 	CPsiCompilerVariable getVariable();
 
+	@Nullable
 	CPsiSharpIfBody getBody();
+
+	@Nullable
+	PsiElement getElseKeyword();
+
+	@Nullable
+	CPsiSharpIfBody getElseBody();
 
 	boolean isReverted();
 }

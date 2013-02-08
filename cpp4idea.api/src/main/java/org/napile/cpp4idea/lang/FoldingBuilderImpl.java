@@ -98,8 +98,6 @@ public class FoldingBuilderImpl implements FoldingBuilder, DumbAware
 	public boolean isCollapsedByDefault(@NotNull ASTNode node)
 	{
 		PsiElement element = node.getPsi();
-		if(element instanceof CPsiSharpIfDef)
-			return element.getUserData(CPreprocessor.ACTIVE_BLOCK) == Boolean.FALSE;
 
 		return false;
 	}

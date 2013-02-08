@@ -31,5 +31,6 @@ public interface CPsiSharpTokens
 	IElementType S_IFDEF_KEYWORD = new CTokenImpl("S_IFDEF_KEYWORD"); // #ifdef
 	IElementType S_IFNDEF_KEYWORD = new CTokenImpl("S_IFNDEF_KEYWORD"); // #ifndef
 	IElementType S_ENDIF_KEYWORD = new CTokenImpl("S_ENDIF_KEYWORD"); // #endif
+	IElementType S_ELSE_KEYWORD = new CTokenImpl("S_ELSE_KEYWORD"); // #else
 	IElementType S_PRAGMA_KEYWORD = new CTokenImpl("S_PRAGMA_KEYWORD"); // #pragma
 }

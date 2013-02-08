@@ -100,17 +100,24 @@ public class CPreprocessor
 			public void visitSIfDef(CPsiSharpIfDef element)
 			{
 				CPsiCompilerVariable variable = element.getVariable();
-				CPsiSharpIfBody body = element.getBody();
+				if(variable == null)
+					return;
+
+				boolean isActive = define.containsKey(variable.getText()) && !element.isReverted() || !define.containsKey(variable.getText()) && element.isReverted();
+
+				CPsiSharpIfBody body = isActive ? element.getBody() : element.getElseBody();
+				CPsiSharpIfBody elseBody = isActive ? element.getElseBody() : element.getBody();
+
 				if(body != null)
 				{
-					if(variable != null && (define.containsKey(variable.getText()) && !element.isReverted() || !define.containsKey(variable.getText()) && element.isReverted()))
-					{
-						element.putUserData(ACTIVE_BLOCK, Boolean.TRUE);
-						body.acceptChildren(this);
-						return;
-					}
+					body.putUserData(ACTIVE_BLOCK, Boolean.TRUE);
 
-					element.putUserData(ACTIVE_BLOCK, Boolean.FALSE);
+					body.acceptChildren(this);
+				}
+
+				if(elseBody != null)
+				{
+					elseBody.putUserData(ACTIVE_BLOCK, null);
 				}
 			}
 
