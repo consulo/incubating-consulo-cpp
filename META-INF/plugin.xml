@@ -1,0 +1,48 @@
+<!--
+  ~ Copyright 2011 napile
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~ http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<idea-plugin version="2">
+	<id>org.napile.cpp4idea.api</id>
+	<name>C/C++</name>
+	<description>Support for C/C++ language.</description>
+	<version>1.0</version>
+	<vendor>napile.org</vendor>
+	<resource-bundle>org.napile.cpp4idea.CBundle</resource-bundle>
+	<category>Custom Languages</category>
+
+	<extensions defaultExtensionNs="com.intellij">
+		<applicationService serviceInterface="org.napile.cpp4idea.config.facet.CDialectProvider" serviceImplementation="org.napile.cpp4idea.config.facet.impl.CDialectProviderImpl"/>
+
+		<additionalTextAttributes scheme="Default" file="/org/napile/cpp4idea/editor/color/Default.xml" />
+
+		<fileTypeFactory implementation="org.napile.cpp4idea.CFileTypeFactory" />
+
+		<toolWindow id="Cpp4Idea Debug" icon="/org/napile/cpp4idea/napile-logo13.png" anchor="right" factoryClass="org.napile.cpp4idea.ide.debugToolWindow.DebugToolWindowFactory" />
+
+		<annotator language="C" implementationClass="org.napile.cpp4idea.editor.CHighlightAnnotator" />
+
+		<moduleExtensionProvider key="cpp" implementationClass="org.napile.cpp4idea.module.extension.CppModuleExtensionProvider" />
+		<!--lang-->
+		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.lang.PairedBraceMatcherImpl" />
+		<lang.syntaxHighlighterFactory key="C" implementationClass="org.napile.cpp4idea.ide.highlight.CSyntaxHighlighterFactory" />
+		<lang.parserDefinition language="C" implementationClass="org.napile.cpp4idea.lang.parser.CParserDefinitionImpl" />
+		<lang.foldingBuilder language="C" implementationClass="org.napile.cpp4idea.lang.FoldingBuilderImpl"/>
+		<lang.commenter language="C" implementationClass="org.napile.cpp4idea.lang.CommenterImpl" />
+
+		<iconProvider implementation="org.napile.cpp4idea.ide.projectView.CIconProvider" />
+		<treeStructureProvider implementation="org.napile.cpp4idea.ide.projectView.CProjectViewProvider" />
+	</extensions>
+</idea-plugin>
