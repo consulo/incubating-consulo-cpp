@@ -155,14 +155,14 @@ public class CMainPsiBuilder extends UserDataHolderBase implements PsiBuilder
 		}
 	};
 
-	public CMainPsiBuilder(Project project, List<PsiElement> list)
+	public CMainPsiBuilder(Project project, LanguageVersion languageVersion, List<PsiElement> list)
 	{
 		myProject = project;
 
 
 		ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(CLanguage.INSTANCE);
-		myWhitespaces = parserDefinition.getWhitespaceTokens();
-		myComments = parserDefinition.getCommentTokens();
+		myWhitespaces = parserDefinition.getWhitespaceTokens(languageVersion);
+		myComments = parserDefinition.getCommentTokens(languageVersion);
 
 		myLexemeCount = list.size();
 		myLexTypes = new IElementType[list.size()];

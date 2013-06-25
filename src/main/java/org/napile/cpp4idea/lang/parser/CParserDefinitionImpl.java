@@ -66,21 +66,21 @@ public class CParserDefinitionImpl implements ParserDefinition
 
 	@NotNull
 	@Override
-	public TokenSet getWhitespaceTokens()
+	public TokenSet getWhitespaceTokens(LanguageVersion languageVersion)
 	{
 		return CPsiTokens.WHITE_SPACE_SET;
 	}
 
 	@NotNull
 	@Override
-	public TokenSet getCommentTokens()
+	public TokenSet getCommentTokens(LanguageVersion languageVersion)
 	{
 		return CPsiTokens.COMMENT_SET;
 	}
 
 	@NotNull
 	@Override
-	public TokenSet getStringLiteralElements()
+	public TokenSet getStringLiteralElements(LanguageVersion languageVersion)
 	{
 		return CPsiTokens.STRING_LITERAL_SET;
 	}

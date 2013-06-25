@@ -130,7 +130,7 @@ public class CPreprocessor
 		};
 		element.accept(recursiveElementVisitor);
 
-		CMainPsiBuilder builder = new CMainPsiBuilder(element.getProject(), elements);
+		CMainPsiBuilder builder = new CMainPsiBuilder(element.getProject(), element.getLanguageVersion(), elements);
 
 		ASTNode node = CDialect.parseMain(builder, CPsiTokens.C_PROCESSED_FILE_TYPE);
 
