@@ -16,21 +16,15 @@
 
 package org.napile.cpp4idea.lang.parser;
 
+import com.intellij.lang.*;
+import com.intellij.lexer.FlexAdapter;
+import com.intellij.psi.tree.IElementType;
+import com.intellij.util.LanguageVersionUtil;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.CDialect;
 import org.napile.cpp4idea.lang.lexer._CppLexer;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
-import com.intellij.lang.LanguageParserDefinitions;
-import com.intellij.lang.LanguageVersion;
-import com.intellij.lang.ParserDefinition;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.PsiBuilderFactory;
-import com.intellij.lang.PsiParser;
-import com.intellij.lexer.FlexAdapter;
-import com.intellij.psi.tree.IElementType;
 
 /**
  * @author VISTALL
@@ -46,7 +40,8 @@ public class CPsiParserImpl implements PsiParser, CPsiTokens
 
 		final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(CLanguage.INSTANCE);
 
-		PsiBuilder newBuilder = PsiBuilderFactory.getInstance().createBuilder(parserDefinition, new FlexAdapter(new _CppLexer()), Language.UNKNOWN_VERSION, builder.getOriginalText());
+		PsiBuilder newBuilder = PsiBuilderFactory.getInstance().createBuilder(parserDefinition, new FlexAdapter(new _CppLexer()), LanguageVersionUtil.findDefaultVersion(CLanguage.INSTANCE),
+				builder.getOriginalText());
 
 		return CDialect.parseInitial(newBuilder, root);
 	}

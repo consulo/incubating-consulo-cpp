@@ -49,7 +49,7 @@
         <lang.foldingBuilder language="C" implementationClass="org.napile.cpp4idea.lang.FoldingBuilderImpl"/>
         <lang.commenter language="C" implementationClass="org.napile.cpp4idea.lang.CommenterImpl"/>
 
-        <iconProvider implementation="org.napile.cpp4idea.ide.projectView.CIconProvider"/>
+        <iconDescriptorUpdater implementation="org.napile.cpp4idea.ide.projectView.CIconProvider"/>
         <treeStructureProvider implementation="org.napile.cpp4idea.ide.projectView.CProjectViewProvider"/>
     </extensions>
 </idea-plugin>

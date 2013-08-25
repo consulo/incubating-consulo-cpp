@@ -16,32 +16,26 @@
 
 package org.napile.cpp4idea.ide.projectView;
 
-import javax.swing.Icon;
-
+import com.intellij.icons.AllIcons;
+import com.intellij.ide.IconDescriptor;
+import com.intellij.ide.IconDescriptorUpdater;
+import com.intellij.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.psi.CPsiClass;
 import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
-import com.intellij.icons.AllIcons;
-import com.intellij.ide.IconProvider;
-import com.intellij.openapi.util.Iconable;
-import com.intellij.psi.PsiElement;
 
 /**
  * @author VISTALL
  * @date 17:34/07.01.13
  */
-public class CIconProvider extends IconProvider
-{
-	@Nullable
+public class CIconProvider implements IconDescriptorUpdater {
 	@Override
-	public Icon getIcon(@NotNull PsiElement element, @Iconable.IconFlags int flags)
-	{
-		if(element instanceof CPsiClass)
-			return AllIcons.Nodes.Class;
-		if(element instanceof CPsiDeclarationMethod)
-			return AllIcons.Nodes.Method;
-
-		return null;
+	public void updateIcon(@NotNull IconDescriptor iconDescriptor, @NotNull PsiElement element, int i) {
+		if (element instanceof CPsiClass) {
+			iconDescriptor.setMainIcon(AllIcons.Nodes.Class);
+		}
+		if (element instanceof CPsiDeclarationMethod) {
+			iconDescriptor.setMainIcon(AllIcons.Nodes.Method);
+		}
 	}
 }

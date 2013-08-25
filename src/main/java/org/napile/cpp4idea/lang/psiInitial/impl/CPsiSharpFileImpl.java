@@ -16,20 +16,17 @@
 
 package org.napile.cpp4idea.lang.psiInitial.impl;
 
-import javax.swing.Icon;
-
+import com.intellij.extapi.psi.PsiFileBase;
+import com.intellij.openapi.fileTypes.FileType;
+import com.intellij.openapi.vfs.VirtualFile;
+import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiElementVisitor;
 import org.apache.commons.lang.ArrayUtils;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CFileType;
 import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
 import org.napile.cpp4idea.lang.psiInitial.visitors.CSharpPsiElementVisitor;
-import org.napile.cpp4idea.util.CIcons;
-import com.intellij.extapi.psi.PsiFileBase;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElementVisitor;
 
 /**
  * @author VISTALL
@@ -78,11 +75,5 @@ public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile
 			((CSharpPsiElementVisitor)visitor).visitSFile(this);
 		else
 			super.accept(visitor);
-	}
-
-	@Override
-	public Icon getElementIcon(int flag)
-	{
-		return isSourceFile() ? CIcons.SOURCE_FILE : CIcons.HEADER_FILE;
 	}
 }

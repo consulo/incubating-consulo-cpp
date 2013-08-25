@@ -16,13 +16,8 @@
 
 package org.napile.cpp4idea.ide.projectView.nodes;
 
-import java.util.Collection;
-import java.util.Collections;
-
-import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.parser.parsingMain.builder.CMainPsiBuilder;
-import org.napile.cpp4idea.lang.psi.CPsiDeclaration;
 import com.intellij.codeInsight.navigation.NavigationUtil;
+import com.intellij.ide.IconDescriptorUpdaters;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.ide.projectView.ProjectViewNode;
 import com.intellij.ide.projectView.ViewSettings;
@@ -30,7 +25,12 @@ import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
-import com.intellij.util.PsiIconUtil;
+import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.lang.parser.parsingMain.builder.CMainPsiBuilder;
+import org.napile.cpp4idea.lang.psi.CPsiDeclaration;
+
+import java.util.Collection;
+import java.util.Collections;
 
 /**
  * @author VISTALL
@@ -83,6 +83,6 @@ public abstract class CBaseTreeNode<D extends CPsiDeclaration> extends ProjectVi
 	{
 		presentation.setPresentableText(getValue().getName());
 
-		presentation.setIcon(PsiIconUtil.getProvidersIcon(getValue(), 0));
+		presentation.setIcon(IconDescriptorUpdaters.getIcon(getValue(), 0));
 	}
 }
