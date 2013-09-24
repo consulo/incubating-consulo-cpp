@@ -34,7 +34,7 @@
 
         <toolWindow id="Cpp4Idea Debug" icon="/org/napile/cpp4idea/napile-logo13.png" anchor="right"
                     factoryClass="org.napile.cpp4idea.ide.debugToolWindow.DebugToolWindowFactory"
-                    conditionClass="org.napile.cpp4idea.ide.debugToolWindow.CDebugToolWindowCondition"/>
+                    requireModuleExtensions="cpp"/>
 
         <annotator language="C" implementationClass="org.napile.cpp4idea.editor.CHighlightAnnotator"/>
 

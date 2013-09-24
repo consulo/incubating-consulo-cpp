@@ -49,7 +49,7 @@ public class CPsiSharpIfDefImpl extends CPsiElementBaseImpl implements CPsiSharp
 	@Override
 	public CPsiSharpIfBody getBody()
 	{
-		return findNotNullChildByClass(CPsiSharpIfBody.class);
+		return findChildByClass(CPsiSharpIfBody.class);
 	}
 
 	@Nullable

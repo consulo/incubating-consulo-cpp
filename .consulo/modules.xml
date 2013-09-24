@@ -6,8 +6,9 @@
         <extension id="java" sdk-module-name="" sdk-name="1.6" language-level-module-name="" language-level-name="JDK_1_6" special-dir-location="MODULE_DIR" />
         <extension id="consulo-plugin" sdk-module-name="" sdk-name="Consulo 1.SNAPSHOT" />
         <content url="file://$MODULE_DIR$">
-          <content-folder type="SOURCE" url="file://$MODULE_DIR$/src/main/java" />
-          <content-folder type="SOURCE" url="file://$MODULE_DIR$/resource/main" />
+          <content-folder type="PRODUCTION" url="file://$MODULE_DIR$/src/main/java" />
+          <content-folder type="PRODUCTION" url="file://$MODULE_DIR$/resource/main" />
+          <content-folder type="PRODUCTION" url="file://$MODULE_DIR$/src/main/javaApi" />
         </content>
         <orderEntry type="module-extension-sdk" extension-id="java" />
         <orderEntry type="module-extension-sdk" extension-id="consulo-plugin" />
