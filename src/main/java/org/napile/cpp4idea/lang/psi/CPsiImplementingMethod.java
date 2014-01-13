@@ -16,7 +16,7 @@
 
 package org.napile.cpp4idea.lang.psi;
 
-import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 
 /**
  * @author VISTALL
@@ -24,6 +24,6 @@ import org.jetbrains.annotations.NotNull;
  */
 public interface CPsiImplementingMethod extends CPsiDeclarationMethod
 {
-	@NotNull
+	@Nullable
 	CPsiCodeBlock getCodeBlock();
 }

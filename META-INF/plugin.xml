@@ -22,7 +22,6 @@
     <vendor>napile.org</vendor>
     <resource-bundle>org.napile.cpp4idea.CBundle</resource-bundle>
     <category>Custom Languages</category>
-    <depends>com.intellij.xml</depends>
 
     <extensions defaultExtensionNs="com.intellij">
         <applicationService serviceInterface="org.napile.cpp4idea.config.facet.CDialectProvider"

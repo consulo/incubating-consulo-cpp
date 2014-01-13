@@ -16,7 +16,12 @@
 
 package org.napile.cpp4idea.ide.debugToolWindow;
 
-import com.intellij.ide.highlighter.XmlFileType;
+import java.awt.BorderLayout;
+
+import javax.swing.JPanel;
+
+import org.napile.cpp4idea.ide.debugToolWindow.psiDebug.XmlPsiDebugger;
+import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.Result;
 import com.intellij.openapi.command.WriteCommandAction;
@@ -24,17 +29,13 @@ import com.intellij.openapi.editor.Editor;
 import com.intellij.openapi.editor.EditorFactory;
 import com.intellij.openapi.editor.ex.EditorEx;
 import com.intellij.openapi.fileEditor.FileEditorManager;
+import com.intellij.openapi.fileTypes.FileTypeManager;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.util.Comparing;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.Alarm;
-import org.napile.cpp4idea.ide.debugToolWindow.psiDebug.XmlPsiDebugger;
-import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
-
-import javax.swing.*;
-import java.awt.*;
 
 /**
  * @author VISTALL
@@ -57,7 +58,7 @@ public abstract class AbstractDebugPsiTreeToolWindow extends JPanel implements D
 	public AbstractDebugPsiTreeToolWindow(final Project project) {
 		super(new BorderLayout());
 		this.project = project;
-		editor = EditorFactory.getInstance().createEditor(EditorFactory.getInstance().createDocument(""), project, XmlFileType.INSTANCE, true);
+		editor = EditorFactory.getInstance().createEditor(EditorFactory.getInstance().createDocument(""), project, FileTypeManager.getInstance().getStdFileType("XML"), true);
 		add(editor.getComponent());
 		alarm = new Alarm(Alarm.ThreadToUse.SWING_THREAD, this);
 		alarm.addRequest(new Runnable() {

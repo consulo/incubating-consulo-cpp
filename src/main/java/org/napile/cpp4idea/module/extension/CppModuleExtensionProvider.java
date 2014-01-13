@@ -30,13 +30,6 @@ public class CppModuleExtensionProvider implements ModuleExtensionProvider<CppMo
 
 	@NotNull
 	@Override
-	public Class<CppModuleExtension> getImmutableClass()
-	{
-		return CppModuleExtension.class;
-	}
-
-	@NotNull
-	@Override
 	public CppModuleExtension createImmutable(@NotNull String s, @NotNull Module module)
 	{
 		return new CppModuleExtension(s, module);

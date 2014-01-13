@@ -16,11 +16,13 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import org.napile.cpp4idea.lang.parser.parsingMain.builder.CMainPsiBuilder;
 import org.napile.cpp4idea.lang.psi.CPsiElement;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
 import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
 import com.intellij.extapi.psi.ASTWrapperPsiElement;
 import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiInvalidElementAccessException;
 import com.intellij.psi.impl.PsiManagerEx;
 import com.intellij.psi.util.PsiTreeUtil;
@@ -34,6 +36,12 @@ public class CPsiElementBaseImpl extends ASTWrapperPsiElement implements CPsiEle
 	public CPsiElementBaseImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{
 		super(node);
+	}
+
+	@Override
+	public PsiElement getOriginalElement()
+	{
+		return getUserData(CMainPsiBuilder.ORIGINAL_SINGLE_ELEMENT);
 	}
 
 	@Override

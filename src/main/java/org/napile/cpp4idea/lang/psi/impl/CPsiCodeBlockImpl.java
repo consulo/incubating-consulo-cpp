@@ -16,7 +16,9 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.psi.CPsiCodeBlock;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import com.intellij.lang.ASTNode;
 
 /**
@@ -28,5 +30,19 @@ public class CPsiCodeBlockImpl extends CPsiElementBaseImpl implements CPsiCodeBl
 	public CPsiCodeBlockImpl(@org.jetbrains.annotations.NotNull ASTNode node)
 	{
 		super(node);
+	}
+
+	@Nullable
+	@Override
+	public com.intellij.psi.PsiElement getLBrace()
+	{
+		return findChildByType(CPsiTokens.LBRACE);
+	}
+
+	@Nullable
+	@Override
+	public com.intellij.psi.PsiElement getRBrace()
+	{
+		return findChildByType(CPsiTokens.RBRACE);
 	}
 }

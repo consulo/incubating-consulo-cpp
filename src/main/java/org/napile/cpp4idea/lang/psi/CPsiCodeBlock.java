@@ -16,11 +16,18 @@
 
 package org.napile.cpp4idea.lang.psi;
 
+import org.jetbrains.annotations.Nullable;
+import com.intellij.psi.PsiElement;
+
 /**
  * @author VISTALL
  * @date 23:13/10.12.2011
  */
 public interface CPsiCodeBlock extends CPsiElement
 {
+	@Nullable
+	PsiElement getLBrace();
 
+	@Nullable
+	PsiElement getRBrace();
 }
