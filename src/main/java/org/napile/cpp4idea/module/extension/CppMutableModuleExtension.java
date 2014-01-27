@@ -20,14 +20,9 @@ import com.intellij.openapi.roots.ModifiableRootModel;
  */
 public class CppMutableModuleExtension extends CppModuleExtension implements MutableModuleExtensionWithSdk<CppModuleExtension>
 {
-	@NotNull
-	private final CppModuleExtension moduleExtension;
-
-	public CppMutableModuleExtension(@NotNull String id, @NotNull Module module, @NotNull CppModuleExtension moduleExtension)
+	public CppMutableModuleExtension(@NotNull String id, @NotNull Module module)
 	{
 		super(id, module);
-		this.moduleExtension = moduleExtension;
-		commit(moduleExtension);
 	}
 
 	@NotNull
@@ -53,14 +48,8 @@ public class CppMutableModuleExtension extends CppModuleExtension implements Mut
 	}
 
 	@Override
-	public boolean isModified()
+	public boolean isModified(@NotNull CppModuleExtension extension)
 	{
-		return isModifiedImpl(moduleExtension);
-	}
-
-	@Override
-	public void commit()
-	{
-		moduleExtension.commit(this);
+		return isModifiedImpl(extension);
 	}
 }

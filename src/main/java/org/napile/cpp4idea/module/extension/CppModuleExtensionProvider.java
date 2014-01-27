@@ -37,8 +37,8 @@ public class CppModuleExtensionProvider implements ModuleExtensionProvider<CppMo
 
 	@NotNull
 	@Override
-	public CppMutableModuleExtension createMutable(@NotNull String s, @NotNull Module module, @NotNull CppModuleExtension cppModuleExtension)
+	public CppMutableModuleExtension createMutable(@NotNull String s, @NotNull Module module)
 	{
-		return new CppMutableModuleExtension(s, module, cppModuleExtension);
+		return new CppMutableModuleExtension(s, module);
 	}
 }
