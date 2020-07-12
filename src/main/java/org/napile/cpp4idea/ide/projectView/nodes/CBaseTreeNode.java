@@ -17,7 +17,6 @@
 package org.napile.cpp4idea.ide.projectView.nodes;
 
 import com.intellij.codeInsight.navigation.NavigationUtil;
-import com.intellij.ide.IconDescriptorUpdaters;
 import com.intellij.ide.projectView.PresentationData;
 import com.intellij.ide.projectView.ProjectViewNode;
 import com.intellij.ide.projectView.ViewSettings;
@@ -25,6 +24,7 @@ import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
+import consulo.ide.IconDescriptorUpdaters;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.parser.parsingMain.builder.CMainPsiBuilder;
 import org.napile.cpp4idea.lang.psi.CPsiDeclaration;

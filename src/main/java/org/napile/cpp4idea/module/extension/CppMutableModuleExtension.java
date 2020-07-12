@@ -1,26 +1,29 @@
 package org.napile.cpp4idea.module.extension;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-
-import org.consulo.module.extension.MutableModuleExtensionWithSdk;
-import org.consulo.module.extension.MutableModuleInheritableNamedPointer;
-import org.consulo.module.extension.ui.ModuleExtensionWithSdkPanel;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import com.intellij.openapi.module.Module;
 import com.intellij.openapi.projectRoots.Sdk;
-import com.intellij.openapi.roots.ModifiableRootModel;
+import consulo.disposer.Disposable;
+import consulo.extension.ui.ModuleExtensionSdkBoxBuilder;
+import consulo.module.extension.MutableModuleExtensionWithSdk;
+import consulo.module.extension.MutableModuleInheritableNamedPointer;
+import consulo.module.extension.swing.SwingMutableModuleExtension;
+import consulo.roots.ModuleRootLayer;
+import consulo.ui.Component;
+import consulo.ui.Label;
+import consulo.ui.annotation.RequiredUIAccess;
+import org.jetbrains.annotations.NotNull;
+
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author VISTALL
  * @since 14:42/30.05.13
  */
-public class CppMutableModuleExtension extends CppModuleExtension implements MutableModuleExtensionWithSdk<CppModuleExtension>
+public class CppMutableModuleExtension extends CppModuleExtension implements MutableModuleExtensionWithSdk<CppModuleExtension>, SwingMutableModuleExtension
 {
-	public CppMutableModuleExtension(@NotNull String id, @NotNull Module module)
+	public CppMutableModuleExtension(@NotNull String id, @NotNull ModuleRootLayer module)
 	{
 		super(id, module);
 	}
@@ -32,13 +35,12 @@ public class CppMutableModuleExtension extends CppModuleExtension implements Mut
 		return (MutableModuleInheritableNamedPointer<Sdk>) super.getInheritableSdk();
 	}
 
-	@Nullable
+	@RequiredUIAccess
+	@javax.annotation.Nullable
 	@Override
-	public JComponent createConfigurablePanel(@NotNull ModifiableRootModel modifiableRootModel, @Nullable Runnable runnable)
+	public Component createConfigurationComponent(@Nonnull Disposable disposable, @Nonnull Runnable runnable)
 	{
-		JPanel panel = new JPanel(new BorderLayout());
-		panel.add(new ModuleExtensionWithSdkPanel(this, runnable), BorderLayout.NORTH);
-		return panel;
+	 	return Label.create("Unsupported UI");
 	}
 
 	@Override
@@ -51,5 +53,15 @@ public class CppMutableModuleExtension extends CppModuleExtension implements Mut
 	public boolean isModified(@NotNull CppModuleExtension extension)
 	{
 		return isModifiedImpl(extension);
+	}
+
+	@RequiredUIAccess
+	@Nullable
+	@Override
+	public JComponent createConfigurablePanel(@Nonnull Disposable disposable, @Nonnull Runnable runnable)
+	{
+		JPanel panel = new JPanel(new BorderLayout());
+		panel.add(ModuleExtensionSdkBoxBuilder.createAndDefine(this, runnable).build(), BorderLayout.NORTH);
+		return panel;
 	}
 }

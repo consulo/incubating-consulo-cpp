@@ -16,17 +16,13 @@
 
 package org.napile.cpp4idea.config.sdk;
 
-import javax.swing.Icon;
-
+import com.intellij.openapi.projectRoots.*;
+import consulo.awt.TargetAWT;
+import consulo.ui.image.Image;
 import org.jdom.Element;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.config.sdk.sdkdialect.SdkDialect;
 import org.napile.cpp4idea.util.CIcons;
-import com.intellij.openapi.projectRoots.AdditionalDataConfigurable;
-import com.intellij.openapi.projectRoots.SdkAdditionalData;
-import com.intellij.openapi.projectRoots.SdkModel;
-import com.intellij.openapi.projectRoots.SdkModificator;
-import com.intellij.openapi.projectRoots.SdkType;
 
 /**
  * @author VISTALL
@@ -36,18 +32,12 @@ public class CSdkType extends SdkType
 {
 	public static SdkType getInstance()
 	{
-		return SdkType.findInstance(CSdkType.class);
+		return SdkType.EP_NAME.findExtensionOrFail(CSdkType.class);
 	}
 
 	public CSdkType()
 	{
 		super("C");
-	}
-
-	@Override
-	public String suggestHomePath()
-	{
-		return null;
 	}
 
 	@Override
@@ -91,16 +81,8 @@ public class CSdkType extends SdkType
 	}
 
 	@Override
-	public Icon getIcon()
+	public Image getIcon()
 	{
-		return CIcons.SOURCE_FILE;
+		return TargetAWT.from(CIcons.SOURCE_FILE);
 	}
-
-	@Nullable
-	@Override
-	public Icon getGroupIcon()
-	{
-		return getIcon();
-	}
-
 }

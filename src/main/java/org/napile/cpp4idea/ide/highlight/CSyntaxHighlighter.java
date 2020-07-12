@@ -16,13 +16,6 @@
 
 package org.napile.cpp4idea.ide.highlight;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.lang.lexer._CppLexer;
-import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
@@ -32,6 +25,13 @@ import com.intellij.openapi.project.Project;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.napile.cpp4idea.lang.lexer._CppLexer;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author VISTALL

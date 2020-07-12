@@ -16,6 +16,18 @@
 
 package org.napile.cpp4idea.lang.parser;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.ParserDefinition;
+import com.intellij.lang.PsiParser;
+import com.intellij.lexer.EmptyLexer;
+import com.intellij.lexer.Lexer;
+import com.intellij.psi.FileViewProvider;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiFile;
+import com.intellij.psi.tree.IFileElementType;
+import com.intellij.psi.tree.IStubFileElementType;
+import com.intellij.psi.tree.TokenSet;
+import consulo.lang.LanguageVersion;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.psi.CPsiTokenImpl;
@@ -23,19 +35,8 @@ import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import org.napile.cpp4idea.lang.psi.impl.CPsiFileImpl;
 import org.napile.cpp4idea.lang.psiInitial.CPsiSharpTokenImpl;
 import org.napile.cpp4idea.lang.psiInitial.impl.CPsiSharpFileImpl;
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.LanguageVersion;
-import com.intellij.lang.ParserDefinition;
-import com.intellij.lang.PsiParser;
-import com.intellij.lexer.EmptyLexer;
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.tree.IFileElementType;
-import com.intellij.psi.tree.IStubFileElementType;
-import com.intellij.psi.tree.TokenSet;
+
+import javax.annotation.Nonnull;
 
 /**
  * @author VISTALL
@@ -47,13 +48,14 @@ public class CParserDefinitionImpl implements ParserDefinition
 
 	@NotNull
 	@Override
-	public Lexer createLexer(Project project, LanguageVersion languageVersion)
+	public Lexer createLexer(LanguageVersion languageVersion)
 	{
 		return new EmptyLexer();
 	}
 
+	@Nonnull
 	@Override
-	public PsiParser createParser(Project project, LanguageVersion languageVersion)
+	public PsiParser createParser(@Nonnull LanguageVersion languageVersion)
 	{
 		return new CPsiParserImpl();
 	}

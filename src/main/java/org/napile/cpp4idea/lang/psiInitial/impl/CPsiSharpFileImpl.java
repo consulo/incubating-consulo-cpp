@@ -21,7 +21,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElementVisitor;
-import org.apache.commons.lang.ArrayUtils;
+import com.intellij.util.ArrayUtil;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CFileType;
 import org.napile.cpp4idea.CLanguage;
@@ -44,7 +44,7 @@ public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile
 
 		VirtualFile virtualFile = viewProvider.getVirtualFile();
 
-		isSourceFile = ArrayUtils.contains(SOURCE_FILES, virtualFile.getExtension());
+		isSourceFile = ArrayUtil.contains(virtualFile.getExtension(), SOURCE_FILES);
 	}
 
 	@Override

@@ -16,20 +16,21 @@
 
 package org.napile.cpp4idea.ide.projectView;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-
-import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.ide.projectView.nodes.CClassTreeNode;
-import org.napile.cpp4idea.ide.projectView.nodes.CFileTreeNode;
-import org.napile.cpp4idea.lang.psi.CPsiClass;
-import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
 import com.intellij.ide.projectView.SelectableTreeStructureProvider;
 import com.intellij.ide.projectView.ViewSettings;
 import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.psi.PsiElement;
+import consulo.util.dataholder.Key;
+import org.jetbrains.annotations.Nullable;
+import org.napile.cpp4idea.ide.projectView.nodes.CClassTreeNode;
+import org.napile.cpp4idea.ide.projectView.nodes.CFileTreeNode;
+import org.napile.cpp4idea.lang.psi.CPsiClass;
+import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
  * @author VISTALL
@@ -78,7 +79,7 @@ public class CProjectViewProvider implements SelectableTreeStructureProvider, Du
 
 	@Nullable
 	@Override
-	public Object getData(Collection<AbstractTreeNode> selected, String dataName)
+	public Object getData(Collection<AbstractTreeNode> selected, Key<?> dataName)
 	{
 		return null;
 	}

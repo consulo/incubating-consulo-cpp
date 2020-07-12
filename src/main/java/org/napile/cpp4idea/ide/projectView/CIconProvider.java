@@ -17,9 +17,9 @@
 package org.napile.cpp4idea.ide.projectView;
 
 import com.intellij.icons.AllIcons;
-import com.intellij.ide.IconDescriptor;
-import com.intellij.ide.IconDescriptorUpdater;
 import com.intellij.psi.PsiElement;
+import consulo.ide.IconDescriptor;
+import consulo.ide.IconDescriptorUpdater;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiClass;
 import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
@@ -28,7 +28,8 @@ import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
  * @author VISTALL
  * @date 17:34/07.01.13
  */
-public class CIconProvider implements IconDescriptorUpdater {
+public class CIconProvider implements IconDescriptorUpdater
+{
 	@Override
 	public void updateIcon(@NotNull IconDescriptor iconDescriptor, @NotNull PsiElement element, int i) {
 		if (element instanceof CPsiClass) {

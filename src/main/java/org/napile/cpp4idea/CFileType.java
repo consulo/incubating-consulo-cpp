@@ -16,11 +16,11 @@
 
 package org.napile.cpp4idea;
 
-import javax.swing.Icon;
-
+import com.intellij.openapi.fileTypes.LanguageFileType;
+import consulo.awt.TargetAWT;
+import consulo.ui.image.Image;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.util.CIcons;
-import com.intellij.openapi.fileTypes.LanguageFileType;
 
 /**
  * @author VISTALL
@@ -57,8 +57,8 @@ public class CFileType extends LanguageFileType
 	}
 
 	@Override
-	public Icon getIcon()
+	public Image getIcon()
 	{
-		return CIcons.SOURCE_FILE;
+		return TargetAWT.from(CIcons.SOURCE_FILE);
 	}
 }

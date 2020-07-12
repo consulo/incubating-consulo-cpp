@@ -1,10 +1,10 @@
 package org.napile.cpp4idea.module.extension;
 
-import org.consulo.module.extension.impl.ModuleExtensionWithSdkImpl;
+import com.intellij.openapi.projectRoots.SdkType;
+import consulo.module.extension.impl.ModuleExtensionWithSdkImpl;
+import consulo.roots.ModuleRootLayer;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.config.sdk.CSdkType;
-import com.intellij.openapi.module.Module;
-import com.intellij.openapi.projectRoots.SdkType;
 
 /**
  * @author VISTALL
@@ -12,13 +12,13 @@ import com.intellij.openapi.projectRoots.SdkType;
  */
 public class CppModuleExtension extends ModuleExtensionWithSdkImpl<CppModuleExtension>
 {
-	public CppModuleExtension(@NotNull String id, @NotNull Module module)
+	public CppModuleExtension(@NotNull String id, @NotNull ModuleRootLayer module)
 	{
 		super(id, module);
 	}
 
 	@Override
-	protected Class<? extends SdkType> getSdkTypeClass()
+	public Class<? extends SdkType> getSdkTypeClass()
 	{
 		return CSdkType.class;
 	}

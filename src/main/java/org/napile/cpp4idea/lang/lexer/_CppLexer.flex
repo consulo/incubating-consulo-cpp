@@ -15,7 +15,6 @@ import com.intellij.psi.tree.IElementType;
 
   public void goTo(int offset) {
     zzCurrentPos = zzMarkedPos = zzStartRead = offset;
-    zzPushbackPos = 0;
     zzAtEOF = offset < zzEndRead;
   }
 %}

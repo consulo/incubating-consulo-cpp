@@ -14,7 +14,7 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin version="2">
+<consulo-plugin>
     <id>org.consulo.cpp</id>
     <name>C/C++</name>
     <description>Support for C/C++ language.</description>
@@ -24,8 +24,6 @@
     <category>Custom Languages</category>
 
     <extensions defaultExtensionNs="com.intellij">
-        <applicationService serviceInterface="org.napile.cpp4idea.config.facet.CDialectProvider"
-                            serviceImplementation="org.napile.cpp4idea.config.facet.impl.CDialectProviderImpl"/>
 
         <additionalTextAttributes scheme="Default" file="/org/napile/cpp4idea/editor/color/Default.xml"/>
 
@@ -38,7 +36,11 @@
         <annotator language="C" implementationClass="org.napile.cpp4idea.editor.CHighlightAnnotator"/>
 
         <moduleExtensionProvider key="cpp"
-                                 implementationClass="org.napile.cpp4idea.module.extension.CppModuleExtensionProvider"/>
+								 id="cpp"
+								 name="C/C++"
+								 icon="/org/napile/cpp4idea/icons/types/c.png"
+								 immutableClass="org.napile.cpp4idea.module.extension.CppModuleExtension"
+								 mutableClass="org.napile.cpp4idea.module.extension.CppMutableModuleExtension" />
         <!--lang-->
         <lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.lang.PairedBraceMatcherImpl"/>
         <lang.syntaxHighlighterFactory key="C"
@@ -51,4 +53,4 @@
         <iconDescriptorUpdater implementation="org.napile.cpp4idea.ide.projectView.CIconProvider"/>
         <treeStructureProvider implementation="org.napile.cpp4idea.ide.projectView.CProjectViewProvider"/>
     </extensions>
-</idea-plugin>
+</consulo-plugin>

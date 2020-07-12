@@ -16,18 +16,17 @@
 
 package org.napile.cpp4idea.config.sdk;
 
-import java.awt.BorderLayout;
-
-import javax.swing.JComponent;
-import javax.swing.JPanel;
-
-import org.napile.cpp4idea.config.sdk.ui.GeneralTabSdkPanel;
 import com.intellij.openapi.options.ConfigurationException;
 import com.intellij.openapi.projectRoots.AdditionalDataConfigurable;
 import com.intellij.openapi.projectRoots.Sdk;
 import com.intellij.openapi.util.Disposer;
 import com.intellij.ui.tabs.TabInfo;
+import com.intellij.ui.tabs.impl.JBEditorTabs;
 import com.intellij.ui.tabs.impl.JBTabsImpl;
+import org.napile.cpp4idea.config.sdk.ui.GeneralTabSdkPanel;
+
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * @author VISTALL
@@ -39,7 +38,7 @@ public class CSdkConfigurable implements AdditionalDataConfigurable
 
 	public CSdkConfigurable()
 	{
-		_tabs = new JBTabsImpl(null, null, null, Disposer.newDisposable());
+		_tabs = new JBEditorTabs(null, null, null, Disposer.newDisposable());
 		//_tabs.setTabSidePaintBorder(5);
 		//_tabs.setPaintBorder(1, 1, 1, 1);
 
