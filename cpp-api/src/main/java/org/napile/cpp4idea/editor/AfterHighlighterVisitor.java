@@ -16,6 +16,7 @@
 
 package org.napile.cpp4idea.editor;
 
+import com.intellij.lang.annotation.HighlightSeverity;
 import org.napile.cpp4idea.ide.highlight.CSyntaxHighlighter;
 import org.napile.cpp4idea.lang.parser.parsingMain.builder.CMainPsiBuilder;
 import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
@@ -48,7 +49,7 @@ public class AfterHighlighterVisitor extends CPsiRecursiveElementVisitor {
 	public void visitErrorElement(PsiErrorElement element) {
 		TextRange textRange = element.getUserData(CMainPsiBuilder.ORIGINAL_TEXT_RANGE);
 
-		holder.createErrorAnnotation(textRange, element.getErrorDescription());
+		holder.newAnnotation(HighlightSeverity.ERROR, element.getErrorDescription()).range(textRange).create();
 
 		super.visitErrorElement(element);
 	}

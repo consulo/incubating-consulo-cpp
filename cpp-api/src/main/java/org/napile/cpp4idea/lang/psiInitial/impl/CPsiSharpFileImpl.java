@@ -45,13 +45,6 @@ public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile {
 		isSourceFile = ArrayUtil.contains(virtualFile.getExtension(), SOURCE_FILES);
 	}
 
-	@Override
-	public void clearCaches() {
-		super.clearCaches();
-
-		putUserData(AFTER_PROCESSED_FILE, null);
-	}
-
 	@NotNull
 	@Override
 	public FileType getFileType() {

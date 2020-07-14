@@ -16,19 +16,20 @@
 
 package org.napile.cpp4idea.ide.projectView.nodes;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-
-import org.napile.cpp4idea.ide.projectView.CProjectViewUtil;
-import org.napile.cpp4idea.lang.psi.CPsiFile;
-import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
 import com.intellij.ide.projectView.ViewSettings;
 import com.intellij.ide.projectView.impl.nodes.PsiFileNode;
 import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
+import org.napile.cpp4idea.ide.projectView.CProjectViewUtil;
+import org.napile.cpp4idea.lang.preprocessor.CPreprocessor;
+import org.napile.cpp4idea.lang.psi.CPsiFile;
+import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * @author VISTALL
@@ -47,7 +48,7 @@ public class CFileTreeNode extends PsiFileNode {
 			return Collections.emptyList();
 		}
 
-		CPsiFile pFile = CPsiSharpFile.AFTER_PROCESSED_FILE.getValue(file);
+		CPsiFile pFile = CPreprocessor.getAfterProcessedFile(file);
 
 		List<AbstractTreeNode<?>> result = new ArrayList<AbstractTreeNode<?>>();
 

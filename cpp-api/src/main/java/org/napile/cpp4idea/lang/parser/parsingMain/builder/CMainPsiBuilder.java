@@ -585,12 +585,12 @@ public class CMainPsiBuilder extends UnprotectedUserDataHolder implements PsiBui
 
 		@Override
 		public int getEndOffset() {
-			return myBuilder.elements[myLexemeIndex == myBuilder.myLexTypes.length ? myLexemeIndex - 1 : myLexemeIndex].getNode().getTextRange().getEndOffset();
+			return myBuilder.elements[myLexemeIndex == myBuilder.elements.length ? myLexemeIndex - 1 : myLexemeIndex].getNode().getTextRange().getEndOffset();
 		}
 
 		@Override
 		public int getStartOffset() {
-			return myBuilder.elements[myLexemeIndex == myBuilder.myLexTypes.length ? myLexemeIndex - 1 : myLexemeIndex].getNode().getStartOffset();
+			return myBuilder.elements[myLexemeIndex == myBuilder.elements.length ? myLexemeIndex - 1 : myLexemeIndex].getNode().getStartOffset();
 		}
 
 		@Nonnull

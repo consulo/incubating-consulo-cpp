@@ -19,6 +19,9 @@ package org.napile.cpp4idea.lang.preprocessor;
 import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiElement;
+import com.intellij.psi.util.CachedValueProvider;
+import com.intellij.psi.util.CachedValuesManager;
+import com.intellij.psi.util.PsiModificationTracker;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.CDialect;
 import org.napile.cpp4idea.lang.parser.parsingMain.builder.CMainPsiBuilder;
@@ -41,13 +44,14 @@ public class CPreprocessor {
 
 	@Nullable
 	public static CPsiFile getAfterProcessedFile(PsiElement psiElement) {
-		return CPsiSharpFile.AFTER_PROCESSED_FILE.getValue((CPsiSharpFile) psiElement.getContainingFile());
+		CPsiSharpFile containingFile = (CPsiSharpFile) psiElement.getContainingFile();
+		return CachedValuesManager.getCachedValue(containingFile, () -> CachedValueProvider.Result.create(preProcess(containingFile), PsiModificationTracker.MODIFICATION_COUNT));
 	}
 
 	@Nullable
 	public static CPsiFile preProcess(CPsiSharpFile element) {
-		final List<PsiElement> elements = new ArrayList<PsiElement>();
-		final Map<String, List<PsiElement>> define = new HashMap<String, List<PsiElement>>();
+		final List<PsiElement> elements = new ArrayList<>();
+		final Map<String, List<PsiElement>> define = new HashMap<>();
 
 		CSharpPsiElementVisitor recursiveElementVisitor = new CSharpPsiElementVisitor() {
 			@Override

@@ -16,11 +16,11 @@
 
 package org.napile.cpp4idea.lang.parser.parsingMain;
 
+import com.intellij.lang.PsiBuilder;
 import org.napile.cpp4idea.CBundle;
 import org.napile.cpp4idea.lang.psi.CPsiCodeBlock;
 import org.napile.cpp4idea.lang.psi.CPsiParameterList;
 import org.napile.cpp4idea.lang.psi.CPsiReturnStatement;
-import com.intellij.lang.PsiBuilder;
 
 /**
  * @author VISTALL
@@ -68,8 +68,6 @@ public class CodeBlockParsing extends MainParsing {
 			builder.advanceLexer();
 
 			ExpressionParsing.parseExpression(builder);
-
-			builder.advanceLexer();
 
 			if (builder.getTokenType() != SEMICOLON) {
 				builder.error(CBundle.message("SEMICOLON.expected"));
