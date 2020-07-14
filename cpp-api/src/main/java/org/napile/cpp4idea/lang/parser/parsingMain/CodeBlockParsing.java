@@ -37,8 +37,7 @@ public class CodeBlockParsing extends MainParsing {
 
 			done(marker, CPsiParameterList.class);
 			return;
-		}
-		else {
+		} else {
 			marker = builder.mark();
 			builder.advanceLexer();
 		}

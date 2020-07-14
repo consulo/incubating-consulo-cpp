@@ -40,8 +40,7 @@ public class CPsiImplementingMethodImpl extends CPsiDeclarationImpl implements C
 	public void accept(@NotNull PsiElementVisitor visitor) {
 		if (visitor instanceof CPsiElementVisitor) {
 			((CPsiElementVisitor) visitor).visitImplementingMethod(this);
-		}
-		else {
+		} else {
 			super.accept(visitor);
 		}
 	}

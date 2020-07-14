@@ -37,8 +37,7 @@ public class CPsiSharpIfBodyImpl extends CPsiElementBaseImpl implements CPsiShar
 	public void accept(@NotNull PsiElementVisitor visitor) {
 		if (visitor instanceof CSharpPsiElementVisitor) {
 			((CSharpPsiElementVisitor) visitor).visitSIfBody(this);
-		}
-		else {
+		} else {
 			super.accept(visitor);
 		}
 	}

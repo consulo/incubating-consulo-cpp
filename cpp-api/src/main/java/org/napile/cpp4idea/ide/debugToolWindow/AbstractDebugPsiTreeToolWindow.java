@@ -80,8 +80,7 @@ public abstract class AbstractDebugPsiTreeToolWindow extends JPanel implements D
 
 		if (editor == null) {
 			setText(DEFAULT_TEXT);
-		}
-		else {
+		} else {
 			VirtualFile vFile = ((EditorEx) editor).getVirtualFile();
 			if (vFile == null) {
 				setText(DEFAULT_TEXT);

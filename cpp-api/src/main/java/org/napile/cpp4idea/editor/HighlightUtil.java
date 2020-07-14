@@ -39,8 +39,7 @@ public class HighlightUtil {
 		PsiElement originalElement = element.getUserData(CMainPsiBuilder.ORIGINAL_SINGLE_ELEMENT);
 		if (originalElement != null) {
 			holder.createInfoAnnotation(originalElement, null).setTextAttributes(key);
-		}
-		else {
+		} else {
 			throw new UnsupportedOperationException("Unknown how highlight element : " + element);
 		}
 	}

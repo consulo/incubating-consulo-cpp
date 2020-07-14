@@ -72,8 +72,7 @@ public class FoldingBuilderImpl implements FoldingBuilder, DumbAware {
 			}
 
 			return list.toArray(new FoldingDescriptor[list.size()]);
-		}
-		else {
+		} else {
 			return EMPTY;
 		}
 	}
@@ -83,8 +82,7 @@ public class FoldingBuilderImpl implements FoldingBuilder, DumbAware {
 		PsiElement element = node.getPsi();
 		if (element instanceof CPsiSharpIfDef) {
 			return (((CPsiSharpIfDef) element).isReverted() ? "#ifndef " : "#ifdef ") + ((CPsiSharpIfDef) element).getVariable().getText() + "\n";
-		}
-		else if (element instanceof CPsiImplementingMethod) {
+		} else if (element instanceof CPsiImplementingMethod) {
 			return "{....}";
 		}
 

@@ -38,8 +38,7 @@ public class CPsiEnumConstantImpl extends CPsiElementBaseImpl implements CPsiEnu
 	public void accept(@NotNull PsiElementVisitor visitor) {
 		if (visitor instanceof CPsiElementVisitor) {
 			((CPsiElementVisitor) visitor).visitEnumConstant(this);
-		}
-		else {
+		} else {
 			super.accept(visitor);
 		}
 	}

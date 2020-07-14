@@ -38,14 +38,12 @@ public class MainParsing extends MainParserHelper {
 			Class<? extends CPsiElement> doneElement = parse(builder);
 			if (doneElement != null) {
 				done(marker, doneElement);
-			}
-			else {
+			} else {
 				marker.drop();
 				if (!isSet(flags, SILENT)) {
 					builder.error("Unknown how to parse symbol " + builder.getTokenType());
 					builder.advanceLexer();
-				}
-				else {
+				} else {
 					break;
 				}
 			}
@@ -69,8 +67,7 @@ public class MainParsing extends MainParserHelper {
 			done(marker, CPsiDoubleColonTypeRef.class);
 
 			return true;
-		}
-		else {
+		} else {
 			return true;
 		}
 	}
@@ -102,14 +99,11 @@ public class MainParsing extends MainParserHelper {
 
 		if (token == CPsiTokens.CLASS_KEYWORD) {
 			return parseClass(builder);
-		}
-		else if (token == CPsiTokens.ENUM_KEYWORD) {
+		} else if (token == CPsiTokens.ENUM_KEYWORD) {
 			return parseEnum(builder, true);
-		}
-		else if (token == CPsiTokens.NAMESPACE_KEYWORD) {
+		} else if (token == CPsiTokens.NAMESPACE_KEYWORD) {
 			return parseNamespace(builder);
-		}
-		else if (token == CPsiTokens.TYPEDEF_KEYWORD) {
+		} else if (token == CPsiTokens.TYPEDEF_KEYWORD) {
 			return parseTypeDef(builder);
 		}
 
@@ -140,8 +134,7 @@ public class MainParsing extends MainParserHelper {
 			Class<? extends CPsiElement> child = parse(builder);
 			if (child != null) {
 				done(marker, child);
-			}
-			else {
+			} else {
 				marker.drop();
 				break;
 			}
@@ -173,12 +166,10 @@ public class MainParsing extends MainParserHelper {
 
 					if (builder.getTokenType() == COMMA) {
 						builder.advanceLexer();
-					}
-					else {
+					} else {
 						break;
 					}
-				}
-				else {
+				} else {
 					break;
 				}
 			}
@@ -216,8 +207,7 @@ public class MainParsing extends MainParserHelper {
 
 				if (consumeIf(builder, IDENTIFIER)) {
 					done(superMarker, CPsiSuperClass.class);
-				}
-				else {
+				} else {
 					done(superMarker, CPsiSuperClass.class);
 					error(builder, "IDENTIFIER.expected");
 				}
@@ -249,21 +239,18 @@ public class MainParsing extends MainParserHelper {
 							Class<? extends CPsiElement> element = parseMemberDeclaration(builder);
 							if (element != null) {
 								done(marker, element);
-							}
-							else {
+							} else {
 								marker.drop();
 								break;
 							}
 						}
 
 						done(memberMark, CPsiAccessorOwner.class);
-					}
-					else {
+					} else {
 						memberMark.drop();
 						error(builder, "COLON.expected");
 					}
-				}
-				else {
+				} else {
 					builder.error("Unknown symbol");
 					break;
 				}
@@ -303,8 +290,7 @@ public class MainParsing extends MainParserHelper {
 			expect(builder, SEMICOLON, "SEMICOLON.expected");
 
 			return CPsiDeclarationConstructor.class;
-		}
-		else if (builder.getTokenType() == IDENTIFIER) {
+		} else if (builder.getTokenType() == IDENTIFIER) {
 			builder.advanceLexer();
 
 			ParameterListParsing.parseParameterList(builder);
@@ -351,8 +337,7 @@ public class MainParsing extends MainParserHelper {
 				CodeBlockParsing.parseCodeBlock(builder);
 
 				return CPsiImplementingMethod.class;
-			}
-			else {
+			} else {
 				builder.advanceLexer();
 
 				return CPsiDeclarationMethod.class;
@@ -362,8 +347,7 @@ public class MainParsing extends MainParserHelper {
 		if (builder.getTokenType() != IDENTIFIER) {
 			error(builder, "name.expected");
 			return null;
-		}
-		else {
+		} else {
 			advanceLexerAndSkipLines(builder);
 		}
 
@@ -374,19 +358,16 @@ public class MainParsing extends MainParserHelper {
 				CodeBlockParsing.parseCodeBlock(builder);
 
 				return CPsiImplementingMethod.class;
-			}
-			else {
+			} else {
 				builder.advanceLexer();
 
 				return CPsiDeclarationMethod.class;
 			}
-		}
-		else {
+		} else {
 			if (builder.getTokenType() != SEMICOLON) {
 				if (builder.getTokenType() != EQ) {
 					builder.error(CBundle.message("EQ.expected"));
-				}
-				else {
+				} else {
 					advanceLexerAndSkipLines(builder);
 
 					ExpressionParsing.parseExpression(builder);
@@ -397,8 +378,7 @@ public class MainParsing extends MainParserHelper {
 
 					builder.advanceLexer();
 				}
-			}
-			else {
+			} else {
 				builder.advanceLexer();
 			}
 

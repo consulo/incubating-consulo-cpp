@@ -17,8 +17,7 @@ public class CSyntaxHighlighterFactory extends SyntaxHighlighterFactory {
 	public SyntaxHighlighter getSyntaxHighlighter(Project project, VirtualFile virtualFile) {
 		if (project == null || virtualFile == null) {
 			return new PlainSyntaxHighlighter();
-		}
-		else {
+		} else {
 			return new CSyntaxHighlighter(project, virtualFile);
 		}
 	}

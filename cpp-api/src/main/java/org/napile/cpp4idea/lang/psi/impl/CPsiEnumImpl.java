@@ -38,8 +38,7 @@ public class CPsiEnumImpl extends CPsiElementBaseImpl implements CPsiEnum {
 	public void accept(@NotNull PsiElementVisitor visitor) {
 		if (visitor instanceof CPsiElementVisitor) {
 			((CPsiElementVisitor) visitor).visitEnum(this);
-		}
-		else {
+		} else {
 			super.accept(visitor);
 		}
 	}

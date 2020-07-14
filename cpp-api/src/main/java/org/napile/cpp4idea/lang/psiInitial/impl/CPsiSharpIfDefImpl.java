@@ -76,8 +76,7 @@ public class CPsiSharpIfDefImpl extends CPsiElementBaseImpl implements CPsiSharp
 	public void accept(@NotNull PsiElementVisitor visitor) {
 		if (visitor instanceof CSharpPsiElementVisitor) {
 			((CSharpPsiElementVisitor) visitor).visitSIfDef(this);
-		}
-		else {
+		} else {
 			super.accept(visitor);
 		}
 	}

@@ -38,8 +38,7 @@ public class CPsiSharpDefineImpl extends CPsiElementBaseImpl implements CPsiShar
 	public void accept(@NotNull PsiElementVisitor visitor) {
 		if (visitor instanceof CSharpPsiElementVisitor) {
 			((CSharpPsiElementVisitor) visitor).visitSDefine(this);
-		}
-		else {
+		} else {
 			super.accept(visitor);
 		}
 	}

@@ -54,8 +54,7 @@ public class XmlPsiDebugger {
 
 			StringUtil.repeatSymbol(builder, '\t', indent);
 			builder.append("</").append(tagName).append(">\n");
-		}
-		else {
+		} else {
 			builder.append(" />\n");
 		}
 	}

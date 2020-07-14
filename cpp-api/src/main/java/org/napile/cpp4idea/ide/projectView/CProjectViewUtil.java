@@ -48,8 +48,7 @@ public class CProjectViewUtil {
 		for (CPsiDeclaration declaration : declarations) {
 			if (declaration instanceof CPsiClass) {
 				list.add(new CClassTreeNode(p, (CPsiClass) declaration, viewSettings));
-			}
-			else if (declaration instanceof CPsiDeclarationMethod) {
+			} else if (declaration instanceof CPsiDeclarationMethod) {
 				list.add(new CMethodTreeNode(p, (CPsiDeclarationMethod) declaration, viewSettings));
 			}
 		}

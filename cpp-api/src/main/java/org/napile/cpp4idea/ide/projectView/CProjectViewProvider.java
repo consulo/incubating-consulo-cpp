@@ -61,12 +61,10 @@ public class CProjectViewProvider implements SelectableTreeStructureProvider, Du
 				CPsiClass clazz = CProjectViewUtil.findSingleClass(((CPsiSharpFile) childValue));
 				if (clazz != null) {
 					result.add(new CClassTreeNode(file.getProject(), clazz, settings));
-				}
-				else {
+				} else {
 					result.add(new CFileTreeNode(file.getProject(), file, settings));
 				}
-			}
-			else {
+			} else {
 				result.add(child);
 			}
 		}

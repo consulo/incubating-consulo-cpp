@@ -85,11 +85,9 @@ public class CParserDefinitionImpl implements ParserDefinition {
 	public PsiElement createElement(ASTNode node) {
 		if (node.getElementType() instanceof CPsiTokenImpl) {
 			return ((CPsiTokenImpl) node.getElementType()).createPsi(node);
-		}
-		else if (node.getElementType() instanceof CPsiSharpTokenImpl) {
+		} else if (node.getElementType() instanceof CPsiSharpTokenImpl) {
 			return ((CPsiSharpTokenImpl) node.getElementType()).createPsi(node);
-		}
-		else if (node.getElementType() == CPsiTokens.C_PROCESSED_FILE_TYPE) {
+		} else if (node.getElementType() == CPsiTokens.C_PROCESSED_FILE_TYPE) {
 			return new CPsiFileImpl(node);
 		}
 

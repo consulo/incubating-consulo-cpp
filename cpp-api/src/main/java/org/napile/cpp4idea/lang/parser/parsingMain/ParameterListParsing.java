@@ -37,8 +37,7 @@ public class ParameterListParsing extends MainParsing {
 			builder.advanceLexer();
 			done(marker, CPsiParameterList.class);
 			return;
-		}
-		else {
+		} else {
 			marker = builder.mark();
 			advanceLexerAndSkipLines(builder);
 		}
@@ -47,8 +46,7 @@ public class ParameterListParsing extends MainParsing {
 			while (true) {
 				if (builder.getTokenType() == ELLIPSIS) {
 					doneOneToken(builder, CPsiParameter.class);
-				}
-				else {
+				} else {
 					VariableParsing.parseVariable(CPsiParameter.class, builder);
 				}
 
@@ -58,8 +56,7 @@ public class ParameterListParsing extends MainParsing {
 			}
 
 			expect(builder, RPARENTH, "RPARENTH.expected");
-		}
-		else {
+		} else {
 			advanceLexerAndSkipLines(builder);
 		}
 

@@ -87,8 +87,7 @@ public class PreHighlighterVisitor extends CSharpPsiRecursiveElementVisitor {
 					super.visitElement(element);
 				}
 			});
-		}
-		else {
+		} else {
 			super.visitSIfBody(element);
 		}
 	}

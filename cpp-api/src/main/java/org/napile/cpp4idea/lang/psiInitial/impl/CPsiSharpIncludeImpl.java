@@ -39,8 +39,7 @@ public class CPsiSharpIncludeImpl extends CPsiElementBaseImpl implements CPsiSha
 	public void accept(@NotNull PsiElementVisitor visitor) {
 		if (visitor instanceof CSharpPsiElementVisitor) {
 			((CSharpPsiElementVisitor) visitor).visitSInclude(this);
-		}
-		else {
+		} else {
 			super.accept(visitor);
 		}
 	}

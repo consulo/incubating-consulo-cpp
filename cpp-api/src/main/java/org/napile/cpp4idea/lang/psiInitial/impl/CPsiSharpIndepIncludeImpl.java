@@ -37,8 +37,7 @@ public class CPsiSharpIndepIncludeImpl extends CPsiSharpIncludeImpl implements C
 	public void accept(@NotNull PsiElementVisitor visitor) {
 		if (visitor instanceof CSharpPsiElementVisitor) {
 			((CSharpPsiElementVisitor) visitor).visitSIndependInclude(this);
-		}
-		else {
+		} else {
 			super.accept(visitor);
 		}
 	}

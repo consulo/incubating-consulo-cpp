@@ -42,8 +42,7 @@ public class CPsiFileImpl extends CPsiElementBaseImpl implements CPsiFile {
 	public void accept(@NotNull PsiElementVisitor visitor) {
 		if (visitor instanceof CPsiElementVisitor) {
 			((CPsiElementVisitor) visitor).visitCFile(this);
-		}
-		else {
+		} else {
 			visitor.visitElement(this);
 		}
 	}

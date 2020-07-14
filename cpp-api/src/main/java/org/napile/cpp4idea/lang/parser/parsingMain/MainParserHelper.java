@@ -53,8 +53,7 @@ public class MainParserHelper implements CPsiTokens {
 
 			if (elementType == NEW_LINE) {
 				step++;
-			}
-			else {
+			} else {
 				return elementType;
 			}
 		}
@@ -72,8 +71,7 @@ public class MainParserHelper implements CPsiTokens {
 	protected static void expect(final PsiBuilder builder, final IElementType token, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message) {
 		if (builder.getTokenType() == token) {
 			advanceLexerAndSkipLines(builder);
-		}
-		else {
+		} else {
 			builder.error(CBundle.message(message));
 		}
 	}
@@ -82,8 +80,7 @@ public class MainParserHelper implements CPsiTokens {
 		if (builder.getTokenType() == token) {
 			advanceLexerAndSkipLines(builder);
 			return true;
-		}
-		else {
+		} else {
 			return false;
 		}
 	}

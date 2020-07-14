@@ -272,8 +272,7 @@ public class CMainPsiBuilder extends UnprotectedUserDataHolder implements PsiBui
 			if (myFirstChild == null) {
 				myFirstChild = node;
 				myLastChild = node;
-			}
-			else {
+			} else {
 				myLastChild.myNext = node;
 				myLastChild = node;
 			}
@@ -405,8 +404,7 @@ public class CMainPsiBuilder extends UnprotectedUserDataHolder implements PsiBui
 					for (int i = 0; i < value.length(); i++) {
 						hc += value.charAt(i);
 					}
-				}
-				else {
+				} else {
 					final int start = myTokenStart;
 					final int end = myTokenEnd;
 
@@ -1069,13 +1067,11 @@ public class CMainPsiBuilder extends UnprotectedUserDataHolder implements PsiBui
 				if (curDepth > maxDepth) {
 					maxDepth = curDepth;
 				}
-			}
-			else if (item instanceof DoneMarker) {
+			} else if (item instanceof DoneMarker) {
 				assertMarkersBalanced(((DoneMarker) item).myStart == curNode, item);
 				curNode = nodes.pop();
 				curDepth--;
-			}
-			else if (item instanceof ErrorItem) {
+			} else if (item instanceof ErrorItem) {
 				int curToken = item.myLexemeIndex;
 				if (curToken == lastErrorIndex) {
 					continue;
@@ -1152,14 +1148,12 @@ public class CMainPsiBuilder extends UnprotectedUserDataHolder implements PsiBui
 						ProductionMarker prev = myProduction.get(k);
 						if (prev.myLexemeIndex >= item.myLexemeIndex) {
 							prev.myLexemeIndex = item.myLexemeIndex;
-						}
-						else {
+						} else {
 							break;
 						}
 					}
 				}
-			}
-			else if (item.myLexemeIndex < wsStartIndex) {
+			} else if (item.myLexemeIndex < wsStartIndex) {
 				item.myLexemeIndex = wsStartIndex;
 			}
 
@@ -1211,8 +1205,7 @@ public class CMainPsiBuilder extends UnprotectedUserDataHolder implements PsiBui
 			if (!Boolean.TRUE.equals(flag)) {
 				file.putUserData(BlockSupport.TREE_DEPTH_LIMIT_EXCEEDED, Boolean.TRUE);
 			}
-		}
-		else if (isFileRoot && flag != null) {
+		} else if (isFileRoot && flag != null) {
 			file.putUserData(BlockSupport.TREE_DEPTH_LIMIT_EXCEEDED, null);
 		}
 	}
@@ -1241,17 +1234,14 @@ public class CMainPsiBuilder extends UnprotectedUserDataHolder implements PsiBui
 
 					item = marker.myFirstChild != null ? marker.myFirstChild : marker.myDoneMarker;
 					continue;
-				}
-				else {
+				} else {
 					lexIndex = collapseLeaves(curNode, marker);
 				}
-			}
-			else if (item instanceof ErrorItem) {
+			} else if (item instanceof ErrorItem) {
 				final CompositeElement errorElement = Factory.createErrorElement(((ErrorItem) item).myMessage);
 				errorElement.putUserData(ORIGINAL_TEXT_RANGE, new TextRange(item.getStartOffset(), item.getEndOffset()));
 				curNode.rawAddChildrenWithoutNotifications(errorElement);
-			}
-			else if (item instanceof DoneMarker) {
+			} else if (item instanceof DoneMarker) {
 				curMarker = (StartMarker) ((DoneMarker) item).myStart.myParent;
 				curNode = curNode.getTreeParent();
 				item = ((DoneMarker) item).myStart;
@@ -1405,8 +1395,7 @@ public class CMainPsiBuilder extends UnprotectedUserDataHolder implements PsiBui
 			if (n1 instanceof ForeignLeafPsiElement) {
 				n1t = ((ForeignLeafPsiElement) n1).getForeignType();
 				n2t = n2.getTokenType();
-			}
-			else {
+			} else {
 				n1t = dereferenceToken(n1.getElementType());
 				n2t = dereferenceToken(n2.getTokenType());
 			}
@@ -1480,8 +1469,7 @@ public class CMainPsiBuilder extends UnprotectedUserDataHolder implements PsiBui
 						return new LazyParseableToken();
 					}
 				});
-			}
-			else {
+			} else {
 				myPool = parentTree.myPool;
 				myLazyPool = parentTree.myLazyPool;
 			}
@@ -1533,8 +1521,7 @@ public class CMainPsiBuilder extends UnprotectedUserDataHolder implements PsiBui
 				if (child instanceof StartMarker && ((StartMarker) child).myDoneMarker.myCollapse) {
 					int lastIndex = ((StartMarker) child).myDoneMarker.myLexemeIndex;
 					insertLeaf(child.getTokenType(), marker.myBuilder, child.myLexemeIndex, lastIndex, true, marker);
-				}
-				else {
+				} else {
 					ensureCapacity();
 					nodes[count++] = child;
 				}
@@ -1561,8 +1548,7 @@ public class CMainPsiBuilder extends UnprotectedUserDataHolder implements PsiBui
 				final LighterASTNode node = nodes[i];
 				if (node instanceof LazyParseableToken) {
 					myLazyPool.recycle((LazyParseableToken) node);
-				}
-				else if (node instanceof Token) {
+				} else if (node instanceof Token) {
 					myPool.recycle((Token) node);
 				}
 			}
@@ -1573,8 +1559,7 @@ public class CMainPsiBuilder extends UnprotectedUserDataHolder implements PsiBui
 			if (old == null) {
 				old = new LighterASTNode[10];
 				nodes = old;
-			}
-			else if (count >= old.length) {
+			} else if (count >= old.length) {
 				LighterASTNode[] newStore = new LighterASTNode[count * 3 / 2];
 				System.arraycopy(old, 0, newStore, 0, count);
 				nodes = newStore;
@@ -1643,8 +1628,7 @@ public class CMainPsiBuilder extends UnprotectedUserDataHolder implements PsiBui
 				token.myEndIndex = endLexemeIndex;
 				token.initToken(type, builder, parent, start, end);
 				builder.myChameleonCache.put(startInFile, token);
-			}
-			else {
+			} else {
 				if (token.myBuilder != builder || token.myStartIndex != startLexemeIndex || token.myEndIndex != endLexemeIndex) {
 					throw new AssertionError("Wrong chameleon cached");
 				}
@@ -1683,11 +1667,9 @@ public class CMainPsiBuilder extends UnprotectedUserDataHolder implements PsiBui
 			if (n instanceof Token) {
 				final Token token = (Token) n;
 				return token.myBuilder.createLeaf(token.getTokenType(), token.myTokenStart, token.myTokenEnd);
-			}
-			else if (n instanceof ErrorItem) {
+			} else if (n instanceof ErrorItem) {
 				return Factory.createErrorElement(((ErrorItem) n).myMessage);
-			}
-			else {
+			} else {
 				final StartMarker startMarker = (StartMarker) n;
 				final CompositeElement composite = n == myRoot ? (CompositeElement) myRoot.myBuilder.createRootAST(myRoot) : createComposite(startMarker);
 				startMarker.myBuilder.bind(startMarker, composite);
@@ -1709,14 +1691,11 @@ public class CMainPsiBuilder extends UnprotectedUserDataHolder implements PsiBui
 		TreeElement element;
 		if (myWhitespaces.contains(type)) {
 			element = new PsiWhiteSpaceImpl(text);
-		}
-		else if (type instanceof ICustomParsingType) {
+		} else if (type instanceof ICustomParsingType) {
 			element = (TreeElement) ((ICustomParsingType) type).parse(text, myCharTable);
-		}
-		else if (type instanceof ILazyParseableElementType) {
+		} else if (type instanceof ILazyParseableElementType) {
 			element = ASTFactory.lazy((ILazyParseableElementType) type, text);
-		}
-		else {
+		} else {
 			element = ASTFactory.leaf(type, text);
 		}
 
@@ -1750,8 +1729,7 @@ public class CMainPsiBuilder extends UnprotectedUserDataHolder implements PsiBui
 	public <T> void putUserData(@Nonnull Key<T> key, @Nullable T value) {
 		if (key == FileContextUtil.CONTAINING_FILE_KEY) {
 			myFile = (PsiFile) value;
-		}
-		else {
+		} else {
 			super.putUserData(key, value);
 		}
 	}
