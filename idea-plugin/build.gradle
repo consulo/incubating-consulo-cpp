@@ -1,0 +1,8 @@
+dependencies{
+  compile project(":cpp.api")
+}
+
+intellij {
+  type 'IC'
+  intellij.plugins = ['copyright', 'java']
+}

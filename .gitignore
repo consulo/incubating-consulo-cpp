@@ -1,7 +1,7 @@
-/.idea/workspace.xml
+/.idea
 /out
-
-/.consulo/workspace.xml
-
+/.consulo
 /target
 .consulo/sandbox
+build/
+.gradle/

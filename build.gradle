@@ -1,0 +1,66 @@
+plugins {
+  id "org.jetbrains.intellij" version "0.4.21"
+}
+
+repositories {
+  mavenCentral()
+}
+
+allprojects {
+
+  apply plugin: 'java'
+  sourceCompatibility = '1.8'
+  targetCompatibility = '1.8'
+  tasks.withType(JavaCompile) { options.encoding = 'UTF-8' }
+
+  project.ext{
+    genRoot = project.file('src/main/gen')
+  }
+
+  sourceSets {
+    main {
+      java.srcDirs files(project.file('src/main/java'), project.genRoot)
+      resources.srcDir project.file('src/main/resources')
+    }
+    test {
+      java.srcDir project.file('src/test/java')
+      resources.srcDirs project.file('src/test/resources')
+    }
+  }
+
+  apply plugin: 'idea'
+  idea {
+    module {
+      generatedSourceDirs += project.genRoot
+    }
+  }
+
+  apply plugin: 'org.jetbrains.intellij'
+  repositories {
+    mavenCentral()
+  }
+  version = "${pluginVersion}${platformBranch}${pluginBuild}"
+
+  intellij {
+    version "${platformVersion}${platformBranch}${platformBuild}"
+    updateSinceUntilBuild = true
+
+    if (project.hasProperty('idea_sandbox')) {
+      sandboxDirectory "${project.buildDir}/${project.idea_sandbox}"
+    }
+  }
+}
+
+apply plugin: 'idea'
+idea {
+  project {
+    languageLevel = '1.8'
+  }
+}
+
+runIde {
+  if (project.hasProperty("nocancel")) {
+    systemProperty("idea.ProcessCanceledException", "disabled")
+  }
+  jvmArgs("-Xmx2048m")
+}
