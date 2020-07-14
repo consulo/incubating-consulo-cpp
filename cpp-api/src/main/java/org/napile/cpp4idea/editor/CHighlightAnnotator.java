@@ -26,13 +26,10 @@ import com.intellij.psi.PsiElement;
  * @author VISTALL
  * @date 15:39/29.12.12
  */
-public class CHighlightAnnotator implements Annotator
-{
+public class CHighlightAnnotator implements Annotator {
 	@Override
-	public void annotate(@NotNull PsiElement element, @NotNull final AnnotationHolder holder)
-	{
-		if(element instanceof CPsiSharpFile)
-		{
+	public void annotate(@NotNull PsiElement element, @NotNull final AnnotationHolder holder) {
+		if (element instanceof CPsiSharpFile) {
 			PreHighlighterVisitor visitor = new PreHighlighterVisitor(holder, (CPsiSharpFile) element);
 
 			visitor.start();

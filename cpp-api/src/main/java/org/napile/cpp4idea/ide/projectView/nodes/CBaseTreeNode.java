@@ -36,42 +36,35 @@ import java.util.Collections;
  * @author VISTALL
  * @date 19:06/07.01.13
  */
-public abstract class CBaseTreeNode<D extends CPsiDeclaration> extends ProjectViewNode<D>
-{
-	public CBaseTreeNode(Project project, D d, ViewSettings viewSettings)
-	{
+public abstract class CBaseTreeNode<D extends CPsiDeclaration> extends ProjectViewNode<D> {
+	public CBaseTreeNode(Project project, D d, ViewSettings viewSettings) {
 		super(project, d, viewSettings);
 	}
 
 	@NotNull
 	@Override
-	public Collection<? extends AbstractTreeNode<?>> getChildren()
-	{
+	public Collection<? extends AbstractTreeNode<?>> getChildren() {
 		return Collections.emptyList();
 	}
 
 	@Override
-	public boolean canNavigate()
-	{
+	public boolean canNavigate() {
 		return true;
 	}
 
 	@Override
-	public boolean contains(@NotNull VirtualFile file)
-	{
+	public boolean contains(@NotNull VirtualFile file) {
 		return false;
 	}
 
 	@Override
-	public void navigate(boolean requestFocus)
-	{
+	public void navigate(boolean requestFocus) {
 		CPsiDeclaration declaration = getValue();
 
 		PsiElement nameIdentifier = declaration.getNameIdentifier();
-		if(nameIdentifier != null)
-		{
+		if (nameIdentifier != null) {
 			PsiElement origNameElement = nameIdentifier.getUserData(CMainPsiBuilder.ORIGINAL_SINGLE_ELEMENT);
-			if(origNameElement == null)
+			if (origNameElement == null)
 				return;
 
 			NavigationUtil.activateFileWithPsiElement(origNameElement, true);
@@ -79,8 +72,7 @@ public abstract class CBaseTreeNode<D extends CPsiDeclaration> extends ProjectVi
 	}
 
 	@Override
-	protected void update(PresentationData presentation)
-	{
+	protected void update(PresentationData presentation) {
 		presentation.setPresentableText(getValue().getName());
 
 		presentation.setIcon(PsiIconUtil.getProvidersIcon(getValue(), 0));

@@ -23,10 +23,8 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 11:44/14.12.2011
  */
-public class CPsiIndexedPropertyAccessExpressionImpl extends CPsiElementBaseImpl implements CPsiIndexedPropertyAccessExpression
-{
-	public CPsiIndexedPropertyAccessExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiIndexedPropertyAccessExpressionImpl extends CPsiElementBaseImpl implements CPsiIndexedPropertyAccessExpression {
+	public CPsiIndexedPropertyAccessExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 }

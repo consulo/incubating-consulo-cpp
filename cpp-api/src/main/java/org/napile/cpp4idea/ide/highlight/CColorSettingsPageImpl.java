@@ -35,58 +35,51 @@ import com.intellij.openapi.options.colors.ColorSettingsPage;
  * @author VISTALL
  * @date 17:14/11.12.2011
  */
-public class CColorSettingsPageImpl implements ColorSettingsPage
-{
+public class CColorSettingsPageImpl implements ColorSettingsPage {
 	@NotNull
 	@Override
-	public String getDisplayName()
-	{
+	public String getDisplayName() {
 		return "C/C++";
 	}
 
 	@Override
-	public Icon getIcon()
-	{
+	public Icon getIcon() {
 		return CIcons.SOURCE_FILE;
 	}
 
 	@NotNull
 	@Override
-	public AttributesDescriptor[] getAttributeDescriptors()
-	{
+	public AttributesDescriptor[] getAttributeDescriptors() {
 		return new AttributesDescriptor[]
-		{
-			new AttributesDescriptor(CBundle.message("keyword"), CSyntaxHighlighter.KEYWORD),
-			new AttributesDescriptor(CBundle.message("number"), CSyntaxHighlighter.NUMBER),
-			new AttributesDescriptor(CBundle.message("string"), CSyntaxHighlighter.STRING),
-			new AttributesDescriptor(CBundle.message("constant"), CSyntaxHighlighter.CONSTANT),
-			new AttributesDescriptor(CBundle.message("compiler.variable"), CSyntaxHighlighter.COMPILER_VARIABLE),
-			new AttributesDescriptor(CBundle.message("comma"), CSyntaxHighlighter.COMMA),
-			new AttributesDescriptor(CBundle.message("dot"), CSyntaxHighlighter.DOT),
-			new AttributesDescriptor(CBundle.message("line.comment"), CSyntaxHighlighter.LINE_COMMENT),
-			new AttributesDescriptor(CBundle.message("block.comment"), CSyntaxHighlighter.BLOCK_COMMENT),
-		};
+				{
+						new AttributesDescriptor(CBundle.message("keyword"), CSyntaxHighlighter.KEYWORD),
+						new AttributesDescriptor(CBundle.message("number"), CSyntaxHighlighter.NUMBER),
+						new AttributesDescriptor(CBundle.message("string"), CSyntaxHighlighter.STRING),
+						new AttributesDescriptor(CBundle.message("constant"), CSyntaxHighlighter.CONSTANT),
+						new AttributesDescriptor(CBundle.message("compiler.variable"), CSyntaxHighlighter.COMPILER_VARIABLE),
+						new AttributesDescriptor(CBundle.message("comma"), CSyntaxHighlighter.COMMA),
+						new AttributesDescriptor(CBundle.message("dot"), CSyntaxHighlighter.DOT),
+						new AttributesDescriptor(CBundle.message("line.comment"), CSyntaxHighlighter.LINE_COMMENT),
+						new AttributesDescriptor(CBundle.message("block.comment"), CSyntaxHighlighter.BLOCK_COMMENT),
+				};
 	}
 
 	@NotNull
 	@Override
-	public ColorDescriptor[] getColorDescriptors()
-	{
+	public ColorDescriptor[] getColorDescriptors() {
 		return ColorDescriptor.EMPTY_ARRAY;
 	}
 
 	@NotNull
 	@Override
-	public SyntaxHighlighter getHighlighter()
-	{
+	public SyntaxHighlighter getHighlighter() {
 		return new PlainSyntaxHighlighter();
 	}
 
 	@NotNull
 	@Override
-	public String getDemoText()
-	{
-		return  "<blockcomment>/*\n" +
+	public String getDemoText() {
+		return "<blockcomment>/*\n" +
 				" * This is block comment\n" +
 				" * napile project\n" +
 				"*/</blockcomment>\n" +
@@ -103,8 +96,7 @@ public class CColorSettingsPageImpl implements ColorSettingsPage
 	}
 
 	@Override
-	public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap()
-	{
+	public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
 		Map<String, TextAttributesKey> map = new HashMap<String, TextAttributesKey>(1);
 		map.put("compilervar", CSyntaxHighlighter.COMPILER_VARIABLE);
 		map.put("string", CSyntaxHighlighter.STRING);

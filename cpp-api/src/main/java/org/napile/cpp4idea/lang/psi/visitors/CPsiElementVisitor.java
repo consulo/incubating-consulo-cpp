@@ -11,30 +11,24 @@ import com.intellij.psi.PsiElementVisitor;
  * @author VISTALL
  * @date 13:07/16.12.2011
  */
-public class CPsiElementVisitor extends PsiElementVisitor
-{
-	public void visitCFile(CPsiFile file)
-	{
+public class CPsiElementVisitor extends PsiElementVisitor {
+	public void visitCFile(CPsiFile file) {
 		visitElement(file);
 	}
 
-	public void visitImplementingMethod(CPsiImplementingMethod element)
-	{
+	public void visitImplementingMethod(CPsiImplementingMethod element) {
 		visitElement(element);
 	}
 
-	public void visitEnum(CPsiEnum element)
-	{
+	public void visitEnum(CPsiEnum element) {
 		visitElement(element);
 	}
 
-	public void visitEnumConstant(CPsiEnumConstant element)
-	{
+	public void visitEnumConstant(CPsiEnumConstant element) {
 		visitElement(element);
 	}
 
-	public void visitModifierList(CPsiModifierList modifierList)
-	{
+	public void visitModifierList(CPsiModifierList modifierList) {
 		visitElement(modifierList);
 	}
 }

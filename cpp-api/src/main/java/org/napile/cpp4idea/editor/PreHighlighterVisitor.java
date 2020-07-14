@@ -32,8 +32,7 @@ import com.intellij.psi.PsiElement;
  * @author VISTALL
  * @date 11:07/02.01.13
  */
-public class PreHighlighterVisitor extends CSharpPsiRecursiveElementVisitor
-{
+public class PreHighlighterVisitor extends CSharpPsiRecursiveElementVisitor {
 	//FIXME [VISTALL] better
 	private static final CSyntaxHighlighter HIGHLIGHTER = new CSyntaxHighlighter(null, null);
 
@@ -41,17 +40,15 @@ public class PreHighlighterVisitor extends CSharpPsiRecursiveElementVisitor
 	private final CPsiFile afterFile;
 	private final CPsiSharpFile preFile;
 
-	public PreHighlighterVisitor(AnnotationHolder holder, CPsiSharpFile element)
-	{
+	public PreHighlighterVisitor(AnnotationHolder holder, CPsiSharpFile element) {
 		this.holder = holder;
 
 		preFile = element;
 		afterFile = CPreprocessor.getAfterProcessedFile(element);
 	}
 
-	public void start()
-	{
-		if(afterFile == null)
+	public void start() {
+		if (afterFile == null)
 			return;
 
 		AfterHighlighterVisitor afterHighlighterVisitor = new AfterHighlighterVisitor(holder);
@@ -62,39 +59,33 @@ public class PreHighlighterVisitor extends CSharpPsiRecursiveElementVisitor
 	}
 
 	@Override
-	public void visitCompilerVariable(CPsiCompilerVariable element)
-	{
+	public void visitCompilerVariable(CPsiCompilerVariable element) {
 		HighlightUtil.highlight(element, holder);
 
 		super.visitCompilerVariable(element);
 	}
 
 	@Override
-	public void visitSIfBody(CPsiSharpIfBody element)
-	{
-		if(element.getTextLength() == 0)
+	public void visitSIfBody(CPsiSharpIfBody element) {
+		if (element.getTextLength() == 0)
 			return;
 
 		CPsiSharpIfDef def = element.getIfDef();
 
 		boolean defined = element.getUserData(CPreprocessor.ACTIVE_BLOCK) == Boolean.TRUE;
 
-		if(!defined)
-		{
+		if (!defined) {
 			//holder.createWarningAnnotation(element, "Not active block");
 
-			element.accept(new CSharpPsiRecursiveElementVisitor()
-			{
+			element.accept(new CSharpPsiRecursiveElementVisitor() {
 				@Override
-				public void visitElement(PsiElement element)
-				{
+				public void visitElement(PsiElement element) {
 					TextAttributesKey[] textAttributesKeys = HIGHLIGHTER.getAttributes(element.getNode().getElementType());
 					holder.createInfoAnnotation(element, null).setTextAttributes(textAttributesKeys != null ? textAttributesKeys[1] : CSyntaxHighlighter.LIGHT_IDENTIFIER);
 					super.visitElement(element);
 				}
 			});
-		}
-		else
+		} else
 			super.visitSIfBody(element);
 	}
 }

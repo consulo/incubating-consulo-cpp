@@ -23,10 +23,8 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 23:40/10.12.2011
  */
-public class CPsiReturnStatementImpl extends CPsiElementBaseImpl implements CPsiReturnStatement
-{
-	public CPsiReturnStatementImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiReturnStatementImpl extends CPsiElementBaseImpl implements CPsiReturnStatement {
+	public CPsiReturnStatementImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 }

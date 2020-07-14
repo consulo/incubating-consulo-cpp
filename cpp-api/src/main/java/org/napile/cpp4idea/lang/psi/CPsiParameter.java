@@ -20,7 +20,6 @@ package org.napile.cpp4idea.lang.psi;
  * @author VISTALL
  * @date 23:03/10.12.2011
  */
-public interface CPsiParameter extends CPsiElement
-{
+public interface CPsiParameter extends CPsiElement {
 
 }

@@ -20,7 +20,6 @@ package org.napile.cpp4idea.lang.psi;
  * @author VISTALL
  * @date 12:49/07.01.13
  */
-public interface CPsiSuperClassList extends CPsiElement
-{
+public interface CPsiSuperClassList extends CPsiElement {
 	CPsiSuperClass[] getSuperClasses();
 }

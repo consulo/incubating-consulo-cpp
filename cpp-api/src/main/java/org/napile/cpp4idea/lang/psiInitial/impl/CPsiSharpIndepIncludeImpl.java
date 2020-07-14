@@ -28,25 +28,21 @@ import com.intellij.psi.PsiElementVisitor;
  * @author VISTALL
  * @date 1:53/11.12.2011
  */
-public class CPsiSharpIndepIncludeImpl extends CPsiSharpIncludeImpl implements CPsiSharpIndepInclude
-{
-	public CPsiSharpIndepIncludeImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiSharpIndepIncludeImpl extends CPsiSharpIncludeImpl implements CPsiSharpIndepInclude {
+	public CPsiSharpIndepIncludeImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if(visitor instanceof CSharpPsiElementVisitor)
-			((CSharpPsiElementVisitor)visitor).visitSIndependInclude(this);
+	public void accept(@NotNull PsiElementVisitor visitor) {
+		if (visitor instanceof CSharpPsiElementVisitor)
+			((CSharpPsiElementVisitor) visitor).visitSIndependInclude(this);
 		else
 			super.accept(visitor);
 	}
 
 	@Override
-	public PsiElement getIncludeElement()
-	{
+	public PsiElement getIncludeElement() {
 		return findChildByType(CPsiTokens.STRING_INCLUDE_LITERAL);
 	}
 }

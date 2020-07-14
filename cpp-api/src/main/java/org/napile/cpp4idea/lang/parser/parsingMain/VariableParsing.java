@@ -23,13 +23,10 @@ import com.intellij.lang.PsiBuilder;
  * @author VISTALL
  * @date 12:27/07.01.13
  */
-public class VariableParsing extends MainParserHelper
-{
-	public static boolean parseVariable(Class<? extends CPsiElement> clazz, PsiBuilder builder)
-	{
+public class VariableParsing extends MainParserHelper {
+	public static boolean parseVariable(Class<? extends CPsiElement> clazz, PsiBuilder builder) {
 		PsiBuilder.Marker variableMarker = builder.mark();
-		if(!MainParsing.parseTypeRef(builder))
-		{
+		if (!MainParsing.parseTypeRef(builder)) {
 			variableMarker.drop();
 			return false;
 		}
@@ -38,23 +35,20 @@ public class VariableParsing extends MainParserHelper
 
 		consumeIf(builder, ASTERISK);
 
-		if(!consumeIf(builder, IDENTIFIER))
-		{
+		if (!consumeIf(builder, IDENTIFIER)) {
 			error(builder, "IDENTIFIER.expected");
 			done(variableMarker, clazz);
 			return true;
 		}
 
-		while(consumeIf(builder, LBRACKET))
-		{
-			if(!consumeIf(builder, RBRACKET))
-			{
+		while (consumeIf(builder, LBRACKET)) {
+			if (!consumeIf(builder, RBRACKET)) {
 				error(builder, "RBRACKET.expected");
 				break;
 			}
 		}
 
-		if(consumeIf(builder, EQ))
+		if (consumeIf(builder, EQ))
 			ExpressionParsing.parsePrimaryExpression(builder);
 
 		done(variableMarker, clazz);

@@ -24,10 +24,8 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 12:53/02.01.13
  */
-public class CPsiNamespaceDeclarationImpl extends CPsiElementBaseImpl implements CPsiNamespaceDeclaration
-{
-	public CPsiNamespaceDeclarationImpl(@NotNull ASTNode node)
-	{
+public class CPsiNamespaceDeclarationImpl extends CPsiElementBaseImpl implements CPsiNamespaceDeclaration {
+	public CPsiNamespaceDeclarationImpl(@NotNull ASTNode node) {
 		super(node);
 	}
 }

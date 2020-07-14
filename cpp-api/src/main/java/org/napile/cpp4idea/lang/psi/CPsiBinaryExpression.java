@@ -20,7 +20,6 @@ package org.napile.cpp4idea.lang.psi;
  * @author VISTALL
  * @date 19:55/13.12.2011
  */
-public interface CPsiBinaryExpression extends CPsiExpression
-{
+public interface CPsiBinaryExpression extends CPsiExpression {
 
 }

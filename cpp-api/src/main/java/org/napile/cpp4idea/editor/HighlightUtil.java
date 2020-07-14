@@ -28,25 +28,21 @@ import com.intellij.psi.PsiElement;
  * @author VISTALL
  * @date 11:30/02.01.13
  */
-public class HighlightUtil
-{
-	public static void highlight(@NotNull PsiElement element, @NotNull AnnotationHolder holder)
-	{
-		if(element instanceof CPsiCompilerVariable)
+public class HighlightUtil {
+	public static void highlight(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
+		if (element instanceof CPsiCompilerVariable)
 			highlightElement(element, holder, CSyntaxHighlighter.COMPILER_VARIABLE);
 	}
 
-	public static void highlightOriginalElement(@NotNull PsiElement element, @NotNull AnnotationHolder holder, @NotNull TextAttributesKey key)
-	{
+	public static void highlightOriginalElement(@NotNull PsiElement element, @NotNull AnnotationHolder holder, @NotNull TextAttributesKey key) {
 		PsiElement originalElement = element.getUserData(CMainPsiBuilder.ORIGINAL_SINGLE_ELEMENT);
-		if(originalElement != null)
+		if (originalElement != null)
 			holder.createInfoAnnotation(originalElement, null).setTextAttributes(key);
 		else
 			throw new UnsupportedOperationException("Unknown how highlight element : " + element);
 	}
 
-	public static void highlightElement(@NotNull PsiElement element, @NotNull AnnotationHolder holder, @NotNull TextAttributesKey key)
-	{
+	public static void highlightElement(@NotNull PsiElement element, @NotNull AnnotationHolder holder, @NotNull TextAttributesKey key) {
 		holder.createInfoAnnotation(element, null).setTextAttributes(key);
 	}
 }

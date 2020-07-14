@@ -27,24 +27,20 @@ import com.intellij.psi.tree.IElementType;
  * @author VISTALL
  * @date 12:31/02.01.13
  */
-public class CPsiModifierListImpl extends CPsiElementBaseImpl implements CPsiModifierList
-{
-	public CPsiModifierListImpl(@NotNull ASTNode node)
-	{
+public class CPsiModifierListImpl extends CPsiElementBaseImpl implements CPsiModifierList {
+	public CPsiModifierListImpl(@NotNull ASTNode node) {
 		super(node);
 	}
 
 	@Override
-	public boolean hasModifier(@NotNull IElementType e)
-	{
+	public boolean hasModifier(@NotNull IElementType e) {
 		return findChildByType(e) != null;
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if(visitor instanceof CPsiElementVisitor)
-			((CPsiElementVisitor)visitor).visitModifierList(this);
+	public void accept(@NotNull PsiElementVisitor visitor) {
+		if (visitor instanceof CPsiElementVisitor)
+			((CPsiElementVisitor) visitor).visitModifierList(this);
 		else
 			super.accept(visitor);
 	}

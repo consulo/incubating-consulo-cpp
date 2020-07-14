@@ -22,11 +22,10 @@ import org.napile.cpp4idea.config.sdk.sdkdialect.impl.MsVs2010SdkDialectImpl;
  * @author VISTALL
  * @date 16:40/12.12.2011
  */
-public abstract class SdkDialect
-{
+public abstract class SdkDialect {
 	public static final SdkDialect[] DIALECTS;
-	static
-	{
+
+	static {
 		DIALECTS = new SdkDialect[1];
 
 		DIALECTS[0] = new MsVs2010SdkDialectImpl();
@@ -34,21 +33,18 @@ public abstract class SdkDialect
 
 	private String _name;
 
-	protected SdkDialect(String name)
-	{
+	protected SdkDialect(String name) {
 		_name = name;
 	}
 
 	public abstract boolean isSupported(String path);
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return _name;
 	}
 
-	public String getName()
-	{
+	public String getName() {
 		return _name;
 	}
 }

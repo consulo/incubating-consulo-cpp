@@ -26,11 +26,9 @@ import com.intellij.ui.content.ContentManager;
  * @author VISTALL
  * @date 14:19/29.12.12
  */
-public class DebugToolWindowFactory implements ToolWindowFactory
-{
+public class DebugToolWindowFactory implements ToolWindowFactory {
 	@Override
-	public void createToolWindowContent(Project project, ToolWindow toolWindow)
-	{
+	public void createToolWindowContent(Project project, ToolWindow toolWindow) {
 		ContentManager contentManager = toolWindow.getContentManager();
 		ContentFactory contentFactory = ContentFactory.SERVICE.getInstance();
 		contentManager.addContent(contentFactory.createContent(new DebugPsiTreeToolWindow(project), "Debug Psi", true));

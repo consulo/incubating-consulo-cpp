@@ -22,7 +22,6 @@ import com.intellij.psi.PsiElement;
  * @author VISTALL
  * @date 18:07/14.12.2011
  */
-public interface CPsiNameElementOwner extends CPsiElement
-{
+public interface CPsiNameElementOwner extends CPsiElement {
 	PsiElement getNameElement();
 }

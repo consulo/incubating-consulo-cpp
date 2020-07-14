@@ -28,31 +28,27 @@ import com.intellij.psi.tree.IElementType;
  * @author VISTALL
  * @date 5:52/11.12.2011
  */
-public class PairedBraceMatcherImpl implements PairedBraceMatcher
-{
+public class PairedBraceMatcherImpl implements PairedBraceMatcher {
 	private static final BracePair[] PAIRS =
-	{
-			new BracePair(CPsiTokens.LPARENTH, CPsiTokens.RPARENTH, true),
-			new BracePair(CPsiTokens.LBRACE, CPsiTokens.RBRACE, false),
-			new BracePair(CPsiTokens.S_IFDEF_KEYWORD, CPsiTokens.S_ENDIF_KEYWORD, false),
-			new BracePair(CPsiTokens.S_IFNDEF_KEYWORD, CPsiTokens.S_ENDIF_KEYWORD, false)
-	};
+			{
+					new BracePair(CPsiTokens.LPARENTH, CPsiTokens.RPARENTH, true),
+					new BracePair(CPsiTokens.LBRACE, CPsiTokens.RBRACE, false),
+					new BracePair(CPsiTokens.S_IFDEF_KEYWORD, CPsiTokens.S_ENDIF_KEYWORD, false),
+					new BracePair(CPsiTokens.S_IFNDEF_KEYWORD, CPsiTokens.S_ENDIF_KEYWORD, false)
+			};
 
 	@Override
-	public BracePair[] getPairs()
-	{
+	public BracePair[] getPairs() {
 		return PAIRS;
 	}
 
 	@Override
-	public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, @Nullable IElementType contextType)
-	{
+	public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, @Nullable IElementType contextType) {
 		return false;
 	}
 
 	@Override
-	public int getCodeConstructStart(PsiFile file, int openingBraceOffset)
-	{
+	public int getCodeConstructStart(PsiFile file, int openingBraceOffset) {
 		return openingBraceOffset;
 	}
 }

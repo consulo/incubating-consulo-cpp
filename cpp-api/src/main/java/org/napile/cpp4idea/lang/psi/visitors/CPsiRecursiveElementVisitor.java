@@ -22,11 +22,9 @@ import com.intellij.psi.PsiElement;
  * @author VISTALL
  * @date 13:07/16.12.2011
  */
-public class CPsiRecursiveElementVisitor extends CPsiElementVisitor
-{
+public class CPsiRecursiveElementVisitor extends CPsiElementVisitor {
 	@Override
-	public void visitElement(PsiElement element)
-	{
+	public void visitElement(PsiElement element) {
 		element.acceptChildren(this);
 	}
 }

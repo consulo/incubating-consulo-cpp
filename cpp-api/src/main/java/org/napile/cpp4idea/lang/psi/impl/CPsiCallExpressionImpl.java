@@ -23,10 +23,8 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 11:47/14.12.2011
  */
-public class CPsiCallExpressionImpl extends CPsiElementBaseImpl implements CPsiCallExpression
-{
-	public CPsiCallExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiCallExpressionImpl extends CPsiElementBaseImpl implements CPsiCallExpression {
+	public CPsiCallExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 }

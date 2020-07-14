@@ -35,16 +35,13 @@ import java.util.List;
  * @author VISTALL
  * @date 17:19/07.01.13
  */
-public class CProjectViewProvider implements SelectableTreeStructureProvider, DumbAware
-{
+public class CProjectViewProvider implements SelectableTreeStructureProvider, DumbAware {
 	@Nullable
 	@Override
-	public PsiElement getTopLevelElement(PsiElement element)
-	{
-		if(element instanceof CPsiSharpFile)
-		{
+	public PsiElement getTopLevelElement(PsiElement element) {
+		if (element instanceof CPsiSharpFile) {
 			CPsiClass clazz = CProjectViewUtil.findSingleClass(((CPsiSharpFile) element));
-			if(clazz != null)
+			if (clazz != null)
 				return clazz;
 			return element;
 		}
@@ -52,24 +49,20 @@ public class CProjectViewProvider implements SelectableTreeStructureProvider, Du
 	}
 
 	@Override
-	public Collection<AbstractTreeNode<?>> modify(AbstractTreeNode<?> parent, Collection<AbstractTreeNode<?>> children, ViewSettings settings)
-	{
+	public Collection<AbstractTreeNode<?>> modify(AbstractTreeNode<?> parent, Collection<AbstractTreeNode<?>> children, ViewSettings settings) {
 		List<AbstractTreeNode<?>> result = new ArrayList<AbstractTreeNode<?>>(children.size());
 
-		for(AbstractTreeNode child : children)
-		{
+		for (AbstractTreeNode child : children) {
 			Object childValue = child.getValue();
 
-			if(childValue instanceof CPsiSharpFile)
-			{
+			if (childValue instanceof CPsiSharpFile) {
 				CPsiSharpFile file = (CPsiSharpFile) childValue;
 				CPsiClass clazz = CProjectViewUtil.findSingleClass(((CPsiSharpFile) childValue));
-				if(clazz != null)
+				if (clazz != null)
 					result.add(new CClassTreeNode(file.getProject(), clazz, settings));
 				else
 					result.add(new CFileTreeNode(file.getProject(), file, settings));
-			}
-			else
+			} else
 				result.add(child);
 		}
 

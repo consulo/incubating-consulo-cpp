@@ -32,14 +32,12 @@ import org.napile.cpp4idea.lang.psiInitial.visitors.CSharpPsiElementVisitor;
  * @author VISTALL
  * @date 2:12/10.12.2011
  */
-public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile
-{
+public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile {
 
-	private static final String[] SOURCE_FILES = new String[] {"c", "cpp"};
+	private static final String[] SOURCE_FILES = new String[]{"c", "cpp"};
 	private boolean isSourceFile;
 
-	public CPsiSharpFileImpl(@NotNull FileViewProvider viewProvider)
-	{
+	public CPsiSharpFileImpl(@NotNull FileViewProvider viewProvider) {
 		super(viewProvider, CLanguage.INSTANCE);
 
 		VirtualFile virtualFile = viewProvider.getVirtualFile();
@@ -48,8 +46,7 @@ public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile
 	}
 
 	@Override
-	public void clearCaches()
-	{
+	public void clearCaches() {
 		super.clearCaches();
 
 		putUserData(AFTER_PROCESSED_FILE, null);
@@ -57,22 +54,19 @@ public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile
 
 	@NotNull
 	@Override
-	public FileType getFileType()
-	{
+	public FileType getFileType() {
 		return CFileType.INSTANCE;
 	}
 
 	@Override
-	public boolean isSourceFile()
-	{
+	public boolean isSourceFile() {
 		return isSourceFile;
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if(visitor instanceof CSharpPsiElementVisitor)
-			((CSharpPsiElementVisitor)visitor).visitSFile(this);
+	public void accept(@NotNull PsiElementVisitor visitor) {
+		if (visitor instanceof CSharpPsiElementVisitor)
+			((CSharpPsiElementVisitor) visitor).visitSFile(this);
 		else
 			super.accept(visitor);
 	}

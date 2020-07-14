@@ -25,19 +25,16 @@ import org.napile.cpp4idea.config.sdk.sdkdialect.SdkDialect;
  * @author VISTALL
  * @date 16:18/12.12.2011
  */
-public class GeneralTabSdkPanel extends JPanel
-{
+public class GeneralTabSdkPanel extends JPanel {
 	private JPanel _this;
 	private JComboBox _dialectComboBox;
 
-	public GeneralTabSdkPanel()
-	{
-		for(SdkDialect d : SdkDialect.DIALECTS)
+	public GeneralTabSdkPanel() {
+		for (SdkDialect d : SdkDialect.DIALECTS)
 			_dialectComboBox.addItem(d);
 	}
 
-	private void createUIComponents()
-	{
+	private void createUIComponents() {
 		_this = this;
 	}
 }

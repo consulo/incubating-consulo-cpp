@@ -9,12 +9,10 @@ import org.jetbrains.annotations.Nullable;
  * @author VISTALL
  * @date 2:14/02.07.2012
  */
-public class CConfiguration
-{
+public class CConfiguration {
 	public static final List<String> NONE = Arrays.asList("MY_VARIABLE");
 
-	public static boolean isDefined(@Nullable String var)
-	{
+	public static boolean isDefined(@Nullable String var) {
 		return var != null && NONE.contains(var.trim());
 	}
 }

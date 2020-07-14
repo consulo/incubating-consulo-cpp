@@ -25,22 +25,18 @@ import com.intellij.psi.PsiElement;
  * @author VISTALL
  * @date 18:20/07.01.13
  */
-public class CPsiUtil
-{
-	public static PsiElement getElementByTextRange(@NotNull PsiElement element, @NotNull TextRange textRange)
-	{
-		if(element.getTextRange().equals(textRange))
+public class CPsiUtil {
+	public static PsiElement getElementByTextRange(@NotNull PsiElement element, @NotNull TextRange textRange) {
+		if (element.getTextRange().equals(textRange))
 			return element;
 
-		if(element.getNode().getElementType() == CPsiTokens.IDENTIFIER)
-		{
+		if (element.getNode().getElementType() == CPsiTokens.IDENTIFIER) {
 			System.out.println(element.getText() + " " + element.getTextRange() + " " + textRange);
 		}
 		PsiElement el = element.getFirstChild();
-		while(el != null)
-		{
+		while (el != null) {
 			PsiElement temp = getElementByTextRange(el, textRange);
-			if(temp != null)
+			if (temp != null)
 				return temp;
 
 			el = el.getNextSibling();

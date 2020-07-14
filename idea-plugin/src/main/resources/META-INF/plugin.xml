@@ -15,35 +15,35 @@
   -->
 
 <idea-plugin>
-    <id>cpp.idea</id>
-    <name>C/C++</name>
-    <description>Support for C/C++ language.</description>
-    <version>1.0</version>
-    <vendor>napile.org</vendor>
-    <resource-bundle>org.napile.cpp4idea.CBundle</resource-bundle>
-    <category>Custom Languages</category>
+	<id>cpp.idea</id>
+	<name>C/C++</name>
+	<description>Support for C/C++ language.</description>
+	<version>1.0</version>
+	<vendor>napile.org</vendor>
+	<resource-bundle>org.napile.cpp4idea.CBundle</resource-bundle>
+	<category>Custom Languages</category>
 
-    <extensions defaultExtensionNs="com.intellij">
+	<extensions defaultExtensionNs="com.intellij">
 
-        <additionalTextAttributes scheme="Default" file="/org/napile/cpp4idea/editor/color/Default.xml"/>
+		<additionalTextAttributes scheme="Default" file="/org/napile/cpp4idea/editor/color/Default.xml"/>
 
-        <fileTypeFactory implementation="org.napile.cpp4idea.CFileTypeFactory"/>
+		<fileTypeFactory implementation="org.napile.cpp4idea.CFileTypeFactory"/>
 
-        <toolWindow id="Cpp4Idea Debug" icon="/org/napile/cpp4idea/napile-logo13.png" anchor="right"
-                    factoryClass="org.napile.cpp4idea.ide.debugToolWindow.DebugToolWindowFactory"/>
+		<toolWindow id="Cpp4Idea Debug" icon="/org/napile/cpp4idea/napile-logo13.png" anchor="right"
+					factoryClass="org.napile.cpp4idea.ide.debugToolWindow.DebugToolWindowFactory"/>
 
-        <annotator language="C" implementationClass="org.napile.cpp4idea.editor.CHighlightAnnotator"/>
+		<annotator language="C" implementationClass="org.napile.cpp4idea.editor.CHighlightAnnotator"/>
 
-        <!--lang-->
-        <lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.lang.PairedBraceMatcherImpl"/>
-        <lang.syntaxHighlighterFactory key="C"
-                                       implementationClass="org.napile.cpp4idea.ide.highlight.CSyntaxHighlighterFactory"/>
-        <lang.parserDefinition language="C"
-                               implementationClass="org.napile.cpp4idea.lang.parser.CParserDefinitionImpl"/>
-        <lang.foldingBuilder language="C" implementationClass="org.napile.cpp4idea.lang.FoldingBuilderImpl"/>
-        <lang.commenter language="C" implementationClass="org.napile.cpp4idea.lang.CommenterImpl"/>
+		<!--lang-->
+		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.lang.PairedBraceMatcherImpl"/>
+		<lang.syntaxHighlighterFactory key="C"
+									   implementationClass="org.napile.cpp4idea.ide.highlight.CSyntaxHighlighterFactory"/>
+		<lang.parserDefinition language="C"
+							   implementationClass="org.napile.cpp4idea.lang.parser.CParserDefinitionImpl"/>
+		<lang.foldingBuilder language="C" implementationClass="org.napile.cpp4idea.lang.FoldingBuilderImpl"/>
+		<lang.commenter language="C" implementationClass="org.napile.cpp4idea.lang.CommenterImpl"/>
 
-        <iconProvider implementation="consulo.cpp.impl.CppIconProvider"/>
-        <treeStructureProvider implementation="org.napile.cpp4idea.ide.projectView.CProjectViewProvider"/>
-    </extensions>
+		<iconProvider implementation="consulo.cpp.impl.CppIconProvider"/>
+		<treeStructureProvider implementation="org.napile.cpp4idea.ide.projectView.CProjectViewProvider"/>
+	</extensions>
 </idea-plugin>

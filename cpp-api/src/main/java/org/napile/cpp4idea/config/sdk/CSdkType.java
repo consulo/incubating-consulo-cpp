@@ -28,67 +28,56 @@ import javax.swing.*;
  * @author VISTALL
  * @date 5:41/11.12.2011
  */
-public class CSdkType extends SdkType
-{
-	public static SdkType getInstance()
-	{
+public class CSdkType extends SdkType {
+	public static SdkType getInstance() {
 		return SdkType.EP_NAME.findExtensionOrFail(CSdkType.class);
 	}
 
-	public CSdkType()
-	{
+	public CSdkType() {
 		super("C");
 	}
 
 	@Override
-	public @Nullable String suggestHomePath()
-	{
+	public @Nullable String suggestHomePath() {
 		return null;
 	}
 
 	@Override
-	public boolean isValidSdkHome(String path)
-	{
-		for(SdkDialect dialect : SdkDialect.DIALECTS)
-			if(dialect.isSupported(path))
+	public boolean isValidSdkHome(String path) {
+		for (SdkDialect dialect : SdkDialect.DIALECTS)
+			if (dialect.isSupported(path))
 				return true;
 		return false;
 	}
 
 	@Nullable
 	@Override
-	public String getVersionString(String s)
-	{
+	public String getVersionString(String s) {
 		return null;
 	}
 
 	@Override
-	public String suggestSdkName(String currentSdkName, String sdkHome)
-	{
+	public String suggestSdkName(String currentSdkName, String sdkHome) {
 		return null;
 	}
 
 	@Override
-	public AdditionalDataConfigurable createAdditionalDataConfigurable(SdkModel sdkModel, SdkModificator sdkModificator)
-	{
+	public AdditionalDataConfigurable createAdditionalDataConfigurable(SdkModel sdkModel, SdkModificator sdkModificator) {
 		return new CSdkConfigurable();
 	}
 
 	@Override
-	public void saveAdditionalData(SdkAdditionalData additionalData, Element additional)
-	{
+	public void saveAdditionalData(SdkAdditionalData additionalData, Element additional) {
 
 	}
 
 	@Override
-	public String getPresentableName()
-	{
+	public String getPresentableName() {
 		return "C/C++ SDK";
 	}
 
 	@Override
-	public Icon getIcon()
-	{
+	public Icon getIcon() {
 		return CIcons.SOURCE_FILE;
 	}
 }

@@ -28,31 +28,26 @@ import com.intellij.psi.PsiElementVisitor;
  * @author VISTALL
  * @date 14:06/29.12.12
  */
-public class CPsiSharpIfBodyImpl extends CPsiElementBaseImpl implements CPsiSharpIfBody
-{
-	public CPsiSharpIfBodyImpl(@NotNull ASTNode node)
-	{
+public class CPsiSharpIfBodyImpl extends CPsiElementBaseImpl implements CPsiSharpIfBody {
+	public CPsiSharpIfBodyImpl(@NotNull ASTNode node) {
 		super(node);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if(visitor instanceof CSharpPsiElementVisitor)
-			((CSharpPsiElementVisitor)visitor).visitSIfBody(this);
+	public void accept(@NotNull PsiElementVisitor visitor) {
+		if (visitor instanceof CSharpPsiElementVisitor)
+			((CSharpPsiElementVisitor) visitor).visitSIfBody(this);
 		else
 			super.accept(visitor);
 	}
 
 	@Override
-	public boolean isElseBody()
-	{
+	public boolean isElseBody() {
 		return getIfDef().getElseBody() == this;
 	}
 
 	@Override
-	public CPsiSharpIfDef getIfDef()
-	{
+	public CPsiSharpIfDef getIfDef() {
 		return (CPsiSharpIfDef) getParent();
 	}
 }

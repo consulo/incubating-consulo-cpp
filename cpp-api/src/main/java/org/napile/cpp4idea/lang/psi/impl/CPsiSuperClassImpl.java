@@ -27,23 +27,19 @@ import com.intellij.psi.tree.IElementType;
  * @author VISTALL
  * @date 12:50/07.01.13
  */
-public class CPsiSuperClassImpl extends CPsiElementBaseImpl implements CPsiSuperClass
-{
-	public CPsiSuperClassImpl(@NotNull ASTNode node)
-	{
+public class CPsiSuperClassImpl extends CPsiElementBaseImpl implements CPsiSuperClass {
+	public CPsiSuperClassImpl(@NotNull ASTNode node) {
 		super(node);
 	}
 
 	@Override
-	public IElementType getAccessElementType()
-	{
+	public IElementType getAccessElementType() {
 		PsiElement element = getAccessElement();
 		return element == null ? null : element.getNode().getElementType();
 	}
 
 	@Override
-	public PsiElement getAccessElement()
-	{
+	public PsiElement getAccessElement() {
 		return findChildByType(CPsiTokens.ACCESS_MODIFIERS);
 	}
 }

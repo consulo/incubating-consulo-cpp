@@ -23,8 +23,7 @@ import com.intellij.psi.PsiElement;
  * @author VISTALL
  * @date 22:58/10.12.2011
  */
-public interface CPsiElement extends PsiElement
-{
+public interface CPsiElement extends PsiElement {
 	CPsiFile getCFile();
 
 	CPsiSharpFile getSharpCFile();

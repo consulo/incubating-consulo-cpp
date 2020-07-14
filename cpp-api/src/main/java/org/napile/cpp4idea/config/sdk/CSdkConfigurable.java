@@ -32,12 +32,10 @@ import java.awt.*;
  * @author VISTALL
  * @date 16:56/11.12.2011
  */
-public class CSdkConfigurable implements AdditionalDataConfigurable
-{
+public class CSdkConfigurable implements AdditionalDataConfigurable {
 	private JBTabsImpl _tabs;
 
-	public CSdkConfigurable()
-	{
+	public CSdkConfigurable() {
 		_tabs = new JBEditorTabs(null, null, null, Disposer.newDisposable());
 		//_tabs.setTabSidePaintBorder(5);
 		//_tabs.setPaintBorder(1, 1, 1, 1);
@@ -48,40 +46,34 @@ public class CSdkConfigurable implements AdditionalDataConfigurable
 	}
 
 	@Override
-	public void setSdk(Sdk sdk)
-	{
+	public void setSdk(Sdk sdk) {
 
 	}
 
 	@Override
-	public JComponent createComponent()
-	{
+	public JComponent createComponent() {
 		JPanel panel = new JPanel(new BorderLayout());
 		panel.add(_tabs.getComponent(), BorderLayout.NORTH);
 		return panel;
 	}
 
 	@Override
-	public boolean isModified()
-	{
+	public boolean isModified() {
 		return false;
 	}
 
 	@Override
-	public void apply() throws ConfigurationException
-	{
+	public void apply() throws ConfigurationException {
 
 	}
 
 	@Override
-	public void reset()
-	{
+	public void reset() {
 
 	}
 
 	@Override
-	public void disposeUIResources()
-	{
-		
+	public void disposeUIResources() {
+
 	}
 }

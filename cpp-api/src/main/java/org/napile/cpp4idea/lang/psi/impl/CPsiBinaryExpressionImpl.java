@@ -23,10 +23,8 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 19:55/13.12.2011
  */
-public class CPsiBinaryExpressionImpl extends CPsiElementBaseImpl implements CPsiBinaryExpression
-{
-	public CPsiBinaryExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiBinaryExpressionImpl extends CPsiElementBaseImpl implements CPsiBinaryExpression {
+	public CPsiBinaryExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 }

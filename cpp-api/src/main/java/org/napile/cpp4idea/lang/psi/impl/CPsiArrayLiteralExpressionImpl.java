@@ -23,10 +23,8 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 11:48/14.12.2011
  */
-public class CPsiArrayLiteralExpressionImpl extends CPsiElementBaseImpl implements CPsiArrayLiteralExpression
-{
-	public CPsiArrayLiteralExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiArrayLiteralExpressionImpl extends CPsiElementBaseImpl implements CPsiArrayLiteralExpression {
+	public CPsiArrayLiteralExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 }

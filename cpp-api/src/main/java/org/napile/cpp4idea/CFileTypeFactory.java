@@ -24,11 +24,9 @@ import com.intellij.openapi.fileTypes.FileTypeFactory;
  * @author VISTALL
  * @date 1:03/10.12.2011
  */
-public class CFileTypeFactory extends FileTypeFactory
-{
+public class CFileTypeFactory extends FileTypeFactory {
 	@Override
-	public void createFileTypes(@NotNull FileTypeConsumer consumer)
-	{
+	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
 		consumer.consume(CFileType.INSTANCE, "c;cpp;h;hpp");
 	}
 }

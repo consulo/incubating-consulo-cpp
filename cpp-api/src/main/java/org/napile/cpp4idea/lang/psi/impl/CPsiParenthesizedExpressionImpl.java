@@ -23,10 +23,8 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 13:29/13.12.2011
  */
-public class CPsiParenthesizedExpressionImpl extends CPsiElementBaseImpl implements CPsiParenthesizedExpression
-{
-	public CPsiParenthesizedExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiParenthesizedExpressionImpl extends CPsiElementBaseImpl implements CPsiParenthesizedExpression {
+	public CPsiParenthesizedExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 }

@@ -24,10 +24,8 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 12:59/02.01.13
  */
-public class CPsiClassImpl extends CPsiDeclarationImpl implements CPsiClass
-{
-	public CPsiClassImpl(@NotNull ASTNode node)
-	{
+public class CPsiClassImpl extends CPsiDeclarationImpl implements CPsiClass {
+	public CPsiClassImpl(@NotNull ASTNode node) {
 		super(node);
 	}
 }

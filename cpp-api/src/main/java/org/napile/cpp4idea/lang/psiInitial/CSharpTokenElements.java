@@ -26,33 +26,27 @@ import com.intellij.psi.tree.IElementType;
  * @author VISTALL
  * @date 11:27/14.12.2011
  */
-public class CSharpTokenElements
-{
+public class CSharpTokenElements {
 	private static final CSharpTokenElements INSTANCE = new CSharpTokenElements();
 
 	private final Map<Class<? extends CPsiSharpElement>, IElementType> _cache = new HashMap<Class<? extends CPsiSharpElement>, IElementType>();
 
 	@NotNull
-	public static IElementType element(Class<? extends CPsiSharpElement> clazz)
-	{
+	public static IElementType element(Class<? extends CPsiSharpElement> clazz) {
 		return INSTANCE.element0(clazz);
 	}
 
 	@NotNull
 	@SuppressWarnings("unchecked")
-	private IElementType element0(Class<? extends CPsiSharpElement> clazz)
-	{
-		try
-		{
+	private IElementType element0(Class<? extends CPsiSharpElement> clazz) {
+		try {
 			Class<? extends CPsiSharpElement> implClass = (Class<? extends CPsiSharpElement>) Class.forName("org.napile.cpp4idea.lang.psiInitial.impl." + clazz.getSimpleName() + "Impl");
 
 			IElementType elementType = _cache.get(implClass);
-			if(elementType == null)
+			if (elementType == null)
 				_cache.put(implClass, elementType = new CPsiSharpTokenImpl(clazz.getSimpleName(), implClass));
 			return elementType;
-		}
-		catch(ClassNotFoundException e)
-		{
+		} catch (ClassNotFoundException e) {
 			throw new IllegalArgumentException(e);
 		}
 	}

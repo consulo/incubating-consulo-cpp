@@ -29,17 +29,14 @@ import java.util.Collections;
  * @author VISTALL
  * @date 17:25/07.01.13
  */
-public class CClassTreeNode extends CBaseTreeNode<CPsiClass>
-{
-	public CClassTreeNode(Project project, CPsiClass cPsiClass, ViewSettings viewSettings)
-	{
+public class CClassTreeNode extends CBaseTreeNode<CPsiClass> {
+	public CClassTreeNode(Project project, CPsiClass cPsiClass, ViewSettings viewSettings) {
 		super(project, cPsiClass, viewSettings);
 	}
 
 	@NotNull
 	@Override
-	public Collection<? extends AbstractTreeNode<?>> getChildren()
-	{
+	public Collection<? extends AbstractTreeNode<?>> getChildren() {
 		return Collections.emptyList();
 	}
 }

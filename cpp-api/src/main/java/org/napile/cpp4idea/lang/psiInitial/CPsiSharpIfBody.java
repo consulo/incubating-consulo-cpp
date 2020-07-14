@@ -20,8 +20,7 @@ package org.napile.cpp4idea.lang.psiInitial;
  * @author VISTALL
  * @date 14:04/29.12.12
  */
-public interface CPsiSharpIfBody extends CPsiSharpElement
-{
+public interface CPsiSharpIfBody extends CPsiSharpElement {
 	boolean isElseBody();
 
 	CPsiSharpIfDef getIfDef();

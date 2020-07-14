@@ -10,17 +10,13 @@ import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
 
 import javax.swing.*;
 
-public class CppIconProvider extends IconProvider
-{
+public class CppIconProvider extends IconProvider {
 	@Override
-	public @Nullable Icon getIcon(@NotNull PsiElement element, int flags)
-	{
-		if (element instanceof CPsiClass)
-		{
+	public @Nullable Icon getIcon(@NotNull PsiElement element, int flags) {
+		if (element instanceof CPsiClass) {
 			return AllIcons.Nodes.Class;
 		}
-		if (element instanceof CPsiDeclarationMethod)
-		{
+		if (element instanceof CPsiDeclarationMethod) {
 			return AllIcons.Nodes.Method;
 		}
 		return null;

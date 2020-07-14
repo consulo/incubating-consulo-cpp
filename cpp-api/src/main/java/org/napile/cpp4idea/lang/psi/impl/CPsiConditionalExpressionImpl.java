@@ -23,10 +23,8 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 11:21/14.12.2011
  */
-public class CPsiConditionalExpressionImpl extends CPsiElementBaseImpl implements CPsiConditionalExpression
-{
-	public CPsiConditionalExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiConditionalExpressionImpl extends CPsiElementBaseImpl implements CPsiConditionalExpression {
+	public CPsiConditionalExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 }

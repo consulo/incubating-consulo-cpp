@@ -26,33 +26,27 @@ import com.intellij.psi.tree.IElementType;
  * @author VISTALL
  * @date 11:27/14.12.2011
  */
-public class CTokenElements
-{
+public class CTokenElements {
 	private static final CTokenElements INSTANCE = new CTokenElements();
 
 	private final Map<Class<? extends CPsiElement>, IElementType> _cache = new HashMap<Class<? extends CPsiElement>, IElementType>();
 
 	@NotNull
-	public static IElementType element(Class<? extends CPsiElement> clazz)
-	{
+	public static IElementType element(Class<? extends CPsiElement> clazz) {
 		return INSTANCE.element0(clazz);
 	}
 
 	@NotNull
 	@SuppressWarnings("unchecked")
-	private IElementType element0(Class<? extends CPsiElement> clazz)
-	{
-		try
-		{
+	private IElementType element0(Class<? extends CPsiElement> clazz) {
+		try {
 			Class<? extends CPsiElement> implClass = (Class<? extends CPsiElement>) Class.forName("org.napile.cpp4idea.lang.psi.impl." + clazz.getSimpleName() + "Impl");
 
 			IElementType elementType = _cache.get(implClass);
-			if(elementType == null)
+			if (elementType == null)
 				_cache.put(implClass, elementType = new CPsiTokenImpl(clazz.getSimpleName(), implClass));
 			return elementType;
-		}
-		catch(ClassNotFoundException e)
-		{
+		} catch (ClassNotFoundException e) {
 			throw new IllegalArgumentException(e);
 		}
 	}

@@ -29,26 +29,22 @@ import com.intellij.psi.PsiElementVisitor;
  * @author VISTALL
  * @date 17:30/11.12.2011
  */
-public class CPsiCompilerVariableImpl extends CPsiElementBaseImpl implements CPsiCompilerVariable
-{
-	public CPsiCompilerVariableImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiCompilerVariableImpl extends CPsiElementBaseImpl implements CPsiCompilerVariable {
+	public CPsiCompilerVariableImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if(visitor instanceof CSharpPsiElementVisitor)
-			((CSharpPsiElementVisitor)visitor).visitCompilerVariable(this);
+	public void accept(@NotNull PsiElementVisitor visitor) {
+		if (visitor instanceof CSharpPsiElementVisitor)
+			((CSharpPsiElementVisitor) visitor).visitCompilerVariable(this);
 		else
 			super.accept(visitor);
 	}
 
 	@Override
 	@NotNull
-	public PsiElement getNameElement()
-	{
+	public PsiElement getNameElement() {
 		return findNotNullChildByType(CPsiTokens.IDENTIFIER);
 	}
 }

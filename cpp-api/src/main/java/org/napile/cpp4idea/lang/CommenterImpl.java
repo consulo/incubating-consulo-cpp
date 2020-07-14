@@ -22,35 +22,29 @@ import com.intellij.lang.Commenter;
  * @author VISTALL
  * @date 16:55/16.12.2011
  */
-public class CommenterImpl implements Commenter
-{
+public class CommenterImpl implements Commenter {
 	@Override
-	public String getLineCommentPrefix()
-	{
+	public String getLineCommentPrefix() {
 		return "//";
 	}
 
 	@Override
-	public String getBlockCommentPrefix()
-	{
+	public String getBlockCommentPrefix() {
 		return "/*";
 	}
 
 	@Override
-	public String getBlockCommentSuffix()
-	{
+	public String getBlockCommentSuffix() {
 		return "*/";
 	}
 
 	@Override
-	public String getCommentedBlockCommentPrefix()
-	{
+	public String getCommentedBlockCommentPrefix() {
 		return null;
 	}
 
 	@Override
-	public String getCommentedBlockCommentSuffix()
-	{
+	public String getCommentedBlockCommentSuffix() {
 		return null;
 	}
 }

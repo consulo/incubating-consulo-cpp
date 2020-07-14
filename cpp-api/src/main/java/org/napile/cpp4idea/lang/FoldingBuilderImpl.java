@@ -38,38 +38,31 @@ import com.intellij.psi.PsiElement;
  * @author VISTALL
  * @date 14:17/16.12.2011
  */
-public class FoldingBuilderImpl implements FoldingBuilder, DumbAware
-{
+public class FoldingBuilderImpl implements FoldingBuilder, DumbAware {
 	private static final FoldingDescriptor[] EMPTY = new FoldingDescriptor[0];
 
 	@NotNull
 	@Override
-	public FoldingDescriptor[] buildFoldRegions(@NotNull ASTNode node, @NotNull Document document)
-	{
+	public FoldingDescriptor[] buildFoldRegions(@NotNull ASTNode node, @NotNull Document document) {
 		PsiElement element = node.getPsi();
-		if(element instanceof CPsiSharpFile)
-		{
+		if (element instanceof CPsiSharpFile) {
 			CPsiFile psiFile = CPreprocessor.getAfterProcessedFile(element);
 
 			final List<FoldingDescriptor> list = new ArrayList<FoldingDescriptor>();
 
-			element.accept(new CSharpPsiRecursiveElementVisitor()
-			{
+			element.accept(new CSharpPsiRecursiveElementVisitor() {
 				@Override
-				public void visitSIfDef(CPsiSharpIfDef element)
-				{
-					if(element.getVariable() != null)
+				public void visitSIfDef(CPsiSharpIfDef element) {
+					if (element.getVariable() != null)
 						list.add(new FoldingDescriptor(element, element.getTextRange()));
 					super.visitSIfDef(element);
 				}
 			});
 
-			if(psiFile != null)
-				psiFile.accept(new CPsiRecursiveElementVisitor()
-				{
+			if (psiFile != null)
+				psiFile.accept(new CPsiRecursiveElementVisitor() {
 					@Override
-					public void visitImplementingMethod(CPsiImplementingMethod element)
-					{
+					public void visitImplementingMethod(CPsiImplementingMethod element) {
 						//list.add(new FoldingDescriptor(element, HighlightUtil.findOriginalRange(element)));
 
 						super.visitImplementingMethod(element);
@@ -77,26 +70,23 @@ public class FoldingBuilderImpl implements FoldingBuilder, DumbAware
 				});
 
 			return list.toArray(new FoldingDescriptor[list.size()]);
-		}
-		else
+		} else
 			return EMPTY;
 	}
 
 	@Override
-	public String getPlaceholderText(@NotNull ASTNode node)
-	{
+	public String getPlaceholderText(@NotNull ASTNode node) {
 		PsiElement element = node.getPsi();
-		if(element instanceof CPsiSharpIfDef)
+		if (element instanceof CPsiSharpIfDef)
 			return (((CPsiSharpIfDef) element).isReverted() ? "#ifndef " : "#ifdef ") + ((CPsiSharpIfDef) element).getVariable().getText() + "\n";
-		else if(element instanceof CPsiImplementingMethod)
+		else if (element instanceof CPsiImplementingMethod)
 			return "{....}";
 
 		throw new IllegalArgumentException();
 	}
 
 	@Override
-	public boolean isCollapsedByDefault(@NotNull ASTNode node)
-	{
+	public boolean isCollapsedByDefault(@NotNull ASTNode node) {
 		PsiElement element = node.getPsi();
 
 		return false;

@@ -27,67 +27,56 @@ import com.intellij.lang.PsiBuilder;
  * @author VISTALL
  * @date 14:38/11.12.2011
  */
-public class ParameterListParsing extends MainParsing
-{
-	public static void parseParameterList(PsiBuilder builder)
-	{
+public class ParameterListParsing extends MainParsing {
+	public static void parseParameterList(PsiBuilder builder) {
 		PsiBuilder.Marker marker;
 
-		if(builder.getTokenType() != LPARENTH)
-		{
+		if (builder.getTokenType() != LPARENTH) {
 			builder.error(CBundle.message("LPARENTH.expected"));
 			marker = builder.mark();
 			builder.advanceLexer();
 			done(marker, CPsiParameterList.class);
 			return;
-		}
-		else
-		{
+		} else {
 			marker = builder.mark();
 			advanceLexerAndSkipLines(builder);
 		}
 
-		if(builder.getTokenType() != RPARENTH)
-		{
-			while(true)
-			{
-				if(builder.getTokenType() == ELLIPSIS)
+		if (builder.getTokenType() != RPARENTH) {
+			while (true) {
+				if (builder.getTokenType() == ELLIPSIS)
 					doneOneToken(builder, CPsiParameter.class);
 				else
 					VariableParsing.parseVariable(CPsiParameter.class, builder);
 
-				if(!consumeIf(builder, COMMA))
+				if (!consumeIf(builder, COMMA))
 					break;
 			}
 
 			expect(builder, RPARENTH, "RPARENTH.expected");
-		}
-		else
+		} else
 			advanceLexerAndSkipLines(builder);
 
 		done(marker, CPsiParameterList.class);
 	}
 
-	private static void parserParameter(PsiBuilder builder)
-	{
+	private static void parserParameter(PsiBuilder builder) {
 		PsiBuilder.Marker marker = builder.mark();
 
 		// goto parameter name
 		parseTypeRef(builder);
 
-		if(builder.getTokenType() == IDENTIFIER)
+		if (builder.getTokenType() == IDENTIFIER)
 			advanceLexerAndSkipLines(builder);
 
-		if(builder.getTokenType() == CPsiTokens.LBRACKET)
-		{
+		if (builder.getTokenType() == CPsiTokens.LBRACKET) {
 			advanceLexerAndSkipLines(builder);
 			expect(builder, CPsiTokens.RBRACKET, "RBRACKET.expected");
 		}
 
 		done(marker, CPsiParameter.class);
 
-		while(builder.getTokenType() == COMMA)
-		{
+		while (builder.getTokenType() == COMMA) {
 			advanceLexerAndSkipLines(builder); // skip COMMA
 
 			parserParameter(builder);

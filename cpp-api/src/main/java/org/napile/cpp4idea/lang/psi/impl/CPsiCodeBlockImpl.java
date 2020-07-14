@@ -25,24 +25,20 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 23:13/10.12.2011
  */
-public class CPsiCodeBlockImpl extends CPsiElementBaseImpl implements CPsiCodeBlock
-{
-	public CPsiCodeBlockImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiCodeBlockImpl extends CPsiElementBaseImpl implements CPsiCodeBlock {
+	public CPsiCodeBlockImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 
 	@Nullable
 	@Override
-	public com.intellij.psi.PsiElement getLBrace()
-	{
+	public com.intellij.psi.PsiElement getLBrace() {
 		return findChildByType(CPsiTokens.LBRACE);
 	}
 
 	@Nullable
 	@Override
-	public com.intellij.psi.PsiElement getRBrace()
-	{
+	public com.intellij.psi.PsiElement getRBrace() {
 		return findChildByType(CPsiTokens.RBRACE);
 	}
 }

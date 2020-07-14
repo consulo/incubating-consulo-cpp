@@ -20,7 +20,6 @@ package org.napile.cpp4idea.lang.psi;
  * @author VISTALL
  * @date 9:28/13.12.2011
  */
-public interface CPsiDeclarationMethod extends CPsiDeclaration
-{
+public interface CPsiDeclarationMethod extends CPsiDeclaration {
 	CPsiParameterList getParameterList();
 }

@@ -23,7 +23,6 @@ import com.intellij.psi.tree.IElementType;
  * @author VISTALL
  * @date 12:30/02.01.13
  */
-public interface CPsiModifierList extends CPsiElement
-{
+public interface CPsiModifierList extends CPsiElement {
 	boolean hasModifier(@NotNull IElementType e);
 }

@@ -23,8 +23,7 @@ import com.intellij.psi.PsiElement;
  * @author VISTALL
  * @date 14:06/11.12.2011
  */
-public interface CPsiSharpIfDef extends CPsiSharpElement
-{
+public interface CPsiSharpIfDef extends CPsiSharpElement {
 	CPsiCompilerVariable getVariable();
 
 	@Nullable

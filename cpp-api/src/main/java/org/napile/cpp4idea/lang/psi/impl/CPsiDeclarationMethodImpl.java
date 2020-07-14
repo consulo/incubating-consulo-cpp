@@ -24,16 +24,13 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 22:57/10.12.2011
  */
-public class CPsiDeclarationMethodImpl extends CPsiDeclarationImpl implements CPsiDeclarationMethod
-{
-	public CPsiDeclarationMethodImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiDeclarationMethodImpl extends CPsiDeclarationImpl implements CPsiDeclarationMethod {
+	public CPsiDeclarationMethodImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 
 	@Override
-	public CPsiParameterList getParameterList()
-	{
+	public CPsiParameterList getParameterList() {
 		return findChildByClass(CPsiParameterList.class);
 	}
 }

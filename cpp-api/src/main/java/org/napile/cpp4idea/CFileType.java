@@ -26,39 +26,33 @@ import javax.swing.*;
  * @author VISTALL
  * @date 1:01/10.12.2011
  */
-public class CFileType extends LanguageFileType
-{
+public class CFileType extends LanguageFileType {
 	public static final LanguageFileType INSTANCE = new CFileType();
 
-	public CFileType()
-	{
+	public CFileType() {
 		super(CLanguage.INSTANCE);
 	}
 
 	@NotNull
 	@Override
-	public String getName()
-	{
+	public String getName() {
 		return "C/C++";
 	}
 
 	@NotNull
 	@Override
-	public String getDescription()
-	{
+	public String getDescription() {
 		return "C/C++ file";
 	}
 
 	@NotNull
 	@Override
-	public String getDefaultExtension()
-	{
+	public String getDefaultExtension() {
 		return "c";
 	}
 
 	@Override
-	public Icon getIcon()
-	{
+	public Icon getIcon() {
 		return CIcons.SOURCE_FILE;
 	}
 }

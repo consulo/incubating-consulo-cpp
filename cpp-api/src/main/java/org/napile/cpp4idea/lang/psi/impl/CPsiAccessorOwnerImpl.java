@@ -24,10 +24,8 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 12:59/02.01.13
  */
-public class CPsiAccessorOwnerImpl extends CPsiElementBaseImpl implements CPsiAccessorOwner
-{
-	public CPsiAccessorOwnerImpl(@NotNull ASTNode node)
-	{
+public class CPsiAccessorOwnerImpl extends CPsiElementBaseImpl implements CPsiAccessorOwner {
+	public CPsiAccessorOwnerImpl(@NotNull ASTNode node) {
 		super(node);
 	}
 }

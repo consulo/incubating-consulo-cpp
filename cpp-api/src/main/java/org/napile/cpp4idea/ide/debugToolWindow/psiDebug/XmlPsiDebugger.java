@@ -24,34 +24,28 @@ import com.intellij.psi.PsiElement;
  * @author VISTALL
  * @date 15:29/29.12.12
  */
-public class XmlPsiDebugger
-{
-	public XmlPsiDebugger()
-	{
+public class XmlPsiDebugger {
+	public XmlPsiDebugger() {
 	}
 
-	public String toText(@NotNull PsiElement element)
-	{
+	public String toText(@NotNull PsiElement element) {
 		StringBuilder builder = new StringBuilder();
 		append(builder, element, 0);
 		return builder.toString();
 	}
 
-	private void append(StringBuilder builder, PsiElement psiElement, int indent)
-	{
+	private void append(StringBuilder builder, PsiElement psiElement, int indent) {
 		StringUtil.repeatSymbol(builder, '\t', indent);
 
 		String tagName = psiElement.getClass().getSimpleName();
-		if(tagName.endsWith("Impl"))
+		if (tagName.endsWith("Impl"))
 			tagName = tagName.substring(0, tagName.length() - 4);
 
 		builder.append("<").append(tagName).append(" text=\"").append(psiElement.getText().replace("\n", "\\n")).append("\"");
 		PsiElement child = psiElement.getFirstChild();
-		if(child != null)
-		{
+		if (child != null) {
 			builder.append(">\n");
-			while(child != null)
-			{
+			while (child != null) {
 				append(builder, child, indent + 1);
 
 				child = child.getNextSibling();
@@ -59,8 +53,7 @@ public class XmlPsiDebugger
 
 			StringUtil.repeatSymbol(builder, '\t', indent);
 			builder.append("</").append(tagName).append(">\n");
-		}
-		else
+		} else
 			builder.append(" />\n");
 	}
 }

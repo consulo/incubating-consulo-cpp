@@ -37,8 +37,7 @@ import java.util.Map;
  * @author VISTALL
  * @date 5:06/10.12.2011
  */
-public class CSyntaxHighlighter extends SyntaxHighlighterBase
-{
+public class CSyntaxHighlighter extends SyntaxHighlighterBase {
 	public static final TextAttributesKey KEYWORD = TextAttributesKey.createTextAttributesKey("C.KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
 	public static final TextAttributesKey LIGHT_KEYWORD = TextAttributesKey.createTextAttributesKey("C.LIGHT_KEYWORD");
 
@@ -62,8 +61,7 @@ public class CSyntaxHighlighter extends SyntaxHighlighterBase
 
 	public static final Map<IElementType, TextAttributesKey[]> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey[]>();
 
-	static
-	{
+	static {
 		fillMap(CPsiTokens.END_OF_LINE_COMMENT, LINE_COMMENT, LINE_COMMENT);
 		fillMap(CPsiTokens.C_STYLE_COMMENT, BLOCK_COMMENT, BLOCK_COMMENT);
 		fillMap(CPsiTokens.KEYWORD_SET, KEYWORD, LIGHT_KEYWORD);
@@ -77,43 +75,37 @@ public class CSyntaxHighlighter extends SyntaxHighlighterBase
 		fillMap(CPsiTokens.BOOL_LITERAL, KEYWORD, LIGHT_KEYWORD);
 	}
 
-	private static void fillMap(IElementType elementType, TextAttributesKey... keys)
-	{
+	private static void fillMap(IElementType elementType, TextAttributesKey... keys) {
 		ATTRIBUTES.put(elementType, keys);
 	}
 
-	private static void fillMap(TokenSet tokenSet, TextAttributesKey... keys)
-	{
-		for(IElementType elementType : tokenSet.getTypes())
+	private static void fillMap(TokenSet tokenSet, TextAttributesKey... keys) {
+		for (IElementType elementType : tokenSet.getTypes())
 			ATTRIBUTES.put(elementType, keys);
 	}
 
 	private final Project project;
 	private final VirtualFile virtualFile;
 
-	public CSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile)
-	{
+	public CSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile) {
 		this.project = project;
 		this.virtualFile = virtualFile;
 	}
 
 	@NotNull
 	@Override
-	public Lexer getHighlightingLexer()
-	{
+	public Lexer getHighlightingLexer() {
 		return new FlexAdapter(new _CppLexer());
 	}
 
 	@NotNull
 	@Override
-	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
-	{
+	public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
 		TextAttributesKey[] keys = ATTRIBUTES.get(tokenType);
 		return pack(keys == null ? null : keys[0]);
 	}
 
-	public TextAttributesKey[] getAttributes(IElementType e)
-	{
+	public TextAttributesKey[] getAttributes(IElementType e) {
 		return ATTRIBUTES.get(e);
 	}
 }

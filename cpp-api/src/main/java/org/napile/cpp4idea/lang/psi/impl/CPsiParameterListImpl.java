@@ -23,10 +23,8 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 22:59/10.12.2011
  */
-public class CPsiParameterListImpl extends CPsiElementBaseImpl implements CPsiParameterList
-{
-	public CPsiParameterListImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiParameterListImpl extends CPsiElementBaseImpl implements CPsiParameterList {
+	public CPsiParameterListImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 }

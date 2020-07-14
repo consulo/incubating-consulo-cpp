@@ -23,10 +23,8 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 11:34/14.12.2011
  */
-public class CPsiCommaExpressionImpl extends CPsiElementBaseImpl implements CPsiCommaExpression
-{
-	public CPsiCommaExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiCommaExpressionImpl extends CPsiElementBaseImpl implements CPsiCommaExpression {
+	public CPsiCommaExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 }

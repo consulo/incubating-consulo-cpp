@@ -23,8 +23,7 @@ import com.intellij.psi.PsiElement;
  * @author VISTALL
  * @date 23:13/10.12.2011
  */
-public interface CPsiCodeBlock extends CPsiElement
-{
+public interface CPsiCodeBlock extends CPsiElement {
 	@Nullable
 	PsiElement getLBrace();
 

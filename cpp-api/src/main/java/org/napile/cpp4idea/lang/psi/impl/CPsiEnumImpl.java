@@ -29,31 +29,26 @@ import com.intellij.psi.PsiElementVisitor;
  * @author VISTALL
  * @date 17:41/14.12.2011
  */
-public class CPsiEnumImpl extends CPsiElementBaseImpl implements CPsiEnum
-{
-	public CPsiEnumImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiEnumImpl extends CPsiElementBaseImpl implements CPsiEnum {
+	public CPsiEnumImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if(visitor instanceof CPsiElementVisitor)
-			((CPsiElementVisitor)visitor).visitEnum(this);
+	public void accept(@NotNull PsiElementVisitor visitor) {
+		if (visitor instanceof CPsiElementVisitor)
+			((CPsiElementVisitor) visitor).visitEnum(this);
 		else
 			super.accept(visitor);
 	}
 
 	@Override
-	public PsiElement getNameElement()
-	{
+	public PsiElement getNameElement() {
 		return findChildByType(CPsiTokens.IDENTIFIER);
 	}
 
 	@Override
-	public CPsiEnumConstant[] getConstants()
-	{
+	public CPsiEnumConstant[] getConstants() {
 		return findChildrenByClass(CPsiEnumConstant.class);
 	}
 }

@@ -24,10 +24,8 @@ import com.intellij.openapi.project.Project;
  * @author VISTALL
  * @date 19:08/07.01.13
  */
-public class CMethodTreeNode extends CBaseTreeNode<CPsiDeclarationMethod>
-{
-	public CMethodTreeNode(Project project, CPsiDeclarationMethod cPsiDeclarationMethod, ViewSettings viewSettings)
-	{
+public class CMethodTreeNode extends CBaseTreeNode<CPsiDeclarationMethod> {
+	public CMethodTreeNode(Project project, CPsiDeclarationMethod cPsiDeclarationMethod, ViewSettings viewSettings) {
 		super(project, cPsiDeclarationMethod, viewSettings);
 	}
 }

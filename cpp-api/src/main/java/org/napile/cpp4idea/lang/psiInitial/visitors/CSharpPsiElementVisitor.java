@@ -31,50 +31,40 @@ import com.intellij.psi.PsiElementVisitor;
  * @author VISTALL
  * @date 13:07/16.12.2011
  */
-public class CSharpPsiElementVisitor extends PsiElementVisitor
-{
-	public void visitSFile(CPsiSharpFile file)
-	{
+public class CSharpPsiElementVisitor extends PsiElementVisitor {
+	public void visitSFile(CPsiSharpFile file) {
 		visitFile(file);
 	}
 
-	public void visitSElement(CPsiSharpElement element)
-	{
+	public void visitSElement(CPsiSharpElement element) {
 		visitElement(element);
 	}
 
-	public void visitCompilerVariable(CPsiCompilerVariable element)
-	{
+	public void visitCompilerVariable(CPsiCompilerVariable element) {
 		visitSElement(element);
 	}
 
-	public void visitSIfBody(CPsiSharpIfBody element)
-	{
+	public void visitSIfBody(CPsiSharpIfBody element) {
 		visitSElement(element);
 	}
 
-	public void visitSDefine(CPsiSharpDefine element)
-	{
+	public void visitSDefine(CPsiSharpDefine element) {
 		visitSElement(element);
 	}
 
-	public void visitSDefineValue(CPsiSharpDefineValue element)
-	{
+	public void visitSDefineValue(CPsiSharpDefineValue element) {
 		visitSElement(element);
 	}
 
-	public void visitSIfDef(CPsiSharpIfDef element)
-	{
+	public void visitSIfDef(CPsiSharpIfDef element) {
 		visitSElement(element);
 	}
 
-	public void visitSInclude(CPsiSharpInclude element)
-	{
+	public void visitSInclude(CPsiSharpInclude element) {
 		visitSElement(element);
 	}
 
-	public void visitSIndependInclude(CPsiSharpIndepInclude element)
-	{
+	public void visitSIndependInclude(CPsiSharpIndepInclude element) {
 		visitSElement(element);
 	}
 }

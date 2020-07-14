@@ -23,8 +23,7 @@ import com.intellij.psi.tree.IElementType;
  * @author VISTALL
  * @date 12:49/07.01.13
  */
-public interface CPsiSuperClass extends CPsiElement
-{
+public interface CPsiSuperClass extends CPsiElement {
 	IElementType getAccessElementType();
 
 	PsiElement getAccessElement();

@@ -23,11 +23,9 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 11:37/14.12.2011
  */
-public class CPsiAssignmentExpressionImpl extends CPsiElementBaseImpl implements CPsiAssignmentExpression
-{
+public class CPsiAssignmentExpressionImpl extends CPsiElementBaseImpl implements CPsiAssignmentExpression {
 
-	public CPsiAssignmentExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+	public CPsiAssignmentExpressionImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 }

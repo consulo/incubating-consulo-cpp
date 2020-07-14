@@ -29,26 +29,22 @@ import com.intellij.psi.PsiErrorElement;
  * @author VISTALL
  * @date 11:17/02.01.13
  */
-public class AfterHighlighterVisitor extends CPsiRecursiveElementVisitor
-{
+public class AfterHighlighterVisitor extends CPsiRecursiveElementVisitor {
 	private final AnnotationHolder holder;
 
-	public AfterHighlighterVisitor(AnnotationHolder holder)
-	{
+	public AfterHighlighterVisitor(AnnotationHolder holder) {
 		this.holder = holder;
 	}
 
 	@Override
-	public void visitEnumConstant(CPsiEnumConstant element)
-	{
+	public void visitEnumConstant(CPsiEnumConstant element) {
 		PsiElement nameElement = element.getNameElement();
-		if(nameElement != null)
+		if (nameElement != null)
 			HighlightUtil.highlightOriginalElement(nameElement, holder, CSyntaxHighlighter.CONSTANT);
 	}
 
 	@Override
-	public void visitErrorElement(PsiErrorElement element)
-	{
+	public void visitErrorElement(PsiErrorElement element) {
 		TextRange textRange = element.getUserData(CMainPsiBuilder.ORIGINAL_TEXT_RANGE);
 
 		holder.createErrorAnnotation(textRange, element.getErrorDescription());

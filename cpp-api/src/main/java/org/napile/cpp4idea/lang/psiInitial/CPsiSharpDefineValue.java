@@ -20,6 +20,5 @@ package org.napile.cpp4idea.lang.psiInitial;
  * @author VISTALL
  * @date 16:20/29.12.12
  */
-public interface CPsiSharpDefineValue extends CPsiSharpElement
-{
+public interface CPsiSharpDefineValue extends CPsiSharpElement {
 }

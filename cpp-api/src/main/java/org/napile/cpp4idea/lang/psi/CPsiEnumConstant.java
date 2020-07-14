@@ -22,8 +22,7 @@ import com.intellij.psi.PsiElement;
  * @author VISTALL
  * @date 17:51/14.12.2011
  */
-public interface CPsiEnumConstant extends CPsiNameElementOwner
-{
+public interface CPsiEnumConstant extends CPsiNameElementOwner {
 	PsiElement getNameElement();
 
 	CPsiExpression getExpression();

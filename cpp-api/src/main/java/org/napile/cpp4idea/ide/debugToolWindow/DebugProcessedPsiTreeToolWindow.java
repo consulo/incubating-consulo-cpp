@@ -25,19 +25,16 @@ import com.intellij.psi.PsiFile;
  * @author VISTALL
  * @date 15:53/29.12.12
  */
-public class DebugProcessedPsiTreeToolWindow extends AbstractDebugPsiTreeToolWindow
-{
-	public DebugProcessedPsiTreeToolWindow(Project project)
-	{
+public class DebugProcessedPsiTreeToolWindow extends AbstractDebugPsiTreeToolWindow {
+	public DebugProcessedPsiTreeToolWindow(Project project) {
 		super(project);
 	}
 
 	@Override
-	protected String toText(PsiFile psiFile)
-	{
+	protected String toText(PsiFile psiFile) {
 		CPsiFile cPsiFile = CPreprocessor.getAfterProcessedFile(psiFile);
 
-		if(cPsiFile == null)
+		if (cPsiFile == null)
 			return "null";
 
 		return debugger.toText(cPsiFile);

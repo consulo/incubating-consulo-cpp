@@ -27,18 +27,15 @@ import com.intellij.psi.PsiElementVisitor;
  * @author VISTALL
  * @date 16:21/29.12.12
  */
-public class CPsiSharpDefineValueImpl extends CPsiElementBaseImpl implements CPsiSharpDefineValue
-{
-	public CPsiSharpDefineValueImpl(@NotNull ASTNode node)
-	{
+public class CPsiSharpDefineValueImpl extends CPsiElementBaseImpl implements CPsiSharpDefineValue {
+	public CPsiSharpDefineValueImpl(@NotNull ASTNode node) {
 		super(node);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if(visitor instanceof CSharpPsiElementVisitor)
-			((CSharpPsiElementVisitor)visitor).visitSDefineValue(this);
+	public void accept(@NotNull PsiElementVisitor visitor) {
+		if (visitor instanceof CSharpPsiElementVisitor)
+			((CSharpPsiElementVisitor) visitor).visitSDefineValue(this);
 		else
 			super.accept(visitor);
 	}

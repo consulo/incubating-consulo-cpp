@@ -22,8 +22,7 @@ import com.intellij.psi.PsiElement;
  * @author VISTALL
  * @date 1:53/11.12.2011
  */
-public interface CPsiSharpInclude extends CPsiSharpElement
-{
+public interface CPsiSharpInclude extends CPsiSharpElement {
 	PsiElement getIncludeElement();
 
 	String getIncludeName();

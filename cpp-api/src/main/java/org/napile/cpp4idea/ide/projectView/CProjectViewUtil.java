@@ -35,24 +35,20 @@ import java.util.List;
  * @author VISTALL
  * @date 17:23/07.01.13
  */
-public class CProjectViewUtil
-{
+public class CProjectViewUtil {
 	@Nullable
-	public static CPsiClass findSingleClass(@NotNull CPsiSharpFile f)
-	{
+	public static CPsiClass findSingleClass(@NotNull CPsiSharpFile f) {
 		CPsiFile psiFile = CPsiSharpFile.AFTER_PROCESSED_FILE.getValue(f);
 
 		CPsiDeclaration[] declarations = psiFile.getDeclarations();
 		return declarations.length == 1 && declarations[0] instanceof CPsiClass ? (CPsiClass) declarations[0] : null;
 	}
 
-	public static void addChildren(Project p, ViewSettings viewSettings, List<AbstractTreeNode<?>> list, CPsiDeclaration[] declarations)
-	{
-		for(CPsiDeclaration declaration : declarations)
-		{
-			if(declaration instanceof CPsiClass)
+	public static void addChildren(Project p, ViewSettings viewSettings, List<AbstractTreeNode<?>> list, CPsiDeclaration[] declarations) {
+		for (CPsiDeclaration declaration : declarations) {
+			if (declaration instanceof CPsiClass)
 				list.add(new CClassTreeNode(p, (CPsiClass) declaration, viewSettings));
-			else if(declaration instanceof CPsiDeclarationMethod)
+			else if (declaration instanceof CPsiDeclarationMethod)
 				list.add(new CMethodTreeNode(p, (CPsiDeclarationMethod) declaration, viewSettings));
 		}
 	}

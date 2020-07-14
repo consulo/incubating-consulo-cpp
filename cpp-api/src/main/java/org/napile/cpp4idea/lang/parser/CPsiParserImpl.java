@@ -29,17 +29,15 @@ import org.napile.cpp4idea.lang.psi.CPsiTokens;
  * @author VISTALL
  * @date 14:28/18.12.2011
  */
-public class CPsiParserImpl implements PsiParser, CPsiTokens
-{
+public class CPsiParserImpl implements PsiParser, CPsiTokens {
 	@NotNull
 	@Override
-	public ASTNode parse(IElementType root, PsiBuilder builder)
-	{
+	public ASTNode parse(IElementType root, PsiBuilder builder) {
 		builder.setDebugMode(true);
 
 		final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(CLanguage.INSTANCE);
 
-		PsiBuilder newBuilder = PsiBuilderFactory.getInstance().createBuilder(parserDefinition, new FlexAdapter(new _CppLexer()),  builder.getOriginalText());
+		PsiBuilder newBuilder = PsiBuilderFactory.getInstance().createBuilder(parserDefinition, new FlexAdapter(new _CppLexer()), builder.getOriginalText());
 
 		return CDialect.parseInitial(newBuilder, root);
 	}

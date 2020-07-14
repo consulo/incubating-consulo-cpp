@@ -30,34 +30,29 @@ import com.intellij.psi.PsiElementVisitor;
  * @author VISTALL
  * @date 1:53/11.12.2011
  */
-public class CPsiSharpIncludeImpl extends CPsiElementBaseImpl implements CPsiSharpInclude
-{
-	public CPsiSharpIncludeImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiSharpIncludeImpl extends CPsiElementBaseImpl implements CPsiSharpInclude {
+	public CPsiSharpIncludeImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if(visitor instanceof CSharpPsiElementVisitor)
-			((CSharpPsiElementVisitor)visitor).visitSInclude(this);
+	public void accept(@NotNull PsiElementVisitor visitor) {
+		if (visitor instanceof CSharpPsiElementVisitor)
+			((CSharpPsiElementVisitor) visitor).visitSInclude(this);
 		else
 			super.accept(visitor);
 	}
 
 	@Override
-	public PsiElement getIncludeElement()
-	{
+	public PsiElement getIncludeElement() {
 		return findChildByType(CPsiTokens.STRING_LITERAL);
 	}
 
 	@Override
 	@Nullable
-	public String getIncludeName()
-	{
+	public String getIncludeName() {
 		PsiElement element = getIncludeElement();
-		if(element == null)
+		if (element == null)
 			return null;
 
 		String text = element.getText();

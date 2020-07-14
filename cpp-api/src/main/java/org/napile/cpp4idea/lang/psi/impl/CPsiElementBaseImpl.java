@@ -30,40 +30,33 @@ import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
  * @author VISTALL
  * @date 22:56/10.12.2011
  */
-public class CPsiElementBaseImpl extends ASTWrapperPsiElement implements CPsiElement
-{
-	public CPsiElementBaseImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiElementBaseImpl extends ASTWrapperPsiElement implements CPsiElement {
+	public CPsiElementBaseImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 
 	@Override
-	public PsiElement getOriginalElement()
-	{
+	public PsiElement getOriginalElement() {
 		return getUserData(CMainPsiBuilder.ORIGINAL_SINGLE_ELEMENT);
 	}
 
 	@Override
-	public PsiManagerEx getManager()
-	{
+	public PsiManagerEx getManager() {
 		return super.getManager();
 	}
 
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return getClass().getSimpleName() + ": " + getText();
 	}
 
 	@Override
-	public CPsiFile getCFile()
-	{
+	public CPsiFile getCFile() {
 		return PsiTreeUtil.getParentOfType(this, CPsiFile.class);
 	}
 
 	@Override
-	public CPsiSharpFile getSharpCFile()
-	{
+	public CPsiSharpFile getSharpCFile() {
 		CPsiFile psiFile = getCFile();
 		return psiFile == null ? null : psiFile.getSharpCFile();
 	}

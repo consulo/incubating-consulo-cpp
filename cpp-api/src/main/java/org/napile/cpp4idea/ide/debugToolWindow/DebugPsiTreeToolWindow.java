@@ -23,16 +23,13 @@ import com.intellij.psi.PsiFile;
  * @author VISTALL
  * @date 14:21/29.12.12
  */
-public class DebugPsiTreeToolWindow extends AbstractDebugPsiTreeToolWindow
-{
-	public DebugPsiTreeToolWindow(Project project)
-	{
+public class DebugPsiTreeToolWindow extends AbstractDebugPsiTreeToolWindow {
+	public DebugPsiTreeToolWindow(Project project) {
 		super(project);
 	}
 
 	@Override
-	protected String toText(PsiFile psiFile)
-	{
+	protected String toText(PsiFile psiFile) {
 		return debugger.toText(psiFile);
 	}
 }

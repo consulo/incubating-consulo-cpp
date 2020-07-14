@@ -32,45 +32,38 @@ import com.intellij.psi.PsiElementVisitor;
  * @author VISTALL
  * @date 14:07/11.12.2011
  */
-public class CPsiSharpIfDefImpl extends CPsiElementBaseImpl implements CPsiSharpIfDef
-{
-	public CPsiSharpIfDefImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiSharpIfDefImpl extends CPsiElementBaseImpl implements CPsiSharpIfDef {
+	public CPsiSharpIfDefImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 
 	@Override
-	public CPsiCompilerVariable getVariable()
-	{
+	public CPsiCompilerVariable getVariable() {
 		return findChildByClass(CPsiCompilerVariable.class);
 	}
 
 	@Nullable
 	@Override
-	public CPsiSharpIfBody getBody()
-	{
+	public CPsiSharpIfBody getBody() {
 		return findChildByClass(CPsiSharpIfBody.class);
 	}
 
 	@Nullable
 	@Override
-	public PsiElement getElseKeyword()
-	{
+	public PsiElement getElseKeyword() {
 		return findChildByType(CPsiSharpTokens.S_ELSE_KEYWORD);
 	}
 
 	@Nullable
 	@Override
-	public CPsiSharpIfBody getElseBody()
-	{
+	public CPsiSharpIfBody getElseBody() {
 		CPsiSharpIfBody body = getBody();
-		if(body == null)
+		if (body == null)
 			return null;
 
 		PsiElement element = body.getNextSibling();
-		while(element != null)
-		{
-			if(element instanceof CPsiSharpIfBody)
+		while (element != null) {
+			if (element instanceof CPsiSharpIfBody)
 				return (CPsiSharpIfBody) element;
 			element = element.getNextSibling();
 		}
@@ -78,17 +71,15 @@ public class CPsiSharpIfDefImpl extends CPsiElementBaseImpl implements CPsiSharp
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if(visitor instanceof CSharpPsiElementVisitor)
-			((CSharpPsiElementVisitor)visitor).visitSIfDef(this);
+	public void accept(@NotNull PsiElementVisitor visitor) {
+		if (visitor instanceof CSharpPsiElementVisitor)
+			((CSharpPsiElementVisitor) visitor).visitSIfDef(this);
 		else
 			super.accept(visitor);
 	}
 
 	@Override
-	public boolean isReverted()
-	{
+	public boolean isReverted() {
 		return findChildByType(CPsiSharpTokens.S_IFNDEF_KEYWORD) != null;
 	}
 }

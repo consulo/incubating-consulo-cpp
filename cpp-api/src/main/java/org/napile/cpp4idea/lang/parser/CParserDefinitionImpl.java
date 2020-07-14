@@ -42,74 +42,64 @@ import javax.annotation.Nonnull;
  * @author VISTALL
  * @date 14:26/18.12.2011
  */
-public class CParserDefinitionImpl implements ParserDefinition
-{
+public class CParserDefinitionImpl implements ParserDefinition {
 	public static final IStubFileElementType C_FILE_TYPE = new IStubFileElementType(CLanguage.INSTANCE);
 
 	@NotNull
 	@Override
-	public Lexer createLexer(Project project)
-	{
+	public Lexer createLexer(Project project) {
 		return new EmptyLexer();
 	}
 
 	@Nonnull
 	@Override
-	public PsiParser createParser(Project project)
-	{
+	public PsiParser createParser(Project project) {
 		return new CPsiParserImpl();
 	}
 
 	@Override
-	public IFileElementType getFileNodeType()
-	{
+	public IFileElementType getFileNodeType() {
 		return C_FILE_TYPE;
 	}
 
 	@NotNull
 	@Override
-	public TokenSet getWhitespaceTokens()
-	{
+	public TokenSet getWhitespaceTokens() {
 		return CPsiTokens.WHITE_SPACE_SET;
 	}
 
 	@NotNull
 	@Override
-	public TokenSet getCommentTokens()
-	{
+	public TokenSet getCommentTokens() {
 		return CPsiTokens.COMMENT_SET;
 	}
 
 	@NotNull
 	@Override
-	public TokenSet getStringLiteralElements()
-	{
+	public TokenSet getStringLiteralElements() {
 		return CPsiTokens.STRING_LITERAL_SET;
 	}
 
 	@NotNull
 	@Override
-	public PsiElement createElement(ASTNode node)
-	{
-		if(node.getElementType() instanceof CPsiTokenImpl)
+	public PsiElement createElement(ASTNode node) {
+		if (node.getElementType() instanceof CPsiTokenImpl)
 			return ((CPsiTokenImpl) node.getElementType()).createPsi(node);
-		else if(node.getElementType() instanceof CPsiSharpTokenImpl)
+		else if (node.getElementType() instanceof CPsiSharpTokenImpl)
 			return ((CPsiSharpTokenImpl) node.getElementType()).createPsi(node);
-		else if(node.getElementType() == CPsiTokens.C_PROCESSED_FILE_TYPE)
+		else if (node.getElementType() == CPsiTokens.C_PROCESSED_FILE_TYPE)
 			return new CPsiFileImpl(node);
 
 		throw new IllegalArgumentException("Illegal argument : " + node.getElementType());
 	}
 
 	@Override
-	public PsiFile createFile(FileViewProvider viewProvider)
-	{
+	public PsiFile createFile(FileViewProvider viewProvider) {
 		return new CPsiSharpFileImpl(viewProvider);
 	}
 
 	@Override
-	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right)
-	{
+	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
 		return SpaceRequirements.MAY;
 	}
 }

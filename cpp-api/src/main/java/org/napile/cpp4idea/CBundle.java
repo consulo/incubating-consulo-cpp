@@ -28,36 +28,30 @@ import com.intellij.reference.SoftReference;
  * @author VISTALL
  * @date 19:39/13.12.2011
  */
-public class CBundle
-{
+public class CBundle {
 	private static Reference<ResourceBundle> BUNDLE;
 
 	@NonNls
 	public static final String PATH_TO_BUNDLE = "org.napile.cpp4idea.CBundle";
 
-	private CBundle()
-	{
+	private CBundle() {
 		//
 	}
 
-	public static String message(@PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key)
-	{
+	public static String message(@PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key) {
 		return CommonBundle.message(getBundle(), key);
 	}
 
-	public static String message(@PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key, Object... params)
-	{
+	public static String message(@PropertyKey(resourceBundle = PATH_TO_BUNDLE) String key, Object... params) {
 		return CommonBundle.message(getBundle(), key, params);
 	}
 
-	private static ResourceBundle getBundle()
-	{
+	private static ResourceBundle getBundle() {
 		ResourceBundle bundle = null;
-		if(BUNDLE != null)
+		if (BUNDLE != null)
 			bundle = BUNDLE.get();
 
-		if(bundle == null)
-		{
+		if (bundle == null) {
 			bundle = ResourceBundle.getBundle(PATH_TO_BUNDLE);
 			BUNDLE = new SoftReference<ResourceBundle>(bundle);
 		}

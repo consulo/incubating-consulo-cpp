@@ -19,10 +19,9 @@ package org.napile.cpp4idea.lang.psi;
 /**
  * @author VISTALL
  * @date 23:30/10.12.2011
- *
+ * <p>
  * char* test() - (char*)
  */
-public interface CPsiTypeRef extends CPsiElement
-{
+public interface CPsiTypeRef extends CPsiElement {
 
 }

@@ -27,14 +27,11 @@ import com.intellij.util.NotNullFunction;
  * @author VISTALL
  * @date 1:07/10.12.2011
  */
-public interface CPsiSharpFile extends PsiFile
-{
-	NotNullLazyKey<CPsiFile, CPsiSharpFile> AFTER_PROCESSED_FILE = NotNullLazyKey.create("after-processed-file", new NotNullFunction<CPsiSharpFile, CPsiFile>()
-	{
+public interface CPsiSharpFile extends PsiFile {
+	NotNullLazyKey<CPsiFile, CPsiSharpFile> AFTER_PROCESSED_FILE = NotNullLazyKey.create("after-processed-file", new NotNullFunction<CPsiSharpFile, CPsiFile>() {
 		@NotNull
 		@Override
-		public CPsiFile fun(CPsiSharpFile dom)
-		{
+		public CPsiFile fun(CPsiSharpFile dom) {
 			return CPreprocessor.preProcess(dom);
 		}
 	});

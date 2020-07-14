@@ -29,31 +29,26 @@ import com.intellij.psi.PsiElementVisitor;
  * @author VISTALL
  * @date 7:23/11.12.2011
  */
-public class CPsiSharpDefineImpl extends CPsiElementBaseImpl implements CPsiSharpDefine
-{
-	public CPsiSharpDefineImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiSharpDefineImpl extends CPsiElementBaseImpl implements CPsiSharpDefine {
+	public CPsiSharpDefineImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if(visitor instanceof CSharpPsiElementVisitor)
-			((CSharpPsiElementVisitor)visitor).visitSDefine(this);
+	public void accept(@NotNull PsiElementVisitor visitor) {
+		if (visitor instanceof CSharpPsiElementVisitor)
+			((CSharpPsiElementVisitor) visitor).visitSDefine(this);
 		else
 			super.accept(visitor);
 	}
 
 	@Override
-	public CPsiCompilerVariable getVariable()
-	{
+	public CPsiCompilerVariable getVariable() {
 		return findChildByClass(CPsiCompilerVariable.class);
 	}
 
 	@Override
-	public CPsiSharpDefineValue getValue()
-	{
+	public CPsiSharpDefineValue getValue() {
 		return findChildByClass(CPsiSharpDefineValue.class);
 	}
 }

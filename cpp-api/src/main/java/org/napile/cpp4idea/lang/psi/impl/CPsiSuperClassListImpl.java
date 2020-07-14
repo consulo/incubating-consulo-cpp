@@ -25,16 +25,13 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 12:50/07.01.13
  */
-public class CPsiSuperClassListImpl extends CPsiElementBaseImpl implements CPsiSuperClassList
-{
-	public CPsiSuperClassListImpl(@NotNull ASTNode node)
-	{
+public class CPsiSuperClassListImpl extends CPsiElementBaseImpl implements CPsiSuperClassList {
+	public CPsiSuperClassListImpl(@NotNull ASTNode node) {
 		super(node);
 	}
 
 	@Override
-	public CPsiSuperClass[] getSuperClasses()
-	{
+	public CPsiSuperClass[] getSuperClasses() {
 		return findChildrenByClass(CPsiSuperClass.class);
 	}
 }

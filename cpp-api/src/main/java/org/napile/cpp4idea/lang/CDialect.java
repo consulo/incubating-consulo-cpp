@@ -26,10 +26,8 @@ import com.intellij.psi.tree.IElementType;
  * @author VISTALL
  * @date 22:23/28.12.12
  */
-public abstract class CDialect
-{
-	public static ASTNode parseInitial(PsiBuilder builder, IElementType root)
-	{
+public abstract class CDialect {
+	public static ASTNode parseInitial(PsiBuilder builder, IElementType root) {
 		PsiBuilder.Marker rootMarker = builder.mark();
 
 		InitialParsing.parse(builder, InitialParsing.EAT_LAST_END_IF);
@@ -39,8 +37,7 @@ public abstract class CDialect
 		return builder.getTreeBuilt();
 	}
 
-	public static ASTNode parseMain(PsiBuilder builder, IElementType root)
-	{
+	public static ASTNode parseMain(PsiBuilder builder, IElementType root) {
 		PsiBuilder.Marker rootMarker = builder.mark();
 
 		MainParsing.parseElement(builder, 0);

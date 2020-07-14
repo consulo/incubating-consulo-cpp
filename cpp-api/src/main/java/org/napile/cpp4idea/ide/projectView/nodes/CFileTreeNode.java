@@ -34,19 +34,16 @@ import com.intellij.psi.PsiFile;
  * @author VISTALL
  * @date 17:27/07.01.13
  */
-public class CFileTreeNode extends PsiFileNode
-{
-	public CFileTreeNode(Project project, PsiFile value, ViewSettings viewSettings)
-	{
+public class CFileTreeNode extends PsiFileNode {
+	public CFileTreeNode(Project project, PsiFile value, ViewSettings viewSettings) {
 		super(project, value, viewSettings);
 	}
 
 	@Override
-	public Collection<AbstractTreeNode<?>> getChildrenImpl()
-	{
+	public Collection<AbstractTreeNode<?>> getChildrenImpl() {
 		CPsiSharpFile file = (CPsiSharpFile) getValue();
 
-		if(file == null || !getSettings().isShowMembers())
+		if (file == null || !getSettings().isShowMembers())
 			return Collections.emptyList();
 
 		CPsiFile pFile = CPsiSharpFile.AFTER_PROCESSED_FILE.getValue(file);

@@ -29,46 +29,40 @@ import com.intellij.psi.PsiElementVisitor;
  * @author VISTALL
  * @date 17:51/14.12.2011
  */
-public class CPsiEnumConstantImpl extends CPsiElementBaseImpl implements CPsiEnumConstant
-{
-	public CPsiEnumConstantImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiEnumConstantImpl extends CPsiElementBaseImpl implements CPsiEnumConstant {
+	public CPsiEnumConstantImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if(visitor instanceof CPsiElementVisitor)
-			((CPsiElementVisitor)visitor).visitEnumConstant(this);
+	public void accept(@NotNull PsiElementVisitor visitor) {
+		if (visitor instanceof CPsiElementVisitor)
+			((CPsiElementVisitor) visitor).visitEnumConstant(this);
 		else
 			super.accept(visitor);
 	}
 
 	@Override
-	public PsiElement getNameElement()
-	{
+	public PsiElement getNameElement() {
 		return findChildByType(CPsiTokens.IDENTIFIER);
 	}
 
 	@Override
-	public CPsiExpression getExpression()
-	{
+	public CPsiExpression getExpression() {
 		return findChildByClass(CPsiExpression.class);
 	}
 
 	@Override
-	public boolean equals(Object o)
-	{
-		if(o == null || !(o instanceof CPsiEnumConstant))
+	public boolean equals(Object o) {
+		if (o == null || !(o instanceof CPsiEnumConstant))
 			return false;
 
 		PsiElement nameElement = getNameElement();
-		if(nameElement == null)
+		if (nameElement == null)
 			return false;
 		PsiElement nameElement2 = ((CPsiEnumConstant) o).getNameElement();
-		if(nameElement2 == null)
+		if (nameElement2 == null)
 			return false;
-		return nameElement.equals(nameElement2) ;
+		return nameElement.equals(nameElement2);
 	}
 }

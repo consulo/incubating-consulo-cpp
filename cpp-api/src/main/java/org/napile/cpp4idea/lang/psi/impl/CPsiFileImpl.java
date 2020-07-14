@@ -30,53 +30,45 @@ import com.intellij.psi.impl.PsiManagerEx;
  * @author VISTALL
  * @date 15:41/29.12.12
  */
-public class CPsiFileImpl extends CPsiElementBaseImpl implements CPsiFile
-{
+public class CPsiFileImpl extends CPsiElementBaseImpl implements CPsiFile {
 	private final CPsiSharpFile originalFile;
 
-	public CPsiFileImpl(@NotNull ASTNode node)
-	{
+	public CPsiFileImpl(@NotNull ASTNode node) {
 		super(node);
 		originalFile = node.getUserData(C_SHARP_FILE);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if(visitor instanceof CPsiElementVisitor)
+	public void accept(@NotNull PsiElementVisitor visitor) {
+		if (visitor instanceof CPsiElementVisitor)
 			((CPsiElementVisitor) visitor).visitCFile(this);
 		else
 			visitor.visitElement(this);
 	}
 
 	@Override
-	public PsiFile getContainingFile()
-	{
+	public PsiFile getContainingFile() {
 		return originalFile;
 	}
 
 	@Override
-	public CPsiSharpFile getSharpCFile()
-	{
+	public CPsiSharpFile getSharpCFile() {
 		return originalFile;
 	}
 
 	@Override
-	public CPsiFile getCFile()
-	{
+	public CPsiFile getCFile() {
 		return this;
 	}
 
 	@Override
-	public PsiManagerEx getManager()
-	{
+	public PsiManagerEx getManager() {
 		return (PsiManagerEx) originalFile.getManager();
 	}
 
 	@NotNull
 	@Override
-	public CPsiDeclaration[] getDeclarations()
-	{
+	public CPsiDeclaration[] getDeclarations() {
 		return findChildrenByClass(CPsiDeclaration.class);
 	}
 }

@@ -31,32 +31,27 @@ import com.intellij.psi.PsiElementVisitor;
  * @author VISTALL
  * @date 22:57/10.12.2011
  */
-public class CPsiImplementingMethodImpl extends CPsiDeclarationImpl implements CPsiImplementingMethod
-{
-	public CPsiImplementingMethodImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
+public class CPsiImplementingMethodImpl extends CPsiDeclarationImpl implements CPsiImplementingMethod {
+	public CPsiImplementingMethodImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if(visitor instanceof CPsiElementVisitor)
-			((CPsiElementVisitor)visitor).visitImplementingMethod(this);
+	public void accept(@NotNull PsiElementVisitor visitor) {
+		if (visitor instanceof CPsiElementVisitor)
+			((CPsiElementVisitor) visitor).visitImplementingMethod(this);
 		else
 			super.accept(visitor);
 	}
 
 	@Override
-	public CPsiParameterList getParameterList()
-	{
+	public CPsiParameterList getParameterList() {
 		return findChildByClass(CPsiParameterList.class);
 	}
 
 	@Override
 	@NotNull
-	public CPsiCodeBlock getCodeBlock()
-	{
+	public CPsiCodeBlock getCodeBlock() {
 		return findNotNullChildByClass(CPsiCodeBlock.class);
 	}
 }

@@ -20,6 +20,5 @@ package org.napile.cpp4idea.lang.psi;
  * @author VISTALL
  * @date 12:59/02.01.13
  */
-public interface CPsiAccessorOwner extends CPsiElement
-{
+public interface CPsiAccessorOwner extends CPsiElement {
 }

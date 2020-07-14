@@ -24,10 +24,8 @@ import com.intellij.lang.ASTNode;
  * @author VISTALL
  * @date 16:00/07.01.13
  */
-public class CPsiDoubleColonTypeRefImpl extends CPsiElementBaseImpl implements CPsiDoubleColonTypeRef
-{
-	public CPsiDoubleColonTypeRefImpl(@NotNull ASTNode node)
-	{
+public class CPsiDoubleColonTypeRefImpl extends CPsiElementBaseImpl implements CPsiDoubleColonTypeRef {
+	public CPsiDoubleColonTypeRefImpl(@NotNull ASTNode node) {
 		super(node);
 	}
 }

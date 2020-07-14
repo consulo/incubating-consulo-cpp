@@ -20,16 +20,13 @@ package org.napile.cpp4idea.config.sdk.sdkdialect.impl;
  * @author VISTALL
  * @date 16:43/12.12.2011
  */
-public class MsVs2010SdkDialectImpl extends MsVsSdkDialectBaseImpl
-{
-	public MsVs2010SdkDialectImpl()
-	{
+public class MsVs2010SdkDialectImpl extends MsVsSdkDialectBaseImpl {
+	public MsVs2010SdkDialectImpl() {
 		super("2010");
 	}
 
 	@Override
-	public boolean isSupported(String path)
-	{
+	public boolean isSupported(String path) {
 		return false;
 	}
 }

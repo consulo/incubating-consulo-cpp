@@ -20,8 +20,7 @@ package org.napile.cpp4idea.lang.psiInitial;
  * @author VISTALL
  * @date 7:23/11.12.2011
  */
-public interface CPsiSharpDefine extends CPsiSharpElement
-{
+public interface CPsiSharpDefine extends CPsiSharpElement {
 	CPsiCompilerVariable getVariable();
 
 	CPsiSharpDefineValue getValue();
