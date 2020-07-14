@@ -72,10 +72,13 @@ public class CodeBlockParsing extends MainParsing {
 			if (builder.getTokenType() != SEMICOLON) {
 				builder.error(CBundle.message("SEMICOLON.expected"));
 			}
+			else {
+				builder.advanceLexer();
+			}
 
 			done(marker, CPsiReturnStatement.class);
+		} else {
+			builder.advanceLexer();
 		}
-
-		builder.advanceLexer();
 	}
 }
