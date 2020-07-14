@@ -37,7 +37,8 @@ public class CodeBlockParsing extends MainParsing {
 
 			done(marker, CPsiParameterList.class);
 			return;
-		} else {
+		}
+		else {
 			marker = builder.mark();
 			builder.advanceLexer();
 		}
@@ -46,12 +47,14 @@ public class CodeBlockParsing extends MainParsing {
 			while (!builder.eof()) {
 				parseStatement(builder);
 
-				if (builder.getTokenType() == RBRACE)
+				if (builder.getTokenType() == RBRACE) {
 					break;
+				}
 			}
 
-			if (builder.getTokenType() != RBRACE)
+			if (builder.getTokenType() != RBRACE) {
 				builder.error(CBundle.message("RBRACE.expected"));
+			}
 		}
 
 		builder.advanceLexer();
@@ -69,8 +72,9 @@ public class CodeBlockParsing extends MainParsing {
 
 			builder.advanceLexer();
 
-			if (builder.getTokenType() != SEMICOLON)
+			if (builder.getTokenType() != SEMICOLON) {
 				builder.error(CBundle.message("SEMICOLON.expected"));
+			}
 
 			done(marker, CPsiReturnStatement.class);
 		}

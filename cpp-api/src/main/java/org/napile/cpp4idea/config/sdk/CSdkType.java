@@ -45,8 +45,9 @@ public class CSdkType extends SdkType {
 	@Override
 	public boolean isValidSdkHome(String path) {
 		for (SdkDialect dialect : SdkDialect.DIALECTS)
-			if (dialect.isSupported(path))
+			if (dialect.isSupported(path)) {
 				return true;
+			}
 		return false;
 	}
 

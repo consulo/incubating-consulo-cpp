@@ -36,10 +36,12 @@ public class CPsiSharpDefineImpl extends CPsiElementBaseImpl implements CPsiShar
 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CSharpPsiElementVisitor)
+		if (visitor instanceof CSharpPsiElementVisitor) {
 			((CSharpPsiElementVisitor) visitor).visitSDefine(this);
-		else
+		}
+		else {
 			super.accept(visitor);
+		}
 	}
 
 	@Override

@@ -48,13 +48,16 @@ public class InitialParserHelper implements CPsiTokens {
 	public static IElementType lookAheadIgnoreLines(PsiBuilder builder, int step) {
 		while (!builder.eof()) {
 			IElementType elementType = builder.lookAhead(step);
-			if (elementType == null)
+			if (elementType == null) {
 				break;
+			}
 
-			if (elementType == NEW_LINE)
+			if (elementType == NEW_LINE) {
 				step++;
-			else
+			}
+			else {
 				return elementType;
+			}
 		}
 		return null;
 	}
@@ -68,17 +71,21 @@ public class InitialParserHelper implements CPsiTokens {
 	}
 
 	protected static void checkMatches(final PsiBuilder builder, final IElementType token, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message) {
-		if (builder.getTokenType() == token)
+		if (builder.getTokenType() == token) {
 			advanceLexerAndSkipLines(builder);
-		else
+		}
+		else {
 			builder.error(CBundle.message(message));
+		}
 	}
 
 	protected static void checkMatchesWithoutLines(final PsiBuilder builder, final IElementType token, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message) {
-		if (builder.getTokenType() == token)
+		if (builder.getTokenType() == token) {
 			builder.advanceLexer();
-		else
+		}
+		else {
 			builder.error(CBundle.message(message));
+		}
 	}
 
 	protected static void error(final PsiBuilder builder, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message) {

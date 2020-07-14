@@ -48,8 +48,9 @@ public class VariableParsing extends MainParserHelper {
 			}
 		}
 
-		if (consumeIf(builder, EQ))
+		if (consumeIf(builder, EQ)) {
 			ExpressionParsing.parsePrimaryExpression(builder);
+		}
 
 		done(variableMarker, clazz);
 		return true;

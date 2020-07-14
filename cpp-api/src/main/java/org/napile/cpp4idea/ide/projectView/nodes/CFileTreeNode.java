@@ -43,8 +43,9 @@ public class CFileTreeNode extends PsiFileNode {
 	public Collection<AbstractTreeNode<?>> getChildrenImpl() {
 		CPsiSharpFile file = (CPsiSharpFile) getValue();
 
-		if (file == null || !getSettings().isShowMembers())
+		if (file == null || !getSettings().isShowMembers()) {
 			return Collections.emptyList();
+		}
 
 		CPsiFile pFile = CPsiSharpFile.AFTER_PROCESSED_FILE.getValue(file);
 

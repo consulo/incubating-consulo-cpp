@@ -53,13 +53,14 @@ public class FoldingBuilderImpl implements FoldingBuilder, DumbAware {
 			element.accept(new CSharpPsiRecursiveElementVisitor() {
 				@Override
 				public void visitSIfDef(CPsiSharpIfDef element) {
-					if (element.getVariable() != null)
+					if (element.getVariable() != null) {
 						list.add(new FoldingDescriptor(element, element.getTextRange()));
+					}
 					super.visitSIfDef(element);
 				}
 			});
 
-			if (psiFile != null)
+			if (psiFile != null) {
 				psiFile.accept(new CPsiRecursiveElementVisitor() {
 					@Override
 					public void visitImplementingMethod(CPsiImplementingMethod element) {
@@ -68,19 +69,24 @@ public class FoldingBuilderImpl implements FoldingBuilder, DumbAware {
 						super.visitImplementingMethod(element);
 					}
 				});
+			}
 
 			return list.toArray(new FoldingDescriptor[list.size()]);
-		} else
+		}
+		else {
 			return EMPTY;
+		}
 	}
 
 	@Override
 	public String getPlaceholderText(@NotNull ASTNode node) {
 		PsiElement element = node.getPsi();
-		if (element instanceof CPsiSharpIfDef)
+		if (element instanceof CPsiSharpIfDef) {
 			return (((CPsiSharpIfDef) element).isReverted() ? "#ifndef " : "#ifdef ") + ((CPsiSharpIfDef) element).getVariable().getText() + "\n";
-		else if (element instanceof CPsiImplementingMethod)
+		}
+		else if (element instanceof CPsiImplementingMethod) {
 			return "{....}";
+		}
 
 		throw new IllegalArgumentException();
 	}

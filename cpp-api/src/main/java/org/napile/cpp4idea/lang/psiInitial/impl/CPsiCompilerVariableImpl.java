@@ -36,10 +36,12 @@ public class CPsiCompilerVariableImpl extends CPsiElementBaseImpl implements CPs
 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CSharpPsiElementVisitor)
+		if (visitor instanceof CSharpPsiElementVisitor) {
 			((CSharpPsiElementVisitor) visitor).visitCompilerVariable(this);
-		else
+		}
+		else {
 			super.accept(visitor);
+		}
 	}
 
 	@Override

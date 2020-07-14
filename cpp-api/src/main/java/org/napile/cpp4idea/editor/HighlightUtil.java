@@ -30,16 +30,19 @@ import com.intellij.psi.PsiElement;
  */
 public class HighlightUtil {
 	public static void highlight(@NotNull PsiElement element, @NotNull AnnotationHolder holder) {
-		if (element instanceof CPsiCompilerVariable)
+		if (element instanceof CPsiCompilerVariable) {
 			highlightElement(element, holder, CSyntaxHighlighter.COMPILER_VARIABLE);
+		}
 	}
 
 	public static void highlightOriginalElement(@NotNull PsiElement element, @NotNull AnnotationHolder holder, @NotNull TextAttributesKey key) {
 		PsiElement originalElement = element.getUserData(CMainPsiBuilder.ORIGINAL_SINGLE_ELEMENT);
-		if (originalElement != null)
+		if (originalElement != null) {
 			holder.createInfoAnnotation(originalElement, null).setTextAttributes(key);
-		else
+		}
+		else {
 			throw new UnsupportedOperationException("Unknown how highlight element : " + element);
+		}
 	}
 
 	public static void highlightElement(@NotNull PsiElement element, @NotNull AnnotationHolder holder, @NotNull TextAttributesKey key) {

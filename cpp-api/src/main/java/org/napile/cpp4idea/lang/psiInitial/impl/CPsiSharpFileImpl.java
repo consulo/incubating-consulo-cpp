@@ -65,9 +65,11 @@ public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile {
 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CSharpPsiElementVisitor)
+		if (visitor instanceof CSharpPsiElementVisitor) {
 			((CSharpPsiElementVisitor) visitor).visitSFile(this);
-		else
+		}
+		else {
 			super.accept(visitor);
+		}
 	}
 }

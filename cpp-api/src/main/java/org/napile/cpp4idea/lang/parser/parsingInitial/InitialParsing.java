@@ -38,20 +38,27 @@ public class InitialParsing extends InitialParserHelper {
 		while (!builder.eof()) {
 			skipLines(builder);
 
-			if (builder.getTokenType() == S_INCLUDE_KEYWORD)
+			if (builder.getTokenType() == S_INCLUDE_KEYWORD) {
 				parseInclude(builder);
-			else if (builder.getTokenType() == S_DEFINE_KEYWORD)
+			}
+			else if (builder.getTokenType() == S_DEFINE_KEYWORD) {
 				parseDefine(builder);
-			else if (builder.getTokenType() == S_IFNDEF_KEYWORD || builder.getTokenType() == S_IFDEF_KEYWORD)
+			}
+			else if (builder.getTokenType() == S_IFNDEF_KEYWORD || builder.getTokenType() == S_IFDEF_KEYWORD) {
 				parseIf(builder);
+			}
 			else if (builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD) {
 				if (isSet(f, EAT_LAST_END_IF)) {
 					error(builder, "S_IFDEF.or.S_IFNDEF.expected");
 					advanceLexerAndSkipLines(builder);
-				} else
+				}
+				else {
 					break;
-			} else
+				}
+			}
+			else {
 				builder.advanceLexer();
+			}
 		}
 	}
 
@@ -60,10 +67,12 @@ public class InitialParsing extends InitialParserHelper {
 
 		IElementType nextElement = builder.lookAhead(1);
 
-		if (nextElement != STRING_LITERAL && nextElement != STRING_INCLUDE_LITERAL)
+		if (nextElement != STRING_LITERAL && nextElement != STRING_INCLUDE_LITERAL) {
 			builder.error("Incorrect include name");
-		else
+		}
+		else {
 			builder.advanceLexer();
+		}
 
 		builder.advanceLexer();
 
@@ -84,11 +93,13 @@ public class InitialParsing extends InitialParserHelper {
 		PsiBuilder.Marker valueMarker = builder.mark();
 
 		while (!builder.eof()) {
-			if (builder.getTokenType() == NEW_LINE)
+			if (builder.getTokenType() == NEW_LINE) {
 				break;
+			}
 
-			if (builder.getTokenType() == NEXT_LINE)
+			if (builder.getTokenType() == NEXT_LINE) {
 				builder.advanceLexer();
+			}
 
 			builder.advanceLexer();
 		}
@@ -105,15 +116,18 @@ public class InitialParsing extends InitialParserHelper {
 
 		builder.advanceLexer();
 
-		if (builder.getTokenType() == IDENTIFIER)
+		if (builder.getTokenType() == IDENTIFIER) {
 			doneOneToken(builder, CPsiCompilerVariable.class);
-		else
+		}
+		else {
 			error(builder, "IDENTIFIER.expected");
+		}
 
 		builder.advanceLexer();
 
-		if (builder.getTokenType() == NEW_LINE)
+		if (builder.getTokenType() == NEW_LINE) {
 			builder.advanceLexer();
+		}
 
 		skipLines(builder);
 
@@ -123,8 +137,9 @@ public class InitialParsing extends InitialParserHelper {
 			while (!builder.eof()) {
 				parse(builder, 0);
 
-				if (builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD)
+				if (builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD) {
 					break;
+				}
 			}
 
 			done(bodyMarker, CPsiSharpIfBody.class);
@@ -137,8 +152,9 @@ public class InitialParsing extends InitialParserHelper {
 				while (!builder.eof()) {
 					parse(builder, 0);
 
-					if (builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD)
+					if (builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD) {
 						break;
+					}
 				}
 				done(elseBody, CPsiSharpIfBody.class);
 			}

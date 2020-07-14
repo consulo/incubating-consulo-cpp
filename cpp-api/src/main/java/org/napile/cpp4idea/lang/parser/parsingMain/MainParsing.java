@@ -36,36 +36,43 @@ public class MainParsing extends MainParserHelper {
 			PsiBuilder.Marker marker = builder.mark();
 
 			Class<? extends CPsiElement> doneElement = parse(builder);
-			if (doneElement != null)
+			if (doneElement != null) {
 				done(marker, doneElement);
+			}
 			else {
 				marker.drop();
 				if (!isSet(flags, SILENT)) {
 					builder.error("Unknown how to parse symbol " + builder.getTokenType());
 					builder.advanceLexer();
-				} else
+				}
+				else {
 					break;
+				}
 			}
 		}
 	}
 
 	public static boolean parseTypeRef(PsiBuilder builder) {
 		PsiBuilder.Marker marker = parseTypeRef0(builder);
-		if (marker == null)
+		if (marker == null) {
 			return false;
+		}
 		if (builder.getTokenType() == DOUBLE_COLON) {
 			marker = marker.precede();
 
 			builder.advanceLexer();
 
-			if (parseTypeRef0(builder) == null)
+			if (parseTypeRef0(builder) == null) {
 				error(builder, "IDENTIFIER.expected");
+			}
 
 			done(marker, CPsiDoubleColonTypeRef.class);
 
 			return true;
-		} else
+		}
+		else {
 			return true;
+		}
 	}
 
 	public static PsiBuilder.Marker parseTypeRef0(PsiBuilder builder) {
@@ -93,14 +100,18 @@ public class MainParsing extends MainParserHelper {
 	public static Class<? extends CPsiElement> parse(@NotNull PsiBuilder builder) {
 		IElementType token = builder.getTokenType();
 
-		if (token == CPsiTokens.CLASS_KEYWORD)
+		if (token == CPsiTokens.CLASS_KEYWORD) {
 			return parseClass(builder);
-		else if (token == CPsiTokens.ENUM_KEYWORD)
+		}
+		else if (token == CPsiTokens.ENUM_KEYWORD) {
 			return parseEnum(builder, true);
-		else if (token == CPsiTokens.NAMESPACE_KEYWORD)
+		}
+		else if (token == CPsiTokens.NAMESPACE_KEYWORD) {
 			return parseNamespace(builder);
-		else if (token == CPsiTokens.TYPEDEF_KEYWORD)
+		}
+		else if (token == CPsiTokens.TYPEDEF_KEYWORD) {
 			return parseTypeDef(builder);
+		}
 
 		return parseMethodOrField(builder);
 	}
@@ -127,8 +138,9 @@ public class MainParsing extends MainParserHelper {
 		while (!builder.eof()) {
 			PsiBuilder.Marker marker = builder.mark();
 			Class<? extends CPsiElement> child = parse(builder);
-			if (child != null)
+			if (child != null) {
 				done(marker, child);
+			}
 			else {
 				marker.drop();
 				break;
@@ -153,23 +165,29 @@ public class MainParsing extends MainParserHelper {
 					PsiBuilder.Marker constantBuilder = builder.mark();
 
 					builder.advanceLexer();
-					if (builder.getTokenType() == EQ)
+					if (builder.getTokenType() == EQ) {
 						ExpressionParsing.parse(builder);
+					}
 
 					done(constantBuilder, CPsiEnumConstant.class);
 
 					if (builder.getTokenType() == COMMA) {
 						builder.advanceLexer();
-					} else
+					}
+					else {
 						break;
-				} else
+					}
+				}
+				else {
 					break;
+				}
 			}
 
 			expect(builder, RBRACE, "RBRACE.expected");
 
-			if (semicolon)
+			if (semicolon) {
 				expect(builder, SEMICOLON, "SEMICOLON.expected");
+			}
 		}
 
 		return CPsiEnum.class;
@@ -180,8 +198,9 @@ public class MainParsing extends MainParserHelper {
 
 		expect(builder, IDENTIFIER, "name.expected");
 
-		if (consumeIf(builder, SEMICOLON))
+		if (consumeIf(builder, SEMICOLON)) {
 			return CPsiClass.class;
+		}
 
 		if (builder.getTokenType() == COLON) {
 			PsiBuilder.Marker superListMarker = builder.mark();
@@ -191,18 +210,21 @@ public class MainParsing extends MainParserHelper {
 			while (true) {
 				PsiBuilder.Marker superMarker = builder.mark();
 
-				if (ACCESS_MODIFIERS.contains(builder.getTokenType()))
+				if (ACCESS_MODIFIERS.contains(builder.getTokenType())) {
 					builder.advanceLexer();
+				}
 
-				if (consumeIf(builder, IDENTIFIER))
+				if (consumeIf(builder, IDENTIFIER)) {
 					done(superMarker, CPsiSuperClass.class);
+				}
 				else {
 					done(superMarker, CPsiSuperClass.class);
 					error(builder, "IDENTIFIER.expected");
 				}
 
-				if (!consumeIf(builder, COMMA))
+				if (!consumeIf(builder, COMMA)) {
 					break;
+				}
 			}
 			done(superListMarker, CPsiSuperClassList.class);
 		}
@@ -210,8 +232,9 @@ public class MainParsing extends MainParserHelper {
 		if (consumeIf(builder, LBRACE)) {
 			while (!builder.eof()) {
 				IElementType classToken = builder.getTokenType();
-				if (classToken == RBRACE)
+				if (classToken == RBRACE) {
 					break;
+				}
 
 				if (CPsiTokens.ACCESS_MODIFIERS.contains(classToken)) {
 					PsiBuilder.Marker memberMark = builder.mark();
@@ -224,8 +247,9 @@ public class MainParsing extends MainParserHelper {
 							PsiBuilder.Marker marker = builder.mark();
 
 							Class<? extends CPsiElement> element = parseMemberDeclaration(builder);
-							if (element != null)
+							if (element != null) {
 								done(marker, element);
+							}
 							else {
 								marker.drop();
 								break;
@@ -233,11 +257,13 @@ public class MainParsing extends MainParserHelper {
 						}
 
 						done(memberMark, CPsiAccessorOwner.class);
-					} else {
+					}
+					else {
 						memberMark.drop();
 						error(builder, "COLON.expected");
 					}
-				} else {
+				}
+				else {
 					builder.error("Unknown symbol");
 					break;
 				}
@@ -267,8 +293,9 @@ public class MainParsing extends MainParserHelper {
 			return CPsiDeclarationConstructor.class;
 		}
 
-		if (!parseTypeRef(builder))
+		if (!parseTypeRef(builder)) {
 			return null;
+		}
 
 		if (builder.getTokenType() == LPARENTH) {
 			ParameterListParsing.parseParameterList(builder);
@@ -276,7 +303,8 @@ public class MainParsing extends MainParserHelper {
 			expect(builder, SEMICOLON, "SEMICOLON.expected");
 
 			return CPsiDeclarationConstructor.class;
-		} else if (builder.getTokenType() == IDENTIFIER) {
+		}
+		else if (builder.getTokenType() == IDENTIFIER) {
 			builder.advanceLexer();
 
 			ParameterListParsing.parseParameterList(builder);
@@ -307,8 +335,9 @@ public class MainParsing extends MainParserHelper {
 	public static Class<? extends CPsiElement> parseMethodOrField(@NotNull PsiBuilder builder) {
 		parseModifiers(builder);
 
-		if (!parseTypeRef(builder))
+		if (!parseTypeRef(builder)) {
 			return null;
+		}
 
 		if (builder.getTokenType() == DOUBLE_COLON) {
 			/*boolean deConstructor = */
@@ -322,7 +351,8 @@ public class MainParsing extends MainParserHelper {
 				CodeBlockParsing.parseCodeBlock(builder);
 
 				return CPsiImplementingMethod.class;
-			} else {
+			}
+			else {
 				builder.advanceLexer();
 
 				return CPsiDeclarationMethod.class;
@@ -332,8 +362,10 @@ public class MainParsing extends MainParserHelper {
 		if (builder.getTokenType() != IDENTIFIER) {
 			error(builder, "name.expected");
 			return null;
-		} else
+		}
+		else {
 			advanceLexerAndSkipLines(builder);
+		}
 
 		if (builder.getTokenType() == LPARENTH) {
 			ParameterListParsing.parseParameterList(builder);
@@ -342,27 +374,33 @@ public class MainParsing extends MainParserHelper {
 				CodeBlockParsing.parseCodeBlock(builder);
 
 				return CPsiImplementingMethod.class;
-			} else {
+			}
+			else {
 				builder.advanceLexer();
 
 				return CPsiDeclarationMethod.class;
 			}
-		} else {
+		}
+		else {
 			if (builder.getTokenType() != SEMICOLON) {
-				if (builder.getTokenType() != EQ)
+				if (builder.getTokenType() != EQ) {
 					builder.error(CBundle.message("EQ.expected"));
+				}
 				else {
 					advanceLexerAndSkipLines(builder);
 
 					ExpressionParsing.parseExpression(builder);
 
-					if (builder.getTokenType() != SEMICOLON)
+					if (builder.getTokenType() != SEMICOLON) {
 						builder.error(CBundle.message("SEMICOLON.expected"));
+					}
 
 					builder.advanceLexer();
 				}
-			} else
+			}
+			else {
 				builder.advanceLexer();
+			}
 
 			return CPsiField.class;
 		}

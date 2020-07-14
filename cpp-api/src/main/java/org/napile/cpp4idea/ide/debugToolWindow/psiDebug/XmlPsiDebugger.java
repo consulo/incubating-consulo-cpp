@@ -38,8 +38,9 @@ public class XmlPsiDebugger {
 		StringUtil.repeatSymbol(builder, '\t', indent);
 
 		String tagName = psiElement.getClass().getSimpleName();
-		if (tagName.endsWith("Impl"))
+		if (tagName.endsWith("Impl")) {
 			tagName = tagName.substring(0, tagName.length() - 4);
+		}
 
 		builder.append("<").append(tagName).append(" text=\"").append(psiElement.getText().replace("\n", "\\n")).append("\"");
 		PsiElement child = psiElement.getFirstChild();
@@ -53,7 +54,9 @@ public class XmlPsiDebugger {
 
 			StringUtil.repeatSymbol(builder, '\t', indent);
 			builder.append("</").append(tagName).append(">\n");
-		} else
+		}
+		else {
 			builder.append(" />\n");
+		}
 	}
 }

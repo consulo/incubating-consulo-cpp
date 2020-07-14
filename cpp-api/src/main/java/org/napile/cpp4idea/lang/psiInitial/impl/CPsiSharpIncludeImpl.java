@@ -37,10 +37,12 @@ public class CPsiSharpIncludeImpl extends CPsiElementBaseImpl implements CPsiSha
 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CSharpPsiElementVisitor)
+		if (visitor instanceof CSharpPsiElementVisitor) {
 			((CSharpPsiElementVisitor) visitor).visitSInclude(this);
-		else
+		}
+		else {
 			super.accept(visitor);
+		}
 	}
 
 	@Override
@@ -52,8 +54,9 @@ public class CPsiSharpIncludeImpl extends CPsiElementBaseImpl implements CPsiSha
 	@Nullable
 	public String getIncludeName() {
 		PsiElement element = getIncludeElement();
-		if (element == null)
+		if (element == null) {
 			return null;
+		}
 
 		String text = element.getText();
 		return text.substring(1, text.length() - 1);

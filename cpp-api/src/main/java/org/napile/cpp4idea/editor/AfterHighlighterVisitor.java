@@ -39,8 +39,9 @@ public class AfterHighlighterVisitor extends CPsiRecursiveElementVisitor {
 	@Override
 	public void visitEnumConstant(CPsiEnumConstant element) {
 		PsiElement nameElement = element.getNameElement();
-		if (nameElement != null)
+		if (nameElement != null) {
 			HighlightUtil.highlightOriginalElement(nameElement, holder, CSyntaxHighlighter.CONSTANT);
+		}
 	}
 
 	@Override

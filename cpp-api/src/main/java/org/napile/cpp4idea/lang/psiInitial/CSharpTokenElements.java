@@ -43,8 +43,9 @@ public class CSharpTokenElements {
 			Class<? extends CPsiSharpElement> implClass = (Class<? extends CPsiSharpElement>) Class.forName("org.napile.cpp4idea.lang.psiInitial.impl." + clazz.getSimpleName() + "Impl");
 
 			IElementType elementType = _cache.get(implClass);
-			if (elementType == null)
+			if (elementType == null) {
 				_cache.put(implClass, elementType = new CPsiSharpTokenImpl(clazz.getSimpleName(), implClass));
+			}
 			return elementType;
 		} catch (ClassNotFoundException e) {
 			throw new IllegalArgumentException(e);

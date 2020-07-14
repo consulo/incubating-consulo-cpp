@@ -34,9 +34,11 @@ public class CPsiSharpDefineValueImpl extends CPsiElementBaseImpl implements CPs
 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CSharpPsiElementVisitor)
+		if (visitor instanceof CSharpPsiElementVisitor) {
 			((CSharpPsiElementVisitor) visitor).visitSDefineValue(this);
-		else
+		}
+		else {
 			super.accept(visitor);
+		}
 	}
 }

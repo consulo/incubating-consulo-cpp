@@ -39,9 +39,11 @@ public class CPsiModifierListImpl extends CPsiElementBaseImpl implements CPsiMod
 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CPsiElementVisitor)
+		if (visitor instanceof CPsiElementVisitor) {
 			((CPsiElementVisitor) visitor).visitModifierList(this);
-		else
+		}
+		else {
 			super.accept(visitor);
+		}
 	}
 }

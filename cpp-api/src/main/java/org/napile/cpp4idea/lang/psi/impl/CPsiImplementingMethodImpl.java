@@ -38,10 +38,12 @@ public class CPsiImplementingMethodImpl extends CPsiDeclarationImpl implements C
 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CPsiElementVisitor)
+		if (visitor instanceof CPsiElementVisitor) {
 			((CPsiElementVisitor) visitor).visitImplementingMethod(this);
-		else
+		}
+		else {
 			super.accept(visitor);
+		}
 	}
 
 	@Override

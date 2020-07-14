@@ -48,8 +48,9 @@ public class CBundle {
 
 	private static ResourceBundle getBundle() {
 		ResourceBundle bundle = null;
-		if (BUNDLE != null)
+		if (BUNDLE != null) {
 			bundle = BUNDLE.get();
+		}
 
 		if (bundle == null) {
 			bundle = ResourceBundle.getBundle(PATH_TO_BUNDLE);

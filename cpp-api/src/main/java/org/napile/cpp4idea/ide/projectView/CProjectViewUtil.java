@@ -46,10 +46,12 @@ public class CProjectViewUtil {
 
 	public static void addChildren(Project p, ViewSettings viewSettings, List<AbstractTreeNode<?>> list, CPsiDeclaration[] declarations) {
 		for (CPsiDeclaration declaration : declarations) {
-			if (declaration instanceof CPsiClass)
+			if (declaration instanceof CPsiClass) {
 				list.add(new CClassTreeNode(p, (CPsiClass) declaration, viewSettings));
-			else if (declaration instanceof CPsiDeclarationMethod)
+			}
+			else if (declaration instanceof CPsiDeclarationMethod) {
 				list.add(new CMethodTreeNode(p, (CPsiDeclarationMethod) declaration, viewSettings));
+			}
 		}
 	}
 }

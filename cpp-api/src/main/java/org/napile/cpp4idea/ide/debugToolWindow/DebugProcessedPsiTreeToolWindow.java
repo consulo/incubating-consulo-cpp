@@ -34,8 +34,9 @@ public class DebugProcessedPsiTreeToolWindow extends AbstractDebugPsiTreeToolWin
 	protected String toText(PsiFile psiFile) {
 		CPsiFile cPsiFile = CPreprocessor.getAfterProcessedFile(psiFile);
 
-		if (cPsiFile == null)
+		if (cPsiFile == null) {
 			return "null";
+		}
 
 		return debugger.toText(cPsiFile);
 	}

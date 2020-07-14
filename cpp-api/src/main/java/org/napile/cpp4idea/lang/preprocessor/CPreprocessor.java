@@ -71,15 +71,17 @@ public class CPreprocessor {
 			public void visitSDefine(CPsiSharpDefine element) {
 				CPsiCompilerVariable variable = element.getVariable();
 				CPsiSharpDefineValue value = element.getValue();
-				if (variable != null && value != null)
+				if (variable != null && value != null) {
 					define.put(variable.getText(), collectChildren(value));
+				}
 			}
 
 			@Override
 			public void visitSIfDef(CPsiSharpIfDef element) {
 				CPsiCompilerVariable variable = element.getVariable();
-				if (variable == null)
+				if (variable == null) {
 					return;
+				}
 
 				boolean isActive = define.containsKey(variable.getText()) && !element.isReverted() || !define.containsKey(variable.getText()) && element.isReverted();
 

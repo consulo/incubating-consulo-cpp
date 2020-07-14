@@ -78,8 +78,9 @@ public abstract class AbstractDebugPsiTreeToolWindow extends JPanel implements D
 	private void update(Location location, Location oldLocation) {
 		Editor editor = location.editor;
 
-		if (editor == null)
+		if (editor == null) {
 			setText(DEFAULT_TEXT);
+		}
 		else {
 			VirtualFile vFile = ((EditorEx) editor).getVirtualFile();
 			if (vFile == null) {
@@ -93,8 +94,9 @@ public abstract class AbstractDebugPsiTreeToolWindow extends JPanel implements D
 				return;
 			}
 
-			if (oldLocation == null || !Comparing.equal(oldLocation.editor, location.editor) || oldLocation.modificationStamp != location.modificationStamp)
+			if (oldLocation == null || !Comparing.equal(oldLocation.editor, location.editor) || oldLocation.modificationStamp != location.modificationStamp) {
 				setText(toText(psiFile));
+			}
 		}
 	}
 
@@ -149,21 +151,27 @@ public abstract class AbstractDebugPsiTreeToolWindow extends JPanel implements D
 
 		@Override
 		public boolean equals(Object o) {
-			if (this == o)
+			if (this == o) {
 				return true;
-			if (!(o instanceof Location))
+			}
+			if (!(o instanceof Location)) {
 				return false;
+			}
 
 			Location location = (Location) o;
 
-			if (endOffset != location.endOffset)
+			if (endOffset != location.endOffset) {
 				return false;
-			if (modificationStamp != location.modificationStamp)
+			}
+			if (modificationStamp != location.modificationStamp) {
 				return false;
-			if (startOffset != location.startOffset)
+			}
+			if (startOffset != location.startOffset) {
 				return false;
-			if (editor != null ? !editor.equals(location.editor) : location.editor != null)
+			}
+			if (editor != null ? !editor.equals(location.editor) : location.editor != null) {
 				return false;
+			}
 
 			return true;
 		}

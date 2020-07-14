@@ -43,8 +43,9 @@ public class CTokenElements {
 			Class<? extends CPsiElement> implClass = (Class<? extends CPsiElement>) Class.forName("org.napile.cpp4idea.lang.psi.impl." + clazz.getSimpleName() + "Impl");
 
 			IElementType elementType = _cache.get(implClass);
-			if (elementType == null)
+			if (elementType == null) {
 				_cache.put(implClass, elementType = new CPsiTokenImpl(clazz.getSimpleName(), implClass));
+			}
 			return elementType;
 		} catch (ClassNotFoundException e) {
 			throw new IllegalArgumentException(e);

@@ -58,13 +58,15 @@ public class CPsiSharpIfDefImpl extends CPsiElementBaseImpl implements CPsiSharp
 	@Override
 	public CPsiSharpIfBody getElseBody() {
 		CPsiSharpIfBody body = getBody();
-		if (body == null)
+		if (body == null) {
 			return null;
+		}
 
 		PsiElement element = body.getNextSibling();
 		while (element != null) {
-			if (element instanceof CPsiSharpIfBody)
+			if (element instanceof CPsiSharpIfBody) {
 				return (CPsiSharpIfBody) element;
+			}
 			element = element.getNextSibling();
 		}
 		return null;
@@ -72,10 +74,12 @@ public class CPsiSharpIfDefImpl extends CPsiElementBaseImpl implements CPsiSharp
 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CSharpPsiElementVisitor)
+		if (visitor instanceof CSharpPsiElementVisitor) {
 			((CSharpPsiElementVisitor) visitor).visitSIfDef(this);
-		else
+		}
+		else {
 			super.accept(visitor);
+		}
 	}
 
 	@Override

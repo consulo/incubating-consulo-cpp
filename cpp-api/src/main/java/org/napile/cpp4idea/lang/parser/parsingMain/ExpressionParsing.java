@@ -34,18 +34,22 @@ public class ExpressionParsing extends MainParsing {
 		if (firstToken == IDENTIFIER) {
 			buildTokenElement(CPsiReferenceExpression.class, builder);
 			return true;
-		} else if (LITERAL_EXPRESSION_SET.contains(firstToken)) {
+		}
+		else if (LITERAL_EXPRESSION_SET.contains(firstToken)) {
 			String errorMessage = validateLiteral(builder);
 
 			buildTokenElement(CPsiLiteralExpression.class, builder);
-			if (errorMessage != null)
+			if (errorMessage != null) {
 				builder.error(errorMessage);
+			}
 
 			return true;
-		} else if (firstToken == LPARENTH) {
+		}
+		else if (firstToken == LPARENTH) {
 			parseParenthesizedExpression(builder);
 			return true;
-		} else if (firstToken == LBRACKET) {
+		}
+		else if (firstToken == LBRACKET) {
 			parseArrayLiteralExpression(builder);
 			return true;
 		}
@@ -101,7 +105,8 @@ public class ExpressionParsing extends MainParsing {
 		while (builder.getTokenType() != RBRACKET) {
 			if (builder.getTokenType() == COMMA) {
 				builder.advanceLexer();
-			} else if (!parseAssignmentExpression(builder)) {
+			}
+			else if (!parseAssignmentExpression(builder)) {
 				builder.error("expression or , or ] expected");
 				break;
 			}
@@ -128,7 +133,8 @@ public class ExpressionParsing extends MainParsing {
 		if (builder.getTokenType() == NEW_KEYWORD) {
 			isNew = true;
 			parseNewExpression(builder);
-		} else {
+		}
+		else {
 			isNew = false;
 			if (!parsePrimaryExpression(builder)) {
 				expr.drop();
@@ -143,17 +149,20 @@ public class ExpressionParsing extends MainParsing {
 				expect(builder, IDENTIFIER, "name.expected");
 				done(expr, CPsiReferenceExpression.class);
 				expr = expr.precede();
-			} else if (tokenType == LBRACKET) {
+			}
+			else if (tokenType == LBRACKET) {
 				builder.advanceLexer();
 				parseExpression(builder);
 				expect(builder, RBRACKET, "RBRACKET.expected");
 				done(expr, CPsiIndexedPropertyAccessExpression.class);
 				expr = expr.precede();
-			} else if (allowCallSyntax && tokenType == LPARENTH) {
+			}
+			else if (allowCallSyntax && tokenType == LPARENTH) {
 				parseArgumentList(builder);
 				done(expr, isNew ? CPsiNewExpression.class : CPsiCallExpression.class);
 				expr = expr.precede();
-			} else {
+			}
+			else {
 				expr.drop();
 				break;
 			}
@@ -166,11 +175,13 @@ public class ExpressionParsing extends MainParsing {
 		LOG.assertTrue(builder.getTokenType() == NEW_KEYWORD);
 		builder.advanceLexer();
 
-		if (!parseMemberExpression(builder, false))
+		if (!parseMemberExpression(builder, false)) {
 			builder.error("Expression expected");
+		}
 
-		if (builder.getTokenType() == LPARENTH)
+		if (builder.getTokenType() == LPARENTH) {
 			parseArgumentList(builder);
+		}
 	}
 
 	private static void parseArgumentList(final PsiBuilder builder) {
@@ -181,10 +192,12 @@ public class ExpressionParsing extends MainParsing {
 		while (builder.getTokenType() != RPARENTH) {
 			if (first) {
 				first = false;
-			} else {
+			}
+			else {
 				if (builder.getTokenType() == COMMA) {
 					builder.advanceLexer();
-				} else {
+				}
+				else {
 					builder.error(", or ) expected");
 					break;
 				}
@@ -200,8 +213,9 @@ public class ExpressionParsing extends MainParsing {
 	}
 
 	public static void parseExpression(PsiBuilder builder) {
-		if (!parseExpressionOptional(builder))
+		if (!parseExpressionOptional(builder)) {
 			builder.error(CBundle.message("expression.expected"));
+		}
 	}
 
 	public static boolean parseAssignmentExpressionNoIn(final PsiBuilder builder) {
@@ -221,11 +235,13 @@ public class ExpressionParsing extends MainParsing {
 
 		if (ASSIGNMENT_OPERATIONS.contains(builder.getTokenType())) {
 			builder.advanceLexer();
-			if (!parseAssignmentExpression(builder, allowIn))
+			if (!parseAssignmentExpression(builder, allowIn)) {
 				builder.error("expression expected");
+			}
 
 			done(expr, CPsiAssignmentExpression.class);
-		} else {
+		}
+		else {
 			expr.drop();
 		}
 		return true;
@@ -240,16 +256,19 @@ public class ExpressionParsing extends MainParsing {
 
 		if (builder.getTokenType() == QUEST) {
 			builder.advanceLexer();
-			if (!parseAssignmentExpression(builder, allowIn))
+			if (!parseAssignmentExpression(builder, allowIn)) {
 				builder.error("expression expected");
+			}
 
 			expect(builder, COLON, "COLON.expected");
 
-			if (!parseAssignmentExpression(builder, allowIn))
+			if (!parseAssignmentExpression(builder, allowIn)) {
 				builder.error("expression expected");
+			}
 
 			done(expr, CPsiConditionalExpression.class);
-		} else {
+		}
+		else {
 			expr.drop();
 		}
 		return true;
@@ -264,8 +283,9 @@ public class ExpressionParsing extends MainParsing {
 
 		while (builder.getTokenType() == OROR) {
 			builder.advanceLexer();
-			if (!parseANDExpression(builder, allowIn))
+			if (!parseANDExpression(builder, allowIn)) {
 				builder.error("expression expected");
+			}
 
 			done(expr, CPsiBinaryExpression.class);
 			expr = expr.precede();
@@ -284,8 +304,9 @@ public class ExpressionParsing extends MainParsing {
 
 		while (builder.getTokenType() == ANDAND) {
 			builder.advanceLexer();
-			if (!parseBitwiseORExpression(builder, allowIn))
+			if (!parseBitwiseORExpression(builder, allowIn)) {
 				builder.error("expression expected");
+			}
 
 			done(expr, CPsiBinaryExpression.class);
 			expr = expr.precede();
@@ -304,8 +325,9 @@ public class ExpressionParsing extends MainParsing {
 
 		while (builder.getTokenType() == OR) {
 			builder.advanceLexer();
-			if (!parseBitwiseXORExpression(builder, allowIn))
+			if (!parseBitwiseXORExpression(builder, allowIn)) {
 				builder.error("expression expected");
+			}
 
 			done(expr, CPsiBinaryExpression.class);
 			expr = expr.precede();
@@ -324,8 +346,9 @@ public class ExpressionParsing extends MainParsing {
 
 		while (builder.getTokenType() == XOR) {
 			builder.advanceLexer();
-			if (!parseBitwiseANDExpression(builder, allowIn))
+			if (!parseBitwiseANDExpression(builder, allowIn)) {
 				builder.error("expression expected");
+			}
 
 			done(expr, CPsiBinaryExpression.class);
 			expr = expr.precede();
@@ -344,8 +367,9 @@ public class ExpressionParsing extends MainParsing {
 
 		while (builder.getTokenType() == AND) {
 			builder.advanceLexer();
-			if (!parseEqualityExpression(builder, allowIn))
+			if (!parseEqualityExpression(builder, allowIn)) {
 				builder.error("expression expected");
+			}
 
 			done(expr, CPsiBinaryExpression.class);
 			expr = expr.precede();
@@ -364,8 +388,9 @@ public class ExpressionParsing extends MainParsing {
 
 		while (EQUALITY_OPERATIONS.contains(builder.getTokenType())) {
 			builder.advanceLexer();
-			if (!parseRelationalExpression(builder, allowIn))
+			if (!parseRelationalExpression(builder, allowIn)) {
 				builder.error("expression expected");
+			}
 
 			done(expr, CPsiBinaryExpression.class);
 			expr = expr.precede();
@@ -383,8 +408,9 @@ public class ExpressionParsing extends MainParsing {
 		}
 		while (RELATIONAL_OPERATIONS.contains(builder.getTokenType()) && allowIn) {
 			builder.advanceLexer();
-			if (!parseShiftExpression(builder))
+			if (!parseShiftExpression(builder)) {
 				builder.error("expression expected");
+			}
 
 			done(expr, CPsiBinaryExpression.class);
 			expr = expr.precede();
@@ -402,8 +428,9 @@ public class ExpressionParsing extends MainParsing {
 		}
 		while (SHIFT_OPERATIONS.contains(builder.getTokenType())) {
 			builder.advanceLexer();
-			if (!parseAdditiveExpression(builder))
+			if (!parseAdditiveExpression(builder)) {
 				builder.error("expression expected");
+			}
 
 			done(expr, CPsiBinaryExpression.class);
 			expr = expr.precede();
@@ -421,8 +448,9 @@ public class ExpressionParsing extends MainParsing {
 		}
 		while (ADDITIVE_OPERATIONS.contains(builder.getTokenType())) {
 			builder.advanceLexer();
-			if (!parseMultiplicativeExpression(builder))
+			if (!parseMultiplicativeExpression(builder)) {
 				builder.error("expression expected");
+			}
 
 			done(expr, CPsiBinaryExpression.class);
 			expr = expr.precede();
@@ -441,8 +469,9 @@ public class ExpressionParsing extends MainParsing {
 
 		while (MULTIPLICATIVE_OPERATIONS.contains(builder.getTokenType())) {
 			builder.advanceLexer();
-			if (!parseUnaryExpression(builder))
+			if (!parseUnaryExpression(builder)) {
 				builder.error("expression expected");
+			}
 
 			done(expr, CPsiBinaryExpression.class);
 			expr = expr.precede();
@@ -457,12 +486,14 @@ public class ExpressionParsing extends MainParsing {
 		if (UNARY_OPERATIONS.contains(tokenType)) {
 			final PsiBuilder.Marker expr = builder.mark();
 			builder.advanceLexer();
-			if (!parseUnaryExpression(builder))
+			if (!parseUnaryExpression(builder)) {
 				builder.error("Expression expected");
+			}
 
 			done(expr, CPsiPrefixExpression.class);
 			return true;
-		} else {
+		}
+		else {
 			return parsePostfixExpression(builder);
 		}
 	}
@@ -479,8 +510,10 @@ public class ExpressionParsing extends MainParsing {
 			builder.advanceLexer();
 
 			done(expr, CPsiPostfixExpression.class);
-		} else
+		}
+		else {
 			expr.drop();
+		}
 
 		return true;
 	}
@@ -502,8 +535,9 @@ public class ExpressionParsing extends MainParsing {
 
 		while (builder.getTokenType() == COMMA) {
 			builder.advanceLexer();
-			if (!parseAssignmentExpression(builder, allowIn))
+			if (!parseAssignmentExpression(builder, allowIn)) {
 				builder.error("expression expected");
+			}
 
 			done(expr, CPsiCommaExpression.class);
 			expr = expr.precede();

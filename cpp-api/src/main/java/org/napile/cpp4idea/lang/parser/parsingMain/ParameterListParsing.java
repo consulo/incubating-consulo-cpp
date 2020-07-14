@@ -37,25 +37,31 @@ public class ParameterListParsing extends MainParsing {
 			builder.advanceLexer();
 			done(marker, CPsiParameterList.class);
 			return;
-		} else {
+		}
+		else {
 			marker = builder.mark();
 			advanceLexerAndSkipLines(builder);
 		}
 
 		if (builder.getTokenType() != RPARENTH) {
 			while (true) {
-				if (builder.getTokenType() == ELLIPSIS)
+				if (builder.getTokenType() == ELLIPSIS) {
 					doneOneToken(builder, CPsiParameter.class);
-				else
+				}
+				else {
 					VariableParsing.parseVariable(CPsiParameter.class, builder);
+				}
 
-				if (!consumeIf(builder, COMMA))
+				if (!consumeIf(builder, COMMA)) {
 					break;
+				}
 			}
 
 			expect(builder, RPARENTH, "RPARENTH.expected");
-		} else
+		}
+		else {
 			advanceLexerAndSkipLines(builder);
+		}
 
 		done(marker, CPsiParameterList.class);
 	}
@@ -66,8 +72,9 @@ public class ParameterListParsing extends MainParsing {
 		// goto parameter name
 		parseTypeRef(builder);
 
-		if (builder.getTokenType() == IDENTIFIER)
+		if (builder.getTokenType() == IDENTIFIER) {
 			advanceLexerAndSkipLines(builder);
+		}
 
 		if (builder.getTokenType() == CPsiTokens.LBRACKET) {
 			advanceLexerAndSkipLines(builder);

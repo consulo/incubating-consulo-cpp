@@ -64,8 +64,9 @@ public abstract class CBaseTreeNode<D extends CPsiDeclaration> extends ProjectVi
 		PsiElement nameIdentifier = declaration.getNameIdentifier();
 		if (nameIdentifier != null) {
 			PsiElement origNameElement = nameIdentifier.getUserData(CMainPsiBuilder.ORIGINAL_SINGLE_ELEMENT);
-			if (origNameElement == null)
+			if (origNameElement == null) {
 				return;
+			}
 
 			NavigationUtil.activateFileWithPsiElement(origNameElement, true);
 		}

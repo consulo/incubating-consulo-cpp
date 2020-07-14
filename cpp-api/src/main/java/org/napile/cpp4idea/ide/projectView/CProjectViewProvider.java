@@ -41,8 +41,9 @@ public class CProjectViewProvider implements SelectableTreeStructureProvider, Du
 	public PsiElement getTopLevelElement(PsiElement element) {
 		if (element instanceof CPsiSharpFile) {
 			CPsiClass clazz = CProjectViewUtil.findSingleClass(((CPsiSharpFile) element));
-			if (clazz != null)
+			if (clazz != null) {
 				return clazz;
+			}
 			return element;
 		}
 		return null;
@@ -58,12 +59,16 @@ public class CProjectViewProvider implements SelectableTreeStructureProvider, Du
 			if (childValue instanceof CPsiSharpFile) {
 				CPsiSharpFile file = (CPsiSharpFile) childValue;
 				CPsiClass clazz = CProjectViewUtil.findSingleClass(((CPsiSharpFile) childValue));
-				if (clazz != null)
+				if (clazz != null) {
 					result.add(new CClassTreeNode(file.getProject(), clazz, settings));
-				else
+				}
+				else {
 					result.add(new CFileTreeNode(file.getProject(), file, settings));
-			} else
+				}
+			}
+			else {
 				result.add(child);
+			}
 		}
 
 		return result;

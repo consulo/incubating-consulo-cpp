@@ -36,10 +36,12 @@ public class CPsiEnumConstantImpl extends CPsiElementBaseImpl implements CPsiEnu
 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CPsiElementVisitor)
+		if (visitor instanceof CPsiElementVisitor) {
 			((CPsiElementVisitor) visitor).visitEnumConstant(this);
-		else
+		}
+		else {
 			super.accept(visitor);
+		}
 	}
 
 	@Override
@@ -54,15 +56,18 @@ public class CPsiEnumConstantImpl extends CPsiElementBaseImpl implements CPsiEnu
 
 	@Override
 	public boolean equals(Object o) {
-		if (o == null || !(o instanceof CPsiEnumConstant))
+		if (o == null || !(o instanceof CPsiEnumConstant)) {
 			return false;
+		}
 
 		PsiElement nameElement = getNameElement();
-		if (nameElement == null)
+		if (nameElement == null) {
 			return false;
+		}
 		PsiElement nameElement2 = ((CPsiEnumConstant) o).getNameElement();
-		if (nameElement2 == null)
+		if (nameElement2 == null) {
 			return false;
+		}
 		return nameElement.equals(nameElement2);
 	}
 }

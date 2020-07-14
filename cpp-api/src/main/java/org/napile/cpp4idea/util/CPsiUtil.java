@@ -27,8 +27,9 @@ import com.intellij.psi.PsiElement;
  */
 public class CPsiUtil {
 	public static PsiElement getElementByTextRange(@NotNull PsiElement element, @NotNull TextRange textRange) {
-		if (element.getTextRange().equals(textRange))
+		if (element.getTextRange().equals(textRange)) {
 			return element;
+		}
 
 		if (element.getNode().getElementType() == CPsiTokens.IDENTIFIER) {
 			System.out.println(element.getText() + " " + element.getTextRange() + " " + textRange);
@@ -36,8 +37,9 @@ public class CPsiUtil {
 		PsiElement el = element.getFirstChild();
 		while (el != null) {
 			PsiElement temp = getElementByTextRange(el, textRange);
-			if (temp != null)
+			if (temp != null) {
 				return temp;
+			}
 
 			el = el.getNextSibling();
 		}

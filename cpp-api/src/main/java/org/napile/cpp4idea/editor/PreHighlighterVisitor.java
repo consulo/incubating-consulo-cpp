@@ -48,8 +48,9 @@ public class PreHighlighterVisitor extends CSharpPsiRecursiveElementVisitor {
 	}
 
 	public void start() {
-		if (afterFile == null)
+		if (afterFile == null) {
 			return;
+		}
 
 		AfterHighlighterVisitor afterHighlighterVisitor = new AfterHighlighterVisitor(holder);
 
@@ -67,8 +68,9 @@ public class PreHighlighterVisitor extends CSharpPsiRecursiveElementVisitor {
 
 	@Override
 	public void visitSIfBody(CPsiSharpIfBody element) {
-		if (element.getTextLength() == 0)
+		if (element.getTextLength() == 0) {
 			return;
+		}
 
 		CPsiSharpIfDef def = element.getIfDef();
 
@@ -85,7 +87,9 @@ public class PreHighlighterVisitor extends CSharpPsiRecursiveElementVisitor {
 					super.visitElement(element);
 				}
 			});
-		} else
+		}
+		else {
 			super.visitSIfBody(element);
+		}
 	}
 }
