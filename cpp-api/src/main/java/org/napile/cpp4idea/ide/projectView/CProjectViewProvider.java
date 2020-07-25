@@ -25,7 +25,7 @@ import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.ide.projectView.nodes.CClassTreeNode;
 import org.napile.cpp4idea.ide.projectView.nodes.CFileTreeNode;
 import org.napile.cpp4idea.lang.psi.CPsiClass;
-import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
+import consulo.cpp.preprocessor.psi.CPsiSharpFile;
 
 import java.util.ArrayList;
 import java.util.Collection;

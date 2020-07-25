@@ -17,7 +17,7 @@
 package org.napile.cpp4idea.lang.psi;
 
 import org.napile.cpp4idea.CLanguage;
-import org.napile.cpp4idea.lang.psiInitial.CPsiSharpTokens;
+import consulo.cpp.preprocessor.psi.CPsiSharpTokens;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;

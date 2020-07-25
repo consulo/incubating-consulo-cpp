@@ -24,7 +24,7 @@ import com.intellij.psi.util.PsiTreeUtil;
 import org.napile.cpp4idea.lang.parser.parsingMain.builder.CMainPsiBuilder;
 import org.napile.cpp4idea.lang.psi.CPsiElement;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
-import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
+import consulo.cpp.preprocessor.psi.CPsiSharpFile;
 
 /**
  * @author VISTALL

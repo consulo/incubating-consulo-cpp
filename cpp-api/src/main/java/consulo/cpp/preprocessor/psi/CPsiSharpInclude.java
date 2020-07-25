@@ -14,30 +14,17 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea;
+package consulo.cpp.preprocessor.psi;
 
-import com.intellij.lang.Language;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.psi.PsiElement;
+import consulo.cpp.preprocessor.psi.CPsiSharpElement;
 
 /**
  * @author VISTALL
- * @date 0:57/10.12.2011
+ * @date 1:53/11.12.2011
  */
-public class CLanguage extends Language {
-	public static final Language INSTANCE = new CLanguage();
+public interface CPsiSharpInclude extends CPsiSharpElement {
+	PsiElement getIncludeElement();
 
-	private CLanguage() {
-		super("C");
-	}
-
-	@NotNull
-	@Override
-	public String getDisplayName() {
-		return "C/C++";
-	}
-
-	@Override
-	public boolean isCaseSensitive() {
-		return true;
-	}
+	String getIncludeName();
 }

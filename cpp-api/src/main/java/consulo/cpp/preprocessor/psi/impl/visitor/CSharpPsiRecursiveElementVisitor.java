@@ -1,5 +1,5 @@
 /*
- * Copyright 2011 napile
+ * Copyright 2010-2012 napile.org
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -14,30 +14,18 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea;
+package consulo.cpp.preprocessor.psi.impl.visitor;
 
-import com.intellij.lang.Language;
-import org.jetbrains.annotations.NotNull;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiRecursiveVisitor;
 
 /**
  * @author VISTALL
- * @date 0:57/10.12.2011
+ * @date 13:07/16.12.2011
  */
-public class CLanguage extends Language {
-	public static final Language INSTANCE = new CLanguage();
-
-	private CLanguage() {
-		super("C");
-	}
-
-	@NotNull
+public class CSharpPsiRecursiveElementVisitor extends CSharpPsiElementVisitor implements PsiRecursiveVisitor {
 	@Override
-	public String getDisplayName() {
-		return "C/C++";
-	}
-
-	@Override
-	public boolean isCaseSensitive() {
-		return true;
+	public void visitElement(PsiElement element) {
+		element.acceptChildren(this);
 	}
 }

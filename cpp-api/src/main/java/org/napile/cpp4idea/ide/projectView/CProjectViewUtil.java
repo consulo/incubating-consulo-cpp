@@ -28,7 +28,7 @@ import org.napile.cpp4idea.lang.psi.CPsiClass;
 import org.napile.cpp4idea.lang.psi.CPsiDeclaration;
 import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
-import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
+import consulo.cpp.preprocessor.psi.CPsiSharpFile;
 
 import java.util.List;
 

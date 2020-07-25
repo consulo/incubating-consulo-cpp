@@ -22,13 +22,13 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.util.CachedValueProvider;
 import com.intellij.psi.util.CachedValuesManager;
 import com.intellij.psi.util.PsiModificationTracker;
+import consulo.cpp.preprocessor.psi.*;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.CDialect;
 import org.napile.cpp4idea.lang.parser.parsingMain.builder.CMainPsiBuilder;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
-import org.napile.cpp4idea.lang.psiInitial.*;
-import org.napile.cpp4idea.lang.psiInitial.visitors.CSharpPsiElementVisitor;
+import consulo.cpp.preprocessor.psi.impl.visitor.CSharpPsiElementVisitor;
 
 import java.util.ArrayList;
 import java.util.HashMap;

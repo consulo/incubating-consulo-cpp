@@ -16,7 +16,7 @@
 
 package org.napile.cpp4idea.lang;
 
-import org.napile.cpp4idea.lang.parser.parsingInitial.InitialParsing;
+import consulo.cpp.preprocessor.parser.InitialParsing;
 import org.napile.cpp4idea.lang.parser.parsingMain.MainParsing;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;

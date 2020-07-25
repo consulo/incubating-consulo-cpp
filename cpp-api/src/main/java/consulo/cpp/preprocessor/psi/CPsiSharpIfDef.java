@@ -14,30 +14,29 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea;
+package consulo.cpp.preprocessor.psi;
 
-import com.intellij.lang.Language;
-import org.jetbrains.annotations.NotNull;
+import consulo.cpp.preprocessor.psi.CPsiCompilerVariable;
+import consulo.cpp.preprocessor.psi.CPsiSharpElement;
+import consulo.cpp.preprocessor.psi.CPsiSharpIfBody;
+import org.jetbrains.annotations.Nullable;
+import com.intellij.psi.PsiElement;
 
 /**
  * @author VISTALL
- * @date 0:57/10.12.2011
+ * @date 14:06/11.12.2011
  */
-public class CLanguage extends Language {
-	public static final Language INSTANCE = new CLanguage();
+public interface CPsiSharpIfDef extends CPsiSharpElement {
+	CPsiCompilerVariable getVariable();
 
-	private CLanguage() {
-		super("C");
-	}
+	@Nullable
+	CPsiSharpIfBody getBody();
 
-	@NotNull
-	@Override
-	public String getDisplayName() {
-		return "C/C++";
-	}
+	@Nullable
+	PsiElement getElseKeyword();
 
-	@Override
-	public boolean isCaseSensitive() {
-		return true;
-	}
+	@Nullable
+	CPsiSharpIfBody getElseBody();
+
+	boolean isReverted();
 }

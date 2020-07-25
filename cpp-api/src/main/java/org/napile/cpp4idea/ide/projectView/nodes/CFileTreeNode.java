@@ -24,7 +24,7 @@ import com.intellij.psi.PsiFile;
 import org.napile.cpp4idea.ide.projectView.CProjectViewUtil;
 import org.napile.cpp4idea.lang.preprocessor.CPreprocessor;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
-import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
+import consulo.cpp.preprocessor.psi.CPsiSharpFile;
 
 import java.util.ArrayList;
 import java.util.Collection;

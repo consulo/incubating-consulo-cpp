@@ -33,8 +33,8 @@ import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.psi.CPsiTokenImpl;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import org.napile.cpp4idea.lang.psi.impl.CPsiFileImpl;
-import org.napile.cpp4idea.lang.psiInitial.CPsiSharpTokenImpl;
-import org.napile.cpp4idea.lang.psiInitial.impl.CPsiSharpFileImpl;
+import consulo.cpp.preprocessor.psi.CPsiSharpTokenImpl;
+import consulo.cpp.preprocessor.psi.impl.CPsiSharpFileImpl;
 
 import javax.annotation.Nonnull;
 

@@ -20,7 +20,7 @@ import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiDeclaration;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
-import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
+import consulo.cpp.preprocessor.psi.CPsiSharpFile;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElementVisitor;
 import com.intellij.psi.PsiFile;

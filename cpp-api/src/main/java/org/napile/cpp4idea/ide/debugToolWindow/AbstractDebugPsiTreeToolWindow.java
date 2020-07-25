@@ -21,7 +21,7 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
 import org.napile.cpp4idea.ide.debugToolWindow.psiDebug.XmlPsiDebugger;
-import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
+import consulo.cpp.preprocessor.psi.CPsiSharpFile;
 import com.intellij.openapi.Disposable;
 import com.intellij.openapi.application.Result;
 import com.intellij.openapi.command.WriteCommandAction;

@@ -14,30 +14,14 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea;
-
-import com.intellij.lang.Language;
-import org.jetbrains.annotations.NotNull;
+package consulo.cpp.preprocessor.psi;
 
 /**
  * @author VISTALL
- * @date 0:57/10.12.2011
+ * @date 7:23/11.12.2011
  */
-public class CLanguage extends Language {
-	public static final Language INSTANCE = new CLanguage();
+public interface CPsiSharpDefine extends CPsiSharpElement {
+	CPsiCompilerVariable getVariable();
 
-	private CLanguage() {
-		super("C");
-	}
-
-	@NotNull
-	@Override
-	public String getDisplayName() {
-		return "C/C++";
-	}
-
-	@Override
-	public boolean isCaseSensitive() {
-		return true;
-	}
+	CPsiSharpDefineValue getValue();
 }

@@ -16,7 +16,7 @@
 
 package org.napile.cpp4idea.lang.psi;
 
-import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
+import consulo.cpp.preprocessor.psi.CPsiSharpFile;
 import com.intellij.psi.PsiElement;
 
 /**

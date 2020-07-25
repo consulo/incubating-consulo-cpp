@@ -24,6 +24,11 @@
 	<category>Custom Languages</category>
 
 	<extensions defaultExtensionNs="com.intellij">
+		<fileType.fileViewProviderFactory filetype="C/C++"
+										  implementationClass="consulo.cpp.preprocessor.fileProvider.CFileViewProviderFactory"/>
+
+		<lang.parserDefinition language="CPreprocessor"
+							   implementationClass="consulo.cpp.preprocessor.parser.CPreprocessorParserDefinition"/>
 
 		<additionalTextAttributes scheme="Default" file="/org/napile/cpp4idea/editor/color/Default.xml"/>
 

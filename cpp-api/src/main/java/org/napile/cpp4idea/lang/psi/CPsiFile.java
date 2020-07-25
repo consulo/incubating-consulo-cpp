@@ -18,7 +18,7 @@ package org.napile.cpp4idea.lang.psi;
 
 import com.intellij.openapi.util.Key;
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
+import consulo.cpp.preprocessor.psi.CPsiSharpFile;
 
 /**
  * @author VISTALL
