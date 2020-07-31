@@ -22,8 +22,8 @@ import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
 import consulo.cpp.preprocessor.psi.CPsiCompilerVariable;
 import consulo.cpp.preprocessor.psi.CPsiSharpIfBody;
 import consulo.cpp.preprocessor.psi.CPsiSharpIfDef;
-import consulo.cpp.preprocessor.psi.CPsiSharpTokens;
-import consulo.cpp.preprocessor.psi.impl.visitor.CSharpPsiElementVisitor;
+import consulo.cpp.preprocessor.psi.CPreprocessorTokenTypes;
+import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
@@ -51,7 +51,7 @@ public class CPsiSharpIfDefImpl extends CPsiElementBaseImpl implements CPsiSharp
 	@Nullable
 	@Override
 	public PsiElement getElseKeyword() {
-		return findChildByType(CPsiSharpTokens.S_ELSE_KEYWORD);
+		return findChildByType(CPreprocessorTokenTypes.S_ELSE_KEYWORD);
 	}
 
 	@Nullable
@@ -74,8 +74,8 @@ public class CPsiSharpIfDefImpl extends CPsiElementBaseImpl implements CPsiSharp
 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CSharpPsiElementVisitor) {
-			((CSharpPsiElementVisitor) visitor).visitSIfDef(this);
+		if (visitor instanceof CPreprocessorElementVisitor) {
+			((CPreprocessorElementVisitor) visitor).visitSIfDef(this);
 		} else {
 			super.accept(visitor);
 		}
@@ -83,6 +83,6 @@ public class CPsiSharpIfDefImpl extends CPsiElementBaseImpl implements CPsiSharp
 
 	@Override
 	public boolean isReverted() {
-		return findChildByType(CPsiSharpTokens.S_IFNDEF_KEYWORD) != null;
+		return findChildByType(CPreprocessorTokenTypes.S_IFNDEF_KEYWORD) != null;
 	}
 }

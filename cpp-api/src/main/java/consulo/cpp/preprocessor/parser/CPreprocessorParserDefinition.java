@@ -9,14 +9,15 @@ import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IFileElementType;
 import com.intellij.psi.tree.IStubFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import consulo.cpp.preprocessor.CPreprocessorLanguage;
+import consulo.cpp.preprocessor.lexer._CPreprocessorLexer;
 import consulo.cpp.preprocessor.psi.CPsiSharpTokenImpl;
 import consulo.cpp.preprocessor.psi.impl.CPsiSharpFileImpl;
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.lexer._CppLexer;
 
 /**
  * @author VISTALL
@@ -27,7 +28,7 @@ public class CPreprocessorParserDefinition implements ParserDefinition {
 
 	@Override
 	public @NotNull Lexer createLexer(Project project) {
-		return new FlexAdapter(new _CppLexer());
+		return new FlexAdapter(new _CPreprocessorLexer());
 	}
 
 	@Override
@@ -38,6 +39,13 @@ public class CPreprocessorParserDefinition implements ParserDefinition {
 	@Override
 	public IFileElementType getFileNodeType() {
 		return FILE_TYPE;
+	}
+
+	@Override
+	public @NotNull TokenSet getWhitespaceTokens() {
+		return TokenSet.create(TokenType.WHITE_SPACE);
+		// TODO [VISTALL]  remove NEW_LINE?
+		//return TokenSet.create(TokenType.WHITE_SPACE, CPsiTokens.NEW_LINE);
 	}
 
 	@Override

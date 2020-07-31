@@ -21,7 +21,7 @@ import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
 import consulo.cpp.preprocessor.psi.CPsiCompilerVariable;
 import consulo.cpp.preprocessor.psi.CPsiSharpDefine;
 import consulo.cpp.preprocessor.psi.CPsiSharpDefineValue;
-import consulo.cpp.preprocessor.psi.impl.visitor.CSharpPsiElementVisitor;
+import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElementVisitor;
 
@@ -36,8 +36,8 @@ public class CPsiSharpDefineImpl extends CPsiElementBaseImpl implements CPsiShar
 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CSharpPsiElementVisitor) {
-			((CSharpPsiElementVisitor) visitor).visitSDefine(this);
+		if (visitor instanceof CPreprocessorElementVisitor) {
+			((CPreprocessorElementVisitor) visitor).visitSDefine(this);
 		} else {
 			super.accept(visitor);
 		}

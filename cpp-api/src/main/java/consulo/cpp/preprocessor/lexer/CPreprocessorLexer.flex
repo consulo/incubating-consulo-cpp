@@ -1,15 +1,16 @@
 /* It's an automatically generated code. Do not modify it. */
-package org.napile.cpp4idea.lang.lexer;
+package consulo.cpp.preprocessor.lexer;
 
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import com.intellij.lexer.FlexLexer;
 import com.intellij.psi.tree.IElementType;
+import consulo.cpp.preprocessor.psi.CPreprocessorTokenTypes;
 
 @SuppressWarnings({"ALL"})
 %%
 
 %{
-  public _CppLexer(){
+  public _CPreprocessorLexer(){
     this((java.io.Reader)null);
   }
 
@@ -21,14 +22,15 @@ import com.intellij.psi.tree.IElementType;
 
 %unicode
 %public
-%class _CppLexer
+%class _CPreprocessorLexer
 %implements FlexLexer
 %function advance
 %type IElementType
 %eof{  return;
 %eof}
 
-WHITE_SPACE_CHAR=[\ \r\t\f\n]
+WHITE_SPACE_CHAR=[\ \r\t\f]
+NEW_LINE_CHAR=[\n]
 
 IDENTIFIER=[:jletter:] [:jletterdigit:]*
 
@@ -71,62 +73,26 @@ HEX_SIGNIFICAND={HEX_INTEGER_LITERAL}|{HEX_INTEGER_LITERAL}.|0[Xx]{HEX_DIGITS}?.
 
 CHARACTER_LITERAL="'"([^\\\'\r\n]|{ESCAPE_SEQUENCE})*("'"|\\)?
 STRING_LITERAL=\"([^\\\"\r\n]|{ESCAPE_SEQUENCE})*(\"|\\)?
+STRING_INCLUDE_LITERAL=\<([^\\\<\r\n]|{ESCAPE_SEQUENCE})*(\>|\\)?
 ESCAPE_SEQUENCE=\\[^\r\n]
 
 %%
 
 <YYINITIAL> {WHITE_SPACE_CHAR}+ { return CPsiTokens.WHITE_SPACE; }
+<YYINITIAL> {NEW_LINE_CHAR} { return CPsiTokens.NEW_LINE; }
 
 <YYINITIAL> {C_STYLE_COMMENT} { return CPsiTokens.C_STYLE_COMMENT; }
 <YYINITIAL> {END_OF_LINE_COMMENT} { return CPsiTokens.END_OF_LINE_COMMENT; }
 
-<YYINITIAL> {LONG_LITERAL} { return CPsiTokens.LONG_LITERAL; }
-<YYINITIAL> {INTEGER_LITERAL} { return CPsiTokens.INTEGER_LITERAL; }
-<YYINITIAL> {FLOAT_LITERAL} { return CPsiTokens.FLOAT_LITERAL; }
-<YYINITIAL> {HEX_FLOAT_LITERAL} { return CPsiTokens.FLOAT_LITERAL; }
-<YYINITIAL> {DOUBLE_LITERAL} { return CPsiTokens.DOUBLE_LITERAL; }
-<YYINITIAL> {HEX_DOUBLE_LITERAL} { return CPsiTokens.DOUBLE_LITERAL; }
-
 <YYINITIAL> {CHARACTER_LITERAL} { return CPsiTokens.CHARACTER_LITERAL; }
 <YYINITIAL> {STRING_LITERAL} { return CPsiTokens.STRING_LITERAL; }
 
-<YYINITIAL> "break" { return CPsiTokens.BREAK_KEYWORD; }
-<YYINITIAL> "case" { return CPsiTokens.CASE_KEYWORD; }
-<YYINITIAL> "class" { return CPsiTokens.CLASS_KEYWORD; }
-<YYINITIAL> "continue" { return CPsiTokens.CONTINUE_KEYWORD; }
-<YYINITIAL> "default" { return CPsiTokens.DEFAULT_KEYWORD; }
-<YYINITIAL> "do" { return CPsiTokens.DO_KEYWORD; }
-<YYINITIAL> "else" { return CPsiTokens.ELSE_KEYWORD; }
-<YYINITIAL> "for" { return CPsiTokens.FOR_KEYWORD; }
-<YYINITIAL> "goto" { return CPsiTokens.GOTO_KEYWORD; }
-<YYINITIAL> "if" { return CPsiTokens.IF_KEYWORD; }
-<YYINITIAL> "new" { return CPsiTokens.NEW_KEYWORD; }
-<YYINITIAL> "public" { return CPsiTokens.PUBLIC_KEYWORD; }
-<YYINITIAL> "private" { return CPsiTokens.PRIVATE_KEYWORD; }
-<YYINITIAL> "switch" { return CPsiTokens.SWITCH_KEYWORD; }
-<YYINITIAL> "return" { return CPsiTokens.RETURN_KEYWORD; }
-<YYINITIAL> "namespace" { return CPsiTokens.NAMESPACE_KEYWORD; }
-<YYINITIAL> "void" { return CPsiTokens.VOID_KEYWORD; }
-<YYINITIAL> "while" { return CPsiTokens.WHILE_KEYWORD; }
-<YYINITIAL> "typedef" { return CPsiTokens.TYPEDEF_KEYWORD; }
-<YYINITIAL> "enum" { return CPsiTokens.ENUM_KEYWORD; }
-
-<YYINITIAL> "virtual" { return CPsiTokens.VIRTUAL_KEYWORD; }
-<YYINITIAL> "explicit" { return CPsiTokens.EXPLICIT_KEYWORD; }
-<YYINITIAL> "static" { return CPsiTokens.STATIC_KEYWORD; }
-<YYINITIAL> "const" { return CPsiTokens.CONST_KEYWORD; }
-<YYINITIAL> "extern" { return CPsiTokens.EXTERN_KEYWORD; }
-<YYINITIAL> "signed" { return CPsiTokens.SIGNED_KEYWORD; }
-<YYINITIAL> "unsigned" { return CPsiTokens.UNSIGNED_KEYWORD; }
-
-<YYINITIAL> "long" { return CPsiTokens.LONG_KEYWORD; }
-<YYINITIAL> "char" { return CPsiTokens.CHAR_KEYWORD; }
-<YYINITIAL> "__int64" { return CPsiTokens.__INT64_KEYWORD; }
-<YYINITIAL> "int" { return CPsiTokens.INT_KEYWORD; }
-<YYINITIAL> "bool" { return CPsiTokens.BOOL_KEYWORD; }
-
-<YYINITIAL> "true" { return CPsiTokens.BOOL_LITERAL; }
-<YYINITIAL> "false" { return CPsiTokens.BOOL_LITERAL; }
+<YYINITIAL> "#include" { return CPreprocessorTokenTypes.S_INCLUDE_KEYWORD; }
+<YYINITIAL> "#define" { return CPreprocessorTokenTypes.S_DEFINE_KEYWORD; }
+<YYINITIAL> "#ifndef" { return CPreprocessorTokenTypes.S_IFNDEF_KEYWORD; }
+<YYINITIAL> "#ifdef" { return CPreprocessorTokenTypes.S_IFDEF_KEYWORD; }
+<YYINITIAL> "#endif" { return CPreprocessorTokenTypes.S_ENDIF_KEYWORD; }
+<YYINITIAL> "#else" { return CPreprocessorTokenTypes.S_ELSE_KEYWORD; }
 
 <YYINITIAL> {IDENTIFIER} { return CPsiTokens.IDENTIFIER; }
 
@@ -181,4 +147,6 @@ ESCAPE_SEQUENCE=\\[^\r\n]
 <YYINITIAL> "%" { return CPsiTokens.PERC; }
 <YYINITIAL> "@" { return CPsiTokens.AT; }
 
-<YYINITIAL> . { return CPsiTokens.BAD_CHARACTER; }
+<YYINITIAL> {STRING_INCLUDE_LITERAL} { return CPsiTokens.STRING_INCLUDE_LITERAL; }
+
+<YYINITIAL> . { return CPreprocessorTokenTypes.SYMBOL; }

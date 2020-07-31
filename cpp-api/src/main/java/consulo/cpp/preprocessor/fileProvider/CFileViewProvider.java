@@ -3,10 +3,13 @@ package consulo.cpp.preprocessor.fileProvider;
 import com.intellij.lang.Language;
 import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.MultiplePsiFilesPerDocumentFileViewProvider;
+import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.containers.ContainerUtil;
 import consulo.cpp.preprocessor.CPreprocessorLanguage;
+import consulo.cpp.preprocessor.psi.impl.CPsiSharpFileImpl;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.CLanguage;
 
 import java.util.Set;
@@ -35,6 +38,14 @@ public class CFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvid
 	@Override
 	public boolean hasLanguage(@NotNull Language language) {
 		return language == CLanguage.INSTANCE || language == CPreprocessorLanguage.INSTANCE;
+	}
+
+	@Override
+	protected @Nullable PsiFile createFile(@NotNull Language lang) {
+		if(lang == CPreprocessorLanguage.INSTANCE) {
+			return new CPsiSharpFileImpl(this);
+		}
+		return super.createFile(lang);
 	}
 
 	@Override

@@ -19,7 +19,7 @@ package consulo.cpp.preprocessor.psi.impl;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
 import consulo.cpp.preprocessor.psi.CPsiSharpDefineValue;
-import consulo.cpp.preprocessor.psi.impl.visitor.CSharpPsiElementVisitor;
+import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElementVisitor;
 
@@ -34,8 +34,8 @@ public class CPsiSharpDefineValueImpl extends CPsiElementBaseImpl implements CPs
 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CSharpPsiElementVisitor) {
-			((CSharpPsiElementVisitor) visitor).visitSDefineValue(this);
+		if (visitor instanceof CPreprocessorElementVisitor) {
+			((CPreprocessorElementVisitor) visitor).visitSDefineValue(this);
 		} else {
 			super.accept(visitor);
 		}

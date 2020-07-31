@@ -16,13 +16,12 @@
 
 package org.napile.cpp4idea.lang.parser;
 
-import com.intellij.lang.*;
-import com.intellij.lexer.FlexAdapter;
+import com.intellij.lang.ASTNode;
+import com.intellij.lang.PsiBuilder;
+import com.intellij.lang.PsiParser;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.CDialect;
-import org.napile.cpp4idea.lang.lexer._CppLexer;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
 
 /**
@@ -35,10 +34,6 @@ public class CPsiParserImpl implements PsiParser, CPsiTokens {
 	public ASTNode parse(IElementType root, PsiBuilder builder) {
 		builder.setDebugMode(true);
 
-		final ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.forLanguage(CLanguage.INSTANCE);
-
-		PsiBuilder newBuilder = PsiBuilderFactory.getInstance().createBuilder(parserDefinition, new FlexAdapter(new _CppLexer()), builder.getOriginalText());
-
-		return CDialect.parseInitial(newBuilder, root);
+		return CDialect.parseMain(builder, root);
 	}
 }

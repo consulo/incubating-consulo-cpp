@@ -23,7 +23,7 @@ import com.intellij.psi.tree.IElementType;
  * @author VISTALL
  * @date 13:37/29.12.12
  */
-public interface CPsiSharpTokens {
+public interface CPreprocessorTokenTypes {
 	// sharp keywords
 	IElementType S_INCLUDE_KEYWORD = new CTokenImpl("S_INCLUDE_KEYWORD"); // #include
 	IElementType S_DEFINE_KEYWORD = new CTokenImpl("S_DEFINE_KEYWORD"); // #define
@@ -32,4 +32,6 @@ public interface CPsiSharpTokens {
 	IElementType S_ENDIF_KEYWORD = new CTokenImpl("S_ENDIF_KEYWORD"); // #endif
 	IElementType S_ELSE_KEYWORD = new CTokenImpl("S_ELSE_KEYWORD"); // #else
 	IElementType S_PRAGMA_KEYWORD = new CTokenImpl("S_PRAGMA_KEYWORD"); // #pragma
+
+	IElementType SYMBOL = new CTokenImpl("C_PREPROCESSOR_SYMBOL");
 }

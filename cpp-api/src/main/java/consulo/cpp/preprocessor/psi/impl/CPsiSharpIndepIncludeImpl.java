@@ -19,7 +19,7 @@ package consulo.cpp.preprocessor.psi.impl;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import consulo.cpp.preprocessor.psi.CPsiSharpIndepInclude;
-import consulo.cpp.preprocessor.psi.impl.visitor.CSharpPsiElementVisitor;
+import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
@@ -35,8 +35,8 @@ public class CPsiSharpIndepIncludeImpl extends CPsiSharpIncludeImpl implements C
 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CSharpPsiElementVisitor) {
-			((CSharpPsiElementVisitor) visitor).visitSIndependInclude(this);
+		if (visitor instanceof CPreprocessorElementVisitor) {
+			((CPreprocessorElementVisitor) visitor).visitSIndependInclude(this);
 		} else {
 			super.accept(visitor);
 		}

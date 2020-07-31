@@ -26,7 +26,7 @@ import org.napile.cpp4idea.lang.psi.CPsiImplementingMethod;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiRecursiveElementVisitor;
 import consulo.cpp.preprocessor.psi.CPsiSharpFile;
 import consulo.cpp.preprocessor.psi.CPsiSharpIfDef;
-import consulo.cpp.preprocessor.psi.impl.visitor.CSharpPsiRecursiveElementVisitor;
+import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorRecursiveElementVisitor;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.FoldingBuilder;
 import com.intellij.lang.folding.FoldingDescriptor;
@@ -50,7 +50,7 @@ public class FoldingBuilderImpl implements FoldingBuilder, DumbAware {
 
 			final List<FoldingDescriptor> list = new ArrayList<FoldingDescriptor>();
 
-			element.accept(new CSharpPsiRecursiveElementVisitor() {
+			element.accept(new CPreprocessorRecursiveElementVisitor() {
 				@Override
 				public void visitSIfDef(CPsiSharpIfDef element) {
 					if (element.getVariable() != null) {

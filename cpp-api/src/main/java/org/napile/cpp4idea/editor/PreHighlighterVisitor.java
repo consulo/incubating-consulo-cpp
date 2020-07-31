@@ -23,7 +23,7 @@ import consulo.cpp.preprocessor.psi.CPsiCompilerVariable;
 import consulo.cpp.preprocessor.psi.CPsiSharpFile;
 import consulo.cpp.preprocessor.psi.CPsiSharpIfBody;
 import consulo.cpp.preprocessor.psi.CPsiSharpIfDef;
-import consulo.cpp.preprocessor.psi.impl.visitor.CSharpPsiRecursiveElementVisitor;
+import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorRecursiveElementVisitor;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.psi.PsiElement;
@@ -32,7 +32,7 @@ import com.intellij.psi.PsiElement;
  * @author VISTALL
  * @date 11:07/02.01.13
  */
-public class PreHighlighterVisitor extends CSharpPsiRecursiveElementVisitor {
+public class PreHighlighterVisitor extends CPreprocessorRecursiveElementVisitor {
 	//FIXME [VISTALL] better
 	private static final CSyntaxHighlighter HIGHLIGHTER = new CSyntaxHighlighter(null, null);
 
@@ -79,7 +79,7 @@ public class PreHighlighterVisitor extends CSharpPsiRecursiveElementVisitor {
 		if (!defined) {
 			//holder.createWarningAnnotation(element, "Not active block");
 
-			element.accept(new CSharpPsiRecursiveElementVisitor() {
+			element.accept(new CPreprocessorRecursiveElementVisitor() {
 				@Override
 				public void visitElement(PsiElement element) {
 					TextAttributesKey[] textAttributesKeys = HIGHLIGHTER.getAttributes(element.getNode().getElementType());

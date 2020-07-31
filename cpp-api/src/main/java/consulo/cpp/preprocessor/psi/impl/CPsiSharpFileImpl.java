@@ -20,11 +20,11 @@ import com.intellij.extapi.psi.PsiFileBase;
 import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElementVisitor;
+import consulo.cpp.preprocessor.CPreprocessorLanguage;
+import consulo.cpp.preprocessor.psi.CPsiSharpFile;
+import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CFileType;
-import org.napile.cpp4idea.CLanguage;
-import consulo.cpp.preprocessor.psi.CPsiSharpFile;
-import consulo.cpp.preprocessor.psi.impl.visitor.CSharpPsiElementVisitor;
 
 /**
  * @author VISTALL
@@ -32,7 +32,7 @@ import consulo.cpp.preprocessor.psi.impl.visitor.CSharpPsiElementVisitor;
  */
 public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile {
 	public CPsiSharpFileImpl(@NotNull FileViewProvider viewProvider) {
-		super(viewProvider, CLanguage.INSTANCE);
+		super(viewProvider, CPreprocessorLanguage.INSTANCE);
 	}
 
 	@NotNull
@@ -43,10 +43,15 @@ public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile {
 
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CSharpPsiElementVisitor) {
-			((CSharpPsiElementVisitor) visitor).visitSFile(this);
+		if (visitor instanceof CPreprocessorElementVisitor) {
+			((CPreprocessorElementVisitor) visitor).visitSFile(this);
 		} else {
 			super.accept(visitor);
 		}
+	}
+
+	@Override
+	public String toString() {
+		return "CPsiSharpFile:" + getVirtualFile().getName();
 	}
 }

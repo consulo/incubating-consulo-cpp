@@ -29,9 +29,9 @@ import com.intellij.psi.PsiElementVisitor;
 
 /**
  * @author VISTALL
- * @date 13:07/16.12.2011
+ * @since 13:07/16.12.2011
  */
-public class CSharpPsiElementVisitor extends PsiElementVisitor {
+public class CPreprocessorElementVisitor extends PsiElementVisitor {
 	public void visitSFile(CPsiSharpFile file) {
 		visitFile(file);
 	}

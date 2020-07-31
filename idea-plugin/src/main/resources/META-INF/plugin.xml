@@ -18,13 +18,13 @@
 	<id>cpp.idea</id>
 	<name>C/C++</name>
 	<description>Support for C/C++ language.</description>
-	<version>1.0</version>
+	<version>SNAPSHOT</version>
 	<vendor>napile.org</vendor>
 	<resource-bundle>org.napile.cpp4idea.CBundle</resource-bundle>
 	<category>Custom Languages</category>
 
 	<extensions defaultExtensionNs="com.intellij">
-		<fileType.fileViewProviderFactory filetype="C/C++"
+		<lang.fileViewProviderFactory language="C"
 										  implementationClass="consulo.cpp.preprocessor.fileProvider.CFileViewProviderFactory"/>
 
 		<lang.parserDefinition language="CPreprocessor"
@@ -41,8 +41,10 @@
 
 		<!--lang-->
 		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.lang.PairedBraceMatcherImpl"/>
-		<lang.syntaxHighlighterFactory key="C"
-									   implementationClass="org.napile.cpp4idea.ide.highlight.CSyntaxHighlighterFactory"/>
+		<!--
+		disable since it's static highlight - can be wrong
+		<lang.syntaxHighlighterFactory language="C"
+									   implementationClass="org.napile.cpp4idea.ide.highlight.CSyntaxHighlighterFactory"/>-->
 		<lang.parserDefinition language="C"
 							   implementationClass="org.napile.cpp4idea.lang.parser.CParserDefinitionImpl"/>
 		<lang.foldingBuilder language="C" implementationClass="org.napile.cpp4idea.lang.FoldingBuilderImpl"/>

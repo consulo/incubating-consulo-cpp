@@ -19,22 +19,21 @@ package org.napile.cpp4idea.lang.parser;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
-import com.intellij.lexer.EmptyLexer;
+import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.tree.IFileElementType;
-import com.intellij.psi.tree.IStubFileElementType;
 import com.intellij.psi.tree.TokenSet;
+import consulo.cpp.lang.psi.impl.CFileElementType;
+import consulo.cpp.lang.psi.impl.CFileImpl;
+import consulo.cpp.preprocessor.psi.CPsiSharpTokenImpl;
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.CLanguage;
+import org.napile.cpp4idea.lang.lexer._CppLexer;
 import org.napile.cpp4idea.lang.psi.CPsiTokenImpl;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
-import org.napile.cpp4idea.lang.psi.impl.CPsiFileImpl;
-import consulo.cpp.preprocessor.psi.CPsiSharpTokenImpl;
-import consulo.cpp.preprocessor.psi.impl.CPsiSharpFileImpl;
 
 import javax.annotation.Nonnull;
 
@@ -43,12 +42,10 @@ import javax.annotation.Nonnull;
  * @date 14:26/18.12.2011
  */
 public class CParserDefinitionImpl implements ParserDefinition {
-	public static final IStubFileElementType C_FILE_TYPE = new IStubFileElementType(CLanguage.INSTANCE);
-
 	@NotNull
 	@Override
 	public Lexer createLexer(Project project) {
-		return new EmptyLexer();
+		return new FlexAdapter(new _CppLexer());
 	}
 
 	@Nonnull
@@ -59,7 +56,7 @@ public class CParserDefinitionImpl implements ParserDefinition {
 
 	@Override
 	public IFileElementType getFileNodeType() {
-		return C_FILE_TYPE;
+		return CFileElementType.INSTANCE;
 	}
 
 	@NotNull
@@ -87,8 +84,6 @@ public class CParserDefinitionImpl implements ParserDefinition {
 			return ((CPsiTokenImpl) node.getElementType()).createPsi(node);
 		} else if (node.getElementType() instanceof CPsiSharpTokenImpl) {
 			return ((CPsiSharpTokenImpl) node.getElementType()).createPsi(node);
-		} else if (node.getElementType() == CPsiTokens.C_PROCESSED_FILE_TYPE) {
-			return new CPsiFileImpl(node);
 		}
 
 		throw new IllegalArgumentException("Illegal argument : " + node.getElementType());
@@ -96,7 +91,7 @@ public class CParserDefinitionImpl implements ParserDefinition {
 
 	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
-		return new CPsiSharpFileImpl(viewProvider);
+		return new CFileImpl(viewProvider);
 	}
 
 	@Override

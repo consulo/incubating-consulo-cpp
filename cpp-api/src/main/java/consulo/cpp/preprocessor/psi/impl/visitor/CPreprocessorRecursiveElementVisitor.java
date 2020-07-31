@@ -23,7 +23,7 @@ import com.intellij.psi.PsiRecursiveVisitor;
  * @author VISTALL
  * @date 13:07/16.12.2011
  */
-public class CSharpPsiRecursiveElementVisitor extends CSharpPsiElementVisitor implements PsiRecursiveVisitor {
+public class CPreprocessorRecursiveElementVisitor extends CPreprocessorElementVisitor implements PsiRecursiveVisitor {
 	@Override
 	public void visitElement(PsiElement element) {
 		element.acceptChildren(this);

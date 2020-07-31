@@ -28,7 +28,7 @@ import org.napile.cpp4idea.lang.CDialect;
 import org.napile.cpp4idea.lang.parser.parsingMain.builder.CMainPsiBuilder;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
-import consulo.cpp.preprocessor.psi.impl.visitor.CSharpPsiElementVisitor;
+import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,7 +53,7 @@ public class CPreprocessor {
 		final List<PsiElement> elements = new ArrayList<>();
 		final Map<String, List<PsiElement>> define = new HashMap<>();
 
-		CSharpPsiElementVisitor recursiveElementVisitor = new CSharpPsiElementVisitor() {
+		CPreprocessorElementVisitor recursiveElementVisitor = new CPreprocessorElementVisitor() {
 			@Override
 			public void visitSFile(CPsiSharpFile file) {
 				file.acceptChildren(this);

@@ -17,7 +17,7 @@
 package org.napile.cpp4idea.lang.psi;
 
 import org.napile.cpp4idea.CLanguage;
-import consulo.cpp.preprocessor.psi.CPsiSharpTokens;
+import consulo.cpp.preprocessor.psi.CPreprocessorTokenTypes;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
@@ -26,7 +26,7 @@ import com.intellij.psi.tree.TokenSet;
  * @author VISTALL
  * @date 2:42/10.12.2011
  */
-public interface CPsiTokens extends TokenType, CPsiSharpTokens {
+public interface CPsiTokens extends TokenType, CPreprocessorTokenTypes {
 	IElementType C_PROCESSED_FILE_TYPE = new IElementType("C_PROCESSED_FILE_TYPE", CLanguage.INSTANCE);
 
 	IElementType IDENTIFIER = new CTokenImpl("IDENTIFIER");
