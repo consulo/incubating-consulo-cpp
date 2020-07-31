@@ -7,6 +7,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.stubs.PsiFileStub;
 import com.intellij.psi.tree.IStubFileElementType;
 import consulo.cpp.preprocessor.CPreprocessorLanguage;
+import consulo.cpp.preprocessor.expand.PreprocessorExpandPsiBuilder;
 import consulo.cpp.preprocessor.expand.PreprocessorExpander;
 import consulo.cpp.preprocessor.fileProvider.CFileViewProvider;
 import org.jetbrains.annotations.NotNull;
@@ -30,18 +31,19 @@ public class CFileElementType extends IStubFileElementType<PsiFileStub<PsiFile>>
 
 		PsiFile preprocessorFile = viewProvider.getPsi(CPreprocessorLanguage.INSTANCE);
 
-		PreprocessorExpander expander = new PreprocessorExpander(preprocessorFile);
+		ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.findSingle(CLanguage.INSTANCE);
+
+		PreprocessorExpander expander = new PreprocessorExpander(preprocessorFile, parserDefinition);
 
 		StringBuilder shortedText = expander.buildText(chameleon.getChars());
 
-		ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.findSingle(CLanguage.INSTANCE);
-
 		Project project = psi.getProject();
 		Language languageForParser = getLanguageForParser(psi);
-		PsiBuilder builder = PsiBuilderFactory.getInstance().createBuilder(parserDefinition, parserDefinition.createLexer(project), shortedText);
+		PsiBuilder original = PsiBuilderFactory.getInstance().createBuilder(parserDefinition, parserDefinition.createLexer(project), shortedText);
+		PreprocessorExpandPsiBuilder builder = new PreprocessorExpandPsiBuilder(original, expander);
+
 		PsiParser parser = LanguageParserDefinitions.INSTANCE.forLanguage(languageForParser).createParser(project);
 		ASTNode node = parser.parse(this, builder);
-
 
 		expander.insert(node.getFirstChildNode());
 

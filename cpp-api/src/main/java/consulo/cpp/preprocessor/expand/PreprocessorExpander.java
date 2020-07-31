@@ -1,14 +1,22 @@
 package consulo.cpp.preprocessor.expand;
 
 import com.intellij.lang.ASTNode;
+import com.intellij.lang.ParserDefinition;
+import com.intellij.lexer.Lexer;
+import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.TreeElement;
+import com.intellij.psi.tree.IElementType;
 import consulo.cpp.preprocessor.psi.CPsiSharpDefine;
+import consulo.cpp.preprocessor.psi.CPsiSharpDefineValue;
 import consulo.cpp.preprocessor.psi.impl.CPreprocessorOuterLanguageElement;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorRecursiveElementVisitor;
+import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -16,13 +24,23 @@ import java.util.Map;
  * @since 17:11/2020-07-31
  */
 public class PreprocessorExpander {
-	private Map<PreprocessorAction, TextRange> myRanges = new LinkedHashMap<>();
+	private final Map<PreprocessorAction, TextRange> myRanges = new LinkedHashMap<>();
+	private final Map<String, CharSequence> myDefines = new LinkedHashMap<>();
+	private final ParserDefinition myParserDefinition;
 
-	public PreprocessorExpander(PsiFile preprocessorFile) {
+	public PreprocessorExpander(PsiFile preprocessorFile, ParserDefinition parserDefinition) {
+		myParserDefinition = parserDefinition;
+
 		preprocessorFile.accept(new CPreprocessorRecursiveElementVisitor() {
 			@Override
 			public void visitSDefine(CPsiSharpDefine element) {
+
 				myRanges.put(new DefineAction(element.getNode().getChars()), element.getTextRange());
+
+				CPsiSharpDefineValue value = element.getValue();
+				String text = element.getVariable().getNameElement().getText();
+
+				myDefines.put(text, value.getNode().getChars());
 			}
 		});
 	}
@@ -49,13 +67,34 @@ public class PreprocessorExpander {
 		return builder;
 	}
 
+	@Nullable
+	public List<Pair<IElementType, String>> tryToExpand(String name) {
+		CharSequence charSequence = myDefines.get(name);
+		if(charSequence == null) {
+			return null;
+		}
+
+		List<Pair<IElementType, String>> list = new ArrayList<>();
+
+		Lexer lexer = myParserDefinition.createLexer(null);
+		lexer.start(charSequence);
+
+		IElementType type = null;
+		while ((type = lexer.getTokenType()) != null) {
+			list.add(Pair.create(type, lexer.getTokenText()));
+
+			lexer.advance();
+		}
+
+		return list;
+	}
+
 	public void insert(ASTNode parsed) {
 		for (Map.Entry<PreprocessorAction, TextRange> entry : myRanges.entrySet()) {
 			PreprocessorAction key = entry.getKey();
 			TextRange value = entry.getValue();
 
 			TreeElement node = (TreeElement) findNode(value, parsed);
-
 
 
 			node.rawInsertBeforeMe(new CPreprocessorOuterLanguageElement(key.getSequence()));
@@ -68,7 +107,7 @@ public class PreprocessorExpander {
 		ASTNode node = parsed;
 
 		while (node != null) {
-			if(textRange.contains(node.getStartOffset())) {
+			if (textRange.contains(node.getStartOffset())) {
 				return node;
 			}
 
