@@ -4,6 +4,8 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.impl.PsiBuilderAdapter;
 import com.intellij.openapi.util.Pair;
 import com.intellij.psi.tree.IElementType;
+import consulo.cpp.preprocessor.parser.InitialParserHelper;
+import consulo.cpp.preprocessor.psi.CPreprocessorMacroReference;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
@@ -51,7 +53,9 @@ public class PreprocessorExpandPsiBuilder extends PsiBuilderAdapter {
 			if (myExpandedMacro.position == myExpandedMacro.elements.size()) {
 				myExpandedMacro = null;
 
+				Marker mark = super.mark();
 				super.advanceLexer(); // macro reference advance
+				InitialParserHelper.done(mark, CPreprocessorMacroReference.class);
 			}
 		} else {
 			super.advanceLexer();

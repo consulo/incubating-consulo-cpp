@@ -16,6 +16,7 @@
 
 package consulo.cpp.preprocessor.psi;
 
+import com.intellij.psi.PsiElement;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,18 +30,18 @@ import java.util.Map;
 public class CSharpTokenElements {
 	private static final CSharpTokenElements INSTANCE = new CSharpTokenElements();
 
-	private final Map<Class<? extends CPsiSharpElement>, IElementType> _cache = new HashMap<Class<? extends CPsiSharpElement>, IElementType>();
+	private final Map<Class<? extends PsiElement>, IElementType> _cache = new HashMap<>();
 
 	@NotNull
-	public static IElementType element(Class<? extends CPsiSharpElement> clazz) {
+	public static IElementType element(Class<? extends PsiElement> clazz) {
 		return INSTANCE.element0(clazz);
 	}
 
 	@NotNull
 	@SuppressWarnings("unchecked")
-	private IElementType element0(Class<? extends CPsiSharpElement> clazz) {
+	private IElementType element0(Class<? extends PsiElement> clazz) {
 		try {
-			Class<? extends CPsiSharpElement> implClass = (Class<? extends CPsiSharpElement>) Class.forName("consulo.cpp.preprocessor.psi.impl." + clazz.getSimpleName() + "Impl");
+			Class<? extends PsiElement> implClass = (Class<? extends PsiElement>) Class.forName("consulo.cpp.preprocessor.psi.impl." + clazz.getSimpleName() + "Impl");
 
 			IElementType elementType = _cache.get(implClass);
 			if (elementType == null) {
