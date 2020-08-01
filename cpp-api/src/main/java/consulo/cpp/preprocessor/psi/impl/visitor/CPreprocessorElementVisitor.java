@@ -33,10 +33,6 @@ public class CPreprocessorElementVisitor extends PsiElementVisitor {
 		visitElement(element);
 	}
 
-	public void visitCompilerVariable(CPsiCompilerVariable element) {
-		visitSElement(element);
-	}
-
 	public void visitSIfBody(CPsiSharpIfBody element) {
 		visitSElement(element);
 	}

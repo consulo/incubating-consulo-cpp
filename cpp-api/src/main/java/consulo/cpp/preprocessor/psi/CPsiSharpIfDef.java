@@ -24,7 +24,7 @@ import com.intellij.psi.PsiElement;
  * @date 14:06/11.12.2011
  */
 public interface CPsiSharpIfDef extends CPreprocessorElement {
-	CPsiCompilerVariable getVariable();
+	CPreprocessorMacroReference getVariable();
 
 	@Nullable
 	CPsiSharpIfBody getBody();

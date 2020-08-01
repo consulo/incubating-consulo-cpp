@@ -16,14 +16,13 @@
 
 package consulo.cpp.preprocessor.parser;
 
+import com.intellij.lang.PsiBuilder;
 import com.intellij.psi.PsiElement;
-import consulo.cpp.preprocessor.psi.CPreprocessorElement;
+import com.intellij.psi.tree.IElementType;
+import consulo.cpp.preprocessor.psi.CSharpTokenElements;
 import org.jetbrains.annotations.PropertyKey;
 import org.napile.cpp4idea.CBundle;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
-import consulo.cpp.preprocessor.psi.CSharpTokenElements;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.psi.tree.IElementType;
 
 /**
  * @author VISTALL
@@ -61,7 +60,7 @@ public class InitialParserHelper implements CPsiTokens {
 		return null;
 	}
 
-	public static void doneOneToken(PsiBuilder builder, Class<? extends CPreprocessorElement> clazz) {
+	public static void doneOneToken(PsiBuilder builder, Class<? extends PsiElement> clazz) {
 		PsiBuilder.Marker marker = builder.mark();
 
 		builder.advanceLexer();

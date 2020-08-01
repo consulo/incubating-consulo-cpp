@@ -16,17 +16,17 @@
 
 package consulo.cpp.preprocessor.psi.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
-import consulo.cpp.preprocessor.psi.CPsiCompilerVariable;
-import consulo.cpp.preprocessor.psi.CPsiSharpIfBody;
-import consulo.cpp.preprocessor.psi.CPsiSharpIfDef;
-import consulo.cpp.preprocessor.psi.CPreprocessorTokenTypes;
-import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
+import consulo.cpp.preprocessor.psi.CPreprocessorMacroReference;
+import consulo.cpp.preprocessor.psi.CPreprocessorTokenTypes;
+import consulo.cpp.preprocessor.psi.CPsiSharpIfBody;
+import consulo.cpp.preprocessor.psi.CPsiSharpIfDef;
+import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
 
 /**
  * @author VISTALL
@@ -38,8 +38,8 @@ public class CPsiSharpIfDefImpl extends CPsiElementBaseImpl implements CPsiSharp
 	}
 
 	@Override
-	public CPsiCompilerVariable getVariable() {
-		return findChildByClass(CPsiCompilerVariable.class);
+	public CPreprocessorMacroReference getVariable() {
+		return findChildByClass(CPreprocessorMacroReference.class);
 	}
 
 	@Nullable

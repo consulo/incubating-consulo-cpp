@@ -38,7 +38,7 @@ public class PreprocessorExpander {
 				myRanges.put(new DefineAction(element.getNode().getChars()), element.getTextRange());
 
 				CPsiSharpDefineValue value = element.getValue();
-				String text = element.getVariable().getNameElement().getText();
+				String text = element.getName();
 
 				myDefines.put(text, new ExpandedMacro(parserDefinition, element, value.getNode().getChars()));
 			}

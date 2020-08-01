@@ -16,12 +16,13 @@
 
 package consulo.cpp.preprocessor.psi;
 
+import com.intellij.psi.PsiNameIdentifierOwner;
+import com.intellij.psi.PsiNamedElement;
+
 /**
  * @author VISTALL
  * @date 7:23/11.12.2011
  */
-public interface CPreprocessorDefineDirective extends CPreprocessorElement {
-	CPsiCompilerVariable getVariable();
-
+public interface CPreprocessorDefineDirective extends CPreprocessorElement, PsiNameIdentifierOwner, PsiNamedElement {
 	CPsiSharpDefineValue getValue();
 }

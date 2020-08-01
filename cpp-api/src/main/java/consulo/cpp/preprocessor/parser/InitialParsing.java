@@ -76,7 +76,7 @@ public class InitialParsing extends InitialParserHelper {
 		advanceLexerAndSkipLines(builder);
 
 		// var name
-		doneOneToken(builder, CPsiCompilerVariable.class);
+		builder.advanceLexer();
 
 		PsiBuilder.Marker valueMarker = builder.mark();
 
@@ -105,7 +105,7 @@ public class InitialParsing extends InitialParserHelper {
 		builder.advanceLexer();
 
 		if (builder.getTokenType() == IDENTIFIER) {
-			doneOneToken(builder, CPsiCompilerVariable.class);
+			doneOneToken(builder, CPreprocessorMacroReference.class);
 		} else {
 			error(builder, "IDENTIFIER.expected");
 		}
