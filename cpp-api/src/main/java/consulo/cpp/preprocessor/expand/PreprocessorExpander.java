@@ -6,12 +6,12 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.LeafElement;
-import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.impl.source.tree.TreeElement;
 import com.intellij.psi.tree.IElementType;
 import consulo.cpp.preprocessor.psi.CPreprocessorMacroReference;
 import consulo.cpp.preprocessor.psi.CPsiSharpDefine;
 import consulo.cpp.preprocessor.psi.CPsiSharpDefineValue;
+import consulo.cpp.preprocessor.psi.impl.CPreprocessorForeignLeafPsiElement;
 import consulo.cpp.preprocessor.psi.impl.CPreprocessorOuterLanguageElement;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorRecursiveElementVisitor;
 import org.jetbrains.annotations.NotNull;
@@ -92,7 +92,7 @@ public class PreprocessorExpander {
 
 				TreeElement next = null;
 				for (Pair<IElementType, String> symbol : value.getSymbols()) {
-					LeafPsiElement leaf = new LeafPsiElement(symbol.getFirst(), "");
+					CPreprocessorForeignLeafPsiElement leaf = new CPreprocessorForeignLeafPsiElement(symbol.getFirst(), symbol.second);
 
 					if (next == null) {
 						TreeElement macroReference = (TreeElement) selectUpNodeIfMacroReference(node);
