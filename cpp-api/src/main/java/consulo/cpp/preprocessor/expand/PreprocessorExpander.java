@@ -9,7 +9,7 @@ import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.impl.source.tree.TreeElement;
 import com.intellij.psi.tree.IElementType;
 import consulo.cpp.preprocessor.psi.CPreprocessorMacroReference;
-import consulo.cpp.preprocessor.psi.CPsiSharpDefine;
+import consulo.cpp.preprocessor.psi.CPreprocessorDefineDirective;
 import consulo.cpp.preprocessor.psi.CPsiSharpDefineValue;
 import consulo.cpp.preprocessor.psi.impl.CPreprocessorForeignLeafPsiElement;
 import consulo.cpp.preprocessor.psi.impl.CPreprocessorOuterLanguageElement;
@@ -33,7 +33,7 @@ public class PreprocessorExpander {
 	public PreprocessorExpander(PsiFile preprocessorFile, ParserDefinition parserDefinition) {
 		preprocessorFile.accept(new CPreprocessorRecursiveElementVisitor() {
 			@Override
-			public void visitSDefine(CPsiSharpDefine element) {
+			public void visitSDefine(CPreprocessorDefineDirective element) {
 
 				myRanges.put(new DefineAction(element.getNode().getChars()), element.getTextRange());
 

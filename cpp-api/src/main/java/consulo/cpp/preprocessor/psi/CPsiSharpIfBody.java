@@ -20,7 +20,7 @@ package consulo.cpp.preprocessor.psi;
  * @author VISTALL
  * @date 14:04/29.12.12
  */
-public interface CPsiSharpIfBody extends CPsiSharpElement {
+public interface CPsiSharpIfBody extends CPreprocessorElement {
 	boolean isElseBody();
 
 	CPsiSharpIfDef getIfDef();

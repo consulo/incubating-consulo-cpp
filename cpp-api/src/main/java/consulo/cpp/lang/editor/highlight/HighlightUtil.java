@@ -19,13 +19,11 @@ package consulo.cpp.lang.editor.highlight;
 import com.intellij.codeInsight.daemon.impl.HighlightInfo;
 import com.intellij.codeInsight.daemon.impl.HighlightInfoType;
 import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder;
-import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.psi.PsiElement;
-import consulo.cpp.preprocessor.psi.CPsiSharpDefine;
+import consulo.cpp.preprocessor.psi.CPreprocessorDefineDirective;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.ide.highlight.CSyntaxHighlighter;
-import org.napile.cpp4idea.lang.parser.parsingMain.builder.CMainPsiBuilder;
 import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
 
 /**
@@ -44,7 +42,7 @@ public class HighlightUtil {
 		if (target instanceof CPsiEnumConstant) {
 			return CSyntaxHighlighter.CONSTANT;
 		}
-		else if(target instanceof CPsiSharpDefine) {
+		else if(target instanceof CPreprocessorDefineDirective) {
 			return CSyntaxHighlighter.COMPILER_VARIABLE;
 		}
 

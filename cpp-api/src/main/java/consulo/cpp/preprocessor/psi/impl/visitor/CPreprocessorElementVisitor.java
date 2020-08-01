@@ -16,15 +16,8 @@
 
 package consulo.cpp.preprocessor.psi.impl.visitor;
 
-import consulo.cpp.preprocessor.psi.CPsiSharpDefineValue;
-import consulo.cpp.preprocessor.psi.CPsiSharpElement;
-import consulo.cpp.preprocessor.psi.CPsiSharpFile;
-import consulo.cpp.preprocessor.psi.CPsiCompilerVariable;
-import consulo.cpp.preprocessor.psi.CPsiSharpDefine;
-import consulo.cpp.preprocessor.psi.CPsiSharpIfBody;
-import consulo.cpp.preprocessor.psi.CPsiSharpIfDef;
-import consulo.cpp.preprocessor.psi.CPsiSharpInclude;
-import consulo.cpp.preprocessor.psi.CPsiSharpIndepInclude;
+import consulo.cpp.preprocessor.psi.*;
+import consulo.cpp.preprocessor.psi.CPreprocessorElement;
 import com.intellij.psi.PsiElementVisitor;
 
 /**
@@ -36,7 +29,7 @@ public class CPreprocessorElementVisitor extends PsiElementVisitor {
 		visitFile(file);
 	}
 
-	public void visitSElement(CPsiSharpElement element) {
+	public void visitSElement(CPreprocessorElement element) {
 		visitElement(element);
 	}
 
@@ -48,7 +41,7 @@ public class CPreprocessorElementVisitor extends PsiElementVisitor {
 		visitSElement(element);
 	}
 
-	public void visitSDefine(CPsiSharpDefine element) {
+	public void visitSDefine(CPreprocessorDefineDirective element) {
 		visitSElement(element);
 	}
 

@@ -16,9 +16,6 @@
 
 package consulo.cpp.preprocessor.psi;
 
-import consulo.cpp.preprocessor.psi.CPsiCompilerVariable;
-import consulo.cpp.preprocessor.psi.CPsiSharpElement;
-import consulo.cpp.preprocessor.psi.CPsiSharpIfBody;
 import org.jetbrains.annotations.Nullable;
 import com.intellij.psi.PsiElement;
 
@@ -26,7 +23,7 @@ import com.intellij.psi.PsiElement;
  * @author VISTALL
  * @date 14:06/11.12.2011
  */
-public interface CPsiSharpIfDef extends CPsiSharpElement {
+public interface CPsiSharpIfDef extends CPreprocessorElement {
 	CPsiCompilerVariable getVariable();
 
 	@Nullable

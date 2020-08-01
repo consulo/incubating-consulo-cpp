@@ -16,10 +16,10 @@
 
 package consulo.cpp.preprocessor.psi.impl;
 
+import consulo.cpp.preprocessor.psi.CPreprocessorDefineDirective;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
 import consulo.cpp.preprocessor.psi.CPsiCompilerVariable;
-import consulo.cpp.preprocessor.psi.CPsiSharpDefine;
 import consulo.cpp.preprocessor.psi.CPsiSharpDefineValue;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
 import com.intellij.lang.ASTNode;
@@ -29,8 +29,8 @@ import com.intellij.psi.PsiElementVisitor;
  * @author VISTALL
  * @date 7:23/11.12.2011
  */
-public class CPsiSharpDefineImpl extends CPsiElementBaseImpl implements CPsiSharpDefine {
-	public CPsiSharpDefineImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
+public class CPreprocessorDefineDirectiveImpl extends CPsiElementBaseImpl implements CPreprocessorDefineDirective {
+	public CPreprocessorDefineDirectiveImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 

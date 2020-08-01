@@ -20,7 +20,7 @@ package consulo.cpp.preprocessor.psi;
  * @author VISTALL
  * @date 7:23/11.12.2011
  */
-public interface CPsiSharpDefine extends CPsiSharpElement {
+public interface CPreprocessorDefineDirective extends CPreprocessorElement {
 	CPsiCompilerVariable getVariable();
 
 	CPsiSharpDefineValue getValue();

@@ -94,7 +94,7 @@ public class InitialParsing extends InitialParserHelper {
 
 		done(valueMarker, CPsiSharpDefineValue.class);
 
-		done(maker, CPsiSharpDefine.class);
+		done(maker, CPreprocessorDefineDirective.class);
 
 		skipLines(builder);
 	}

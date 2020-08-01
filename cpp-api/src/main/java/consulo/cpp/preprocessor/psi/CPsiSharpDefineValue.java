@@ -20,5 +20,5 @@ package consulo.cpp.preprocessor.psi;
  * @author VISTALL
  * @date 16:20/29.12.12
  */
-public interface CPsiSharpDefineValue extends CPsiSharpElement {
+public interface CPsiSharpDefineValue extends CPreprocessorElement {
 }
