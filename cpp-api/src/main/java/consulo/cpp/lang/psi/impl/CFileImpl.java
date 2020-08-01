@@ -20,7 +20,7 @@ public class CFileImpl extends PsiFileBase implements CPsiFile {
 
 	@Override
 	public @NotNull FileType getFileType() {
-		return getVirtualFile().getFileType();
+		return getViewProvider().getFileType();
 	}
 
 	@Override

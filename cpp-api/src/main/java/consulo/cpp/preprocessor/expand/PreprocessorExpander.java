@@ -2,21 +2,23 @@ package consulo.cpp.preprocessor.expand;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
-import com.intellij.lexer.Lexer;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.impl.source.tree.LeafElement;
+import com.intellij.psi.impl.source.tree.LeafPsiElement;
 import com.intellij.psi.impl.source.tree.TreeElement;
 import com.intellij.psi.tree.IElementType;
+import consulo.cpp.preprocessor.psi.CPreprocessorMacroReference;
 import consulo.cpp.preprocessor.psi.CPsiSharpDefine;
 import consulo.cpp.preprocessor.psi.CPsiSharpDefineValue;
 import consulo.cpp.preprocessor.psi.impl.CPreprocessorOuterLanguageElement;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorRecursiveElementVisitor;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
 
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,12 +27,10 @@ import java.util.Map;
  */
 public class PreprocessorExpander {
 	private final Map<PreprocessorAction, TextRange> myRanges = new LinkedHashMap<>();
-	private final Map<String, CharSequence> myDefines = new LinkedHashMap<>();
-	private final ParserDefinition myParserDefinition;
+
+	private final Map<String, ExpandedMacro> myDefines = new LinkedHashMap<>();
 
 	public PreprocessorExpander(PsiFile preprocessorFile, ParserDefinition parserDefinition) {
-		myParserDefinition = parserDefinition;
-
 		preprocessorFile.accept(new CPreprocessorRecursiveElementVisitor() {
 			@Override
 			public void visitSDefine(CPsiSharpDefine element) {
@@ -40,7 +40,7 @@ public class PreprocessorExpander {
 				CPsiSharpDefineValue value = element.getValue();
 				String text = element.getVariable().getNameElement().getText();
 
-				myDefines.put(text, value.getNode().getChars());
+				myDefines.put(text, new ExpandedMacro(parserDefinition, value.getNode().getChars()));
 			}
 		});
 	}
@@ -68,47 +68,88 @@ public class PreprocessorExpander {
 	}
 
 	@Nullable
-	public List<Pair<IElementType, String>> tryToExpand(String name) {
-		CharSequence charSequence = myDefines.get(name);
-		if(charSequence == null) {
+	public ExpandedMacro tryToExpand(String name, int startOffset) {
+		ExpandedMacro macro = myDefines.get(name);
+		if (macro == null) {
 			return null;
 		}
 
-		List<Pair<IElementType, String>> list = new ArrayList<>();
-
-		Lexer lexer = myParserDefinition.createLexer(null);
-		lexer.start(charSequence);
-
-		IElementType type = null;
-		while ((type = lexer.getTokenType()) != null) {
-			list.add(Pair.create(type, lexer.getTokenText()));
-
-			lexer.advance();
-		}
-
-		return list;
+		macro.expand(startOffset);
+		return macro;
 	}
 
 	public void insert(ASTNode parsed) {
+		// we need insert dummy nodes before inserting outer elements, due it will change tree length
+		// this dummy nodes not change tree text length
+		for (Map.Entry<String, ExpandedMacro> entry : myDefines.entrySet()) {
+			String key = entry.getKey();
+			ExpandedMacro value = entry.getValue();
+
+			for (int expandedOffset : value.getExpandedOffsets()) {
+				TextRange textRange = new TextRange(expandedOffset, expandedOffset + key.length());
+
+				TreeElement node = (TreeElement) findNode(textRange, parsed, true);
+
+				TreeElement next = null;
+				for (Pair<IElementType, String> symbol : value.getSymbols()) {
+					LeafPsiElement leaf = new LeafPsiElement(symbol.getFirst(), "");
+
+					if (next == null) {
+						TreeElement macroReference = (TreeElement) selectUpNodeIfMacroReference(node);
+
+						macroReference.rawInsertAfterMe(next = leaf);
+					} else {
+						next.rawInsertAfterMe(leaf);
+					}
+				}
+			}
+		}
+
 		for (Map.Entry<PreprocessorAction, TextRange> entry : myRanges.entrySet()) {
 			PreprocessorAction key = entry.getKey();
 			TextRange value = entry.getValue();
 
-			TreeElement node = (TreeElement) findNode(value, parsed);
+			TreeElement node = (TreeElement) findNode(value, parsed, false);
 
 
 			node.rawInsertBeforeMe(new CPreprocessorOuterLanguageElement(key.getSequence()));
-
-			System.out.println();
 		}
 	}
 
-	private static ASTNode findNode(TextRange textRange, ASTNode parsed) {
+	@NotNull
+	private static ASTNode selectUpNodeIfMacroReference(ASTNode node) {
+		if (node.getElementType() == CPsiTokens.IDENTIFIER) {
+			ASTNode treeParent = node.getTreeParent();
+			if (treeParent != null && treeParent.getPsi() instanceof CPreprocessorMacroReference) {
+				return treeParent;
+			}
+		}
+
+		return node;
+	}
+
+	private static ASTNode findNode(TextRange textRange, ASTNode parsed, boolean strict) {
 		ASTNode node = parsed;
 
 		while (node != null) {
-			if (textRange.contains(node.getStartOffset())) {
-				return node;
+			if (node instanceof LeafElement) {
+				if (strict) {
+					if (textRange.equals(node.getTextRange())) {
+						return node;
+					}
+				} else {
+					if (textRange.contains(node.getStartOffset())) {
+						return node;
+					}
+				}
+			} else {
+				for (ASTNode child = node.getFirstChildNode(); child != null; child = child.getTreeNext()) {
+					ASTNode result = findNode(textRange, child, strict);
+
+					if (result != null) {
+						return result;
+					}
+				}
 			}
 
 			node = node.getTreeNext();

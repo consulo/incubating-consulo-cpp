@@ -17,7 +17,7 @@ import java.util.List;
  * @since 21:20/2020-07-31
  */
 public class PreprocessorExpandPsiBuilder extends PsiBuilderAdapter {
-	private class ExpandedMacro {
+	private class ExpandedMacroPosition {
 		public int position;
 
 		public List<Pair<IElementType, String>> elements;
@@ -25,7 +25,7 @@ public class PreprocessorExpandPsiBuilder extends PsiBuilderAdapter {
 
 	private PreprocessorExpander myExpander;
 
-	private ExpandedMacro myExpandedMacro;
+	private ExpandedMacroPosition myExpandedMacroPosition;
 
 	public PreprocessorExpandPsiBuilder(@NotNull PsiBuilder delegate, PreprocessorExpander expander) {
 		super(delegate);
@@ -36,8 +36,8 @@ public class PreprocessorExpandPsiBuilder extends PsiBuilderAdapter {
 	public @Nullable IElementType getTokenType() {
 		lookForExpand();
 
-		if (myExpandedMacro != null) {
-			return myExpandedMacro.elements.get(myExpandedMacro.position).getFirst();
+		if (myExpandedMacroPosition != null) {
+			return myExpandedMacroPosition.elements.get(myExpandedMacroPosition.position).getFirst();
 		}
 		return super.getTokenType();
 	}
@@ -46,12 +46,12 @@ public class PreprocessorExpandPsiBuilder extends PsiBuilderAdapter {
 	public void advanceLexer() {
 		lookForExpand();
 
-		if (myExpandedMacro != null) {
-			myExpandedMacro.position++;
+		if (myExpandedMacroPosition != null) {
+			myExpandedMacroPosition.position++;
 
 			// macro finished
-			if (myExpandedMacro.position == myExpandedMacro.elements.size()) {
-				myExpandedMacro = null;
+			if (myExpandedMacroPosition.position == myExpandedMacroPosition.elements.size()) {
+				myExpandedMacroPosition = null;
 
 				Marker mark = super.mark();
 				super.advanceLexer(); // macro reference advance
@@ -66,11 +66,11 @@ public class PreprocessorExpandPsiBuilder extends PsiBuilderAdapter {
 		IElementType tokenType = super.getTokenType();
 
 		if (tokenType == CPsiTokens.IDENTIFIER) {
-			List<Pair<IElementType, String>> list = myExpander.tryToExpand(super.getTokenText());
+			ExpandedMacro expandedMacro = myExpander.tryToExpand(super.getTokenText(), super.getCurrentOffset());
 
-			if(list != null) {
-				myExpandedMacro = new ExpandedMacro();
-				myExpandedMacro.elements = list;
+			if(expandedMacro != null) {
+				myExpandedMacroPosition = new ExpandedMacroPosition();
+				myExpandedMacroPosition.elements = expandedMacro.getSymbols();
 			}
 		}
 	}
