@@ -16,7 +16,6 @@
 
 package org.napile.cpp4idea.lang.psi;
 
-import consulo.cpp.preprocessor.psi.CPsiSharpFile;
 import com.intellij.psi.PsiElement;
 
 /**
@@ -24,7 +23,5 @@ import com.intellij.psi.PsiElement;
  * @date 22:58/10.12.2011
  */
 public interface CPsiElement extends PsiElement {
-	CPsiFile getCFile();
 
-	CPsiSharpFile getSharpCFile();
 }

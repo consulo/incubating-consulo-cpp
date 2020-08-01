@@ -61,7 +61,11 @@ import java.util.List;
  * Modifications by VISTALL
  */
 public class CMainPsiBuilder extends UnprotectedUserDataHolder implements PsiBuilder {
+	@Deprecated
+	// not used. from prev macro draft
 	public static final Key<TextRange> ORIGINAL_TEXT_RANGE = Key.create("c-original-text-range");
+	@Deprecated
+	// not used. from prev macro draft
 	public static final Key<PsiElement> ORIGINAL_SINGLE_ELEMENT = Key.create("c-original-single-element");
 
 	private static final Logger LOG = Logger.getInstance(PsiBuilderImpl.class);

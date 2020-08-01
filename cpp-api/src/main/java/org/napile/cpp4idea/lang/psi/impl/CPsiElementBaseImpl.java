@@ -41,23 +41,7 @@ public class CPsiElementBaseImpl extends ASTWrapperPsiElement implements CPsiEle
 	}
 
 	@Override
-	public PsiManagerEx getManager() {
-		return super.getManager();
-	}
-
-	@Override
 	public String toString() {
 		return getClass().getSimpleName() + ": " + getText();
-	}
-
-	@Override
-	public CPsiFile getCFile() {
-		return PsiTreeUtil.getParentOfType(this, CPsiFile.class);
-	}
-
-	@Override
-	public CPsiSharpFile getSharpCFile() {
-		CPsiFile psiFile = getCFile();
-		return psiFile == null ? null : psiFile.getSharpCFile();
 	}
 }
