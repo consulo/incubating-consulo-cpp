@@ -41,10 +41,9 @@
 
 		<!--lang-->
 		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.lang.PairedBraceMatcherImpl"/>
-		<!--
-		disable since it's static highlight - can be wrong
+
 		<lang.syntaxHighlighterFactory language="C"
-									   implementationClass="org.napile.cpp4idea.ide.highlight.CSyntaxHighlighterFactory"/>-->
+									   implementationClass="org.napile.cpp4idea.ide.highlight.CSyntaxHighlighterFactory"/>
 		<lang.parserDefinition language="C"
 							   implementationClass="org.napile.cpp4idea.lang.parser.CParserDefinitionImpl"/>
 		<lang.foldingBuilder language="C" implementationClass="org.napile.cpp4idea.lang.FoldingBuilderImpl"/>

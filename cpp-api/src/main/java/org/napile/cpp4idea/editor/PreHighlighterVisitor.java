@@ -34,7 +34,7 @@ import com.intellij.psi.PsiElement;
  */
 public class PreHighlighterVisitor extends CPreprocessorRecursiveElementVisitor {
 	//FIXME [VISTALL] better
-	private static final CSyntaxHighlighter HIGHLIGHTER = new CSyntaxHighlighter(null, null);
+	private static final CSyntaxHighlighter HIGHLIGHTER = new CSyntaxHighlighter();
 
 	private final AnnotationHolder holder;
 	private final CPsiFile afterFile;

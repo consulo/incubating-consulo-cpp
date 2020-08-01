@@ -21,12 +21,9 @@ import com.intellij.lexer.Lexer;
 import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.tree.IElementType;
 import com.intellij.psi.tree.TokenSet;
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.lexer._CppLexer;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
 
@@ -35,7 +32,7 @@ import java.util.Map;
 
 /**
  * @author VISTALL
- * @date 5:06/10.12.2011
+ * @since 5:06/10.12.2011
  */
 public class CSyntaxHighlighter extends SyntaxHighlighterBase {
 	public static final TextAttributesKey KEYWORD = TextAttributesKey.createTextAttributesKey("C.KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
@@ -59,7 +56,7 @@ public class CSyntaxHighlighter extends SyntaxHighlighterBase {
 	public static final TextAttributesKey LINE_COMMENT = TextAttributesKey.createTextAttributesKey("C.LINE_COMMENT", DefaultLanguageHighlighterColors.LINE_COMMENT);
 	public static final TextAttributesKey BLOCK_COMMENT = TextAttributesKey.createTextAttributesKey("C.BLOCK_COMMENT", DefaultLanguageHighlighterColors.BLOCK_COMMENT);
 
-	public static final Map<IElementType, TextAttributesKey[]> ATTRIBUTES = new HashMap<IElementType, TextAttributesKey[]>();
+	public static final Map<IElementType, TextAttributesKey[]> ATTRIBUTES = new HashMap<>();
 
 	static {
 		fillMap(CPsiTokens.END_OF_LINE_COMMENT, LINE_COMMENT, LINE_COMMENT);
@@ -82,14 +79,6 @@ public class CSyntaxHighlighter extends SyntaxHighlighterBase {
 	private static void fillMap(TokenSet tokenSet, TextAttributesKey... keys) {
 		for (IElementType elementType : tokenSet.getTypes())
 			ATTRIBUTES.put(elementType, keys);
-	}
-
-	private final Project project;
-	private final VirtualFile virtualFile;
-
-	public CSyntaxHighlighter(@Nullable Project project, @Nullable VirtualFile virtualFile) {
-		this.project = project;
-		this.virtualFile = virtualFile;
 	}
 
 	@NotNull
