@@ -26,7 +26,6 @@ import com.intellij.openapi.vfs.VirtualFile;
 import com.intellij.psi.PsiElement;
 import com.intellij.util.PsiIconUtil;
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.parser.parsingMain.builder.CMainPsiBuilder;
 import org.napile.cpp4idea.lang.psi.CPsiDeclaration;
 
 import java.util.Collection;
@@ -63,12 +62,7 @@ public abstract class CBaseTreeNode<D extends CPsiDeclaration> extends ProjectVi
 
 		PsiElement nameIdentifier = declaration.getNameIdentifier();
 		if (nameIdentifier != null) {
-			PsiElement origNameElement = nameIdentifier.getUserData(CMainPsiBuilder.ORIGINAL_SINGLE_ELEMENT);
-			if (origNameElement == null) {
-				return;
-			}
-
-			NavigationUtil.activateFileWithPsiElement(origNameElement, true);
+			NavigationUtil.activateFileWithPsiElement(nameIdentifier, true);
 		}
 	}
 

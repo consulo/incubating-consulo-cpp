@@ -16,17 +16,14 @@
 
 package org.napile.cpp4idea.lang.psi;
 
-import com.intellij.openapi.util.Key;
+import com.intellij.psi.PsiFile;
 import org.jetbrains.annotations.NotNull;
-import consulo.cpp.preprocessor.psi.CPsiSharpFile;
 
 /**
  * @author VISTALL
  * @date 15:40/29.12.12
  */
-public interface CPsiFile extends CPsiElement {
-	Key<CPsiSharpFile> C_SHARP_FILE = Key.create("c-sharp-file");
-
+public interface CPsiFile extends PsiFile {
 	@NotNull
 	CPsiDeclaration[] getDeclarations();
 }

@@ -22,9 +22,7 @@ import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.project.Project;
 import com.intellij.psi.PsiFile;
 import org.napile.cpp4idea.ide.projectView.CProjectViewUtil;
-import org.napile.cpp4idea.lang.preprocessor.CPreprocessor;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
-import consulo.cpp.preprocessor.psi.CPsiSharpFile;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -42,17 +40,15 @@ public class CFileTreeNode extends PsiFileNode {
 
 	@Override
 	public Collection<AbstractTreeNode<?>> getChildrenImpl() {
-		CPsiSharpFile file = (CPsiSharpFile) getValue();
+		CPsiFile file = (CPsiFile) getValue();
 
 		if (file == null || !getSettings().isShowMembers()) {
 			return Collections.emptyList();
 		}
 
-		CPsiFile pFile = CPreprocessor.getAfterProcessedFile(file);
+		List<AbstractTreeNode<?>> result = new ArrayList<>();
 
-		List<AbstractTreeNode<?>> result = new ArrayList<AbstractTreeNode<?>>();
-
-		CProjectViewUtil.addChildren(getProject(), getSettings(), result, pFile.getDeclarations());
+		CProjectViewUtil.addChildren(getProject(), getSettings(), result, file.getDeclarations());
 		return result;
 	}
 }

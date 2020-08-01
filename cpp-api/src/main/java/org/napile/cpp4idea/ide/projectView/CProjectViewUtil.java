@@ -23,12 +23,10 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.ide.projectView.nodes.CClassTreeNode;
 import org.napile.cpp4idea.ide.projectView.nodes.CMethodTreeNode;
-import org.napile.cpp4idea.lang.preprocessor.CPreprocessor;
 import org.napile.cpp4idea.lang.psi.CPsiClass;
 import org.napile.cpp4idea.lang.psi.CPsiDeclaration;
 import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
-import consulo.cpp.preprocessor.psi.CPsiSharpFile;
 
 import java.util.List;
 
@@ -38,10 +36,8 @@ import java.util.List;
  */
 public class CProjectViewUtil {
 	@Nullable
-	public static CPsiClass findSingleClass(@NotNull CPsiSharpFile f) {
-		CPsiFile psiFile = CPreprocessor.getAfterProcessedFile(f);
-
-		CPsiDeclaration[] declarations = psiFile.getDeclarations();
+	public static CPsiClass findSingleClass(@NotNull CPsiFile f) {
+		CPsiDeclaration[] declarations = f.getDeclarations();
 		return declarations.length == 1 && declarations[0] instanceof CPsiClass ? (CPsiClass) declarations[0] : null;
 	}
 

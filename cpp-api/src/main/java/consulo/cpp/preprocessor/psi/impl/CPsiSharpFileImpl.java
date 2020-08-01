@@ -24,11 +24,10 @@ import consulo.cpp.preprocessor.CPreprocessorLanguage;
 import consulo.cpp.preprocessor.psi.CPsiSharpFile;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.CFileType;
 
 /**
  * @author VISTALL
- * @date 2:12/10.12.2011
+ * @since  2:12/10.12.2011
  */
 public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile {
 	public CPsiSharpFileImpl(@NotNull FileViewProvider viewProvider) {
@@ -38,7 +37,7 @@ public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile {
 	@NotNull
 	@Override
 	public FileType getFileType() {
-		return CFileType.INSTANCE;
+		return getVirtualFile().getFileType();
 	}
 
 	@Override
@@ -52,6 +51,6 @@ public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile {
 
 	@Override
 	public String toString() {
-		return "CPsiSharpFile:" + getVirtualFile().getName();
+		return "CPsiSharpFile:" + getViewProvider().getVirtualFile().getName();
 	}
 }
