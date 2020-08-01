@@ -16,14 +16,15 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiEnum;
 import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
 
 /**
  * @author VISTALL
@@ -44,12 +45,23 @@ public class CPsiEnumImpl extends CPsiElementBaseImpl implements CPsiEnum {
 	}
 
 	@Override
-	public PsiElement getNameElement() {
+	public String getName() {
+		PsiElement element = getNameIdentifier();
+		return element == null ? null : element.getText();
+	}
+
+	@Override
+	public PsiElement getNameIdentifier() {
 		return findChildByType(CPsiTokens.IDENTIFIER);
 	}
 
 	@Override
 	public CPsiEnumConstant[] getConstants() {
 		return findChildrenByClass(CPsiEnumConstant.class);
+	}
+
+	@Override
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
+		return null;
 	}
 }

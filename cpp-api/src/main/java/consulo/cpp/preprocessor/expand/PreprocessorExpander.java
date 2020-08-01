@@ -40,7 +40,7 @@ public class PreprocessorExpander {
 				CPsiSharpDefineValue value = element.getValue();
 				String text = element.getVariable().getNameElement().getText();
 
-				myDefines.put(text, new ExpandedMacro(parserDefinition, value.getNode().getChars()));
+				myDefines.put(text, new ExpandedMacro(parserDefinition, element, value.getNode().getChars()));
 			}
 		});
 	}
@@ -65,6 +65,11 @@ public class PreprocessorExpander {
 		}
 
 		return builder;
+	}
+
+	@Nullable
+	public ExpandedMacro getMacro(@NotNull String name) {
+		return myDefines.get(name);
 	}
 
 	@Nullable

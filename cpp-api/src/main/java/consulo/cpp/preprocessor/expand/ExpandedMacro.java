@@ -5,6 +5,7 @@ import com.intellij.lang.ParserDefinition;
 import com.intellij.lexer.Lexer;
 import com.intellij.openapi.util.Pair;
 import com.intellij.psi.tree.IElementType;
+import consulo.cpp.preprocessor.psi.CPsiSharpDefine;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +20,21 @@ public class ExpandedMacro {
 	private List<Pair<IElementType, String>> mySymbols = new ArrayList<>();
 
 	private ParserDefinition myParserDefinition;
+	private CPsiSharpDefine myElement;
 	private CharSequence myText;
 
 	private boolean myExpanded;
 
 	private Set<Integer> myExpandedOffsets = new TreeSet<>();
 
-	public ExpandedMacro(ParserDefinition parserDefinition, CharSequence text) {
+	public ExpandedMacro(ParserDefinition parserDefinition, CPsiSharpDefine element, CharSequence text) {
 		myParserDefinition = parserDefinition;
+		myElement = element;
 		myText = text;
+	}
+
+	public CPsiSharpDefine getElement() {
+		return myElement;
 	}
 
 	public int[] getExpandedOffsets() {

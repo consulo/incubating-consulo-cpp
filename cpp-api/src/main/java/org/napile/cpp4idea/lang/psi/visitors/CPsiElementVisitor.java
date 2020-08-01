@@ -1,11 +1,8 @@
 package org.napile.cpp4idea.lang.psi.visitors;
 
-import org.napile.cpp4idea.lang.psi.CPsiEnum;
-import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
-import org.napile.cpp4idea.lang.psi.CPsiFile;
-import org.napile.cpp4idea.lang.psi.CPsiImplementingMethod;
-import org.napile.cpp4idea.lang.psi.CPsiModifierList;
 import com.intellij.psi.PsiElementVisitor;
+import consulo.cpp.preprocessor.psi.CPreprocessorMacroReference;
+import org.napile.cpp4idea.lang.psi.*;
 
 /**
  * @author VISTALL
@@ -30,5 +27,9 @@ public class CPsiElementVisitor extends PsiElementVisitor {
 
 	public void visitModifierList(CPsiModifierList modifierList) {
 		visitElement(modifierList);
+	}
+
+	public void visitPreprocessorMacroReference(CPreprocessorMacroReference reference) {
+		visitElement(reference);
 	}
 }

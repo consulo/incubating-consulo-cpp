@@ -24,6 +24,8 @@
 	<category>Custom Languages</category>
 
 	<extensions defaultExtensionNs="com.intellij">
+		<highlightVisitor implementation="consulo.cpp.lang.editor.highlight.CHighlightVisitor" />
+
 		<lang.fileViewProviderFactory language="C"
 										  implementationClass="consulo.cpp.preprocessor.fileProvider.CFileViewProviderFactory"/>
 
@@ -36,8 +38,6 @@
 
 		<toolWindow id="Cpp4Idea Debug" icon="/org/napile/cpp4idea/napile-logo13.png" anchor="right"
 					factoryClass="org.napile.cpp4idea.ide.debugToolWindow.DebugToolWindowFactory"/>
-
-		<annotator language="C" implementationClass="org.napile.cpp4idea.editor.CHighlightAnnotator"/>
 
 		<!--lang-->
 		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.lang.PairedBraceMatcherImpl"/>
