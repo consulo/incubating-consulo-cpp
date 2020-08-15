@@ -11,7 +11,6 @@ import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.TokenType;
 import com.intellij.psi.tree.IFileElementType;
-import com.intellij.psi.tree.IStubFileElementType;
 import com.intellij.psi.tree.TokenSet;
 import consulo.cpp.preprocessor.CPreprocessorLanguage;
 import consulo.cpp.preprocessor.lexer._CPreprocessorLexer;
@@ -24,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
  * @since 20:35/2020-07-25
  */
 public class CPreprocessorParserDefinition implements ParserDefinition {
-	public static final IStubFileElementType FILE_TYPE = new IStubFileElementType(CPreprocessorLanguage.INSTANCE);
+	public static final IFileElementType FILE_TYPE = new IFileElementType(CPreprocessorLanguage.INSTANCE);
 
 	@Override
 	public @NotNull Lexer createLexer(Project project) {

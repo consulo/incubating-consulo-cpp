@@ -23,7 +23,7 @@ public class PreprocessorExpandPsiBuilder extends PsiBuilderAdapter {
 		public List<Pair<IElementType, String>> elements;
 	}
 
-	private PreprocessorExpander myExpander;
+	private final PreprocessorExpander myExpander;
 
 	private ExpandedMacroPosition myExpandedMacroPosition;
 

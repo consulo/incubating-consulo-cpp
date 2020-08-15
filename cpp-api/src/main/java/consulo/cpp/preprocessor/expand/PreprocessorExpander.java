@@ -2,17 +2,17 @@ package consulo.cpp.preprocessor.expand;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
+import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiFile;
 import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.impl.source.tree.TreeElement;
 import com.intellij.psi.tree.IElementType;
-import consulo.cpp.preprocessor.psi.CPreprocessorMacroReference;
 import consulo.cpp.preprocessor.psi.CPreprocessorDefineDirective;
+import consulo.cpp.preprocessor.psi.CPreprocessorMacroReference;
 import consulo.cpp.preprocessor.psi.CPsiSharpDefineValue;
 import consulo.cpp.preprocessor.psi.impl.CPreprocessorForeignLeafPsiElement;
-import consulo.cpp.preprocessor.psi.impl.CPreprocessorOuterLanguageElement;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorRecursiveElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -26,45 +26,35 @@ import java.util.Map;
  * @since 17:11/2020-07-31
  */
 public class PreprocessorExpander {
-	private final Map<PreprocessorAction, TextRange> myRanges = new LinkedHashMap<>();
+	public static final Key<PreprocessorExpander> EXPANDER_KEY = Key.create("PreprocessorExpander");
 
 	private final Map<String, ExpandedMacro> myDefines = new LinkedHashMap<>();
+
+	private final CTemplateDataModifications myModifications = new CTemplateDataModifications();
+
+	private final CPreprocessorDirectiveCollector rangeCollector = new CPreprocessorDirectiveCollector();
 
 	public PreprocessorExpander(PsiFile preprocessorFile, ParserDefinition parserDefinition) {
 		preprocessorFile.accept(new CPreprocessorRecursiveElementVisitor() {
 			@Override
 			public void visitSDefine(CPreprocessorDefineDirective element) {
 
-				myRanges.put(new DefineAction(element.getNode().getChars()), element.getTextRange());
-
 				CPsiSharpDefineValue value = element.getValue();
 				String text = element.getName();
+
+				myModifications.addOuterRange(element.getTextRange());
 
 				myDefines.put(text, new ExpandedMacro(parserDefinition, element, value.getNode().getChars()));
 			}
 		});
 	}
 
-	public StringBuilder buildText(CharSequence sequence) {
-		StringBuilder builder = new StringBuilder();
+	public CharSequence buildText(CharSequence sequence) {
+		return rangeCollector.applyTemplateDataModifications(sequence, myModifications);
+	}
 
-		// todo this is slow
-
-		loop:
-		for (int i = 0; i < sequence.length(); i++) {
-			// if element is preprocessor part - ignore
-			for (TextRange value : myRanges.values()) {
-				if (value.contains(i)) {
-					continue loop;
-				}
-			}
-
-			char c = sequence.charAt(i);
-
-			builder.append(c);
-		}
-
-		return builder;
+	public CPreprocessorDirectiveCollector getRangeCollector() {
+		return rangeCollector;
 	}
 
 	@Nullable
@@ -83,9 +73,17 @@ public class PreprocessorExpander {
 		return macro;
 	}
 
-	public void insert(ASTNode parsed) {
+	/**
+	 * Insert zero-length element after macro reference for normalize psi tree
+	 */
+	public void insertDummyNodes(TreeElement parsed) {
 		// we need insert dummy nodes before inserting outer elements, due it will change tree length
 		// this dummy nodes not change tree text length
+		int textLength = parsed.getTextLength();
+
+		// call it for parse file tree
+		parsed.getFirstChildNode();
+
 		for (Map.Entry<String, ExpandedMacro> entry : myDefines.entrySet()) {
 			String key = entry.getKey();
 			ExpandedMacro value = entry.getValue();
@@ -108,16 +106,6 @@ public class PreprocessorExpander {
 					}
 				}
 			}
-		}
-
-		for (Map.Entry<PreprocessorAction, TextRange> entry : myRanges.entrySet()) {
-			PreprocessorAction key = entry.getKey();
-			TextRange value = entry.getValue();
-
-			TreeElement node = (TreeElement) findNode(value, parsed, false);
-
-
-			node.rawInsertBeforeMe(new CPreprocessorOuterLanguageElement(key.getSequence()));
 		}
 	}
 

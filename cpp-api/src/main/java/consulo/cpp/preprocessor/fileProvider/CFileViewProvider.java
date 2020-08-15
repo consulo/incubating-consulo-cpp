@@ -42,7 +42,7 @@ public class CFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvid
 
 	@Override
 	protected @Nullable PsiFile createFile(@NotNull Language lang) {
-		if(lang == CPreprocessorLanguage.INSTANCE) {
+		if (lang == CPreprocessorLanguage.INSTANCE) {
 			return new CPsiSharpFileImpl(this);
 		}
 		return super.createFile(lang);
