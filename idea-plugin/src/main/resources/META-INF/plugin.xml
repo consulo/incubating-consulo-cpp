@@ -36,9 +36,6 @@
 
 		<fileTypeFactory implementation="org.napile.cpp4idea.CFileTypeFactory"/>
 
-		<toolWindow id="Cpp4Idea Debug" icon="/org/napile/cpp4idea/napile-logo13.png" anchor="right"
-					factoryClass="org.napile.cpp4idea.ide.debugToolWindow.DebugToolWindowFactory"/>
-
 		<!--lang-->
 		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.lang.PairedBraceMatcherImpl"/>
 
