@@ -53,6 +53,6 @@ public class CFileType extends LanguageFileType {
 
 	@Override
 	public Icon getIcon() {
-		return CIcons.SOURCE_FILE;
+		return CIcons.SourceFile;
 	}
 }

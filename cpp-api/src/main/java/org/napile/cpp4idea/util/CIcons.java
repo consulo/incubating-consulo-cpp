@@ -16,15 +16,16 @@
 
 package org.napile.cpp4idea.util;
 
-import javax.swing.Icon;
+import com.intellij.icons.AllIcons;
 
-import com.intellij.openapi.util.IconLoader;
+import javax.swing.*;
 
 /**
  * @author VISTALL
  * @date 2:29/10.12.2011
  */
 public interface CIcons {
-	public static final Icon SOURCE_FILE = IconLoader.getIcon("/org/napile/cpp4idea/icons/types/c.png");
-	public static final Icon HEADER_FILE = IconLoader.getIcon("/org/napile/cpp4idea/icons/types/h.png");
+	public static final Icon SourceFile = AllIcons.FileTypes.Custom;
+
+	public static final Icon HeaderFile = AllIcons.FileTypes.Custom;
 }

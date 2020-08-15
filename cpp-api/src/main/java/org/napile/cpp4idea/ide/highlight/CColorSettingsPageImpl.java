@@ -16,20 +16,19 @@
 
 package org.napile.cpp4idea.ide.highlight;
 
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.swing.Icon;
-
-import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.CBundle;
-import org.napile.cpp4idea.util.CIcons;
 import com.intellij.openapi.editor.colors.TextAttributesKey;
 import com.intellij.openapi.fileTypes.PlainSyntaxHighlighter;
 import com.intellij.openapi.fileTypes.SyntaxHighlighter;
 import com.intellij.openapi.options.colors.AttributesDescriptor;
 import com.intellij.openapi.options.colors.ColorDescriptor;
 import com.intellij.openapi.options.colors.ColorSettingsPage;
+import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.CBundle;
+import org.napile.cpp4idea.util.CIcons;
+
+import javax.swing.*;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author VISTALL
@@ -44,7 +43,7 @@ public class CColorSettingsPageImpl implements ColorSettingsPage {
 
 	@Override
 	public Icon getIcon() {
-		return CIcons.SOURCE_FILE;
+		return CIcons.SourceFile;
 	}
 
 	@NotNull

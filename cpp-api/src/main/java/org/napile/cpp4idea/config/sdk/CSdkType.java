@@ -79,6 +79,6 @@ public class CSdkType extends SdkType {
 
 	@Override
 	public Icon getIcon() {
-		return CIcons.SOURCE_FILE;
+		return CIcons.SourceFile;
 	}
 }
