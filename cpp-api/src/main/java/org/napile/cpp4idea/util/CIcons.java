@@ -25,7 +25,7 @@ import javax.swing.*;
  * @date 2:29/10.12.2011
  */
 public interface CIcons {
-	public static final Icon SourceFile = AllIcons.FileTypes.Custom;
+	Icon SourceFile = AllIcons.FileTypes.Custom;
 
-	public static final Icon HeaderFile = AllIcons.FileTypes.Custom;
+	Icon HeaderFile = AllIcons.FileTypes.Any_type;
 }
