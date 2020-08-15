@@ -27,8 +27,6 @@ import com.intellij.psi.tree.TokenSet;
  * @date 2:42/10.12.2011
  */
 public interface CPsiTokens extends TokenType, CPreprocessorTokenTypes {
-	IElementType C_PROCESSED_FILE_TYPE = new IElementType("C_PROCESSED_FILE_TYPE", CLanguage.INSTANCE);
-
 	IElementType IDENTIFIER = new CTokenImpl("IDENTIFIER");
 	IElementType NEW_LINE = new CTokenImpl("NEW_LINE");
 	// comments

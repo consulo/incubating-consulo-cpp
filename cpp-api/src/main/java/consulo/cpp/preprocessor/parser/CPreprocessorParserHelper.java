@@ -28,7 +28,7 @@ import org.napile.cpp4idea.lang.psi.CPsiTokens;
  * @author VISTALL
  * @date 13:36/29.12.12
  */
-public class InitialParserHelper implements CPsiTokens {
+public class CPreprocessorParserHelper implements CPsiTokens {
 	public static boolean isSet(int val, int constant) {
 		return (val & constant) != 0;
 	}
@@ -42,22 +42,6 @@ public class InitialParserHelper implements CPsiTokens {
 	public static void skipLines(PsiBuilder builder) {
 		while (builder.getTokenType() == NEW_LINE)
 			builder.advanceLexer();
-	}
-
-	public static IElementType lookAheadIgnoreLines(PsiBuilder builder, int step) {
-		while (!builder.eof()) {
-			IElementType elementType = builder.lookAhead(step);
-			if (elementType == null) {
-				break;
-			}
-
-			if (elementType == NEW_LINE) {
-				step++;
-			} else {
-				return elementType;
-			}
-		}
-		return null;
 	}
 
 	public static void doneOneToken(PsiBuilder builder, Class<? extends PsiElement> clazz) {

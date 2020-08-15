@@ -25,7 +25,7 @@ import org.jetbrains.annotations.NotNull;
  * @author VISTALL
  * @date 13:34/29.12.12
  */
-public class InitialParsing extends InitialParserHelper {
+public class CPreprocessorDirectiveParser extends CPreprocessorParserHelper {
 	public static final int EAT_LAST_END_IF = 1 << 0;
 
 	public static void parse(@NotNull PsiBuilder builder, int f) {

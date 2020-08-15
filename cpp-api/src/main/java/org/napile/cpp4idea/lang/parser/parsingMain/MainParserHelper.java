@@ -29,19 +29,15 @@ import com.intellij.psi.tree.IElementType;
  * @date 15:26/29.12.12
  */
 public class MainParserHelper implements CPsiTokens {
-	public static boolean isSet(int val, int constant) {
-		return (val & constant) != 0;
-	}
 
+	@Deprecated
 	public static void advanceLexerAndSkipLines(PsiBuilder builder) {
 		builder.advanceLexer();
-
-		skipLines(builder);
 	}
 
+	@Deprecated
 	public static void skipLines(PsiBuilder builder) {
-		while (builder.getTokenType() == NEW_LINE)
-			builder.advanceLexer();
+		// just remove usage of this method
 	}
 
 	public static IElementType lookAheadIgnoreLines(PsiBuilder builder, int step) {

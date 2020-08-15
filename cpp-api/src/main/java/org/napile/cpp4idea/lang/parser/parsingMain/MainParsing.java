@@ -27,25 +27,17 @@ import com.intellij.psi.tree.IElementType;
  * @date 14:26/11.12.2011
  */
 public class MainParsing extends MainParserHelper {
-	public static final int SILENT = 1 << 0;
 
-	public static void parseElement(@NotNull PsiBuilder builder, int flags) {
+	public static void parseElement(@NotNull PsiBuilder builder) {
 		while (!builder.eof()) {
-			skipLines(builder);
-
 			PsiBuilder.Marker marker = builder.mark();
 
 			Class<? extends CPsiElement> doneElement = parse(builder);
 			if (doneElement != null) {
 				done(marker, doneElement);
 			} else {
-				marker.drop();
-				if (!isSet(flags, SILENT)) {
-					builder.error("Unknown how to parse symbol " + builder.getTokenType());
-					builder.advanceLexer();
-				} else {
-					break;
-				}
+				builder.advanceLexer();
+				marker.error("Unexpected element");
 			}
 		}
 	}

@@ -21,7 +21,7 @@ import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.psi.tree.IElementType;
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.CDialect;
+import org.napile.cpp4idea.lang.parser.parsingMain.MainParsing;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
 
 /**
@@ -34,6 +34,16 @@ public class CPsiParserImpl implements PsiParser, CPsiTokens {
 	public ASTNode parse(IElementType root, PsiBuilder builder) {
 		builder.setDebugMode(true);
 
-		return CDialect.parseMain(builder, root);
+		return parseMain(builder, root);
+	}
+
+	public static ASTNode parseMain(PsiBuilder builder, IElementType root) {
+		PsiBuilder.Marker rootMarker = builder.mark();
+
+		MainParsing.parseElement(builder);
+
+		rootMarker.done(root);
+
+		return builder.getTreeBuilt();
 	}
 }

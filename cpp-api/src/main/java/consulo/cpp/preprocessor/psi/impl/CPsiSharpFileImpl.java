@@ -37,7 +37,7 @@ public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile {
 	@NotNull
 	@Override
 	public FileType getFileType() {
-		return getVirtualFile().getFileType();
+		return getViewProvider().getFileType();
 	}
 
 	@Override
