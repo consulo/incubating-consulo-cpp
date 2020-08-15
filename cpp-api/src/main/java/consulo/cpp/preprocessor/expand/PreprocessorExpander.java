@@ -2,10 +2,12 @@ package consulo.cpp.preprocessor.expand;
 
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
+import com.intellij.openapi.util.Couple;
 import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiFile;
+import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.impl.source.tree.TreeElement;
 import com.intellij.psi.tree.IElementType;
@@ -16,7 +18,6 @@ import consulo.cpp.preprocessor.psi.impl.CPreprocessorForeignLeafPsiElement;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorRecursiveElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.lang.psi.CPsiTokens;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -63,13 +64,13 @@ public class PreprocessorExpander {
 	}
 
 	@Nullable
-	public ExpandedMacro tryToExpand(String name, int startOffset) {
+	public ExpandedMacro tryToExpand(String name) {
 		ExpandedMacro macro = myDefines.get(name);
 		if (macro == null) {
 			return null;
 		}
 
-		macro.expand(startOffset);
+		macro.expand();
 		return macro;
 	}
 
@@ -88,37 +89,42 @@ public class PreprocessorExpander {
 			String key = entry.getKey();
 			ExpandedMacro value = entry.getValue();
 
-			for (int expandedOffset : value.getExpandedOffsets()) {
-				TextRange textRange = new TextRange(expandedOffset, expandedOffset + key.length());
+			for (PreprocessorSymbolDoneInfo doneInfo : value.getSymbolDoneInfos()) {
+				Pair<IElementType, String> symbol = entry.getValue().getSymbols().get(doneInfo.getTokenIndex());
+
+				int tokenOffset = doneInfo.getTokenOffset();
+
+				TextRange textRange = new TextRange(tokenOffset, tokenOffset + key.length());
 
 				TreeElement node = (TreeElement) findNode(textRange, parsed, true);
 
-				TreeElement next = null;
-				for (Pair<IElementType, String> symbol : value.getSymbols()) {
-					CPreprocessorForeignLeafPsiElement leaf = new CPreprocessorForeignLeafPsiElement(symbol.getFirst(), symbol.second);
+				Couple<TreeElement> forInsert = selectNodeForInsert(node, node, doneInfo.getDoneElementType());
 
-					if (next == null) {
-						TreeElement macroReference = (TreeElement) selectUpNodeIfMacroReference(node);
+				TreeElement parentIn = forInsert.getFirst();
 
-						macroReference.rawInsertAfterMe(next = leaf);
-					} else {
-						next.rawInsertAfterMe(leaf);
-					}
+				TreeElement childIn = forInsert.getSecond();
+
+				if (childIn.getPsi() instanceof CPreprocessorMacroReference) {
+					childIn.rawInsertAfterMe(new CPreprocessorForeignLeafPsiElement(symbol.getFirst(), symbol.second));
+				} else {
+					childIn.rawInsertBeforeMe(new CPreprocessorForeignLeafPsiElement(symbol.getFirst(), symbol.second));
 				}
 			}
 		}
 	}
 
-	@NotNull
-	private static ASTNode selectUpNodeIfMacroReference(ASTNode node) {
-		if (node.getElementType() == CPsiTokens.IDENTIFIER) {
-			ASTNode treeParent = node.getTreeParent();
-			if (treeParent != null && treeParent.getPsi() instanceof CPreprocessorMacroReference) {
-				return treeParent;
-			}
+	private static Couple<TreeElement> selectNodeForInsert(TreeElement element, TreeElement childElement, AstElementTypeId astElementTypeId) {
+		IElementType elementType = element.getElementType();
+
+		if (elementType == astElementTypeId.getElementType() && element.getStartOffset() == astElementTypeId.getStartOffset()) {
+			return Couple.of(element, childElement);
 		}
 
-		return node;
+		CompositeElement treeParent = element.getTreeParent();
+		if (treeParent == null) {
+			return null;
+		}
+		return selectNodeForInsert(treeParent, element, astElementTypeId);
 	}
 
 	private static ASTNode findNode(TextRange textRange, ASTNode parsed, boolean strict) {
