@@ -46,7 +46,7 @@ public class CPreprocessorMacroReferenceImpl extends ASTWrapperPsiElement implem
 
 	@Override
 	public @NotNull PsiElement getElement() {
-		return getReferenceElement();
+		return this;
 	}
 
 	@Override
