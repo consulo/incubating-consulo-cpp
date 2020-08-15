@@ -18,25 +18,28 @@
 	<id>cpp.idea</id>
 	<name>C/C++</name>
 	<description>Support for C/C++ language.</description>
-	<version>1.0</version>
+	<version>SNAPSHOT</version>
 	<vendor>napile.org</vendor>
 	<resource-bundle>org.napile.cpp4idea.CBundle</resource-bundle>
 	<category>Custom Languages</category>
 
 	<extensions defaultExtensionNs="com.intellij">
+		<highlightVisitor implementation="consulo.cpp.lang.editor.highlight.CHighlightVisitor" />
+
+		<lang.fileViewProviderFactory language="C"
+										  implementationClass="consulo.cpp.preprocessor.fileProvider.CFileViewProviderFactory"/>
+
+		<lang.parserDefinition language="CPreprocessor"
+							   implementationClass="consulo.cpp.preprocessor.parser.CPreprocessorParserDefinition"/>
 
 		<additionalTextAttributes scheme="Default" file="/org/napile/cpp4idea/editor/color/Default.xml"/>
 
 		<fileTypeFactory implementation="org.napile.cpp4idea.CFileTypeFactory"/>
 
-		<toolWindow id="Cpp4Idea Debug" icon="/org/napile/cpp4idea/napile-logo13.png" anchor="right"
-					factoryClass="org.napile.cpp4idea.ide.debugToolWindow.DebugToolWindowFactory"/>
-
-		<annotator language="C" implementationClass="org.napile.cpp4idea.editor.CHighlightAnnotator"/>
-
 		<!--lang-->
 		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.lang.PairedBraceMatcherImpl"/>
-		<lang.syntaxHighlighterFactory key="C"
+
+		<lang.syntaxHighlighterFactory language="C"
 									   implementationClass="org.napile.cpp4idea.ide.highlight.CSyntaxHighlighterFactory"/>
 		<lang.parserDefinition language="C"
 							   implementationClass="org.napile.cpp4idea.lang.parser.CParserDefinitionImpl"/>

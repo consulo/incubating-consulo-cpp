@@ -28,8 +28,7 @@ import com.intellij.psi.tree.IElementType;
 %eof{  return;
 %eof}
 
-WHITE_SPACE_CHAR=[\ \r\t\f]
-NEW_LINE_CHAR=[\n]
+WHITE_SPACE_CHAR=[\ \r\t\f\n]
 
 IDENTIFIER=[:jletter:] [:jletterdigit:]*
 
@@ -72,13 +71,11 @@ HEX_SIGNIFICAND={HEX_INTEGER_LITERAL}|{HEX_INTEGER_LITERAL}.|0[Xx]{HEX_DIGITS}?.
 
 CHARACTER_LITERAL="'"([^\\\'\r\n]|{ESCAPE_SEQUENCE})*("'"|\\)?
 STRING_LITERAL=\"([^\\\"\r\n]|{ESCAPE_SEQUENCE})*(\"|\\)?
-STRING_INCLUDE_LITERAL=\<([^\\\<\r\n]|{ESCAPE_SEQUENCE})*(\>|\\)?
 ESCAPE_SEQUENCE=\\[^\r\n]
 
 %%
 
 <YYINITIAL> {WHITE_SPACE_CHAR}+ { return CPsiTokens.WHITE_SPACE; }
-<YYINITIAL> {NEW_LINE_CHAR} { return CPsiTokens.NEW_LINE; }
 
 <YYINITIAL> {C_STYLE_COMMENT} { return CPsiTokens.C_STYLE_COMMENT; }
 <YYINITIAL> {END_OF_LINE_COMMENT} { return CPsiTokens.END_OF_LINE_COMMENT; }
@@ -93,12 +90,6 @@ ESCAPE_SEQUENCE=\\[^\r\n]
 <YYINITIAL> {CHARACTER_LITERAL} { return CPsiTokens.CHARACTER_LITERAL; }
 <YYINITIAL> {STRING_LITERAL} { return CPsiTokens.STRING_LITERAL; }
 
-<YYINITIAL> "#include" { return CPsiTokens.S_INCLUDE_KEYWORD; }
-<YYINITIAL> "#define" { return CPsiTokens.S_DEFINE_KEYWORD; }
-<YYINITIAL> "#ifndef" { return CPsiTokens.S_IFNDEF_KEYWORD; }
-<YYINITIAL> "#ifdef" { return CPsiTokens.S_IFDEF_KEYWORD; }
-<YYINITIAL> "#endif" { return CPsiTokens.S_ENDIF_KEYWORD; }
-<YYINITIAL> "#else" { return CPsiTokens.S_ELSE_KEYWORD; }
 <YYINITIAL> "break" { return CPsiTokens.BREAK_KEYWORD; }
 <YYINITIAL> "case" { return CPsiTokens.CASE_KEYWORD; }
 <YYINITIAL> "class" { return CPsiTokens.CLASS_KEYWORD; }
@@ -189,7 +180,5 @@ ESCAPE_SEQUENCE=\\[^\r\n]
 <YYINITIAL> "^" { return CPsiTokens.XOR; }
 <YYINITIAL> "%" { return CPsiTokens.PERC; }
 <YYINITIAL> "@" { return CPsiTokens.AT; }
-
-<YYINITIAL> {STRING_INCLUDE_LITERAL} { return CPsiTokens.STRING_INCLUDE_LITERAL; }
 
 <YYINITIAL> . { return CPsiTokens.BAD_CHARACTER; }

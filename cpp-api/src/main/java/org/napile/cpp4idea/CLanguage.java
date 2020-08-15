@@ -17,6 +17,7 @@
 package org.napile.cpp4idea;
 
 import com.intellij.lang.Language;
+import org.jetbrains.annotations.NotNull;
 
 /**
  * @author VISTALL
@@ -25,10 +26,11 @@ import com.intellij.lang.Language;
 public class CLanguage extends Language {
 	public static final Language INSTANCE = new CLanguage();
 
-	public CLanguage() {
+	private CLanguage() {
 		super("C");
 	}
 
+	@NotNull
 	@Override
 	public String getDisplayName() {
 		return "C/C++";

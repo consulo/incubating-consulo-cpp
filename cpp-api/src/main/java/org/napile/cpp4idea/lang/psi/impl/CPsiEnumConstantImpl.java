@@ -16,14 +16,15 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import com.intellij.lang.ASTNode;
+import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiElementVisitor;
+import com.intellij.util.IncorrectOperationException;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
 import org.napile.cpp4idea.lang.psi.CPsiExpression;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
 
 /**
  * @author VISTALL
@@ -44,7 +45,13 @@ public class CPsiEnumConstantImpl extends CPsiElementBaseImpl implements CPsiEnu
 	}
 
 	@Override
-	public PsiElement getNameElement() {
+	public String getName() {
+		PsiElement element = getNameIdentifier();
+		return element == null ? null : element.getText();
+	}
+
+	@Override
+	public PsiElement getNameIdentifier() {
 		return findChildByType(CPsiTokens.IDENTIFIER);
 	}
 
@@ -54,19 +61,7 @@ public class CPsiEnumConstantImpl extends CPsiElementBaseImpl implements CPsiEnu
 	}
 
 	@Override
-	public boolean equals(Object o) {
-		if (o == null || !(o instanceof CPsiEnumConstant)) {
-			return false;
-		}
-
-		PsiElement nameElement = getNameElement();
-		if (nameElement == null) {
-			return false;
-		}
-		PsiElement nameElement2 = ((CPsiEnumConstant) o).getNameElement();
-		if (nameElement2 == null) {
-			return false;
-		}
-		return nameElement.equals(nameElement2);
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
+		return null;
 	}
 }

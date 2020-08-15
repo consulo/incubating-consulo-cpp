@@ -16,12 +16,12 @@
 
 package org.napile.cpp4idea.lang.psi;
 
-import com.intellij.psi.PsiElement;
+import com.intellij.psi.PsiNameIdentifierOwner;
+import com.intellij.psi.PsiNamedElement;
 
 /**
  * @author VISTALL
  * @date 18:07/14.12.2011
  */
-public interface CPsiNameElementOwner extends CPsiElement {
-	PsiElement getNameElement();
+public interface CPsiNameElementOwner extends CPsiElement, PsiNameIdentifierOwner, PsiNamedElement {
 }

@@ -16,121 +16,23 @@
 
 package org.napile.cpp4idea.lang.preprocessor;
 
-import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.Key;
 import com.intellij.psi.PsiElement;
-import com.intellij.psi.util.CachedValueProvider;
-import com.intellij.psi.util.CachedValuesManager;
-import com.intellij.psi.util.PsiModificationTracker;
+import consulo.cpp.preprocessor.psi.CPsiSharpFile;
 import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.lang.CDialect;
-import org.napile.cpp4idea.lang.parser.parsingMain.builder.CMainPsiBuilder;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
-import org.napile.cpp4idea.lang.psi.CPsiTokens;
-import org.napile.cpp4idea.lang.psiInitial.*;
-import org.napile.cpp4idea.lang.psiInitial.visitors.CSharpPsiElementVisitor;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author VISTALL
  * @date 11:07/30.12.12
  */
+@Deprecated
+// not used - old draft
 public class CPreprocessor {
 	public static Key<Boolean> ACTIVE_BLOCK = Key.create("c-active-block");
 
 	@Nullable
 	public static CPsiFile getAfterProcessedFile(PsiElement psiElement) {
-		CPsiSharpFile containingFile = (CPsiSharpFile) psiElement.getContainingFile();
-		return CachedValuesManager.getCachedValue(containingFile, () -> CachedValueProvider.Result.create(preProcess(containingFile), PsiModificationTracker.MODIFICATION_COUNT));
-	}
-
-	@Nullable
-	public static CPsiFile preProcess(CPsiSharpFile element) {
-		final List<PsiElement> elements = new ArrayList<>();
-		final Map<String, List<PsiElement>> define = new HashMap<>();
-
-		CSharpPsiElementVisitor recursiveElementVisitor = new CSharpPsiElementVisitor() {
-			@Override
-			public void visitSFile(CPsiSharpFile file) {
-				file.acceptChildren(this);
-			}
-
-			@Override
-			public void visitElement(PsiElement element) {
-				if (element.getNode().getElementType() == CPsiTokens.IDENTIFIER) {
-					List<PsiElement> defineElements = define.get(element.getText());
-					if (defineElements != null) {
-						elements.addAll(defineElements);
-						return;
-					}
-				}
-				elements.add(element);
-			}
-
-			@Override
-			public void visitSDefine(CPsiSharpDefine element) {
-				CPsiCompilerVariable variable = element.getVariable();
-				CPsiSharpDefineValue value = element.getValue();
-				if (variable != null && value != null) {
-					define.put(variable.getText(), collectChildren(value));
-				}
-			}
-
-			@Override
-			public void visitSIfDef(CPsiSharpIfDef element) {
-				CPsiCompilerVariable variable = element.getVariable();
-				if (variable == null) {
-					return;
-				}
-
-				boolean isActive = define.containsKey(variable.getText()) && !element.isReverted() || !define.containsKey(variable.getText()) && element.isReverted();
-
-				CPsiSharpIfBody body = isActive ? element.getBody() : element.getElseBody();
-				CPsiSharpIfBody elseBody = isActive ? element.getElseBody() : element.getBody();
-
-				if (body != null) {
-					body.putUserData(ACTIVE_BLOCK, Boolean.TRUE);
-
-					body.acceptChildren(this);
-				}
-
-				if (elseBody != null) {
-					elseBody.putUserData(ACTIVE_BLOCK, null);
-				}
-			}
-
-			@Override
-			public void visitSInclude(CPsiSharpInclude element) {
-
-			}
-
-			@Override
-			public void visitSIndependInclude(CPsiSharpIndepInclude element) {
-
-			}
-		};
-		element.accept(recursiveElementVisitor);
-
-		CMainPsiBuilder builder = new CMainPsiBuilder(element.getProject(), elements);
-
-		ASTNode node = CDialect.parseMain(builder, CPsiTokens.C_PROCESSED_FILE_TYPE);
-
-		node.putUserData(CPsiFile.C_SHARP_FILE, element);
-
-		return (CPsiFile) node.getPsi();
-	}
-
-	private static List<PsiElement> collectChildren(PsiElement e) {
-		List<PsiElement> list = new ArrayList<PsiElement>();
-		PsiElement child = e.getFirstChild();
-		while (child != null) {
-			list.add(child);
-			child = child.getNextSibling();
-		}
-		return list;
+		return null;
 	}
 }

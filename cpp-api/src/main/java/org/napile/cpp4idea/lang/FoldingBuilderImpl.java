@@ -16,23 +16,20 @@
 
 package org.napile.cpp4idea.lang;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.preprocessor.CPreprocessor;
-import org.napile.cpp4idea.lang.psi.CPsiFile;
-import org.napile.cpp4idea.lang.psi.CPsiImplementingMethod;
-import org.napile.cpp4idea.lang.psi.visitors.CPsiRecursiveElementVisitor;
-import org.napile.cpp4idea.lang.psiInitial.CPsiSharpFile;
-import org.napile.cpp4idea.lang.psiInitial.CPsiSharpIfDef;
-import org.napile.cpp4idea.lang.psiInitial.visitors.CSharpPsiRecursiveElementVisitor;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.folding.FoldingBuilder;
 import com.intellij.lang.folding.FoldingDescriptor;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.psi.PsiElement;
+import consulo.cpp.preprocessor.psi.CPsiSharpIfDef;
+import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.lang.psi.CPsiFile;
+import org.napile.cpp4idea.lang.psi.CPsiImplementingMethod;
+import org.napile.cpp4idea.lang.psi.visitors.CPsiRecursiveElementVisitor;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author VISTALL
@@ -45,31 +42,29 @@ public class FoldingBuilderImpl implements FoldingBuilder, DumbAware {
 	@Override
 	public FoldingDescriptor[] buildFoldRegions(@NotNull ASTNode node, @NotNull Document document) {
 		PsiElement element = node.getPsi();
-		if (element instanceof CPsiSharpFile) {
-			CPsiFile psiFile = CPreprocessor.getAfterProcessedFile(element);
+		if (element instanceof CPsiFile) {
+			CPsiFile psiFile = (CPsiFile) element;
 
-			final List<FoldingDescriptor> list = new ArrayList<FoldingDescriptor>();
+			final List<FoldingDescriptor> list = new ArrayList<>();
 
-			element.accept(new CSharpPsiRecursiveElementVisitor() {
+//			element.accept(new CPreprocessorRecursiveElementVisitor() {
+//				@Override
+//				public void visitSIfDef(CPsiSharpIfDef element) {
+//					if (element.getVariable() != null) {
+//						list.add(new FoldingDescriptor(element, element.getTextRange()));
+//					}
+//					super.visitSIfDef(element);
+//				}
+//			});
+
+			psiFile.accept(new CPsiRecursiveElementVisitor() {
 				@Override
-				public void visitSIfDef(CPsiSharpIfDef element) {
-					if (element.getVariable() != null) {
-						list.add(new FoldingDescriptor(element, element.getTextRange()));
-					}
-					super.visitSIfDef(element);
+				public void visitImplementingMethod(CPsiImplementingMethod element) {
+					//list.add(new FoldingDescriptor(element, HighlightUtil.findOriginalRange(element)));
+
+					super.visitImplementingMethod(element);
 				}
 			});
-
-			if (psiFile != null) {
-				psiFile.accept(new CPsiRecursiveElementVisitor() {
-					@Override
-					public void visitImplementingMethod(CPsiImplementingMethod element) {
-						//list.add(new FoldingDescriptor(element, HighlightUtil.findOriginalRange(element)));
-
-						super.visitImplementingMethod(element);
-					}
-				});
-			}
 
 			return list.toArray(new FoldingDescriptor[list.size()]);
 		} else {
