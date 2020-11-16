@@ -15,7 +15,7 @@ import com.intellij.psi.tree.TokenSet;
 import consulo.cpp.preprocessor.CPreprocessorLanguage;
 import consulo.cpp.preprocessor.lexer._CPreprocessorLexer;
 import consulo.cpp.preprocessor.psi.CPsiSharpTokenImpl;
-import consulo.cpp.preprocessor.psi.impl.CPsiSharpFileImpl;
+import consulo.cpp.preprocessor.psi.impl.CPreprocessorFileImpl;
 import org.jetbrains.annotations.NotNull;
 
 /**
@@ -68,6 +68,6 @@ public class CPreprocessorParserDefinition implements ParserDefinition {
 
 	@Override
 	public PsiFile createFile(FileViewProvider viewProvider) {
-		return new CPsiSharpFileImpl(viewProvider);
+		return new CPreprocessorFileImpl(viewProvider);
 	}
 }

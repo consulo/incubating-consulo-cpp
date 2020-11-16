@@ -19,7 +19,7 @@ package consulo.cpp.preprocessor.psi.impl;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
 import consulo.cpp.preprocessor.psi.CPsiSharpIfBody;
-import consulo.cpp.preprocessor.psi.CPsiSharpIfDef;
+import consulo.cpp.preprocessor.psi.CPreprocessorIfBlock;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElementVisitor;
@@ -48,7 +48,7 @@ public class CPsiSharpIfBodyImpl extends CPsiElementBaseImpl implements CPsiShar
 	}
 
 	@Override
-	public CPsiSharpIfDef getIfDef() {
-		return (CPsiSharpIfDef) getParent();
+	public CPreprocessorIfBlock getIfDef() {
+		return (CPreprocessorIfBlock) getParent();
 	}
 }

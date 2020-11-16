@@ -25,7 +25,7 @@ import com.intellij.psi.PsiElementVisitor;
  * @since 13:07/16.12.2011
  */
 public class CPreprocessorElementVisitor extends PsiElementVisitor {
-	public void visitSFile(CPsiSharpFile file) {
+	public void visitPreprocessorFile(CPreprocessorFile file) {
 		visitFile(file);
 	}
 
@@ -45,7 +45,7 @@ public class CPreprocessorElementVisitor extends PsiElementVisitor {
 		visitSElement(element);
 	}
 
-	public void visitSIfDef(CPsiSharpIfDef element) {
+	public void visitPreprocessorIfBlock(CPreprocessorIfBlock element) {
 		visitSElement(element);
 	}
 

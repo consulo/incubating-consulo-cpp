@@ -148,6 +148,6 @@ public class CPreprocessorDirectiveParser extends CPreprocessorParserHelper {
 		}
 		checkMatchesWithoutLines(builder, S_ENDIF_KEYWORD, "S_END_IF.expected");
 
-		done(marker, CPsiSharpIfDef.class);
+		done(marker, CPreprocessorIfBlock.class);
 	}
 }

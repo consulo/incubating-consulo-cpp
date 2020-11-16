@@ -22,7 +22,7 @@ import com.intellij.lang.folding.FoldingDescriptor;
 import com.intellij.openapi.editor.Document;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.psi.PsiElement;
-import consulo.cpp.preprocessor.psi.CPsiSharpIfDef;
+import consulo.cpp.preprocessor.psi.CPreprocessorIfBlock;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
 import org.napile.cpp4idea.lang.psi.CPsiImplementingMethod;
@@ -75,8 +75,8 @@ public class FoldingBuilderImpl implements FoldingBuilder, DumbAware {
 	@Override
 	public String getPlaceholderText(@NotNull ASTNode node) {
 		PsiElement element = node.getPsi();
-		if (element instanceof CPsiSharpIfDef) {
-			return (((CPsiSharpIfDef) element).isReverted() ? "#ifndef " : "#ifdef ") + ((CPsiSharpIfDef) element).getVariable().getText() + "\n";
+		if (element instanceof CPreprocessorIfBlock) {
+			return (((CPreprocessorIfBlock) element).isReverted() ? "#ifndef " : "#ifdef ") + ((CPreprocessorIfBlock) element).getVariable().getText() + "\n";
 		} else if (element instanceof CPsiImplementingMethod) {
 			return "{....}";
 		}

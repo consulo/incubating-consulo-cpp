@@ -23,5 +23,5 @@ package consulo.cpp.preprocessor.psi;
 public interface CPsiSharpIfBody extends CPreprocessorElement {
 	boolean isElseBody();
 
-	CPsiSharpIfDef getIfDef();
+	CPreprocessorIfBlock getIfDef();
 }
