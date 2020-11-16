@@ -17,15 +17,14 @@
 package org.napile.cpp4idea.util;
 
 import com.intellij.icons.AllIcons;
-
-import javax.swing.*;
+import consulo.ui.image.Image;
 
 /**
  * @author VISTALL
  * @date 2:29/10.12.2011
  */
 public interface CIcons {
-	Icon SourceFile = AllIcons.FileTypes.Custom;
+	Image SourceFile = AllIcons.FileTypes.Custom;
 
-	Icon HeaderFile = AllIcons.FileTypes.Any_type;
+	Image HeaderFile = AllIcons.FileTypes.Any_type;
 }

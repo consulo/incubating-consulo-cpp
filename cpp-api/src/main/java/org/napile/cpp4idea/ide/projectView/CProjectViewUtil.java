@@ -41,7 +41,7 @@ public class CProjectViewUtil {
 		return declarations.length == 1 && declarations[0] instanceof CPsiClass ? (CPsiClass) declarations[0] : null;
 	}
 
-	public static void addChildren(Project p, ViewSettings viewSettings, List<AbstractTreeNode<?>> list, CPsiDeclaration[] declarations) {
+	public static void addChildren(Project p, ViewSettings viewSettings, List<AbstractTreeNode> list, CPsiDeclaration[] declarations) {
 		for (CPsiDeclaration declaration : declarations) {
 			if (declaration instanceof CPsiClass) {
 				list.add(new CClassTreeNode(p, (CPsiClass) declaration, viewSettings));

@@ -21,7 +21,6 @@ import com.intellij.ide.projectView.ViewSettings;
 import com.intellij.ide.util.treeView.AbstractTreeNode;
 import com.intellij.openapi.project.DumbAware;
 import com.intellij.psi.PsiElement;
-import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.ide.projectView.nodes.CClassTreeNode;
 import org.napile.cpp4idea.ide.projectView.nodes.CFileTreeNode;
@@ -36,13 +35,17 @@ import java.util.List;
  * @author VISTALL
  * @date 17:19/07.01.13
  */
-public class CProjectViewProvider implements SelectableTreeStructureProvider, DumbAware {
+public class CProjectViewProvider implements SelectableTreeStructureProvider, DumbAware
+{
 	@Nullable
 	@Override
-	public PsiElement getTopLevelElement(PsiElement element) {
-		if (element instanceof CPsiFile) {
+	public PsiElement getTopLevelElement(PsiElement element)
+	{
+		if(element instanceof CPsiFile)
+		{
 			CPsiClass clazz = CProjectViewUtil.findSingleClass(((CPsiFile) element));
-			if (clazz != null) {
+			if(clazz != null)
+			{
 				return clazz;
 			}
 			return element;
@@ -51,21 +54,29 @@ public class CProjectViewProvider implements SelectableTreeStructureProvider, Du
 	}
 
 	@Override
-	public @NotNull Collection<AbstractTreeNode<?>> modify(AbstractTreeNode<?> parent, Collection<AbstractTreeNode<?>> children, ViewSettings settings) {
-		List<AbstractTreeNode<?>> result = new ArrayList<>(children.size());
+	public Collection<AbstractTreeNode> modify(AbstractTreeNode parent, Collection<AbstractTreeNode> children, ViewSettings settings)
+	{
+		List<AbstractTreeNode> result = new ArrayList<>(children.size());
 
-		for (AbstractTreeNode<?> child : children) {
+		for(AbstractTreeNode<?> child : children)
+		{
 			Object childValue = child.getValue();
 
-			if (childValue instanceof CPsiFile) {
+			if(childValue instanceof CPsiFile)
+			{
 				CPsiFile file = (CPsiFile) childValue;
 				CPsiClass clazz = CProjectViewUtil.findSingleClass(((CPsiFile) childValue));
-				if (clazz != null) {
+				if(clazz != null)
+				{
 					result.add(new CClassTreeNode(file.getProject(), clazz, settings));
-				} else {
+				}
+				else
+				{
 					result.add(new CFileTreeNode(file.getProject(), file, settings));
 				}
-			} else {
+			}
+			else
+			{
 				result.add(child);
 			}
 		}

@@ -41,11 +41,6 @@ public class CColorSettingsPageImpl implements ColorSettingsPage {
 		return "C/C++";
 	}
 
-	@Override
-	public Icon getIcon() {
-		return CIcons.SourceFile;
-	}
-
 	@NotNull
 	@Override
 	public AttributesDescriptor[] getAttributeDescriptors() {

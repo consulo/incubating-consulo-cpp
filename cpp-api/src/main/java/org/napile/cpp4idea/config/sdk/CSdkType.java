@@ -17,6 +17,7 @@
 package org.napile.cpp4idea.config.sdk;
 
 import com.intellij.openapi.projectRoots.*;
+import consulo.ui.image.Image;
 import org.jdom.Element;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.config.sdk.sdkdialect.SdkDialect;
@@ -37,10 +38,6 @@ public class CSdkType extends SdkType {
 		super("C");
 	}
 
-	@Override
-	public @Nullable String suggestHomePath() {
-		return null;
-	}
 
 	@Override
 	public boolean isValidSdkHome(String path) {
@@ -78,7 +75,7 @@ public class CSdkType extends SdkType {
 	}
 
 	@Override
-	public Icon getIcon() {
+	public Image getIcon() {
 		return CIcons.SourceFile;
 	}
 }

@@ -20,12 +20,11 @@ import consulo.cpp.preprocessor.CPreprocessorLanguage;
 import consulo.cpp.preprocessor.expand.CPreprocessorDirectiveCollector;
 import consulo.cpp.preprocessor.expand.PreprocessorExpander;
 import consulo.cpp.preprocessor.fileProvider.CFileViewProvider;
+import consulo.ui.image.Image;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.CLanguage;
-
-import javax.swing.*;
 
 /**
  * @author VISTALL
@@ -134,7 +133,7 @@ public class CFileElementType extends IStubFileElementType<PsiFileStub<PsiFile>>
 
 		@Override
 		@Nullable
-		public Icon getIcon() {
+		public Image getIcon() {
 			return null;
 		}
 

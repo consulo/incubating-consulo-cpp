@@ -1,5 +1,0 @@
-rootProject.name = 'cpp.idea'
-include 'cpp.api'
-project(':cpp.api').projectDir = file('cpp-api')
-include 'cpp.ide.plugin'
-project(':cpp.ide.plugin').projectDir = file('idea-plugin')

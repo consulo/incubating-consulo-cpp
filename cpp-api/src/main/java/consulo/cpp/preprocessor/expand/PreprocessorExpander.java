@@ -3,7 +3,6 @@ package consulo.cpp.preprocessor.expand;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.openapi.util.Couple;
-import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiFile;
@@ -14,6 +13,7 @@ import com.intellij.psi.tree.IElementType;
 import consulo.cpp.preprocessor.psi.*;
 import consulo.cpp.preprocessor.psi.impl.CPreprocessorForeignLeafPsiElement;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorRecursiveElementVisitor;
+import consulo.util.dataholder.Key;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
