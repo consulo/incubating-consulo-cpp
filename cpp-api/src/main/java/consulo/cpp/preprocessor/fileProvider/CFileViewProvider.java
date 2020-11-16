@@ -7,7 +7,7 @@ import com.intellij.psi.PsiFile;
 import com.intellij.psi.PsiManager;
 import com.intellij.util.containers.ContainerUtil;
 import consulo.cpp.preprocessor.CPreprocessorLanguage;
-import consulo.cpp.preprocessor.psi.impl.CPsiSharpFileImpl;
+import consulo.cpp.preprocessor.psi.impl.CPreprocessorFileImpl;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.CLanguage;
@@ -43,7 +43,7 @@ public class CFileViewProvider extends MultiplePsiFilesPerDocumentFileViewProvid
 	@Override
 	protected @Nullable PsiFile createFile(@NotNull Language lang) {
 		if (lang == CPreprocessorLanguage.INSTANCE) {
-			return new CPsiSharpFileImpl(this);
+			return new CPreprocessorFileImpl(this);
 		}
 		return super.createFile(lang);
 	}

@@ -22,6 +22,6 @@ import com.intellij.psi.PsiFile;
  * @author VISTALL
  * @date 1:07/10.12.2011
  */
-public interface CPsiSharpFile extends PsiFile {
+public interface CPreprocessorFile extends PsiFile {
 
 }

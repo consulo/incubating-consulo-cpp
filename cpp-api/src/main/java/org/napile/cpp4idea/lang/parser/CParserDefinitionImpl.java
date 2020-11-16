@@ -21,7 +21,6 @@ import com.intellij.lang.ParserDefinition;
 import com.intellij.lang.PsiParser;
 import com.intellij.lexer.FlexAdapter;
 import com.intellij.lexer.Lexer;
-import com.intellij.openapi.project.Project;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiFile;
@@ -30,6 +29,7 @@ import com.intellij.psi.tree.TokenSet;
 import consulo.cpp.lang.psi.impl.CFileElementType;
 import consulo.cpp.lang.psi.impl.CFileImpl;
 import consulo.cpp.preprocessor.psi.CPsiSharpTokenImpl;
+import consulo.lang.LanguageVersion;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.lexer._CppLexer;
 import org.napile.cpp4idea.lang.psi.CPsiTokenImpl;
@@ -44,13 +44,13 @@ import javax.annotation.Nonnull;
 public class CParserDefinitionImpl implements ParserDefinition {
 	@NotNull
 	@Override
-	public Lexer createLexer(Project project) {
+	public Lexer createLexer(LanguageVersion languageVersion) {
 		return new FlexAdapter(new _CppLexer());
 	}
 
 	@Nonnull
 	@Override
-	public PsiParser createParser(Project project) {
+	public PsiParser createParser(LanguageVersion languageVersion) {
 		return new CPsiParserImpl();
 	}
 
@@ -61,19 +61,19 @@ public class CParserDefinitionImpl implements ParserDefinition {
 
 	@NotNull
 	@Override
-	public TokenSet getWhitespaceTokens() {
+	public TokenSet getWhitespaceTokens(LanguageVersion languageVersion) {
 		return CPsiTokens.WHITE_SPACE_SET;
 	}
 
 	@NotNull
 	@Override
-	public TokenSet getCommentTokens() {
+	public TokenSet getCommentTokens(LanguageVersion languageVersion) {
 		return CPsiTokens.COMMENT_SET;
 	}
 
 	@NotNull
 	@Override
-	public TokenSet getStringLiteralElements() {
+	public TokenSet getStringLiteralElements(LanguageVersion languageVersion) {
 		return CPsiTokens.STRING_LITERAL_SET;
 	}
 

@@ -6,7 +6,6 @@ import com.intellij.lang.Language;
 import com.intellij.openapi.application.ApplicationManager;
 import com.intellij.openapi.diagnostic.Attachment;
 import com.intellij.openapi.diagnostic.Logger;
-import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.openapi.util.text.StringUtil;
 import com.intellij.psi.impl.source.tree.*;
@@ -15,6 +14,7 @@ import com.intellij.psi.templateLanguages.TreePatcher;
 import com.intellij.util.CharTable;
 import com.intellij.util.containers.ContainerUtil;
 import consulo.cpp.preprocessor.psi.impl.CPreprocessorOuterLanguageElement;
+import consulo.util.dataholder.Key;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 

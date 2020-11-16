@@ -14,8 +14,8 @@
   ~ limitations under the License.
   -->
 
-<idea-plugin>
-	<id>cpp.idea</id>
+<consulo-plugin>
+	<id>consulo.cpp</id>
 	<name>C/C++</name>
 	<description>Support for C/C++ language.</description>
 	<version>SNAPSHOT</version>
@@ -46,7 +46,7 @@
 		<lang.foldingBuilder language="C" implementationClass="org.napile.cpp4idea.lang.FoldingBuilderImpl"/>
 		<lang.commenter language="C" implementationClass="org.napile.cpp4idea.lang.CommenterImpl"/>
 
-		<iconProvider implementation="consulo.cpp.impl.CppIconProvider"/>
+		<iconDescriptorUpdater implementation="consulo.cpp.impl.CppIconProvider"/>
 		<treeStructureProvider implementation="org.napile.cpp4idea.ide.projectView.CProjectViewProvider"/>
 	</extensions>
-</idea-plugin>
+</consulo-plugin>

@@ -19,10 +19,10 @@ package consulo.cpp.preprocessor.psi.impl;
 import com.intellij.lang.ASTNode;
 import com.intellij.psi.PsiElement;
 import com.intellij.psi.PsiElementVisitor;
+import consulo.cpp.preprocessor.psi.CPreprocessorIfBlock;
 import consulo.cpp.preprocessor.psi.CPreprocessorMacroReference;
 import consulo.cpp.preprocessor.psi.CPreprocessorTokenTypes;
 import consulo.cpp.preprocessor.psi.CPsiSharpIfBody;
-import consulo.cpp.preprocessor.psi.CPsiSharpIfDef;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -32,8 +32,8 @@ import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
  * @author VISTALL
  * @date 14:07/11.12.2011
  */
-public class CPsiSharpIfDefImpl extends CPsiElementBaseImpl implements CPsiSharpIfDef {
-	public CPsiSharpIfDefImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
+public class CPreprocessorIfBlockImpl extends CPsiElementBaseImpl implements CPreprocessorIfBlock {
+	public CPreprocessorIfBlockImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
 		super(node);
 	}
 
@@ -75,7 +75,7 @@ public class CPsiSharpIfDefImpl extends CPsiElementBaseImpl implements CPsiSharp
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor) {
 		if (visitor instanceof CPreprocessorElementVisitor) {
-			((CPreprocessorElementVisitor) visitor).visitSIfDef(this);
+			((CPreprocessorElementVisitor) visitor).visitPreprocessorIfBlock(this);
 		} else {
 			super.accept(visitor);
 		}

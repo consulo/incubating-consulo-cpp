@@ -21,7 +21,7 @@ import com.intellij.openapi.fileTypes.FileType;
 import com.intellij.psi.FileViewProvider;
 import com.intellij.psi.PsiElementVisitor;
 import consulo.cpp.preprocessor.CPreprocessorLanguage;
-import consulo.cpp.preprocessor.psi.CPsiSharpFile;
+import consulo.cpp.preprocessor.psi.CPreprocessorFile;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
 import org.jetbrains.annotations.NotNull;
 
@@ -29,8 +29,8 @@ import org.jetbrains.annotations.NotNull;
  * @author VISTALL
  * @since  2:12/10.12.2011
  */
-public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile {
-	public CPsiSharpFileImpl(@NotNull FileViewProvider viewProvider) {
+public class CPreprocessorFileImpl extends PsiFileBase implements CPreprocessorFile {
+	public CPreprocessorFileImpl(@NotNull FileViewProvider viewProvider) {
 		super(viewProvider, CPreprocessorLanguage.INSTANCE);
 	}
 
@@ -43,7 +43,7 @@ public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile {
 	@Override
 	public void accept(@NotNull PsiElementVisitor visitor) {
 		if (visitor instanceof CPreprocessorElementVisitor) {
-			((CPreprocessorElementVisitor) visitor).visitSFile(this);
+			((CPreprocessorElementVisitor) visitor).visitPreprocessorFile(this);
 		} else {
 			super.accept(visitor);
 		}
@@ -51,6 +51,6 @@ public class CPsiSharpFileImpl extends PsiFileBase implements CPsiSharpFile {
 
 	@Override
 	public String toString() {
-		return "CPsiSharpFile:" + getViewProvider().getVirtualFile().getName();
+		return "CPreprocessorFile:" + getViewProvider().getVirtualFile().getName();
 	}
 }

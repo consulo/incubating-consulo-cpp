@@ -3,7 +3,6 @@ package consulo.cpp.preprocessor.expand;
 import com.intellij.lang.ASTNode;
 import com.intellij.lang.ParserDefinition;
 import com.intellij.openapi.util.Couple;
-import com.intellij.openapi.util.Key;
 import com.intellij.openapi.util.Pair;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.psi.PsiFile;
@@ -11,11 +10,10 @@ import com.intellij.psi.impl.source.tree.CompositeElement;
 import com.intellij.psi.impl.source.tree.LeafElement;
 import com.intellij.psi.impl.source.tree.TreeElement;
 import com.intellij.psi.tree.IElementType;
-import consulo.cpp.preprocessor.psi.CPreprocessorDefineDirective;
-import consulo.cpp.preprocessor.psi.CPreprocessorMacroReference;
-import consulo.cpp.preprocessor.psi.CPsiSharpDefineValue;
+import consulo.cpp.preprocessor.psi.*;
 import consulo.cpp.preprocessor.psi.impl.CPreprocessorForeignLeafPsiElement;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorRecursiveElementVisitor;
+import consulo.util.dataholder.Key;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -46,6 +44,23 @@ public class PreprocessorExpander {
 				myModifications.addOuterRange(element.getTextRange());
 
 				myDefines.put(text, new ExpandedMacro(parserDefinition, element, value.getNode().getChars()));
+			}
+
+			@Override
+			public void visitPreprocessorIfBlock(CPreprocessorIfBlock element) {
+				super.visitPreprocessorIfBlock(element);
+			}
+
+			@Override
+			public void visitSInclude(CPsiSharpInclude element) {
+				// todo file including
+				myModifications.addOuterRange(element.getTextRange());
+			}
+
+			@Override
+			public void visitSIndependInclude(CPsiSharpIndepInclude element) {
+				// todo file including
+				myModifications.addOuterRange(element.getTextRange());
 			}
 		});
 	}

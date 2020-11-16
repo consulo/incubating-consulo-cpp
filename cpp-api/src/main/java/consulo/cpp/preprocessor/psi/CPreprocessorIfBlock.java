@@ -23,7 +23,7 @@ import com.intellij.psi.PsiElement;
  * @author VISTALL
  * @date 14:06/11.12.2011
  */
-public interface CPsiSharpIfDef extends CPreprocessorElement {
+public interface CPreprocessorIfBlock extends CPreprocessorElement {
 	CPreprocessorMacroReference getVariable();
 
 	@Nullable

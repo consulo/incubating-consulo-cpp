@@ -39,14 +39,14 @@ public class CFileTreeNode extends PsiFileNode {
 	}
 
 	@Override
-	public Collection<AbstractTreeNode<?>> getChildrenImpl() {
+	public Collection<AbstractTreeNode> getChildrenImpl() {
 		CPsiFile file = (CPsiFile) getValue();
 
 		if (file == null || !getSettings().isShowMembers()) {
 			return Collections.emptyList();
 		}
 
-		List<AbstractTreeNode<?>> result = new ArrayList<>();
+		List<AbstractTreeNode> result = new ArrayList<>();
 
 		CProjectViewUtil.addChildren(getProject(), getSettings(), result, file.getDeclarations());
 		return result;

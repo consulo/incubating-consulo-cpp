@@ -1,11 +1,10 @@
 package consulo.cpp.lang;
 
 import com.intellij.openapi.fileTypes.LanguageFileType;
+import consulo.ui.image.Image;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.util.CIcons;
-
-import javax.swing.*;
 
 /**
  * @author VISTALL
@@ -20,7 +19,7 @@ public class CHeaderFileFile extends LanguageFileType {
 
 	@NotNull
 	@Override
-	public String getName() {
+	public String getId() {
 		return "C_Header";
 	}
 
@@ -37,7 +36,7 @@ public class CHeaderFileFile extends LanguageFileType {
 	}
 
 	@Override
-	public Icon getIcon() {
+	public Image getIcon() {
 		return CIcons.HeaderFile;
 	}
 }

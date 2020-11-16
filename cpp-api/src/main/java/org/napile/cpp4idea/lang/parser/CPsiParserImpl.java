@@ -20,6 +20,7 @@ import com.intellij.lang.ASTNode;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.PsiParser;
 import com.intellij.psi.tree.IElementType;
+import consulo.lang.LanguageVersion;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.parser.parsingMain.MainParsing;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
@@ -31,7 +32,7 @@ import org.napile.cpp4idea.lang.psi.CPsiTokens;
 public class CPsiParserImpl implements PsiParser, CPsiTokens {
 	@NotNull
 	@Override
-	public ASTNode parse(IElementType root, PsiBuilder builder) {
+	public ASTNode parse(IElementType root, PsiBuilder builder, LanguageVersion languageVersion) {
 		builder.setDebugMode(true);
 
 		return parseMain(builder, root);

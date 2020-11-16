@@ -1,7 +1,7 @@
 /.idea
 /out
 /.consulo
-/target
+target/
 .consulo/sandbox
 build/
 .gradle/
