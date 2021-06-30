@@ -22,6 +22,7 @@
 	<vendor>napile.org</vendor>
 	<resource-bundle>org.napile.cpp4idea.CBundle</resource-bundle>
 	<category>Custom Languages</category>
+	<experimental>true</experimental>
 
 	<extensions defaultExtensionNs="com.intellij">
 		<highlightVisitor implementation="consulo.cpp.lang.editor.highlight.CHighlightVisitor" />

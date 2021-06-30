@@ -18,6 +18,7 @@ package consulo.cpp.preprocessor.expand;
 import com.intellij.lang.PsiBuilder;
 import com.intellij.lang.WhitespacesAndCommentsBinder;
 import com.intellij.psi.tree.IElementType;
+import consulo.localize.LocalizeValue;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -75,19 +76,19 @@ public abstract class DelegateMarker implements PsiBuilder.Marker
 	}
 
 	@Override
-	public void doneBefore(@NotNull IElementType type, @NotNull PsiBuilder.Marker before, @NotNull String errorMessage)
+	public void doneBefore(@NotNull IElementType type, @NotNull PsiBuilder.Marker before, @NotNull LocalizeValue errorMessage)
 	{
 		myDelegate.doneBefore(type, before, errorMessage);
 	}
 
 	@Override
-	public void error(@NotNull String message)
+	public void error(@NotNull LocalizeValue message)
 	{
 		myDelegate.error(message);
 	}
 
 	@Override
-	public void errorBefore(@NotNull String message, @NotNull PsiBuilder.Marker before)
+	public void errorBefore(@NotNull LocalizeValue message, @NotNull PsiBuilder.Marker before)
 	{
 		myDelegate.errorBefore(message, before);
 	}

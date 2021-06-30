@@ -6,6 +6,7 @@ import com.intellij.openapi.util.Pair;
 import com.intellij.psi.tree.IElementType;
 import consulo.cpp.preprocessor.parser.CPreprocessorParserHelper;
 import consulo.cpp.preprocessor.psi.CPreprocessorMacroReference;
+import consulo.localize.LocalizeValue;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
@@ -95,7 +96,7 @@ public class PreprocessorExpandPsiBuilder extends PsiBuilderAdapter
 		}
 
 		@Override
-		public void doneBefore(@NotNull IElementType type, @NotNull Marker before, @NotNull String errorMessage)
+		public void doneBefore(@NotNull IElementType type, @NotNull Marker before, @NotNull LocalizeValue errorMessage)
 		{
 			super.doneBefore(type, before, errorMessage);
 
