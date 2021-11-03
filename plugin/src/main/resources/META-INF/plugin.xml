@@ -24,6 +24,11 @@
 	<category>Custom Languages</category>
 	<experimental>true</experimental>
 
+	<tags>
+		<tag>custom.language</tag>
+		<tag>experimental</tag>
+	</tags>
+
 	<extensions defaultExtensionNs="com.intellij">
 		<highlightVisitor implementation="consulo.cpp.lang.editor.highlight.CHighlightVisitor" />
 
