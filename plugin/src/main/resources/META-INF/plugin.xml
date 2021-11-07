@@ -26,7 +26,6 @@
 
 	<tags>
 		<tag>custom.language</tag>
-		<tag>experimental</tag>
 	</tags>
 
 	<extensions defaultExtensionNs="com.intellij">
