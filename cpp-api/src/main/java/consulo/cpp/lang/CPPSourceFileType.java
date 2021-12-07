@@ -11,11 +11,11 @@ import javax.annotation.Nonnull;
  * @author VISTALL
  * @since 18:15/2020-08-15
  */
-public class CSourceFileType extends LanguageFileType
+public class CPPSourceFileType extends LanguageFileType
 {
-	public static final CSourceFileType INSTANCE = new CSourceFileType();
+	public static final CPPSourceFileType INSTANCE = new CPPSourceFileType();
 
-	public CSourceFileType()
+	public CPPSourceFileType()
 	{
 		super(CLanguage.INSTANCE);
 	}
@@ -24,27 +24,27 @@ public class CSourceFileType extends LanguageFileType
 	@Override
 	public String getId()
 	{
-		return "C_SOURCE";
+		return "CPP_SOURCE";
 	}
 
 	@Nonnull
 	@Override
 	public String getDescription()
 	{
-		return "C source file";
+		return "C++ source file";
 	}
 
 	@Nonnull
 	@Override
 	public String getDefaultExtension()
 	{
-		return "c";
+		return "cpp";
 	}
 
 	@Nonnull
 	@Override
 	public Image getIcon()
 	{
-		return CppApiIconGroup.fileTypeC();
+		return CppApiIconGroup.fileTypeCpp();
 	}
 }

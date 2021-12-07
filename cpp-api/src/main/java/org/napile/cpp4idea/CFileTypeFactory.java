@@ -16,20 +16,28 @@
 
 package org.napile.cpp4idea;
 
-import consulo.cpp.lang.CHeaderFileFile;
-import consulo.cpp.lang.CSourceFileType;
-import org.jetbrains.annotations.NotNull;
 import com.intellij.openapi.fileTypes.FileTypeConsumer;
 import com.intellij.openapi.fileTypes.FileTypeFactory;
+import consulo.cpp.lang.CHeaderFileType;
+import consulo.cpp.lang.CPPHeaderFileType;
+import consulo.cpp.lang.CPPSourceFileType;
+import consulo.cpp.lang.CSourceFileType;
+
+import javax.annotation.Nonnull;
 
 /**
  * @author VISTALL
  * @date 1:03/10.12.2011
  */
-public class CFileTypeFactory extends FileTypeFactory {
+public class CFileTypeFactory extends FileTypeFactory
+{
 	@Override
-	public void createFileTypes(@NotNull FileTypeConsumer consumer) {
-		consumer.consume(CSourceFileType.INSTANCE, "c;cpp");
-		consumer.consume(CHeaderFileFile.INSTANCE, "h;hpp");
+	public void createFileTypes(@Nonnull FileTypeConsumer consumer)
+	{
+		consumer.consume(CSourceFileType.INSTANCE);
+		consumer.consume(CPPSourceFileType.INSTANCE);
+
+		consumer.consume(CHeaderFileType.INSTANCE);
+		consumer.consume(CPPHeaderFileType.INSTANCE);
 	}
 }

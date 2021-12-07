@@ -3,48 +3,49 @@ package consulo.cpp.lang;
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import consulo.cpp.api.icon.CppApiIconGroup;
 import consulo.ui.image.Image;
+import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CLanguage;
 
 import javax.annotation.Nonnull;
 
 /**
  * @author VISTALL
- * @since 18:15/2020-08-15
+ * @since 18:16/2020-08-15
  */
-public class CSourceFileType extends LanguageFileType
+public class CHeaderFileType extends LanguageFileType
 {
-	public static final CSourceFileType INSTANCE = new CSourceFileType();
+	public static final CHeaderFileType INSTANCE = new CHeaderFileType();
 
-	public CSourceFileType()
+	public CHeaderFileType()
 	{
 		super(CLanguage.INSTANCE);
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getId()
 	{
-		return "C_SOURCE";
+		return "C_HEADER";
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getDescription()
 	{
-		return "C source file";
+		return "C header file";
 	}
 
-	@Nonnull
+	@NotNull
 	@Override
 	public String getDefaultExtension()
 	{
-		return "c";
+		return "h";
 	}
 
 	@Nonnull
 	@Override
 	public Image getIcon()
 	{
-		return CppApiIconGroup.fileTypeC();
+		return CppApiIconGroup.fileTypeH();
 	}
 }
