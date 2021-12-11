@@ -2,6 +2,7 @@ package consulo.cpp.lang;
 
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import consulo.cpp.api.icon.CppApiIconGroup;
+import consulo.localize.LocalizeValue;
 import consulo.ui.image.Image;
 import org.napile.cpp4idea.CLanguage;
 
@@ -29,9 +30,9 @@ public class CPPSourceFileType extends LanguageFileType
 
 	@Nonnull
 	@Override
-	public String getDescription()
+	public LocalizeValue getDescription()
 	{
-		return "C++ source file";
+		return LocalizeValue.localizeTODO("C++ source file");
 	}
 
 	@Nonnull

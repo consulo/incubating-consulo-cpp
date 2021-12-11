@@ -20,6 +20,7 @@ import consulo.cpp.preprocessor.CPreprocessorLanguage;
 import consulo.cpp.preprocessor.expand.CPreprocessorDirectiveCollector;
 import consulo.cpp.preprocessor.expand.PreprocessorExpander;
 import consulo.cpp.preprocessor.fileProvider.CFileViewProvider;
+import consulo.localize.LocalizeValue;
 import consulo.ui.image.Image;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
@@ -127,8 +128,8 @@ public class CFileElementType extends IStubFileElementType<PsiFileStub<PsiFile>>
 		@Override
 		@NotNull
 		@NonNls
-		public String getDescription() {
-			return "fake for language" + myLanguage.getID();
+		public LocalizeValue getDescription() {
+			return LocalizeValue.localizeTODO("fake for language" + myLanguage.getID());
 		}
 
 		@Override
@@ -140,7 +141,7 @@ public class CFileElementType extends IStubFileElementType<PsiFileStub<PsiFile>>
 		@Override
 		@NotNull
 		@NonNls
-		public String getName() {
+		public String getId() {
 			return myLanguage.getID();
 		}
 	}

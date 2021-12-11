@@ -2,6 +2,7 @@ package consulo.cpp.lang;
 
 import com.intellij.openapi.fileTypes.LanguageFileType;
 import consulo.cpp.api.icon.CppApiIconGroup;
+import consulo.localize.LocalizeValue;
 import consulo.ui.image.Image;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CLanguage;
@@ -30,9 +31,9 @@ public class CHeaderFileType extends LanguageFileType
 
 	@NotNull
 	@Override
-	public String getDescription()
+	public LocalizeValue getDescription()
 	{
-		return "C header file";
+		return LocalizeValue.localizeTODO("C header file");
 	}
 
 	@NotNull
