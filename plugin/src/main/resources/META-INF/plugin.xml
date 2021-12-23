@@ -14,7 +14,7 @@
   - limitations under the License.
   -->
 
-<consulo-plugin>
+<consulo-plugin url="https://github.com/consulo/incubating-consulo-cpp">
 	<id>consulo.cpp</id>
 	<name>C/C++</name>
 	<description>Support for C/C++ language.</description>
