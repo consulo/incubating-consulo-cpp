@@ -20,6 +20,7 @@ package org.napile.cpp4idea.lang.psi;
  * @author VISTALL
  * @date 17:41/14.12.2011
  */
-public interface CPsiEnum extends CPsiNameElementOwner {
+public interface CPsiEnum extends CPsiNameElementOwner
+{
 	CPsiEnumConstant[] getConstants();
 }

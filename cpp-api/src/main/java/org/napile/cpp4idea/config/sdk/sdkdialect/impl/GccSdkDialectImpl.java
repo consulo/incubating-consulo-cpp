@@ -22,13 +22,16 @@ import org.napile.cpp4idea.config.sdk.sdkdialect.SdkDialect;
  * @author VISTALL
  * @date 16:45/12.12.2011
  */
-public class GccSdkDialectImpl extends SdkDialect {
-	public GccSdkDialectImpl(String name) {
+public class GccSdkDialectImpl extends SdkDialect
+{
+	public GccSdkDialectImpl(String name)
+	{
 		super(name);
 	}
 
 	@Override
-	public boolean isSupported(String path) {
+	public boolean isSupported(String path)
+	{
 		return false;
 	}
 

@@ -16,14 +16,15 @@
 
 package org.napile.cpp4idea.lang.psi;
 
-import com.intellij.psi.PsiFile;
+import consulo.language.psi.PsiFile;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * @author VISTALL
  * @date 15:40/29.12.12
  */
-public interface CPsiFile extends PsiFile {
+public interface CPsiFile extends PsiFile
+{
 	@NotNull
 	CPsiDeclaration[] getDeclarations();
 }

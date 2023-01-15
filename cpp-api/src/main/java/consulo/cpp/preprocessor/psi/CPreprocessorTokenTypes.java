@@ -16,14 +16,15 @@
 
 package consulo.cpp.preprocessor.psi;
 
+import consulo.language.ast.IElementType;
 import org.napile.cpp4idea.lang.psi.CTokenImpl;
-import com.intellij.psi.tree.IElementType;
 
 /**
  * @author VISTALL
  * @date 13:37/29.12.12
  */
-public interface CPreprocessorTokenTypes {
+public interface CPreprocessorTokenTypes
+{
 	// sharp keywords
 	IElementType S_INCLUDE_KEYWORD = new CTokenImpl("S_INCLUDE_KEYWORD"); // #include
 	IElementType S_DEFINE_KEYWORD = new CTokenImpl("S_DEFINE_KEYWORD"); // #define

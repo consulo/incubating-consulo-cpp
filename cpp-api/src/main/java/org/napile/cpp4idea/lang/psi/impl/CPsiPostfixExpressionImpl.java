@@ -16,8 +16,8 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import consulo.language.ast.ASTNode;
 import org.napile.cpp4idea.lang.psi.CPsiPostfixExpression;
-import com.intellij.lang.ASTNode;
 
 /**
  * @author VISTALL

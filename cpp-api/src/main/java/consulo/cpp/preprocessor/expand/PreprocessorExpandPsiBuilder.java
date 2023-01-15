@@ -1,12 +1,12 @@
 package consulo.cpp.preprocessor.expand;
 
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.impl.PsiBuilderAdapter;
-import com.intellij.openapi.util.Pair;
-import com.intellij.psi.tree.IElementType;
 import consulo.cpp.preprocessor.parser.CPreprocessorParserHelper;
 import consulo.cpp.preprocessor.psi.CPreprocessorMacroReference;
+import consulo.language.ast.IElementType;
+import consulo.language.parser.PsiBuilder;
+import consulo.language.parser.PsiBuilderAdapter;
 import consulo.localize.LocalizeValue;
+import consulo.util.lang.Pair;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;

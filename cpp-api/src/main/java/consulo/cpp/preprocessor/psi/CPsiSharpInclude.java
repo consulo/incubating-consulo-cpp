@@ -16,13 +16,14 @@
 
 package consulo.cpp.preprocessor.psi;
 
-import com.intellij.psi.PsiElement;
+import consulo.language.psi.PsiElement;
 
 /**
  * @author VISTALL
  * @date 1:53/11.12.2011
  */
-public interface CPsiSharpInclude extends CPreprocessorElement {
+public interface CPsiSharpInclude extends CPreprocessorElement
+{
 	PsiElement getIncludeElement();
 
 	String getIncludeName();

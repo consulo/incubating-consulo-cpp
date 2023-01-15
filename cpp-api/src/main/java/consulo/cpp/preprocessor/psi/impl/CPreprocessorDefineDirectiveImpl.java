@@ -16,13 +16,13 @@
 
 package consulo.cpp.preprocessor.psi.impl;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.util.IncorrectOperationException;
 import consulo.cpp.preprocessor.psi.CPreprocessorDefineDirective;
 import consulo.cpp.preprocessor.psi.CPsiSharpDefineValue;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.util.IncorrectOperationException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
@@ -32,44 +32,57 @@ import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
  * @author VISTALL
  * @date 7:23/11.12.2011
  */
-public class CPreprocessorDefineDirectiveImpl extends CPsiElementBaseImpl implements CPreprocessorDefineDirective {
-	public CPreprocessorDefineDirectiveImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
+public class CPreprocessorDefineDirectiveImpl extends CPsiElementBaseImpl implements CPreprocessorDefineDirective
+{
+	public CPreprocessorDefineDirectiveImpl(@org.jetbrains.annotations.NotNull ASTNode node)
+	{
 		super(node);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CPreprocessorElementVisitor) {
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof CPreprocessorElementVisitor)
+		{
 			((CPreprocessorElementVisitor) visitor).visitSDefine(this);
-		} else {
+		}
+		else
+		{
 			super.accept(visitor);
 		}
 	}
 
 	@Override
-	public String getName() {
+	public String getName()
+	{
 		PsiElement nameIdentifier = getNameIdentifier();
 		return nameIdentifier == null ? null : nameIdentifier.getText();
 	}
 
 	@Override
-	public CPsiSharpDefineValue getValue() {
+	public CPsiSharpDefineValue getValue()
+	{
 		return findChildByClass(CPsiSharpDefineValue.class);
 	}
 
 	@Override
-	public int getTextOffset() {
+	public int getTextOffset()
+	{
 		PsiElement nameIdentifier = getNameIdentifier();
 		return nameIdentifier == null ? super.getTextOffset() : nameIdentifier.getTextOffset();
 	}
 
 	@Override
-	public @Nullable PsiElement getNameIdentifier() {
+	public
+	@Nullable
+	PsiElement getNameIdentifier()
+	{
 		return findChildByType(CPsiTokens.IDENTIFIER);
 	}
 
 	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+	{
 		return null;
 	}
 }

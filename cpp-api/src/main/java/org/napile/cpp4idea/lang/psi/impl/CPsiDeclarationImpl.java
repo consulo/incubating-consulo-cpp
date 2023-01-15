@@ -16,38 +16,43 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElement;
+import consulo.language.util.IncorrectOperationException;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.psi.CPsiDeclaration;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.util.IncorrectOperationException;
 
 /**
  * @author VISTALL
  * @date 17:42/07.01.13
  */
-public class CPsiDeclarationImpl extends CPsiElementBaseImpl implements CPsiDeclaration {
-	public CPsiDeclarationImpl(@NotNull ASTNode node) {
+public class CPsiDeclarationImpl extends CPsiElementBaseImpl implements CPsiDeclaration
+{
+	public CPsiDeclarationImpl(@NotNull ASTNode node)
+	{
 		super(node);
 	}
 
 	@Nullable
 	@Override
-	public PsiElement getNameIdentifier() {
+	public PsiElement getNameIdentifier()
+	{
 		return findChildByType(CPsiTokens.IDENTIFIER);
 	}
 
 	@Override
-	public String getName() {
+	public String getName()
+	{
 		PsiElement element = getNameIdentifier();
 		return element == null ? null : element.getText();
 	}
 
 	@Override
-	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException {
+	public PsiElement setName(@NonNls @NotNull String name) throws IncorrectOperationException
+	{
 		return null;
 	}
 }

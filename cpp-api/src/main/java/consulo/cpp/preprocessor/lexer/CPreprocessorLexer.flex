@@ -1,10 +1,10 @@
 /* It's an automatically generated code. Do not modify it. */
 package consulo.cpp.preprocessor.lexer;
 
-import org.napile.cpp4idea.lang.psi.CPsiTokens;
-import com.intellij.lexer.FlexLexer;
-import com.intellij.psi.tree.IElementType;
 import consulo.cpp.preprocessor.psi.CPreprocessorTokenTypes;
+import consulo.language.ast.IElementType;
+import consulo.language.lexer.FlexLexer;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
 
 @SuppressWarnings({"ALL"})
 %%

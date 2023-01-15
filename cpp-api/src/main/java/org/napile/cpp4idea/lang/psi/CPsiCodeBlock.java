@@ -16,8 +16,8 @@
 
 package org.napile.cpp4idea.lang.psi;
 
+import consulo.language.psi.PsiElement;
 import org.jetbrains.annotations.Nullable;
-import com.intellij.psi.PsiElement;
 
 /**
  * @author VISTALL

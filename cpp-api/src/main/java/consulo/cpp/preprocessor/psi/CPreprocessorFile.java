@@ -16,12 +16,13 @@
 
 package consulo.cpp.preprocessor.psi;
 
-import com.intellij.psi.PsiFile;
+import consulo.language.psi.PsiFile;
 
 /**
  * @author VISTALL
  * @date 1:07/10.12.2011
  */
-public interface CPreprocessorFile extends PsiFile {
+public interface CPreprocessorFile extends PsiFile
+{
 
 }

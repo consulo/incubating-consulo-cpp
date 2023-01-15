@@ -16,11 +16,11 @@
 
 package org.napile.cpp4idea.lang.parser;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.PsiBuilder;
-import com.intellij.lang.PsiParser;
-import com.intellij.psi.tree.IElementType;
-import consulo.lang.LanguageVersion;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementType;
+import consulo.language.parser.PsiBuilder;
+import consulo.language.parser.PsiParser;
+import consulo.language.version.LanguageVersion;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.parser.parsingMain.MainParsing;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
@@ -29,16 +29,19 @@ import org.napile.cpp4idea.lang.psi.CPsiTokens;
  * @author VISTALL
  * @date 14:28/18.12.2011
  */
-public class CPsiParserImpl implements PsiParser, CPsiTokens {
+public class CPsiParserImpl implements PsiParser, CPsiTokens
+{
 	@NotNull
 	@Override
-	public ASTNode parse(IElementType root, PsiBuilder builder, LanguageVersion languageVersion) {
+	public ASTNode parse(IElementType root, PsiBuilder builder, LanguageVersion languageVersion)
+	{
 		builder.setDebugMode(true);
 
 		return parseMain(builder, root);
 	}
 
-	public static ASTNode parseMain(PsiBuilder builder, IElementType root) {
+	public static ASTNode parseMain(PsiBuilder builder, IElementType root)
+	{
 		PsiBuilder.Marker rootMarker = builder.mark();
 
 		MainParsing.parseElement(builder);

@@ -1,12 +1,13 @@
 package consulo.cpp.lang.editor.highlight;
 
-import com.intellij.codeInsight.daemon.impl.HighlightInfo;
-import com.intellij.codeInsight.daemon.impl.HighlightInfoType;
-import com.intellij.codeInsight.daemon.impl.HighlightVisitor;
-import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
+import consulo.annotation.component.ExtensionImpl;
 import consulo.cpp.preprocessor.psi.CPreprocessorMacroReference;
+import consulo.language.editor.rawHighlight.HighlightInfo;
+import consulo.language.editor.rawHighlight.HighlightInfoHolder;
+import consulo.language.editor.rawHighlight.HighlightInfoType;
+import consulo.language.editor.rawHighlight.HighlightVisitor;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
 import org.napile.cpp4idea.lang.psi.CPsiFile;
@@ -16,6 +17,7 @@ import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
  * @author VISTALL
  * @since 11:11/2020-08-01
  */
+@ExtensionImpl
 public class CHighlightVisitor extends CPsiElementVisitor implements HighlightVisitor
 {
 	private HighlightInfoHolder myHolder;
@@ -68,16 +70,9 @@ public class CHighlightVisitor extends CPsiElementVisitor implements HighlightVi
 	}
 
 	@Override
-	public
 	@NotNull
-	HighlightVisitor clone()
+	public HighlightVisitor clone()
 	{
 		return new CHighlightVisitor();
-	}
-
-	@Override
-	public int order()
-	{
-		return 0;
 	}
 }

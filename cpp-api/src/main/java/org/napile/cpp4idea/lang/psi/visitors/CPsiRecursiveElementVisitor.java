@@ -16,7 +16,7 @@
 
 package org.napile.cpp4idea.lang.psi.visitors;
 
-import com.intellij.psi.PsiElement;
+import consulo.language.psi.PsiElement;
 
 /**
  * @author VISTALL

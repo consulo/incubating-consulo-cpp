@@ -16,8 +16,9 @@
 
 package org.napile.cpp4idea;
 
-import com.intellij.openapi.fileTypes.FileTypeConsumer;
-import com.intellij.openapi.fileTypes.FileTypeFactory;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.virtualFileSystem.fileType.FileTypeConsumer;
+import consulo.virtualFileSystem.fileType.FileTypeFactory;
 import consulo.cpp.lang.CHeaderFileType;
 import consulo.cpp.lang.CPPHeaderFileType;
 import consulo.cpp.lang.CPPSourceFileType;
@@ -29,6 +30,7 @@ import javax.annotation.Nonnull;
  * @author VISTALL
  * @date 1:03/10.12.2011
  */
+@ExtensionImpl
 public class CFileTypeFactory extends FileTypeFactory
 {
 	@Override

@@ -1,7 +1,7 @@
 package consulo.cpp.lang;
 
-import com.intellij.openapi.fileTypes.LanguageFileType;
 import consulo.cpp.api.icon.CppApiIconGroup;
+import consulo.language.file.LanguageFileType;
 import consulo.localize.LocalizeValue;
 import consulo.ui.image.Image;
 import org.jetbrains.annotations.NotNull;
@@ -47,6 +47,6 @@ public class CPPHeaderFileType extends LanguageFileType
 	@Override
 	public Image getIcon()
 	{
-		return CppApiIconGroup.fileTypeHpp();
+		return CppApiIconGroup.filetypeHpp();
 	}
 }

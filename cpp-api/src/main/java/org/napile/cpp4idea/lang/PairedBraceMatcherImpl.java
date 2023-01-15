@@ -16,19 +16,22 @@
 
 package org.napile.cpp4idea.lang;
 
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.BracePair;
+import consulo.language.Language;
+import consulo.language.PairedBraceMatcher;
+import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
-import com.intellij.lang.BracePair;
-import com.intellij.lang.PairedBraceMatcher;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.tree.IElementType;
+
+import javax.annotation.Nonnull;
 
 /**
  * @author VISTALL
  * @date 5:52/11.12.2011
  */
-public class PairedBraceMatcherImpl implements PairedBraceMatcher {
+@ExtensionImpl
+public class PairedBraceMatcherImpl implements PairedBraceMatcher
+{
 	private static final BracePair[] PAIRS =
 			{
 					new BracePair(CPsiTokens.LPARENTH, CPsiTokens.RPARENTH, true),
@@ -38,17 +41,15 @@ public class PairedBraceMatcherImpl implements PairedBraceMatcher {
 			};
 
 	@Override
-	public BracePair[] getPairs() {
+	public BracePair[] getPairs()
+	{
 		return PAIRS;
 	}
 
+	@Nonnull
 	@Override
-	public boolean isPairedBracesAllowedBeforeType(@NotNull IElementType lbraceType, @Nullable IElementType contextType) {
-		return false;
-	}
-
-	@Override
-	public int getCodeConstructStart(PsiFile file, int openingBraceOffset) {
-		return openingBraceOffset;
+	public Language getLanguage()
+	{
+		return CLanguage.INSTANCE;
 	}
 }

@@ -1,9 +1,9 @@
 /* It's an automatically generated code. Do not modify it. */
 package org.napile.cpp4idea.lang.lexer;
 
+import consulo.language.ast.IElementType;
+import consulo.language.lexer.FlexLexer;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
-import com.intellij.lexer.FlexLexer;
-import com.intellij.psi.tree.IElementType;
 
 @SuppressWarnings({"ALL"})
 %%

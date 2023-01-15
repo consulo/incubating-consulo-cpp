@@ -16,10 +16,10 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
-import com.intellij.util.IncorrectOperationException;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.language.util.IncorrectOperationException;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
 import org.napile.cpp4idea.lang.psi.CPsiExpression;
@@ -30,38 +30,48 @@ import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
  * @author VISTALL
  * @date 17:51/14.12.2011
  */
-public class CPsiEnumConstantImpl extends CPsiElementBaseImpl implements CPsiEnumConstant {
-	public CPsiEnumConstantImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
+public class CPsiEnumConstantImpl extends CPsiElementBaseImpl implements CPsiEnumConstant
+{
+	public CPsiEnumConstantImpl(@org.jetbrains.annotations.NotNull ASTNode node)
+	{
 		super(node);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CPsiElementVisitor) {
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof CPsiElementVisitor)
+		{
 			((CPsiElementVisitor) visitor).visitEnumConstant(this);
-		} else {
+		}
+		else
+		{
 			super.accept(visitor);
 		}
 	}
 
 	@Override
-	public String getName() {
+	public String getName()
+	{
 		PsiElement element = getNameIdentifier();
 		return element == null ? null : element.getText();
 	}
 
 	@Override
-	public PsiElement getNameIdentifier() {
+	public PsiElement getNameIdentifier()
+	{
 		return findChildByType(CPsiTokens.IDENTIFIER);
 	}
 
 	@Override
-	public CPsiExpression getExpression() {
+	public CPsiExpression getExpression()
+	{
 		return findChildByClass(CPsiExpression.class);
 	}
 
 	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException {
+	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+	{
 		return null;
 	}
 }

@@ -16,41 +16,49 @@
 
 package consulo.cpp.preprocessor.psi.impl;
 
-import com.intellij.extapi.psi.PsiFileBase;
-import com.intellij.openapi.fileTypes.FileType;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElementVisitor;
 import consulo.cpp.preprocessor.CPreprocessorLanguage;
 import consulo.cpp.preprocessor.psi.CPreprocessorFile;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
+import consulo.language.file.FileViewProvider;
+import consulo.language.impl.psi.PsiFileBase;
+import consulo.language.psi.PsiElementVisitor;
+import consulo.virtualFileSystem.fileType.FileType;
 import org.jetbrains.annotations.NotNull;
 
 /**
  * @author VISTALL
- * @since  2:12/10.12.2011
+ * @since 2:12/10.12.2011
  */
-public class CPreprocessorFileImpl extends PsiFileBase implements CPreprocessorFile {
-	public CPreprocessorFileImpl(@NotNull FileViewProvider viewProvider) {
+public class CPreprocessorFileImpl extends PsiFileBase implements CPreprocessorFile
+{
+	public CPreprocessorFileImpl(@NotNull FileViewProvider viewProvider)
+	{
 		super(viewProvider, CPreprocessorLanguage.INSTANCE);
 	}
 
 	@NotNull
 	@Override
-	public FileType getFileType() {
+	public FileType getFileType()
+	{
 		return getViewProvider().getFileType();
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CPreprocessorElementVisitor) {
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof CPreprocessorElementVisitor)
+		{
 			((CPreprocessorElementVisitor) visitor).visitPreprocessorFile(this);
-		} else {
+		}
+		else
+		{
 			super.accept(visitor);
 		}
 	}
 
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return "CPreprocessorFile:" + getViewProvider().getVirtualFile().getName();
 	}
 }

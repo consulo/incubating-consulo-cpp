@@ -16,39 +16,47 @@
 
 package consulo.cpp.preprocessor.psi.impl;
 
+import consulo.cpp.preprocessor.psi.CPreprocessorIfBlock;
+import consulo.cpp.preprocessor.psi.CPsiSharpIfBody;
+import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
-import consulo.cpp.preprocessor.psi.CPsiSharpIfBody;
-import consulo.cpp.preprocessor.psi.CPreprocessorIfBlock;
-import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElementVisitor;
 
 /**
  * @author VISTALL
  * @date 14:06/29.12.12
  */
-public class CPsiSharpIfBodyImpl extends CPsiElementBaseImpl implements CPsiSharpIfBody {
-	public CPsiSharpIfBodyImpl(@NotNull ASTNode node) {
+public class CPsiSharpIfBodyImpl extends CPsiElementBaseImpl implements CPsiSharpIfBody
+{
+	public CPsiSharpIfBodyImpl(@NotNull ASTNode node)
+	{
 		super(node);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CPreprocessorElementVisitor) {
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof CPreprocessorElementVisitor)
+		{
 			((CPreprocessorElementVisitor) visitor).visitSIfBody(this);
-		} else {
+		}
+		else
+		{
 			super.accept(visitor);
 		}
 	}
 
 	@Override
-	public boolean isElseBody() {
+	public boolean isElseBody()
+	{
 		return getIfDef().getElseBody() == this;
 	}
 
 	@Override
-	public CPreprocessorIfBlock getIfDef() {
+	public CPreprocessorIfBlock getIfDef()
+	{
 		return (CPreprocessorIfBlock) getParent();
 	}
 }

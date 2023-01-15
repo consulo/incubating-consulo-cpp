@@ -16,7 +16,7 @@
 
 package org.napile.cpp4idea.util;
 
-import com.intellij.icons.AllIcons;
+import consulo.application.AllIcons;
 import consulo.ui.image.Image;
 
 /**

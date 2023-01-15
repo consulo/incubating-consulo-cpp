@@ -16,66 +16,65 @@
 
 package org.napile.cpp4idea.config.sdk;
 
-import com.intellij.openapi.projectRoots.*;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.content.bundle.SdkType;
 import consulo.ui.image.Image;
-import org.jdom.Element;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.config.sdk.sdkdialect.SdkDialect;
 import org.napile.cpp4idea.util.CIcons;
-
-import javax.swing.*;
 
 /**
  * @author VISTALL
  * @date 5:41/11.12.2011
  */
-public class CSdkType extends SdkType {
-	public static SdkType getInstance() {
+@ExtensionImpl
+public class CSdkType extends SdkType
+{
+	public static SdkType getInstance()
+	{
 		return SdkType.EP_NAME.findExtensionOrFail(CSdkType.class);
 	}
 
-	public CSdkType() {
+	public CSdkType()
+	{
 		super("C");
 	}
 
-
 	@Override
-	public boolean isValidSdkHome(String path) {
-		for (SdkDialect dialect : SdkDialect.DIALECTS)
-			if (dialect.isSupported(path)) {
+	public boolean isValidSdkHome(String path)
+	{
+		for(SdkDialect dialect : SdkDialect.DIALECTS)
+		{
+			if(dialect.isSupported(path))
+			{
 				return true;
 			}
+		}
 		return false;
 	}
 
 	@Nullable
 	@Override
-	public String getVersionString(String s) {
+	public String getVersionString(String s)
+	{
 		return null;
 	}
 
 	@Override
-	public String suggestSdkName(String currentSdkName, String sdkHome) {
+	public String suggestSdkName(String currentSdkName, String sdkHome)
+	{
 		return null;
 	}
 
 	@Override
-	public AdditionalDataConfigurable createAdditionalDataConfigurable(SdkModel sdkModel, SdkModificator sdkModificator) {
-		return new CSdkConfigurable();
-	}
-
-	@Override
-	public void saveAdditionalData(SdkAdditionalData additionalData, Element additional) {
-
-	}
-
-	@Override
-	public String getPresentableName() {
+	public String getPresentableName()
+	{
 		return "C/C++ SDK";
 	}
 
 	@Override
-	public Image getIcon() {
+	public Image getIcon()
+	{
 		return CIcons.SourceFile;
 	}
 }

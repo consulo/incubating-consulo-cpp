@@ -16,35 +16,54 @@
 
 package org.napile.cpp4idea.lang;
 
-import com.intellij.lang.Commenter;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.Commenter;
+import consulo.language.Language;
+import org.napile.cpp4idea.CLanguage;
+
+import javax.annotation.Nonnull;
 
 /**
  * @author VISTALL
  * @date 16:55/16.12.2011
  */
-public class CommenterImpl implements Commenter {
+@ExtensionImpl
+public class CommenterImpl implements Commenter
+{
 	@Override
-	public String getLineCommentPrefix() {
+	public String getLineCommentPrefix()
+	{
 		return "//";
 	}
 
 	@Override
-	public String getBlockCommentPrefix() {
+	public String getBlockCommentPrefix()
+	{
 		return "/*";
 	}
 
 	@Override
-	public String getBlockCommentSuffix() {
+	public String getBlockCommentSuffix()
+	{
 		return "*/";
 	}
 
 	@Override
-	public String getCommentedBlockCommentPrefix() {
+	public String getCommentedBlockCommentPrefix()
+	{
 		return null;
 	}
 
 	@Override
-	public String getCommentedBlockCommentSuffix() {
+	public String getCommentedBlockCommentSuffix()
+	{
 		return null;
+	}
+
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return CLanguage.INSTANCE;
 	}
 }

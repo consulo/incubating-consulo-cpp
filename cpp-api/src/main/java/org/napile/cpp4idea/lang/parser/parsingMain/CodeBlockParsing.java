@@ -16,7 +16,7 @@
 
 package org.napile.cpp4idea.lang.parser.parsingMain;
 
-import com.intellij.lang.PsiBuilder;
+import consulo.language.parser.PsiBuilder;
 import org.napile.cpp4idea.CBundle;
 import org.napile.cpp4idea.lang.psi.CPsiCodeBlock;
 import org.napile.cpp4idea.lang.psi.CPsiParameterList;
@@ -26,32 +26,41 @@ import org.napile.cpp4idea.lang.psi.CPsiReturnStatement;
  * @author VISTALL
  * @date 10:36/13.12.2011
  */
-public class CodeBlockParsing extends MainParsing {
-	public static void parseCodeBlock(PsiBuilder builder) {
+public class CodeBlockParsing extends MainParsing
+{
+	public static void parseCodeBlock(PsiBuilder builder)
+	{
 		PsiBuilder.Marker marker;
 
-		if (builder.getTokenType() != LBRACE) {
+		if(builder.getTokenType() != LBRACE)
+		{
 			builder.error(CBundle.message("LBRACE.expected"));
 			marker = builder.mark();
 			builder.advanceLexer();
 
 			done(marker, CPsiParameterList.class);
 			return;
-		} else {
+		}
+		else
+		{
 			marker = builder.mark();
 			builder.advanceLexer();
 		}
 
-		if (builder.getTokenType() != RBRACE) {
-			while (!builder.eof()) {
+		if(builder.getTokenType() != RBRACE)
+		{
+			while(!builder.eof())
+			{
 				parseStatement(builder);
 
-				if (builder.getTokenType() == RBRACE) {
+				if(builder.getTokenType() == RBRACE)
+				{
 					break;
 				}
 			}
 
-			if (builder.getTokenType() != RBRACE) {
+			if(builder.getTokenType() != RBRACE)
+			{
 				builder.error(CBundle.message("RBRACE.expected"));
 			}
 		}
@@ -61,23 +70,29 @@ public class CodeBlockParsing extends MainParsing {
 		done(marker, CPsiCodeBlock.class);
 	}
 
-	private static void parseStatement(PsiBuilder builder) {
-		if (builder.getTokenType() == RETURN_KEYWORD) {
+	private static void parseStatement(PsiBuilder builder)
+	{
+		if(builder.getTokenType() == RETURN_KEYWORD)
+		{
 			PsiBuilder.Marker marker = builder.mark();
 
 			builder.advanceLexer();
 
 			ExpressionParsing.parseExpression(builder);
 
-			if (builder.getTokenType() != SEMICOLON) {
+			if(builder.getTokenType() != SEMICOLON)
+			{
 				builder.error(CBundle.message("SEMICOLON.expected"));
 			}
-			else {
+			else
+			{
 				builder.advanceLexer();
 			}
 
 			done(marker, CPsiReturnStatement.class);
-		} else {
+		}
+		else
+		{
 			builder.advanceLexer();
 		}
 	}

@@ -16,16 +16,18 @@
 
 package consulo.cpp.preprocessor.psi.impl.visitor;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiRecursiveVisitor;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiRecursiveVisitor;
 
 /**
  * @author VISTALL
  * @date 13:07/16.12.2011
  */
-public class CPreprocessorRecursiveElementVisitor extends CPreprocessorElementVisitor implements PsiRecursiveVisitor {
+public class CPreprocessorRecursiveElementVisitor extends CPreprocessorElementVisitor implements PsiRecursiveVisitor
+{
 	@Override
-	public void visitElement(PsiElement element) {
+	public void visitElement(PsiElement element)
+	{
 		element.acceptChildren(this);
 	}
 }

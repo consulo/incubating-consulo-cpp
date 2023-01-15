@@ -16,34 +16,41 @@
 
 package consulo.cpp.preprocessor.psi.impl;
 
-import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import consulo.cpp.preprocessor.psi.CPsiSharpIndepInclude;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiElementVisitor;
+import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.lang.psi.CPsiTokens;
 
 /**
  * @author VISTALL
  * @date 1:53/11.12.2011
  */
-public class CPsiSharpIndepIncludeImpl extends CPsiSharpIncludeImpl implements CPsiSharpIndepInclude {
-	public CPsiSharpIndepIncludeImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
+public class CPsiSharpIndepIncludeImpl extends CPsiSharpIncludeImpl implements CPsiSharpIndepInclude
+{
+	public CPsiSharpIndepIncludeImpl(@org.jetbrains.annotations.NotNull ASTNode node)
+	{
 		super(node);
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CPreprocessorElementVisitor) {
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof CPreprocessorElementVisitor)
+		{
 			((CPreprocessorElementVisitor) visitor).visitSIndependInclude(this);
-		} else {
+		}
+		else
+		{
 			super.accept(visitor);
 		}
 	}
 
 	@Override
-	public PsiElement getIncludeElement() {
+	public PsiElement getIncludeElement()
+	{
 		return findChildByType(CPsiTokens.STRING_INCLUDE_LITERAL);
 	}
 }

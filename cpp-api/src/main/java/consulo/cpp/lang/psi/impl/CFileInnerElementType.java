@@ -1,14 +1,19 @@
 package consulo.cpp.lang.psi.impl;
 
-import com.intellij.lang.*;
-import com.intellij.openapi.project.Project;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IFileElementType;
 import consulo.cpp.preprocessor.expand.PreprocessorExpandPsiBuilder;
 import consulo.cpp.preprocessor.expand.PreprocessorExpander;
-import consulo.lang.LanguageVersion;
-import consulo.lang.util.LanguageVersionUtil;
+import consulo.language.Language;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IFileElementType;
+import consulo.language.file.FileViewProvider;
+import consulo.language.parser.ParserDefinition;
+import consulo.language.parser.PsiBuilder;
+import consulo.language.parser.PsiBuilderFactory;
+import consulo.language.parser.PsiParser;
+import consulo.language.psi.PsiElement;
+import consulo.language.version.LanguageVersion;
+import consulo.language.version.LanguageVersionUtil;
+import consulo.project.Project;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CLanguage;
 
@@ -44,7 +49,7 @@ public class CFileInnerElementType extends IFileElementType
 			builder = new PreprocessorExpandPsiBuilder(builder, expander);
 		}
 
-		PsiParser parser = LanguageParserDefinitions.INSTANCE.forLanguage(languageForParser).createParser(languageVersion);
+		PsiParser parser = ParserDefinition.forLanguage(languageForParser).createParser(languageVersion);
 		ASTNode node = parser.parse(this, builder, languageVersion);
 		return node.getFirstChildNode();
 	}

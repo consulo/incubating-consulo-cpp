@@ -16,8 +16,8 @@
 
 package org.napile.cpp4idea.lang.psi;
 
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.ast.IElementType;
+import consulo.language.psi.PsiElement;
 
 /**
  * @author VISTALL

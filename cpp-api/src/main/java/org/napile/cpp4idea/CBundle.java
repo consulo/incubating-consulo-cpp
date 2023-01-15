@@ -19,10 +19,10 @@ package org.napile.cpp4idea;
 import java.lang.ref.Reference;
 import java.util.ResourceBundle;
 
+import consulo.application.CommonBundle;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.PropertyKey;
-import com.intellij.CommonBundle;
-import com.intellij.reference.SoftReference;
+import consulo.util.lang.ref.SoftReference;
 
 /**
  * @author VISTALL

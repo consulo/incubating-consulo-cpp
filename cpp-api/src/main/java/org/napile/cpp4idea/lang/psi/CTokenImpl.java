@@ -16,15 +16,17 @@
 
 package org.napile.cpp4idea.lang.psi;
 
+import consulo.language.ast.IElementType;
 import org.napile.cpp4idea.CLanguage;
-import com.intellij.psi.tree.IElementType;
 
 /**
  * @author VISTALL
  * @date 8:57/10.12.2011
  */
-public class CTokenImpl extends IElementType {
-	public CTokenImpl(@org.jetbrains.annotations.NotNull @org.jetbrains.annotations.NonNls String debugName) {
+public class CTokenImpl extends IElementType
+{
+	public CTokenImpl(@org.jetbrains.annotations.NotNull @org.jetbrains.annotations.NonNls String debugName)
+	{
 		super(debugName, CLanguage.INSTANCE);
 	}
 }

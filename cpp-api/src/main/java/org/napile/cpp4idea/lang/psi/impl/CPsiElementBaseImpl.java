@@ -16,8 +16,8 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
-import com.intellij.extapi.psi.ASTWrapperPsiElement;
-import com.intellij.lang.ASTNode;
+import consulo.language.ast.ASTNode;
+import consulo.language.impl.psi.ASTWrapperPsiElement;
 import org.napile.cpp4idea.lang.psi.CPsiElement;
 
 /**

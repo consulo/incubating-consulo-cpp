@@ -22,8 +22,10 @@ import org.napile.cpp4idea.config.sdk.sdkdialect.SdkDialect;
  * @author VISTALL
  * @date 16:43/12.12.2011
  */
-public abstract class MsVsSdkDialectBaseImpl extends SdkDialect {
-	protected MsVsSdkDialectBaseImpl(String name) {
+public abstract class MsVsSdkDialectBaseImpl extends SdkDialect
+{
+	protected MsVsSdkDialectBaseImpl(String name)
+	{
 		super("Microsoft Visual Studio " + name);
 	}
 }

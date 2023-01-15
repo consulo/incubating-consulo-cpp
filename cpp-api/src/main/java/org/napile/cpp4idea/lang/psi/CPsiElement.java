@@ -16,12 +16,13 @@
 
 package org.napile.cpp4idea.lang.psi;
 
-import com.intellij.psi.PsiElement;
+import consulo.language.psi.PsiElement;
 
 /**
  * @author VISTALL
  * @date 22:58/10.12.2011
  */
-public interface CPsiElement extends PsiElement {
+public interface CPsiElement extends PsiElement
+{
 
 }

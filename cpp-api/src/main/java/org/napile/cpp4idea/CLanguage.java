@@ -16,28 +16,30 @@
 
 package org.napile.cpp4idea;
 
-import com.intellij.lang.Language;
-import org.jetbrains.annotations.NotNull;
+import consulo.language.Language;
 
 /**
  * @author VISTALL
  * @date 0:57/10.12.2011
  */
-public class CLanguage extends Language {
+public class CLanguage extends Language
+{
 	public static final Language INSTANCE = new CLanguage();
 
-	private CLanguage() {
+	private CLanguage()
+	{
 		super("C");
 	}
 
-	@NotNull
 	@Override
-	public String getDisplayName() {
+	public String getDisplayName()
+	{
 		return "C/C++";
 	}
 
 	@Override
-	public boolean isCaseSensitive() {
+	public boolean isCaseSensitive()
+	{
 		return true;
 	}
 }

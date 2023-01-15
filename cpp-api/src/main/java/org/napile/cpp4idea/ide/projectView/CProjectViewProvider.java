@@ -16,11 +16,12 @@
 
 package org.napile.cpp4idea.ide.projectView;
 
-import com.intellij.ide.projectView.SelectableTreeStructureProvider;
-import com.intellij.ide.projectView.ViewSettings;
-import com.intellij.ide.util.treeView.AbstractTreeNode;
-import com.intellij.openapi.project.DumbAware;
-import com.intellij.psi.PsiElement;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.language.psi.PsiElement;
+import consulo.project.ui.view.tree.SelectableTreeStructureProvider;
+import consulo.project.ui.view.tree.ViewSettings;
+import consulo.project.ui.view.tree.AbstractTreeNode;
+import consulo.application.dumb.DumbAware;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.ide.projectView.nodes.CClassTreeNode;
 import org.napile.cpp4idea.ide.projectView.nodes.CFileTreeNode;
@@ -35,6 +36,7 @@ import java.util.List;
  * @author VISTALL
  * @date 17:19/07.01.13
  */
+@ExtensionImpl
 public class CProjectViewProvider implements SelectableTreeStructureProvider, DumbAware
 {
 	@Nullable

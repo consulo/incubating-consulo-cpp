@@ -16,10 +16,11 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import consulo.language.psi.PsiElement;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.psi.CPsiCodeBlock;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
-import com.intellij.lang.ASTNode;
+import consulo.language.ast.ASTNode;
 
 /**
  * @author VISTALL
@@ -32,13 +33,13 @@ public class CPsiCodeBlockImpl extends CPsiElementBaseImpl implements CPsiCodeBl
 
 	@Nullable
 	@Override
-	public com.intellij.psi.PsiElement getLBrace() {
+	public PsiElement getLBrace() {
 		return findChildByType(CPsiTokens.LBRACE);
 	}
 
 	@Nullable
 	@Override
-	public com.intellij.psi.PsiElement getRBrace() {
+	public PsiElement getRBrace() {
 		return findChildByType(CPsiTokens.RBRACE);
 	}
 }

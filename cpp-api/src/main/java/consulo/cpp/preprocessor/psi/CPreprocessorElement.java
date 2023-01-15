@@ -16,11 +16,12 @@
 
 package consulo.cpp.preprocessor.psi;
 
-import com.intellij.psi.PsiElement;
+import consulo.language.psi.PsiElement;
 
 /**
  * @author VISTALL
  * @date 15:22/29.12.12
  */
-public interface CPreprocessorElement extends PsiElement {
+public interface CPreprocessorElement extends PsiElement
+{
 }

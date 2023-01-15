@@ -16,21 +16,24 @@
 
 package org.napile.cpp4idea.lang.parser;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.ParserDefinition;
-import com.intellij.lang.PsiParser;
-import com.intellij.lexer.FlexAdapter;
-import com.intellij.lexer.Lexer;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.tree.IFileElementType;
-import com.intellij.psi.tree.TokenSet;
+import consulo.annotation.component.ExtensionImpl;
 import consulo.cpp.lang.psi.impl.CFileElementType;
 import consulo.cpp.lang.psi.impl.CFileImpl;
 import consulo.cpp.preprocessor.psi.CPsiSharpTokenImpl;
-import consulo.lang.LanguageVersion;
+import consulo.language.Language;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IFileElementType;
+import consulo.language.ast.TokenSet;
+import consulo.language.file.FileViewProvider;
+import consulo.language.lexer.FlexAdapter;
+import consulo.language.lexer.Lexer;
+import consulo.language.parser.ParserDefinition;
+import consulo.language.parser.PsiParser;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.version.LanguageVersion;
 import org.jetbrains.annotations.NotNull;
+import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.lexer._CppLexer;
 import org.napile.cpp4idea.lang.psi.CPsiTokenImpl;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
@@ -41,48 +44,67 @@ import javax.annotation.Nonnull;
  * @author VISTALL
  * @date 14:26/18.12.2011
  */
-public class CParserDefinitionImpl implements ParserDefinition {
+@ExtensionImpl
+public class CParserDefinitionImpl implements ParserDefinition
+{
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return CLanguage.INSTANCE;
+	}
+
 	@NotNull
 	@Override
-	public Lexer createLexer(LanguageVersion languageVersion) {
+	public Lexer createLexer(LanguageVersion languageVersion)
+	{
 		return new FlexAdapter(new _CppLexer());
 	}
 
 	@Nonnull
 	@Override
-	public PsiParser createParser(LanguageVersion languageVersion) {
+	public PsiParser createParser(LanguageVersion languageVersion)
+	{
 		return new CPsiParserImpl();
 	}
 
 	@Override
-	public IFileElementType getFileNodeType() {
+	public IFileElementType getFileNodeType()
+	{
 		return CFileElementType.INSTANCE;
 	}
 
 	@NotNull
 	@Override
-	public TokenSet getWhitespaceTokens(LanguageVersion languageVersion) {
+	public TokenSet getWhitespaceTokens(LanguageVersion languageVersion)
+	{
 		return CPsiTokens.WHITE_SPACE_SET;
 	}
 
 	@NotNull
 	@Override
-	public TokenSet getCommentTokens(LanguageVersion languageVersion) {
+	public TokenSet getCommentTokens(LanguageVersion languageVersion)
+	{
 		return CPsiTokens.COMMENT_SET;
 	}
 
 	@NotNull
 	@Override
-	public TokenSet getStringLiteralElements(LanguageVersion languageVersion) {
+	public TokenSet getStringLiteralElements(LanguageVersion languageVersion)
+	{
 		return CPsiTokens.STRING_LITERAL_SET;
 	}
 
 	@NotNull
 	@Override
-	public PsiElement createElement(ASTNode node) {
-		if (node.getElementType() instanceof CPsiTokenImpl) {
+	public PsiElement createElement(ASTNode node)
+	{
+		if(node.getElementType() instanceof CPsiTokenImpl)
+		{
 			return ((CPsiTokenImpl) node.getElementType()).createPsi(node);
-		} else if (node.getElementType() instanceof CPsiSharpTokenImpl) {
+		}
+		else if(node.getElementType() instanceof CPsiSharpTokenImpl)
+		{
 			return ((CPsiSharpTokenImpl) node.getElementType()).createPsi(node);
 		}
 
@@ -90,12 +112,14 @@ public class CParserDefinitionImpl implements ParserDefinition {
 	}
 
 	@Override
-	public PsiFile createFile(FileViewProvider viewProvider) {
+	public PsiFile createFile(FileViewProvider viewProvider)
+	{
 		return new CFileImpl(viewProvider);
 	}
 
 	@Override
-	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
+	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right)
+	{
 		return SpaceRequirements.MAY;
 	}
 }

@@ -16,12 +16,12 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import consulo.language.ast.IElementType;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiSuperClass;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElement;
 
 /**
  * @author VISTALL

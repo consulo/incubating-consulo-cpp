@@ -1,11 +1,11 @@
 package consulo.cpp.preprocessor.expand;
 
-import com.intellij.lang.ParserDefinition;
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.util.Pair;
-import com.intellij.psi.TokenType;
-import com.intellij.psi.tree.IElementType;
 import consulo.cpp.preprocessor.psi.CPreprocessorDefineDirective;
+import consulo.language.ast.IElementType;
+import consulo.language.ast.TokenType;
+import consulo.language.lexer.Lexer;
+import consulo.language.parser.ParserDefinition;
+import consulo.util.lang.Pair;
 import consulo.util.lang.StringUtil;
 import org.jetbrains.annotations.NotNull;
 

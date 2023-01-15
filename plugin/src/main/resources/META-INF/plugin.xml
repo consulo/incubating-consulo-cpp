@@ -27,31 +27,4 @@
 	<tags>
 		<tag>custom.language</tag>
 	</tags>
-
-	<extensions defaultExtensionNs="com.intellij">
-		<highlightVisitor implementation="consulo.cpp.lang.editor.highlight.CHighlightVisitor" />
-
-		<lang.fileViewProviderFactory language="C"
-										  implementationClass="consulo.cpp.preprocessor.fileProvider.CFileViewProviderFactory"/>
-
-		<lang.parserDefinition language="CPreprocessor"
-							   implementationClass="consulo.cpp.preprocessor.parser.CPreprocessorParserDefinition"/>
-
-		<additionalTextAttributes scheme="Default" file="/org/napile/cpp4idea/editor/color/Default.xml"/>
-
-		<fileTypeFactory implementation="org.napile.cpp4idea.CFileTypeFactory"/>
-
-		<!--lang-->
-		<lang.braceMatcher language="C" implementationClass="org.napile.cpp4idea.lang.PairedBraceMatcherImpl"/>
-
-		<lang.syntaxHighlighterFactory language="C"
-									   implementationClass="org.napile.cpp4idea.ide.highlight.CSyntaxHighlighterFactory"/>
-		<lang.parserDefinition language="C"
-							   implementationClass="org.napile.cpp4idea.lang.parser.CParserDefinitionImpl"/>
-		<lang.foldingBuilder language="C" implementationClass="org.napile.cpp4idea.lang.FoldingBuilderImpl"/>
-		<lang.commenter language="C" implementationClass="org.napile.cpp4idea.lang.CommenterImpl"/>
-
-		<iconDescriptorUpdater implementation="consulo.cpp.impl.CppIconProvider"/>
-		<treeStructureProvider implementation="org.napile.cpp4idea.ide.projectView.CProjectViewProvider"/>
-	</extensions>
 </consulo-plugin>

@@ -16,8 +16,8 @@
 
 package consulo.cpp.preprocessor.psi;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElement;
 import org.napile.cpp4idea.lang.psi.CTokenImpl;
 
 import java.lang.reflect.Constructor;
@@ -26,24 +26,33 @@ import java.lang.reflect.Constructor;
  * @author VISTALL
  * @date 5:34/10.12.2011
  */
-public class CPsiSharpTokenImpl extends CTokenImpl {
+public class CPsiSharpTokenImpl extends CTokenImpl
+{
 	private Constructor<? extends PsiElement> _clazz;
 
-	public CPsiSharpTokenImpl(@org.jetbrains.annotations.NonNls String debugName, Class<? extends PsiElement> clazz) {
+	public CPsiSharpTokenImpl(@org.jetbrains.annotations.NonNls String debugName, Class<? extends PsiElement> clazz)
+	{
 		super(debugName);
 
-		try {
+		try
+		{
 			_clazz = clazz.getConstructor(ASTNode.class);
-		} catch (NoSuchMethodException e) {
+		}
+		catch(NoSuchMethodException e)
+		{
 			//
 		}
 	}
 
-	public PsiElement createPsi(ASTNode node) {
+	public PsiElement createPsi(ASTNode node)
+	{
 		PsiElement element = null;
-		try {
+		try
+		{
 			element = _clazz.newInstance(node);
-		} catch (Exception e) {
+		}
+		catch(Exception e)
+		{
 			//
 		}
 		return element;

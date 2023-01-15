@@ -1,21 +1,23 @@
 package consulo.cpp.preprocessor.parser;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.ParserDefinition;
-import com.intellij.lang.PsiParser;
-import com.intellij.lexer.FlexAdapter;
-import com.intellij.lexer.Lexer;
-import com.intellij.psi.FileViewProvider;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiFile;
-import com.intellij.psi.TokenType;
-import com.intellij.psi.tree.IFileElementType;
-import com.intellij.psi.tree.TokenSet;
+import consulo.annotation.component.ExtensionImpl;
 import consulo.cpp.preprocessor.CPreprocessorLanguage;
 import consulo.cpp.preprocessor.lexer._CPreprocessorLexer;
 import consulo.cpp.preprocessor.psi.CPsiSharpTokenImpl;
 import consulo.cpp.preprocessor.psi.impl.CPreprocessorFileImpl;
-import consulo.lang.LanguageVersion;
+import consulo.language.Language;
+import consulo.language.ast.ASTNode;
+import consulo.language.ast.IFileElementType;
+import consulo.language.ast.TokenSet;
+import consulo.language.ast.TokenType;
+import consulo.language.file.FileViewProvider;
+import consulo.language.lexer.FlexAdapter;
+import consulo.language.lexer.Lexer;
+import consulo.language.parser.ParserDefinition;
+import consulo.language.parser.PsiParser;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.version.LanguageVersion;
 
 import javax.annotation.Nonnull;
 
@@ -23,9 +25,17 @@ import javax.annotation.Nonnull;
  * @author VISTALL
  * @since 20:35/2020-07-25
  */
+@ExtensionImpl
 public class CPreprocessorParserDefinition implements ParserDefinition
 {
 	public static final IFileElementType FILE_TYPE = new IFileElementType(CPreprocessorLanguage.INSTANCE);
+
+	@Nonnull
+	@Override
+	public Language getLanguage()
+	{
+		return CPreprocessorLanguage.INSTANCE;
+	}
 
 	@Nonnull
 	@Override

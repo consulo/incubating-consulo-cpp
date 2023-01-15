@@ -16,14 +16,15 @@
 
 package consulo.cpp.preprocessor.psi;
 
+import consulo.language.psi.PsiElement;
 import org.jetbrains.annotations.Nullable;
-import com.intellij.psi.PsiElement;
 
 /**
  * @author VISTALL
  * @date 14:06/11.12.2011
  */
-public interface CPreprocessorIfBlock extends CPreprocessorElement {
+public interface CPreprocessorIfBlock extends CPreprocessorElement
+{
 	CPreprocessorMacroReference getVariable();
 
 	@Nullable

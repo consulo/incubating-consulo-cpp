@@ -17,43 +17,51 @@
 package consulo.cpp.preprocessor.psi.impl.visitor;
 
 import consulo.cpp.preprocessor.psi.*;
-import consulo.cpp.preprocessor.psi.CPreprocessorElement;
-import com.intellij.psi.PsiElementVisitor;
+import consulo.language.psi.PsiElementVisitor;
 
 /**
  * @author VISTALL
  * @since 13:07/16.12.2011
  */
-public class CPreprocessorElementVisitor extends PsiElementVisitor {
-	public void visitPreprocessorFile(CPreprocessorFile file) {
+public class CPreprocessorElementVisitor extends PsiElementVisitor
+{
+	public void visitPreprocessorFile(CPreprocessorFile file)
+	{
 		visitFile(file);
 	}
 
-	public void visitSElement(CPreprocessorElement element) {
+	public void visitSElement(CPreprocessorElement element)
+	{
 		visitElement(element);
 	}
 
-	public void visitSIfBody(CPsiSharpIfBody element) {
+	public void visitSIfBody(CPsiSharpIfBody element)
+	{
 		visitSElement(element);
 	}
 
-	public void visitSDefine(CPreprocessorDefineDirective element) {
+	public void visitSDefine(CPreprocessorDefineDirective element)
+	{
 		visitSElement(element);
 	}
 
-	public void visitSDefineValue(CPsiSharpDefineValue element) {
+	public void visitSDefineValue(CPsiSharpDefineValue element)
+	{
 		visitSElement(element);
 	}
 
-	public void visitPreprocessorIfBlock(CPreprocessorIfBlock element) {
+	public void visitPreprocessorIfBlock(CPreprocessorIfBlock element)
+	{
 		visitSElement(element);
 	}
 
-	public void visitSInclude(CPsiSharpInclude element) {
+	public void visitSInclude(CPsiSharpInclude element)
+	{
 		visitSElement(element);
 	}
 
-	public void visitSIndependInclude(CPsiSharpIndepInclude element) {
+	public void visitSIndependInclude(CPsiSharpIndepInclude element)
+	{
 		visitSElement(element);
 	}
 }

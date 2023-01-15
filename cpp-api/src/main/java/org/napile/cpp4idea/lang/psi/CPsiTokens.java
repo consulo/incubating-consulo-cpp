@@ -16,17 +16,17 @@
 
 package org.napile.cpp4idea.lang.psi;
 
-import org.napile.cpp4idea.CLanguage;
 import consulo.cpp.preprocessor.psi.CPreprocessorTokenTypes;
-import com.intellij.psi.TokenType;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import consulo.language.ast.IElementType;
+import consulo.language.ast.TokenSet;
+import consulo.language.ast.TokenType;
 
 /**
  * @author VISTALL
  * @date 2:42/10.12.2011
  */
-public interface CPsiTokens extends TokenType, CPreprocessorTokenTypes {
+public interface CPsiTokens extends TokenType, CPreprocessorTokenTypes
+{
 	IElementType IDENTIFIER = new CTokenImpl("IDENTIFIER");
 	IElementType NEW_LINE = new CTokenImpl("NEW_LINE");
 	// comments

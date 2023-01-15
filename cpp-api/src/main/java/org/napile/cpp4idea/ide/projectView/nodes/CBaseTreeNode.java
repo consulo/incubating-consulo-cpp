@@ -16,15 +16,15 @@
 
 package org.napile.cpp4idea.ide.projectView.nodes;
 
-import com.intellij.codeInsight.navigation.NavigationUtil;
-import com.intellij.ide.projectView.PresentationData;
-import com.intellij.ide.projectView.ProjectViewNode;
-import com.intellij.ide.projectView.ViewSettings;
-import com.intellij.ide.util.treeView.AbstractTreeNode;
-import com.intellij.openapi.project.Project;
-import com.intellij.openapi.vfs.VirtualFile;
-import com.intellij.psi.PsiElement;
-import consulo.ide.IconDescriptorUpdaters;
+import consulo.language.editor.util.LanguageEditorNavigationUtil;
+import consulo.language.icon.IconDescriptorUpdaters;
+import consulo.language.psi.PsiElement;
+import consulo.project.Project;
+import consulo.project.ui.view.tree.AbstractTreeNode;
+import consulo.project.ui.view.tree.ProjectViewNode;
+import consulo.project.ui.view.tree.ViewSettings;
+import consulo.ui.ex.tree.PresentationData;
+import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiDeclaration;
 
@@ -35,39 +35,47 @@ import java.util.Collections;
  * @author VISTALL
  * @date 19:06/07.01.13
  */
-public abstract class CBaseTreeNode<D extends CPsiDeclaration> extends ProjectViewNode<D> {
-	public CBaseTreeNode(Project project, D d, ViewSettings viewSettings) {
+public abstract class CBaseTreeNode<D extends CPsiDeclaration> extends ProjectViewNode<D>
+{
+	public CBaseTreeNode(Project project, D d, ViewSettings viewSettings)
+	{
 		super(project, d, viewSettings);
 	}
 
 	@NotNull
 	@Override
-	public Collection<? extends AbstractTreeNode<?>> getChildren() {
+	public Collection<? extends AbstractTreeNode<?>> getChildren()
+	{
 		return Collections.emptyList();
 	}
 
 	@Override
-	public boolean canNavigate() {
+	public boolean canNavigate()
+	{
 		return true;
 	}
 
 	@Override
-	public boolean contains(@NotNull VirtualFile file) {
+	public boolean contains(@NotNull VirtualFile file)
+	{
 		return false;
 	}
 
 	@Override
-	public void navigate(boolean requestFocus) {
+	public void navigate(boolean requestFocus)
+	{
 		CPsiDeclaration declaration = getValue();
 
 		PsiElement nameIdentifier = declaration.getNameIdentifier();
-		if (nameIdentifier != null) {
-			NavigationUtil.activateFileWithPsiElement(nameIdentifier, true);
+		if(nameIdentifier != null)
+		{
+			LanguageEditorNavigationUtil.activateFileWithPsiElement(nameIdentifier, true);
 		}
 	}
 
 	@Override
-	protected void update(PresentationData presentation) {
+	protected void update(PresentationData presentation)
+	{
 		presentation.setPresentableText(getValue().getName());
 
 		presentation.setIcon(IconDescriptorUpdaters.getIcon(getValue(), 0));

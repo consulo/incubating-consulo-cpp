@@ -16,9 +16,9 @@
 
 package org.napile.cpp4idea.lang.psi.impl;
 
+import consulo.language.ast.ASTNode;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiClass;
-import com.intellij.lang.ASTNode;
 
 /**
  * @author VISTALL

@@ -22,7 +22,8 @@ import org.jetbrains.annotations.Nullable;
  * @author VISTALL
  * @date 23:18/10.12.2011
  */
-public interface CPsiImplementingMethod extends CPsiDeclarationMethod {
+public interface CPsiImplementingMethod extends CPsiDeclarationMethod
+{
 	@Nullable
 	CPsiCodeBlock getCodeBlock();
 }

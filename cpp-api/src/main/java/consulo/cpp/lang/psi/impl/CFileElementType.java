@@ -1,27 +1,31 @@
 package consulo.cpp.lang.psi.impl;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.lang.Language;
-import com.intellij.lang.LanguageParserDefinitions;
-import com.intellij.lang.ParserDefinition;
-import com.intellij.openapi.fileTypes.LanguageFileType;
-import com.intellij.psi.*;
-import com.intellij.psi.impl.DebugUtil;
-import com.intellij.psi.impl.source.PsiFileImpl;
-import com.intellij.psi.impl.source.tree.FileElement;
-import com.intellij.psi.impl.source.tree.SharedImplUtil;
-import com.intellij.psi.impl.source.tree.TreeElement;
-import com.intellij.psi.stubs.PsiFileStub;
-import com.intellij.psi.tree.IStubFileElementType;
-import com.intellij.testFramework.LightVirtualFile;
-import com.intellij.util.CharTable;
-import com.intellij.util.LocalTimeCounter;
 import consulo.cpp.preprocessor.CPreprocessorLanguage;
 import consulo.cpp.preprocessor.expand.CPreprocessorDirectiveCollector;
 import consulo.cpp.preprocessor.expand.PreprocessorExpander;
 import consulo.cpp.preprocessor.fileProvider.CFileViewProvider;
+import consulo.language.Language;
+import consulo.language.ast.ASTNode;
+import consulo.language.file.FileViewProvider;
+import consulo.language.file.LanguageFileType;
+import consulo.language.file.light.LightVirtualFile;
+import consulo.language.impl.DebugUtil;
+import consulo.language.impl.ast.FileElement;
+import consulo.language.impl.ast.SharedImplUtil;
+import consulo.language.impl.ast.TreeElement;
+import consulo.language.impl.file.SingleRootFileViewProvider;
+import consulo.language.impl.psi.PsiFileImpl;
+import consulo.language.impl.psi.template.TemplateDataElementType;
+import consulo.language.parser.ParserDefinition;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiFile;
+import consulo.language.psi.PsiManager;
+import consulo.language.psi.stub.IStubFileElementType;
+import consulo.language.psi.stub.PsiFileStub;
+import consulo.language.util.CharTable;
 import consulo.localize.LocalizeValue;
 import consulo.ui.image.Image;
+import consulo.util.lang.LocalTimeCounter;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -29,26 +33,28 @@ import org.napile.cpp4idea.CLanguage;
 
 /**
  * @author VISTALL
+ * @see TemplateDataElementType
  * @since 15:16/2020-07-31
- *
- * @see com.intellij.psi.templateLanguages.TemplateDataElementType
  */
-public class CFileElementType extends IStubFileElementType<PsiFileStub<PsiFile>> {
+public class CFileElementType extends IStubFileElementType<PsiFileStub<PsiFile>>
+{
 	public static final CFileElementType INSTANCE = new CFileElementType();
 
-	public CFileElementType() {
+	public CFileElementType()
+	{
 		super(CLanguage.INSTANCE);
 	}
 
 	@Override
-	protected ASTNode doParseContents(@NotNull ASTNode chameleon, @NotNull PsiElement psi) {
+	protected ASTNode doParseContents(@NotNull ASTNode chameleon, @NotNull PsiElement psi)
+	{
 		final CharTable charTable = SharedImplUtil.findCharTableByTree(chameleon);
 
 		CFileViewProvider viewProvider = (CFileViewProvider) ((PsiFile) psi).getViewProvider();
 
 		PsiFile preprocessorFile = viewProvider.getPsi(CPreprocessorLanguage.INSTANCE);
 
-		ParserDefinition parserDefinition = LanguageParserDefinitions.INSTANCE.findSingle(CLanguage.INSTANCE);
+		ParserDefinition parserDefinition = ParserDefinition.forLanguage(CLanguage.INSTANCE);
 
 		PreprocessorExpander expander = new PreprocessorExpander(preprocessorFile, parserDefinition);
 
@@ -75,20 +81,27 @@ public class CFileElementType extends IStubFileElementType<PsiFileStub<PsiFile>>
 		});
 	}
 
-	protected PsiFile createPsiFileFromSource(final Language language, CharSequence sourceCode, PsiManager manager, PreprocessorExpander expander) {
+	protected PsiFile createPsiFileFromSource(final Language language, CharSequence sourceCode, PsiManager manager, PreprocessorExpander expander)
+	{
 		LightVirtualFile virtualFile = new LightVirtualFile("foo", createTemplateFakeFileType(language), sourceCode, LocalTimeCounter.currentTime());
 
-		FileViewProvider viewProvider = new SingleRootFileViewProvider(manager, virtualFile, false) {
+		FileViewProvider viewProvider = new SingleRootFileViewProvider(manager, virtualFile, false)
+		{
 			@Override
 			@NotNull
-			public Language getBaseLanguage() {
+			public Language getBaseLanguage()
+			{
 				return language;
 			}
 
 			@Override
-			protected @Nullable PsiFile createFile(@NotNull Language lang) {
+			protected
+			@Nullable
+			PsiFile createFile(@NotNull Language lang)
+			{
 				PsiFile file = super.createFile(lang);
-				if (file == null) {
+				if(file == null)
+				{
 					return null;
 				}
 
@@ -107,41 +120,48 @@ public class CFileElementType extends IStubFileElementType<PsiFileStub<PsiFile>>
 		return viewProvider.getPsi(language);
 	}
 
-	protected LanguageFileType createTemplateFakeFileType(final Language language) {
+	protected LanguageFileType createTemplateFakeFileType(final Language language)
+	{
 		return new TemplateFileType(language);
 	}
 
-	protected static class TemplateFileType extends LanguageFileType {
+	protected static class TemplateFileType extends LanguageFileType
+	{
 		private final Language myLanguage;
 
-		protected TemplateFileType(final Language language) {
+		protected TemplateFileType(final Language language)
+		{
 			super(language);
 			myLanguage = language;
 		}
 
 		@Override
 		@NotNull
-		public String getDefaultExtension() {
+		public String getDefaultExtension()
+		{
 			return "";
 		}
 
 		@Override
 		@NotNull
 		@NonNls
-		public LocalizeValue getDescription() {
+		public LocalizeValue getDescription()
+		{
 			return LocalizeValue.localizeTODO("fake for language" + myLanguage.getID());
 		}
 
 		@Override
 		@Nullable
-		public Image getIcon() {
+		public Image getIcon()
+		{
 			return null;
 		}
 
 		@Override
 		@NotNull
 		@NonNls
-		public String getId() {
+		public String getId()
+		{
 			return myLanguage.getID();
 		}
 	}

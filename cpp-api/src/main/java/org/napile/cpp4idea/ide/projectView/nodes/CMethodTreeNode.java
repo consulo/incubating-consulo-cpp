@@ -16,9 +16,9 @@
 
 package org.napile.cpp4idea.ide.projectView.nodes;
 
+import consulo.project.ui.view.tree.ViewSettings;
 import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
-import com.intellij.ide.projectView.ViewSettings;
-import com.intellij.openapi.project.Project;
+import consulo.project.Project;
 
 /**
  * @author VISTALL

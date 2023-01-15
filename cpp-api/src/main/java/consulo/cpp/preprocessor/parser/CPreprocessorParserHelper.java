@@ -16,10 +16,10 @@
 
 package consulo.cpp.preprocessor.parser;
 
-import com.intellij.lang.PsiBuilder;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.tree.IElementType;
+import consulo.language.parser.PsiBuilder;
+import consulo.language.ast.IElementType;
 import consulo.cpp.preprocessor.psi.CSharpTokenElements;
+import consulo.language.psi.PsiElement;
 import org.jetbrains.annotations.PropertyKey;
 import org.napile.cpp4idea.CBundle;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;

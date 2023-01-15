@@ -1,18 +1,17 @@
 package consulo.cpp.impl;
 
-import com.intellij.icons.AllIcons;
-import com.intellij.psi.PsiElement;
 import consulo.annotation.access.RequiredReadAction;
-import consulo.ide.IconDescriptor;
-import consulo.ide.IconDescriptorUpdater;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.application.AllIcons;
+import consulo.language.icon.IconDescriptor;
+import consulo.language.icon.IconDescriptorUpdater;
+import consulo.language.psi.PsiElement;
 import org.napile.cpp4idea.lang.psi.CPsiClass;
 import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
 
 import javax.annotation.Nonnull;
-import javax.swing.*;
 
+@ExtensionImpl
 public class CppIconProvider implements IconDescriptorUpdater
 {
 	@RequiredReadAction

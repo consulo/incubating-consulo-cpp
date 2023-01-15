@@ -16,13 +16,13 @@
 
 package org.napile.cpp4idea.ide.highlight;
 
-import com.intellij.lexer.FlexAdapter;
-import com.intellij.lexer.Lexer;
-import com.intellij.openapi.editor.DefaultLanguageHighlighterColors;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.fileTypes.SyntaxHighlighterBase;
-import com.intellij.psi.tree.IElementType;
-import com.intellij.psi.tree.TokenSet;
+import consulo.codeEditor.DefaultLanguageHighlighterColors;
+import consulo.colorScheme.TextAttributesKey;
+import consulo.language.ast.IElementType;
+import consulo.language.ast.TokenSet;
+import consulo.language.editor.highlight.SyntaxHighlighterBase;
+import consulo.language.lexer.FlexAdapter;
+import consulo.language.lexer.Lexer;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.lexer._CppLexer;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
@@ -34,7 +34,8 @@ import java.util.Map;
  * @author VISTALL
  * @since 5:06/10.12.2011
  */
-public class CSyntaxHighlighter extends SyntaxHighlighterBase {
+public class CSyntaxHighlighter extends SyntaxHighlighterBase
+{
 	public static final TextAttributesKey KEYWORD = TextAttributesKey.createTextAttributesKey("C.KEYWORD", DefaultLanguageHighlighterColors.KEYWORD);
 	public static final TextAttributesKey LIGHT_KEYWORD = TextAttributesKey.createTextAttributesKey("C.LIGHT_KEYWORD");
 
@@ -58,7 +59,8 @@ public class CSyntaxHighlighter extends SyntaxHighlighterBase {
 
 	public static final Map<IElementType, TextAttributesKey[]> ATTRIBUTES = new HashMap<>();
 
-	static {
+	static
+	{
 		fillMap(CPsiTokens.END_OF_LINE_COMMENT, LINE_COMMENT, LINE_COMMENT);
 		fillMap(CPsiTokens.C_STYLE_COMMENT, BLOCK_COMMENT, BLOCK_COMMENT);
 		fillMap(CPsiTokens.KEYWORD_SET, KEYWORD, LIGHT_KEYWORD);
@@ -72,29 +74,36 @@ public class CSyntaxHighlighter extends SyntaxHighlighterBase {
 		fillMap(CPsiTokens.BOOL_LITERAL, KEYWORD, LIGHT_KEYWORD);
 	}
 
-	private static void fillMap(IElementType elementType, TextAttributesKey... keys) {
+	private static void fillMap(IElementType elementType, TextAttributesKey... keys)
+	{
 		ATTRIBUTES.put(elementType, keys);
 	}
 
-	private static void fillMap(TokenSet tokenSet, TextAttributesKey... keys) {
-		for (IElementType elementType : tokenSet.getTypes())
+	private static void fillMap(TokenSet tokenSet, TextAttributesKey... keys)
+	{
+		for(IElementType elementType : tokenSet.getTypes())
+		{
 			ATTRIBUTES.put(elementType, keys);
+		}
 	}
 
 	@NotNull
 	@Override
-	public Lexer getHighlightingLexer() {
+	public Lexer getHighlightingLexer()
+	{
 		return new FlexAdapter(new _CppLexer());
 	}
 
 	@NotNull
 	@Override
-	public TextAttributesKey[] getTokenHighlights(IElementType tokenType) {
+	public TextAttributesKey[] getTokenHighlights(IElementType tokenType)
+	{
 		TextAttributesKey[] keys = ATTRIBUTES.get(tokenType);
 		return pack(keys == null ? null : keys[0]);
 	}
 
-	public TextAttributesKey[] getAttributes(IElementType e) {
+	public TextAttributesKey[] getAttributes(IElementType e)
+	{
 		return ATTRIBUTES.get(e);
 	}
 }

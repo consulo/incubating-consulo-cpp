@@ -16,14 +16,14 @@
 
 package consulo.cpp.preprocessor.psi.impl;
 
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
 import consulo.cpp.preprocessor.psi.CPreprocessorIfBlock;
 import consulo.cpp.preprocessor.psi.CPreprocessorMacroReference;
 import consulo.cpp.preprocessor.psi.CPreprocessorTokenTypes;
 import consulo.cpp.preprocessor.psi.CPsiSharpIfBody;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiElementVisitor;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
@@ -32,39 +32,48 @@ import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
  * @author VISTALL
  * @date 14:07/11.12.2011
  */
-public class CPreprocessorIfBlockImpl extends CPsiElementBaseImpl implements CPreprocessorIfBlock {
-	public CPreprocessorIfBlockImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
+public class CPreprocessorIfBlockImpl extends CPsiElementBaseImpl implements CPreprocessorIfBlock
+{
+	public CPreprocessorIfBlockImpl(@org.jetbrains.annotations.NotNull ASTNode node)
+	{
 		super(node);
 	}
 
 	@Override
-	public CPreprocessorMacroReference getVariable() {
+	public CPreprocessorMacroReference getVariable()
+	{
 		return findChildByClass(CPreprocessorMacroReference.class);
 	}
 
 	@Nullable
 	@Override
-	public CPsiSharpIfBody getBody() {
+	public CPsiSharpIfBody getBody()
+	{
 		return findChildByClass(CPsiSharpIfBody.class);
 	}
 
 	@Nullable
 	@Override
-	public PsiElement getElseKeyword() {
+	public PsiElement getElseKeyword()
+	{
 		return findChildByType(CPreprocessorTokenTypes.S_ELSE_KEYWORD);
 	}
 
 	@Nullable
 	@Override
-	public CPsiSharpIfBody getElseBody() {
+	public CPsiSharpIfBody getElseBody()
+	{
 		CPsiSharpIfBody body = getBody();
-		if (body == null) {
+		if(body == null)
+		{
 			return null;
 		}
 
 		PsiElement element = body.getNextSibling();
-		while (element != null) {
-			if (element instanceof CPsiSharpIfBody) {
+		while(element != null)
+		{
+			if(element instanceof CPsiSharpIfBody)
+			{
 				return (CPsiSharpIfBody) element;
 			}
 			element = element.getNextSibling();
@@ -73,16 +82,21 @@ public class CPreprocessorIfBlockImpl extends CPsiElementBaseImpl implements CPr
 	}
 
 	@Override
-	public void accept(@NotNull PsiElementVisitor visitor) {
-		if (visitor instanceof CPreprocessorElementVisitor) {
+	public void accept(@NotNull PsiElementVisitor visitor)
+	{
+		if(visitor instanceof CPreprocessorElementVisitor)
+		{
 			((CPreprocessorElementVisitor) visitor).visitPreprocessorIfBlock(this);
-		} else {
+		}
+		else
+		{
 			super.accept(visitor);
 		}
 	}
 
 	@Override
-	public boolean isReverted() {
+	public boolean isReverted()
+	{
 		return findChildByType(CPreprocessorTokenTypes.S_IFNDEF_KEYWORD) != null;
 	}
 }

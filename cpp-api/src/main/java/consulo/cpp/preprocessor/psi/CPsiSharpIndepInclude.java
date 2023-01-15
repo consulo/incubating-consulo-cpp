@@ -20,6 +20,7 @@ package consulo.cpp.preprocessor.psi;
  * @author VISTALL
  * @date 9:08/14.12.2011
  */
-public interface CPsiSharpIndepInclude extends CPreprocessorElement {
+public interface CPsiSharpIndepInclude extends CPreprocessorElement
+{
 	//
 }

@@ -16,12 +16,12 @@
 
 package consulo.cpp.lang.editor.highlight;
 
-import com.intellij.codeInsight.daemon.impl.HighlightInfo;
-import com.intellij.codeInsight.daemon.impl.HighlightInfoType;
-import com.intellij.codeInsight.daemon.impl.analysis.HighlightInfoHolder;
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.psi.PsiElement;
+import consulo.colorScheme.TextAttributesKey;
 import consulo.cpp.preprocessor.psi.CPreprocessorDefineDirective;
+import consulo.language.editor.rawHighlight.HighlightInfo;
+import consulo.language.editor.rawHighlight.HighlightInfoHolder;
+import consulo.language.editor.rawHighlight.HighlightInfoType;
+import consulo.language.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.ide.highlight.CSyntaxHighlighter;
 import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
@@ -30,19 +30,23 @@ import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
  * @author VISTALL
  * @date 11:30/02.01.13
  */
-public class HighlightUtil {
-	public static void highlight(@NotNull PsiElement target, @NotNull PsiElement nameElement, @NotNull HighlightInfoHolder holder) {
-
+public class HighlightUtil
+{
+	public static void highlight(@NotNull PsiElement target, @NotNull PsiElement nameElement, @NotNull HighlightInfoHolder holder)
+	{
 		TextAttributesKey key = getKey(target);
 
 		holder.add(HighlightInfo.newHighlightInfo(HighlightInfoType.INFORMATION).textAttributes(key).range(nameElement).create());
 	}
 
-	private static TextAttributesKey getKey(PsiElement target) {
-		if (target instanceof CPsiEnumConstant) {
+	private static TextAttributesKey getKey(PsiElement target)
+	{
+		if(target instanceof CPsiEnumConstant)
+		{
 			return CSyntaxHighlighter.CONSTANT;
 		}
-		else if(target instanceof CPreprocessorDefineDirective) {
+		else if(target instanceof CPreprocessorDefineDirective)
+		{
 			return CSyntaxHighlighter.COMPILER_VARIABLE;
 		}
 

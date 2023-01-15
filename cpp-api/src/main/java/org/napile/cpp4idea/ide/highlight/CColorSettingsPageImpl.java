@@ -16,17 +16,15 @@
 
 package org.napile.cpp4idea.ide.highlight;
 
-import com.intellij.openapi.editor.colors.TextAttributesKey;
-import com.intellij.openapi.fileTypes.PlainSyntaxHighlighter;
-import com.intellij.openapi.fileTypes.SyntaxHighlighter;
-import com.intellij.openapi.options.colors.AttributesDescriptor;
-import com.intellij.openapi.options.colors.ColorDescriptor;
-import com.intellij.openapi.options.colors.ColorSettingsPage;
+import consulo.annotation.component.ExtensionImpl;
+import consulo.colorScheme.TextAttributesKey;
+import consulo.colorScheme.setting.AttributesDescriptor;
+import consulo.colorScheme.setting.ColorDescriptor;
+import consulo.language.editor.colorScheme.setting.ColorSettingsPage;
+import consulo.language.editor.highlight.SyntaxHighlighter;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CBundle;
-import org.napile.cpp4idea.util.CIcons;
 
-import javax.swing.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -34,16 +32,20 @@ import java.util.Map;
  * @author VISTALL
  * @date 17:14/11.12.2011
  */
-public class CColorSettingsPageImpl implements ColorSettingsPage {
+@ExtensionImpl
+public class CColorSettingsPageImpl implements ColorSettingsPage
+{
 	@NotNull
 	@Override
-	public String getDisplayName() {
+	public String getDisplayName()
+	{
 		return "C/C++";
 	}
 
 	@NotNull
 	@Override
-	public AttributesDescriptor[] getAttributeDescriptors() {
+	public AttributesDescriptor[] getAttributeDescriptors()
+	{
 		return new AttributesDescriptor[]
 				{
 						new AttributesDescriptor(CBundle.message("keyword"), CSyntaxHighlighter.KEYWORD),
@@ -60,19 +62,22 @@ public class CColorSettingsPageImpl implements ColorSettingsPage {
 
 	@NotNull
 	@Override
-	public ColorDescriptor[] getColorDescriptors() {
+	public ColorDescriptor[] getColorDescriptors()
+	{
 		return ColorDescriptor.EMPTY_ARRAY;
 	}
 
 	@NotNull
 	@Override
-	public SyntaxHighlighter getHighlighter() {
-		return new PlainSyntaxHighlighter();
+	public SyntaxHighlighter getHighlighter()
+	{
+		return new CSyntaxHighlighter();
 	}
 
 	@NotNull
 	@Override
-	public String getDemoText() {
+	public String getDemoText()
+	{
 		return "<blockcomment>/*\n" +
 				" * This is block comment\n" +
 				" * napile project\n" +
@@ -90,7 +95,8 @@ public class CColorSettingsPageImpl implements ColorSettingsPage {
 	}
 
 	@Override
-	public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap() {
+	public Map<String, TextAttributesKey> getAdditionalHighlightingTagToDescriptorMap()
+	{
 		Map<String, TextAttributesKey> map = new HashMap<String, TextAttributesKey>(1);
 		map.put("compilervar", CSyntaxHighlighter.COMPILER_VARIABLE);
 		map.put("string", CSyntaxHighlighter.STRING);

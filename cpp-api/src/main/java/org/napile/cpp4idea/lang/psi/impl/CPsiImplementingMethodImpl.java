@@ -17,15 +17,12 @@
 package org.napile.cpp4idea.lang.psi.impl;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.psi.CPsiCodeBlock;
 import org.napile.cpp4idea.lang.psi.CPsiImplementingMethod;
 import org.napile.cpp4idea.lang.psi.CPsiParameterList;
-import org.napile.cpp4idea.lang.psi.CPsiTokens;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
-import com.intellij.lang.ASTNode;
-import com.intellij.psi.PsiElement;
-import com.intellij.psi.PsiElementVisitor;
+import consulo.language.ast.ASTNode;
+import consulo.language.psi.PsiElementVisitor;
 
 /**
  * @author VISTALL
