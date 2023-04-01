@@ -17,16 +17,9 @@ import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
  * @author VISTALL
  * @since 11:11/2020-08-01
  */
-@ExtensionImpl
 public class CHighlightVisitor extends CPsiElementVisitor implements HighlightVisitor
 {
 	private HighlightInfoHolder myHolder;
-
-	@Override
-	public boolean suitableForFile(@NotNull PsiFile file)
-	{
-		return file instanceof CPsiFile;
-	}
 
 	@Override
 	public void visit(@NotNull PsiElement element)
@@ -67,12 +60,5 @@ public class CHighlightVisitor extends CPsiElementVisitor implements HighlightVi
 		myHolder = holder;
 		action.run();
 		return true;
-	}
-
-	@Override
-	@NotNull
-	public HighlightVisitor clone()
-	{
-		return new CHighlightVisitor();
 	}
 }
