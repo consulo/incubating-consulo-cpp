@@ -5,3 +5,4 @@ target/
 .consulo/sandbox
 build/
 .gradle/
+plugin/sandbox
