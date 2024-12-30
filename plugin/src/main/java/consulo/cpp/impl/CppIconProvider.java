@@ -9,7 +9,7 @@ import consulo.language.psi.PsiElement;
 import org.napile.cpp4idea.lang.psi.CPsiClass;
 import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 @ExtensionImpl
 public class CppIconProvider implements IconDescriptorUpdater

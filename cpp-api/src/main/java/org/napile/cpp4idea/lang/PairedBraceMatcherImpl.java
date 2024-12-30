@@ -23,7 +23,7 @@ import consulo.language.PairedBraceMatcher;
 import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * @author VISTALL

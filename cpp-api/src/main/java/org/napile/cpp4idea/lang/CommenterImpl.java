@@ -21,7 +21,7 @@ import consulo.language.Commenter;
 import consulo.language.Language;
 import org.napile.cpp4idea.CLanguage;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * @author VISTALL

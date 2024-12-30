@@ -24,7 +24,7 @@ import consulo.cpp.lang.CPPHeaderFileType;
 import consulo.cpp.lang.CPPSourceFileType;
 import consulo.cpp.lang.CSourceFileType;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * @author VISTALL

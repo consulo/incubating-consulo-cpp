@@ -38,7 +38,7 @@ import org.napile.cpp4idea.lang.lexer._CppLexer;
 import org.napile.cpp4idea.lang.psi.CPsiTokenImpl;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * @author VISTALL

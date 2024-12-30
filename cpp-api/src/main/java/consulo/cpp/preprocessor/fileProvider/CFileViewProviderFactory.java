@@ -9,7 +9,7 @@ import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CLanguage;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 
 /**
  * @author VISTALL

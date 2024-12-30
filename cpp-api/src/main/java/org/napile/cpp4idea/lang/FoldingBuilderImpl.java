@@ -31,7 +31,7 @@ import org.napile.cpp4idea.lang.psi.CPsiFile;
 import org.napile.cpp4idea.lang.psi.CPsiImplementingMethod;
 import org.napile.cpp4idea.lang.psi.visitors.CPsiRecursiveElementVisitor;
 
-import javax.annotation.Nonnull;
+import jakarta.annotation.Nonnull;
 import java.util.ArrayList;
 import java.util.List;
 
