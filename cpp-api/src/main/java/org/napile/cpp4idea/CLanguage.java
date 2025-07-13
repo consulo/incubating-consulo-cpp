@@ -17,29 +17,28 @@
 package org.napile.cpp4idea;
 
 import consulo.language.Language;
+import consulo.localize.LocalizeValue;
+import jakarta.annotation.Nonnull;
 
 /**
  * @author VISTALL
- * @date 0:57/10.12.2011
+ * @since 0:57/10.12.2011
  */
-public class CLanguage extends Language
-{
-	public static final Language INSTANCE = new CLanguage();
+public class CLanguage extends Language {
+    public static final Language INSTANCE = new CLanguage();
 
-	private CLanguage()
-	{
-		super("C");
-	}
+    private CLanguage() {
+        super("C");
+    }
 
-	@Override
-	public String getDisplayName()
-	{
-		return "C/C++";
-	}
+    @Nonnull
+    @Override
+    public LocalizeValue getDisplayName() {
+        return LocalizeValue.localizeTODO("C/C++");
+    }
 
-	@Override
-	public boolean isCaseSensitive()
-	{
-		return true;
-	}
+    @Override
+    public boolean isCaseSensitive() {
+        return true;
+    }
 }
