@@ -22,8 +22,10 @@ import consulo.colorScheme.setting.AttributesDescriptor;
 import consulo.colorScheme.setting.ColorDescriptor;
 import consulo.language.editor.colorScheme.setting.ColorSettingsPage;
 import consulo.language.editor.highlight.SyntaxHighlighter;
+import consulo.localize.LocalizeValue;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CBundle;
+import org.napile.cpp4idea.CLanguage;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -37,9 +39,9 @@ public class CColorSettingsPageImpl implements ColorSettingsPage
 {
 	@NotNull
 	@Override
-	public String getDisplayName()
+	public LocalizeValue getDisplayName()
 	{
-		return "C/C++";
+		return CLanguage.INSTANCE.getDisplayName();
 	}
 
 	@NotNull
