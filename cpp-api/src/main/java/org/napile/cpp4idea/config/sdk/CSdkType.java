@@ -19,7 +19,7 @@ package org.napile.cpp4idea.config.sdk;
 import consulo.annotation.component.ExtensionImpl;
 import consulo.application.Application;
 import consulo.content.bundle.SdkType;
-import consulo.ui.image.Image;
+import consulo.localize.LocalizeValue;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.config.sdk.sdkdialect.SdkDialect;
 import org.napile.cpp4idea.util.CIcons;
@@ -35,7 +35,7 @@ public class CSdkType extends SdkType {
     }
 
     public CSdkType() {
-        super("C");
+        super("C", LocalizeValue.localizeTODO("C/C++ SDK"), CIcons.SourceFile);
     }
 
     @Override
@@ -52,20 +52,5 @@ public class CSdkType extends SdkType {
     @Override
     public String getVersionString(String s) {
         return null;
-    }
-
-    @Override
-    public String suggestSdkName(String currentSdkName, String sdkHome) {
-        return null;
-    }
-
-    @Override
-    public String getPresentableName() {
-        return "C/C++ SDK";
-    }
-
-    @Override
-    public Image getIcon() {
-        return CIcons.SourceFile;
     }
 }
