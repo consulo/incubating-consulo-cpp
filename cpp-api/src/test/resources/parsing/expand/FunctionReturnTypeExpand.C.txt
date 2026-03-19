@@ -1,0 +1,17 @@
+FILE
+  PsiElement(OUTER)('#define VOID void')
+  PsiWhiteSpace('\n')
+  CPsiDeclarationMethodImpl: VOID foo();
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: VOID
+      CPreprocessorMacroReferenceImpl(CPreprocessorMacroReference)
+        PsiElement(IDENTIFIER)('VOID')
+      ForeignLeaf(VOID_KEYWORD: void)('void')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('foo')
+    CPsiParameterListImpl: ()
+      PsiElement(LPARENTH)('(')
+      PsiElement(RPARENTH)(')')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')

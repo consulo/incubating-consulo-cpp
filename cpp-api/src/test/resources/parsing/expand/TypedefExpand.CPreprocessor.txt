@@ -1,0 +1,14 @@
+CPreprocessorFile:TypedefExpand.c
+  CPreprocessorDefineDirectiveImpl: #define MY_INT int
+    PsiElement(S_DEFINE_KEYWORD)('#define')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('MY_INT')
+    PsiWhiteSpace(' ')
+    CPsiSharpDefineValueImpl: int
+      PsiElement(IDENTIFIER)('int')
+  PsiElement(NEW_LINE)('\n')
+  PsiElement(IDENTIFIER)('MY_INT')
+  PsiWhiteSpace(' ')
+  PsiElement(IDENTIFIER)('x')
+  PsiElement(SEMICOLON)(';')
+  PsiElement(NEW_LINE)('\n')

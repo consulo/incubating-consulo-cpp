@@ -18,43 +18,26 @@ package org.napile.cpp4idea.lang.psi;
 
 import consulo.language.ast.ASTNode;
 import consulo.language.psi.PsiElement;
+import jakarta.annotation.Nonnull;
+import org.jetbrains.annotations.NonNls;
 
-import java.lang.reflect.Constructor;
+import java.util.function.Function;
 
 
 /**
  * @author VISTALL
  * @date 5:34/10.12.2011
  */
-public class CPsiTokenImpl extends CTokenImpl
-{
-	private Constructor<? extends PsiElement> _clazz;
+public class CElementType extends CBaseElementType {
+    private final Function<ASTNode, ? extends PsiElement> myFactory;
 
-	public CPsiTokenImpl(@org.jetbrains.annotations.NonNls String debugName, Class<? extends PsiElement> clazz)
-	{
-		super(debugName);
+    public CElementType(@NonNls String debugName, Function<ASTNode, ? extends PsiElement> factory) {
+        super(debugName);
+        myFactory = factory;
+    }
 
-		try
-		{
-			_clazz = clazz.getConstructor(ASTNode.class);
-		}
-		catch(NoSuchMethodException e)
-		{
-			//
-		}
-	}
-
-	public PsiElement createPsi(ASTNode node)
-	{
-		PsiElement element = null;
-		try
-		{
-			element = _clazz.newInstance(node);
-		}
-		catch(Exception e)
-		{
-			//
-		}
-		return element;
-	}
+    @Nonnull
+    public PsiElement createPsi(ASTNode node) {
+        return myFactory.apply(node);
+    }
 }

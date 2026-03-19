@@ -19,7 +19,7 @@ package consulo.cpp.preprocessor.psi;
 import consulo.language.ast.ASTNode;
 import consulo.language.psi.PsiElement;
 import jakarta.annotation.Nonnull;
-import org.napile.cpp4idea.lang.psi.CTokenImpl;
+import org.napile.cpp4idea.lang.psi.CBaseElementType;
 
 import java.util.function.Function;
 
@@ -27,10 +27,10 @@ import java.util.function.Function;
  * @author VISTALL
  * @since 5:34/10.12.2011
  */
-public class CPsiSharpTokenImpl extends CTokenImpl {
+public class CPreprocessorElementType extends CBaseElementType {
     private final Function<ASTNode, ? extends PsiElement> myFactory;
 
-    public CPsiSharpTokenImpl(String debugName, Function<ASTNode, ? extends PsiElement> factory) {
+    public CPreprocessorElementType(String debugName, Function<ASTNode, ? extends PsiElement> factory) {
         super(debugName);
         myFactory = factory;
     }

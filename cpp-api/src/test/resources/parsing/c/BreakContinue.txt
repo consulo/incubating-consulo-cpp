@@ -1,0 +1,53 @@
+FILE
+  CPsiImplementingMethodImpl: void foo() {
+    while (1) {
+        break;
+        continue;
+    }
+}
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: void
+      PsiElement(VOID_KEYWORD)('void')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('foo')
+    CPsiParameterListImpl: ()
+      PsiElement(LPARENTH)('(')
+      PsiElement(RPARENTH)(')')
+    PsiWhiteSpace(' ')
+    CPsiCodeBlockImpl: {
+    while (1) {
+        break;
+        continue;
+    }
+}
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n    ')
+      CPsiWhileStatementImpl: while (1) {
+        break;
+        continue;
+    }
+        PsiElement(WHILE_KEYWORD)('while')
+        PsiWhiteSpace(' ')
+        PsiElement(LPARENTH)('(')
+        CPsiLiteralExpressionImpl: 1
+          PsiElement(INTEGER_LITERAL)('1')
+        PsiElement(RPARENTH)(')')
+        PsiWhiteSpace(' ')
+        CPsiCodeBlockImpl: {
+        break;
+        continue;
+    }
+          PsiElement(LBRACE)('{')
+          PsiWhiteSpace('\n        ')
+          CPsiBreakStatementImpl: break;
+            PsiElement(BREAK_KEYWORD)('break')
+            PsiElement(SEMICOLON)(';')
+          PsiWhiteSpace('\n        ')
+          CPsiContinueStatementImpl: continue;
+            PsiElement(CONTINUE_KEYWORD)('continue')
+            PsiElement(SEMICOLON)(';')
+          PsiWhiteSpace('\n    ')
+          PsiElement(RBRACE)('}')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')

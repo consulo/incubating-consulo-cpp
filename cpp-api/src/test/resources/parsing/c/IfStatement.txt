@@ -1,0 +1,74 @@
+FILE
+  CPsiImplementingMethodImpl: void foo() {
+    if (x > 0) {
+        return;
+    } else {
+        return;
+    }
+}
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: void
+      PsiElement(VOID_KEYWORD)('void')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('foo')
+    CPsiParameterListImpl: ()
+      PsiElement(LPARENTH)('(')
+      PsiElement(RPARENTH)(')')
+    PsiWhiteSpace(' ')
+    CPsiCodeBlockImpl: {
+    if (x > 0) {
+        return;
+    } else {
+        return;
+    }
+}
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n    ')
+      CPsiIfStatementImpl: if (x > 0) {
+        return;
+    } else {
+        return;
+    }
+        PsiElement(IF_KEYWORD)('if')
+        PsiWhiteSpace(' ')
+        PsiElement(LPARENTH)('(')
+        CPsiBinaryExpressionImpl: x > 0
+          CPsiReferenceExpressionImpl: x
+            PsiElement(IDENTIFIER)('x')
+          PsiWhiteSpace(' ')
+          PsiElement(GT)('>')
+          PsiWhiteSpace(' ')
+          CPsiLiteralExpressionImpl: 0
+            PsiElement(INTEGER_LITERAL)('0')
+        PsiElement(RPARENTH)(')')
+        PsiWhiteSpace(' ')
+        CPsiCodeBlockImpl: {
+        return;
+    }
+          PsiElement(LBRACE)('{')
+          PsiWhiteSpace('\n        ')
+          CPsiReturnStatementImpl: return;
+            PsiElement(RETURN_KEYWORD)('return')
+            PsiErrorElement:Expression expected
+              <empty list>
+            PsiElement(SEMICOLON)(';')
+          PsiWhiteSpace('\n    ')
+          PsiElement(RBRACE)('}')
+        PsiWhiteSpace(' ')
+        PsiElement(ELSE_KEYWORD)('else')
+        PsiWhiteSpace(' ')
+        CPsiCodeBlockImpl: {
+        return;
+    }
+          PsiElement(LBRACE)('{')
+          PsiWhiteSpace('\n        ')
+          CPsiReturnStatementImpl: return;
+            PsiElement(RETURN_KEYWORD)('return')
+            PsiErrorElement:Expression expected
+              <empty list>
+            PsiElement(SEMICOLON)(';')
+          PsiWhiteSpace('\n    ')
+          PsiElement(RBRACE)('}')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')

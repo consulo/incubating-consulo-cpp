@@ -15,16 +15,16 @@
   -->
 
 <consulo-plugin url="https://github.com/consulo/incubating-consulo-cpp">
-	<id>consulo.cpp</id>
-	<name>C/C++</name>
-	<description>Support for C/C++ language.</description>
-	<version>SNAPSHOT</version>
-	<vendor>napile.org</vendor>
-	<resource-bundle>org.napile.cpp4idea.CBundle</resource-bundle>
-	<category>Custom Languages</category>
-	<experimental>true</experimental>
+    <id>consulo.cpp</id>
+    <name>C/C++</name>
+    <description>Support for C/C++ language.</description>
+    <version>SNAPSHOT</version>
+    <vendor>consulo.io</vendor>
+    <resource-bundle>org.napile.cpp4idea.CBundle</resource-bundle>
+    <category>Custom Languages</category>
+    <experimental>true</experimental>
 
-	<tags>
-		<tag>custom.language</tag>
-	</tags>
+    <tags>
+        <tag>custom.language</tag>
+    </tags>
 </consulo-plugin>

@@ -24,183 +24,173 @@ import java.util.Map;
  * @author VISTALL
  * @since 17:11/2020-07-31
  */
-public class PreprocessorExpander
-{
-	public static final Key<PreprocessorExpander> EXPANDER_KEY = Key.create("PreprocessorExpander");
+public class PreprocessorExpander {
+    public static final Key<PreprocessorExpander> EXPANDER_KEY = Key.create("PreprocessorExpander");
 
-	private final Map<String, ExpandedMacro> myDefines = new LinkedHashMap<>();
+    private final Map<String, ExpandedMacro> myDefines = new LinkedHashMap<>();
 
-	private final CTemplateDataModifications myModifications = new CTemplateDataModifications();
+    private final CTemplateDataModifications myModifications = new CTemplateDataModifications();
 
-	private final CPreprocessorDirectiveCollector rangeCollector = new CPreprocessorDirectiveCollector();
+    private final CPreprocessorDirectiveCollector rangeCollector = new CPreprocessorDirectiveCollector();
 
-	public PreprocessorExpander(PsiFile preprocessorFile, ParserDefinition parserDefinition)
-	{
-		preprocessorFile.accept(new CPreprocessorRecursiveElementVisitor()
-		{
-			@Override
-			public void visitSDefine(CPreprocessorDefineDirective element)
-			{
-				CPsiSharpDefineValue value = element.getValue();
-				String text = element.getName();
+    public PreprocessorExpander(PsiFile preprocessorFile, ParserDefinition parserDefinition) {
+        preprocessorFile.accept(new CPreprocessorRecursiveElementVisitor() {
+            @Override
+            public void visitSDefine(CPreprocessorDefineDirective element) {
+                CPsiSharpDefineValue value = element.getValue();
+                String text = element.getName();
 
-				myModifications.addOuterRange(element.getTextRange());
+                myModifications.addOuterRange(element.getTextRange());
 
-				myDefines.put(text, new ExpandedMacro(parserDefinition, element, value.getNode().getChars()));
-			}
+                myDefines.put(text, new ExpandedMacro(parserDefinition, element, value.getNode().getChars()));
+            }
 
-			@Override
-			public void visitPreprocessorIfBlock(CPreprocessorIfBlock element)
-			{
-				super.visitPreprocessorIfBlock(element);
-			}
+            @Override
+            public void visitSUndef(consulo.cpp.preprocessor.psi.CPreprocessorUndefDirective element) {
+                myModifications.addOuterRange(element.getTextRange());
 
-			@Override
-			public void visitSInclude(CPsiSharpInclude element)
-			{
-				// todo file including
-				myModifications.addOuterRange(element.getTextRange());
-			}
+                // remove the macro from the active defines so subsequent references are not expanded
+                String name = element.getName();
+                if (name != null) {
+                    myDefines.remove(name);
+                }
+            }
 
-			@Override
-			public void visitSIndependInclude(CPsiSharpIndepInclude element)
-			{
-				// todo file including
-				myModifications.addOuterRange(element.getTextRange());
-			}
-		});
-	}
+            @Override
+            public void visitSPragma(consulo.cpp.preprocessor.psi.CPreprocessorPragmaDirective element) {
+                // #pragma directives have no effect on the C/C++ parse; remove from output
+                myModifications.addOuterRange(element.getTextRange());
+            }
 
-	public CharSequence buildText(CharSequence sequence)
-	{
-		return rangeCollector.applyTemplateDataModifications(sequence, myModifications);
-	}
+            @Override
+            public void visitPreprocessorIfBlock(CPreprocessorIfBlock element) {
+                // Mark the whole #if/#ifdef/#ifndef...#endif block as an outer range so
+                // the preprocessor tokens do not appear as errors in the primary C root.
+                // TODO: conditionally include the body content based on active defines.
+                myModifications.addOuterRange(element.getTextRange());
+            }
 
-	public CPreprocessorDirectiveCollector getRangeCollector()
-	{
-		return rangeCollector;
-	}
+            @Override
+            public void visitSInclude(CPsiSharpInclude element) {
+                // todo file including
+                myModifications.addOuterRange(element.getTextRange());
+            }
 
-	@Nullable
-	public ExpandedMacro getMacro(@NotNull String name)
-	{
-		return myDefines.get(name);
-	}
+            @Override
+            public void visitSIndependInclude(CPsiSharpIndepInclude element) {
+                // todo file including
+                myModifications.addOuterRange(element.getTextRange());
+            }
+        });
+    }
 
-	@Nullable
-	public ExpandedMacro tryToExpand(String name)
-	{
-		ExpandedMacro macro = myDefines.get(name);
-		if(macro == null)
-		{
-			return null;
-		}
+    public CharSequence buildText(CharSequence sequence) {
+        return rangeCollector.applyTemplateDataModifications(sequence, myModifications);
+    }
 
-		macro.expand();
-		return macro;
-	}
+    public CPreprocessorDirectiveCollector getRangeCollector() {
+        return rangeCollector;
+    }
 
-	/**
-	 * Insert zero-length element after macro reference for normalize psi tree
-	 */
-	public void insertDummyNodes(TreeElement parsed)
-	{
-		// we need insert dummy nodes before inserting outer elements, due it will change tree length
-		// this dummy nodes not change tree text length
-		int textLength = parsed.getTextLength();
+    @Nullable
+    public ExpandedMacro getMacro(@NotNull String name) {
+        return myDefines.get(name);
+    }
 
-		// call it for parse file tree
-		parsed.getFirstChildNode();
+    @Nullable
+    public ExpandedMacro tryToExpand(String name) {
+        ExpandedMacro macro = myDefines.get(name);
+        if (macro == null) {
+            return null;
+        }
 
-		for(Map.Entry<String, ExpandedMacro> entry : myDefines.entrySet())
-		{
-			String key = entry.getKey();
-			ExpandedMacro value = entry.getValue();
+        macro.expand();
+        return macro;
+    }
 
-			for(PreprocessorSymbolDoneInfo doneInfo : value.getSymbolDoneInfos())
-			{
-				Pair<IElementType, String> symbol = entry.getValue().getSymbols().get(doneInfo.getTokenIndex());
+    /**
+     * Insert zero-length element after macro reference for normalize psi tree
+     */
+    public void insertDummyNodes(TreeElement parsed) {
+        // we need insert dummy nodes before inserting outer elements, due it will change tree length
+        // this dummy nodes not change tree text length
+        int textLength = parsed.getTextLength();
 
-				int tokenOffset = doneInfo.getTokenOffset();
+        // call it for parse file tree
+        parsed.getFirstChildNode();
 
-				TextRange textRange = new TextRange(tokenOffset, tokenOffset + key.length());
+        for (Map.Entry<String, ExpandedMacro> entry : myDefines.entrySet()) {
+            String key = entry.getKey();
+            ExpandedMacro value = entry.getValue();
 
-				TreeElement node = (TreeElement) findNode(textRange, parsed, true);
+            for (PreprocessorSymbolDoneInfo doneInfo : value.getSymbolDoneInfos()) {
+                Pair<IElementType, String> symbol = entry.getValue().getSymbols().get(doneInfo.getTokenIndex());
 
-				Couple<TreeElement> forInsert = selectNodeForInsert(node, node, doneInfo.getDoneElementType());
+                int tokenOffset = doneInfo.getTokenOffset();
 
-				TreeElement parentIn = forInsert.getFirst();
+                TextRange textRange = new TextRange(tokenOffset, tokenOffset + key.length());
 
-				TreeElement childIn = forInsert.getSecond();
+                TreeElement node = (TreeElement) findNode(textRange, parsed, true);
 
-				if(childIn.getPsi() instanceof CPreprocessorMacroReference)
-				{
-					childIn.rawInsertAfterMe(new CPreprocessorForeignLeafPsiElement(symbol.getFirst(), symbol.second));
-				}
-				else
-				{
-					childIn.rawInsertBeforeMe(new CPreprocessorForeignLeafPsiElement(symbol.getFirst(), symbol.second));
-				}
-			}
-		}
-	}
+                Couple<TreeElement> forInsert = selectNodeForInsert(node, node, doneInfo.getDoneElementType());
 
-	private static Couple<TreeElement> selectNodeForInsert(TreeElement element, TreeElement childElement, AstElementTypeId astElementTypeId)
-	{
-		IElementType elementType = element.getElementType();
+                TreeElement parentIn = forInsert.getFirst();
 
-		if(elementType == astElementTypeId.getElementType() && element.getStartOffset() == astElementTypeId.getStartOffset())
-		{
-			return Couple.of(element, childElement);
-		}
+                TreeElement childIn = forInsert.getSecond();
 
-		CompositeElement treeParent = element.getTreeParent();
-		if(treeParent == null)
-		{
-			return null;
-		}
-		return selectNodeForInsert(treeParent, element, astElementTypeId);
-	}
+                if (childIn.getPsi() instanceof CPreprocessorMacroReference) {
+                    childIn.rawInsertAfterMe(new CPreprocessorForeignLeafPsiElement(symbol.getFirst(), symbol.second));
+                }
+                else {
+                    childIn.rawInsertBeforeMe(new CPreprocessorForeignLeafPsiElement(symbol.getFirst(), symbol.second));
+                }
+            }
+        }
+    }
 
-	private static ASTNode findNode(TextRange textRange, ASTNode parsed, boolean strict)
-	{
-		ASTNode node = parsed;
+    private static Couple<TreeElement> selectNodeForInsert(TreeElement element, TreeElement childElement, AstElementTypeId astElementTypeId) {
+        IElementType elementType = element.getElementType();
 
-		while(node != null)
-		{
-			if(node instanceof LeafElement)
-			{
-				if(strict)
-				{
-					if(textRange.equals(node.getTextRange()))
-					{
-						return node;
-					}
-				}
-				else
-				{
-					if(textRange.contains(node.getStartOffset()))
-					{
-						return node;
-					}
-				}
-			}
-			else
-			{
-				for(ASTNode child = node.getFirstChildNode(); child != null; child = child.getTreeNext())
-				{
-					ASTNode result = findNode(textRange, child, strict);
+        if (elementType == astElementTypeId.getElementType() && element.getStartOffset() == astElementTypeId.getStartOffset()) {
+            return Couple.of(element, childElement);
+        }
 
-					if(result != null)
-					{
-						return result;
-					}
-				}
-			}
+        CompositeElement treeParent = element.getTreeParent();
+        if (treeParent == null) {
+            return null;
+        }
+        return selectNodeForInsert(treeParent, element, astElementTypeId);
+    }
 
-			node = node.getTreeNext();
-		}
+    private static ASTNode findNode(TextRange textRange, ASTNode parsed, boolean strict) {
+        ASTNode node = parsed;
 
-		return null;
-	}
+        while (node != null) {
+            if (node instanceof LeafElement) {
+                if (strict) {
+                    if (textRange.equals(node.getTextRange())) {
+                        return node;
+                    }
+                }
+                else {
+                    if (textRange.contains(node.getStartOffset())) {
+                        return node;
+                    }
+                }
+            }
+            else {
+                for (ASTNode child = node.getFirstChildNode(); child != null; child = child.getTreeNext()) {
+                    ASTNode result = findNode(textRange, child, strict);
+
+                    if (result != null) {
+                        return result;
+                    }
+                }
+            }
+
+            node = node.getTreeNext();
+        }
+
+        return null;
+    }
 }

@@ -1,0 +1,33 @@
+FILE
+  CPsiClassImpl: class Foo {
+public:
+    void bar();
+};
+    PsiElement(CLASS_KEYWORD)('class')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('Foo')
+    PsiWhiteSpace(' ')
+    PsiElement(LBRACE)('{')
+    PsiWhiteSpace('\n')
+    CPsiAccessorOwnerImpl: public:
+    void bar();
+
+      PsiElement(PUBLIC_KEYWORD)('public')
+      PsiElement(COLON)(':')
+      PsiWhiteSpace('\n    ')
+      CPsiDeclarationMethodImpl: void bar();
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: void
+          PsiElement(VOID_KEYWORD)('void')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('bar')
+        CPsiParameterListImpl: ()
+          PsiElement(LPARENTH)('(')
+          PsiElement(RPARENTH)(')')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n')
+      CPsiModifierListImpl: 
+        <empty list>
+    PsiElement(RBRACE)('}')
+    PsiElement(SEMICOLON)(';')

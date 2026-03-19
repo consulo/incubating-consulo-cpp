@@ -19,7 +19,7 @@ package org.napile.cpp4idea.lang.parser;
 import consulo.annotation.component.ExtensionImpl;
 import consulo.cpp.lang.psi.impl.CFileElementType;
 import consulo.cpp.lang.psi.impl.CFileImpl;
-import consulo.cpp.preprocessor.psi.CPsiSharpTokenImpl;
+import consulo.cpp.preprocessor.psi.CPreprocessorElementType;
 import consulo.language.Language;
 import consulo.language.ast.ASTNode;
 import consulo.language.ast.IFileElementType;
@@ -32,94 +32,80 @@ import consulo.language.parser.PsiParser;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiFile;
 import consulo.language.version.LanguageVersion;
+import jakarta.annotation.Nonnull;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.CLanguage;
 import org.napile.cpp4idea.lang.lexer._CppLexer;
-import org.napile.cpp4idea.lang.psi.CPsiTokenImpl;
+import org.napile.cpp4idea.lang.psi.CElementType;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
-
-import jakarta.annotation.Nonnull;
 
 /**
  * @author VISTALL
  * @date 14:26/18.12.2011
  */
 @ExtensionImpl
-public class CParserDefinitionImpl implements ParserDefinition
-{
-	@Nonnull
-	@Override
-	public Language getLanguage()
-	{
-		return CLanguage.INSTANCE;
-	}
+public class CParserDefinitionImpl implements ParserDefinition {
+    @Nonnull
+    @Override
+    public Language getLanguage() {
+        return CLanguage.INSTANCE;
+    }
 
-	@NotNull
-	@Override
-	public Lexer createLexer(LanguageVersion languageVersion)
-	{
-		return new FlexAdapter(new _CppLexer());
-	}
+    @NotNull
+    @Override
+    public Lexer createLexer(LanguageVersion languageVersion) {
+        return new FlexAdapter(new _CppLexer());
+    }
 
-	@Nonnull
-	@Override
-	public PsiParser createParser(LanguageVersion languageVersion)
-	{
-		return new CPsiParserImpl();
-	}
+    @Nonnull
+    @Override
+    public PsiParser createParser(LanguageVersion languageVersion) {
+        return new CPsiParserImpl();
+    }
 
-	@Override
-	public IFileElementType getFileNodeType()
-	{
-		return CFileElementType.INSTANCE;
-	}
+    @Override
+    public IFileElementType getFileNodeType() {
+        return CFileElementType.INSTANCE;
+    }
 
-	@NotNull
-	@Override
-	public TokenSet getWhitespaceTokens(LanguageVersion languageVersion)
-	{
-		return CPsiTokens.WHITE_SPACE_SET;
-	}
+    @NotNull
+    @Override
+    public TokenSet getWhitespaceTokens(LanguageVersion languageVersion) {
+        return CPsiTokens.WHITE_SPACE_SET;
+    }
 
-	@NotNull
-	@Override
-	public TokenSet getCommentTokens(LanguageVersion languageVersion)
-	{
-		return CPsiTokens.COMMENT_SET;
-	}
+    @NotNull
+    @Override
+    public TokenSet getCommentTokens(LanguageVersion languageVersion) {
+        return CPsiTokens.COMMENT_SET;
+    }
 
-	@NotNull
-	@Override
-	public TokenSet getStringLiteralElements(LanguageVersion languageVersion)
-	{
-		return CPsiTokens.STRING_LITERAL_SET;
-	}
+    @NotNull
+    @Override
+    public TokenSet getStringLiteralElements(LanguageVersion languageVersion) {
+        return CPsiTokens.STRING_LITERAL_SET;
+    }
 
-	@NotNull
-	@Override
-	public PsiElement createElement(ASTNode node)
-	{
-		if(node.getElementType() instanceof CPsiTokenImpl)
-		{
-			return ((CPsiTokenImpl) node.getElementType()).createPsi(node);
-		}
-		else if(node.getElementType() instanceof CPsiSharpTokenImpl)
-		{
-			return ((CPsiSharpTokenImpl) node.getElementType()).createPsi(node);
-		}
+    @NotNull
+    @Override
+    public PsiElement createElement(ASTNode node) {
+        if (node.getElementType() instanceof CElementType) {
+            return ((CElementType) node.getElementType()).createPsi(node);
+        }
+        else if (node.getElementType() instanceof CPreprocessorElementType) {
+            return ((CPreprocessorElementType) node.getElementType()).createPsi(node);
+        }
 
-		throw new IllegalArgumentException("Illegal argument : " + node.getElementType());
-	}
+        throw new IllegalArgumentException("Illegal argument : " + node.getElementType());
+    }
 
-	@Override
-	public PsiFile createFile(FileViewProvider viewProvider)
-	{
-		return new CFileImpl(viewProvider);
-	}
+    @Override
+    public PsiFile createFile(FileViewProvider viewProvider) {
+        return new CFileImpl(viewProvider);
+    }
 
-	@Override
-	public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right)
-	{
-		return SpaceRequirements.MAY;
-	}
+    @Override
+    public SpaceRequirements spaceExistanceTypeBetweenTokens(ASTNode left, ASTNode right) {
+        return SpaceRequirements.MAY;
+    }
 }

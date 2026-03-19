@@ -1,0 +1,42 @@
+CPreprocessorFile:IfElifElse.c
+  CPreprocessorIfBlockImpl: #if 1
+int x;
+#elif 0
+int y;
+#else
+int z;
+#endif
+    PsiElement(S_IF_KEYWORD)('#if')
+    PsiWhiteSpace(' ')
+    PsiElement(C_PREPROCESSOR_SYMBOL)('1')
+    PsiElement(NEW_LINE)('\n')
+    CPsiSharpIfBodyImpl: int x;
+
+      PsiElement(IDENTIFIER)('int')
+      PsiWhiteSpace(' ')
+      PsiElement(IDENTIFIER)('x')
+      PsiElement(SEMICOLON)(';')
+      PsiElement(NEW_LINE)('\n')
+    PsiElement(S_ELIF_KEYWORD)('#elif')
+    PsiWhiteSpace(' ')
+    PsiElement(C_PREPROCESSOR_SYMBOL)('0')
+    PsiElement(NEW_LINE)('\n')
+    CPsiSharpIfBodyImpl: int y;
+
+      PsiElement(IDENTIFIER)('int')
+      PsiWhiteSpace(' ')
+      PsiElement(IDENTIFIER)('y')
+      PsiElement(SEMICOLON)(';')
+      PsiElement(NEW_LINE)('\n')
+    PsiElement(S_ELSE_KEYWORD)('#else')
+    CPsiSharpIfBodyImpl: 
+int z;
+
+      PsiElement(NEW_LINE)('\n')
+      PsiElement(IDENTIFIER)('int')
+      PsiWhiteSpace(' ')
+      PsiElement(IDENTIFIER)('z')
+      PsiElement(SEMICOLON)(';')
+      PsiElement(NEW_LINE)('\n')
+    PsiElement(S_ENDIF_KEYWORD)('#endif')
+  PsiElement(NEW_LINE)('\n')

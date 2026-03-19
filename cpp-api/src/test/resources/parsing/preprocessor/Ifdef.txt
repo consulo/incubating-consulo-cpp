@@ -1,0 +1,3 @@
+FILE
+  PsiElement(OUTER)('#ifdef FOO\nint x;\n#endif')
+  PsiWhiteSpace('\n')

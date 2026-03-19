@@ -3,7 +3,7 @@ package consulo.cpp.preprocessor.parser;
 import consulo.annotation.component.ExtensionImpl;
 import consulo.cpp.preprocessor.CPreprocessorLanguage;
 import consulo.cpp.preprocessor.lexer._CPreprocessorLexer;
-import consulo.cpp.preprocessor.psi.CPsiSharpTokenImpl;
+import consulo.cpp.preprocessor.psi.CPreprocessorElementType;
 import consulo.cpp.preprocessor.psi.impl.CPreprocessorFileImpl;
 import consulo.language.Language;
 import consulo.language.ast.ASTNode;
@@ -75,8 +75,8 @@ public class CPreprocessorParserDefinition implements ParserDefinition {
     @Nonnull
     @Override
     public PsiElement createElement(ASTNode node) {
-        if (node.getElementType() instanceof CPsiSharpTokenImpl) {
-            return ((CPsiSharpTokenImpl) node.getElementType()).createPsi(node);
+        if (node.getElementType() instanceof CPreprocessorElementType) {
+            return ((CPreprocessorElementType) node.getElementType()).createPsi(node);
         }
 
         throw new IllegalArgumentException("Illegal argument : " + node.getElementType());

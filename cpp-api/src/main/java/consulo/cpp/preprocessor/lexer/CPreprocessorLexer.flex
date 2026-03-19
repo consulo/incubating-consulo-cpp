@@ -93,6 +93,10 @@ ESCAPE_SEQUENCE=\\[^\r\n]
 <YYINITIAL> "#ifdef" { return CPreprocessorTokenTypes.S_IFDEF_KEYWORD; }
 <YYINITIAL> "#endif" { return CPreprocessorTokenTypes.S_ENDIF_KEYWORD; }
 <YYINITIAL> "#else" { return CPreprocessorTokenTypes.S_ELSE_KEYWORD; }
+<YYINITIAL> "#pragma" { return CPreprocessorTokenTypes.S_PRAGMA_KEYWORD; }
+<YYINITIAL> "#undef" { return CPreprocessorTokenTypes.S_UNDEF_KEYWORD; }
+<YYINITIAL> "#elif" { return CPreprocessorTokenTypes.S_ELIF_KEYWORD; }
+<YYINITIAL> "#if" { return CPreprocessorTokenTypes.S_IF_KEYWORD; }
 
 <YYINITIAL> {IDENTIFIER} { return CPsiTokens.IDENTIFIER; }
 

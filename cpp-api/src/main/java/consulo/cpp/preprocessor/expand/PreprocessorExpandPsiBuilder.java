@@ -1,6 +1,5 @@
 package consulo.cpp.preprocessor.expand;
 
-import consulo.cpp.preprocessor.parser.CPreprocessorParserHelper;
 import consulo.cpp.preprocessor.psi.CPreprocessorElementTypes;
 import consulo.language.ast.IElementType;
 import consulo.language.parser.PsiBuilder;
@@ -149,9 +148,7 @@ public class PreprocessorExpandPsiBuilder extends PsiBuilderAdapter {
     }
 
     @Override
-    public
-    @NotNull
-    Marker mark() {
+    public @NotNull Marker mark() {
         ExpandMarker marker = new ExpandMarker(super.mark(), super.getCurrentOffset());
         myMarkers.addLast(marker);
         return marker;

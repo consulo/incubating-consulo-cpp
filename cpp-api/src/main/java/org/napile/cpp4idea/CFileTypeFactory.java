@@ -17,29 +17,26 @@
 package org.napile.cpp4idea;
 
 import consulo.annotation.component.ExtensionImpl;
-import consulo.virtualFileSystem.fileType.FileTypeConsumer;
-import consulo.virtualFileSystem.fileType.FileTypeFactory;
 import consulo.cpp.lang.CHeaderFileType;
 import consulo.cpp.lang.CPPHeaderFileType;
 import consulo.cpp.lang.CPPSourceFileType;
 import consulo.cpp.lang.CSourceFileType;
-
+import consulo.virtualFileSystem.fileType.FileTypeConsumer;
+import consulo.virtualFileSystem.fileType.FileTypeFactory;
 import jakarta.annotation.Nonnull;
 
 /**
  * @author VISTALL
- * @date 1:03/10.12.2011
+ * @since 1:03/10.12.2011
  */
 @ExtensionImpl
-public class CFileTypeFactory extends FileTypeFactory
-{
-	@Override
-	public void createFileTypes(@Nonnull FileTypeConsumer consumer)
-	{
-		consumer.consume(CSourceFileType.INSTANCE);
-		consumer.consume(CPPSourceFileType.INSTANCE);
+public class CFileTypeFactory extends FileTypeFactory {
+    @Override
+    public void createFileTypes(@Nonnull FileTypeConsumer consumer) {
+        consumer.consume(CSourceFileType.INSTANCE);
+        consumer.consume(CPPSourceFileType.INSTANCE);
 
-		consumer.consume(CHeaderFileType.INSTANCE);
-		consumer.consume(CPPHeaderFileType.INSTANCE);
-	}
+        consumer.consume(CHeaderFileType.INSTANCE);
+        consumer.consume(CPPHeaderFileType.INSTANCE);
+    }
 }

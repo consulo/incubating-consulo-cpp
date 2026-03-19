@@ -1,0 +1,10 @@
+CPreprocessorFile:Define.c
+  CPreprocessorDefineDirectiveImpl: #define FOO 42
+    PsiElement(S_DEFINE_KEYWORD)('#define')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('FOO')
+    PsiWhiteSpace(' ')
+    CPsiSharpDefineValueImpl: 42
+      PsiElement(C_PREPROCESSOR_SYMBOL)('4')
+      PsiElement(C_PREPROCESSOR_SYMBOL)('2')
+  PsiElement(NEW_LINE)('\n')

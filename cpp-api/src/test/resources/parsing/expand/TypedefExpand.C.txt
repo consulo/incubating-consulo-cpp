@@ -1,0 +1,14 @@
+FILE
+  PsiElement(OUTER)('#define MY_INT int')
+  PsiWhiteSpace('\n')
+  CPsiFieldImpl: MY_INT x;
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: MY_INT
+      CPreprocessorMacroReferenceImpl(CPreprocessorMacroReference)
+        PsiElement(IDENTIFIER)('MY_INT')
+      ForeignLeaf(INT_KEYWORD: int)('int')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('x')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')

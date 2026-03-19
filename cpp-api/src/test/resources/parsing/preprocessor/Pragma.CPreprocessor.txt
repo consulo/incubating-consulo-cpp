@@ -1,0 +1,6 @@
+CPreprocessorFile:Pragma.c
+  CPreprocessorPragmaDirectiveImpl: #pragma once
+    PsiElement(S_PRAGMA_KEYWORD)('#pragma')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('once')
+  PsiElement(NEW_LINE)('\n')

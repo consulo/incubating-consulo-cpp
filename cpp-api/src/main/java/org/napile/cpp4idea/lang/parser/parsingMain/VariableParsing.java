@@ -23,43 +23,36 @@ import org.napile.cpp4idea.lang.psi.CPsiElement;
  * @author VISTALL
  * @date 12:27/07.01.13
  */
-public class VariableParsing extends MainParserHelper
-{
-	public static boolean parseVariable(Class<? extends CPsiElement> clazz, PsiBuilder builder)
-	{
-		PsiBuilder.Marker variableMarker = builder.mark();
-		if(!MainParsing.parseTypeRef(builder))
-		{
-			variableMarker.drop();
-			return false;
-		}
+public class VariableParsing extends MainParserHelper {
+    public static boolean parseVariable(Class<? extends CPsiElement> clazz, PsiBuilder builder) {
+        PsiBuilder.Marker variableMarker = builder.mark();
+        if (!MainParsing.parseTypeRef(builder)) {
+            variableMarker.drop();
+            return false;
+        }
 
-		// Type *name
+        // Type *name
 
-		consumeIf(builder, ASTERISK);
+        consumeIf(builder, ASTERISK);
 
-		if(!consumeIf(builder, IDENTIFIER))
-		{
-			error(builder, "IDENTIFIER.expected");
-			done(variableMarker, clazz);
-			return true;
-		}
+        if (!consumeIf(builder, IDENTIFIER)) {
+            error(builder, "IDENTIFIER.expected");
+            done(variableMarker, clazz);
+            return true;
+        }
 
-		while(consumeIf(builder, LBRACKET))
-		{
-			if(!consumeIf(builder, RBRACKET))
-			{
-				error(builder, "RBRACKET.expected");
-				break;
-			}
-		}
+        while (consumeIf(builder, LBRACKET)) {
+            if (!consumeIf(builder, RBRACKET)) {
+                error(builder, "RBRACKET.expected");
+                break;
+            }
+        }
 
-		if(consumeIf(builder, EQ))
-		{
-			ExpressionParsing.parsePrimaryExpression(builder);
-		}
+        if (consumeIf(builder, EQ)) {
+            ExpressionParsing.parsePrimaryExpression(builder);
+        }
 
-		done(variableMarker, clazz);
-		return true;
-	}
+        done(variableMarker, clazz);
+        return true;
+    }
 }

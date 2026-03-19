@@ -1,0 +1,16 @@
+CPreprocessorFile:FunctionReturnTypeExpand.c
+  CPreprocessorDefineDirectiveImpl: #define VOID void
+    PsiElement(S_DEFINE_KEYWORD)('#define')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('VOID')
+    PsiWhiteSpace(' ')
+    CPsiSharpDefineValueImpl: void
+      PsiElement(IDENTIFIER)('void')
+  PsiElement(NEW_LINE)('\n')
+  PsiElement(IDENTIFIER)('VOID')
+  PsiWhiteSpace(' ')
+  PsiElement(IDENTIFIER)('foo')
+  PsiElement(LPARENTH)('(')
+  PsiElement(RPARENTH)(')')
+  PsiElement(SEMICOLON)(';')
+  PsiElement(NEW_LINE)('\n')

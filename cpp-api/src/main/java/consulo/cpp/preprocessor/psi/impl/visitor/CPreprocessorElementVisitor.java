@@ -64,4 +64,14 @@ public class CPreprocessorElementVisitor extends PsiElementVisitor
 	{
 		visitSElement(element);
 	}
+
+	public void visitSUndef(CPreprocessorUndefDirective element)
+	{
+		visitSElement(element);
+	}
+
+	public void visitSPragma(CPreprocessorPragmaDirective element)
+	{
+		visitSElement(element);
+	}
 }

@@ -1,12 +1,6 @@
 package consulo.cpp.preprocessor.psi;
 
-import consulo.cpp.preprocessor.psi.impl.CPreprocessorDefineDirectiveImpl;
-import consulo.cpp.preprocessor.psi.impl.CPreprocessorIfBlockImpl;
-import consulo.cpp.preprocessor.psi.impl.CPreprocessorMacroReferenceImpl;
-import consulo.cpp.preprocessor.psi.impl.CPsiSharpDefineValueImpl;
-import consulo.cpp.preprocessor.psi.impl.CPsiSharpIfBodyImpl;
-import consulo.cpp.preprocessor.psi.impl.CPsiSharpIncludeImpl;
-import consulo.cpp.preprocessor.psi.impl.CPsiSharpIndepIncludeImpl;
+import consulo.cpp.preprocessor.psi.impl.*;
 import consulo.language.ast.IElementType;
 
 /**
@@ -15,23 +9,29 @@ import consulo.language.ast.IElementType;
  */
 public interface CPreprocessorElementTypes {
     IElementType DEFINE_VALUE =
-        new CPsiSharpTokenImpl(CPsiSharpDefineValue.class.getSimpleName(), CPsiSharpDefineValueImpl::new);
+        new CPreprocessorElementType(CPsiSharpDefineValue.class.getSimpleName(), CPsiSharpDefineValueImpl::new);
 
     IElementType DEFINE_DIRECTIVE =
-        new CPsiSharpTokenImpl(CPreprocessorDefineDirective.class.getSimpleName(), CPreprocessorDefineDirectiveImpl::new);
+        new CPreprocessorElementType(CPreprocessorDefineDirective.class.getSimpleName(), CPreprocessorDefineDirectiveImpl::new);
 
     IElementType MACRO_REFERENCE =
-        new CPsiSharpTokenImpl(CPreprocessorMacroReference.class.getSimpleName(), CPreprocessorMacroReferenceImpl::new);
+        new CPreprocessorElementType(CPreprocessorMacroReference.class.getSimpleName(), CPreprocessorMacroReferenceImpl::new);
 
     IElementType IF_BLOCK =
-        new CPsiSharpTokenImpl(CPreprocessorIfBlock.class.getSimpleName(), CPreprocessorIfBlockImpl::new);
+        new CPreprocessorElementType(CPreprocessorIfBlock.class.getSimpleName(), CPreprocessorIfBlockImpl::new);
 
     IElementType IF_BODY =
-        new CPsiSharpTokenImpl(CPsiSharpIfBody.class.getSimpleName(), CPsiSharpIfBodyImpl::new);
+        new CPreprocessorElementType(CPsiSharpIfBody.class.getSimpleName(), CPsiSharpIfBodyImpl::new);
 
     IElementType INCLUDE =
-        new CPsiSharpTokenImpl(CPsiSharpInclude.class.getSimpleName(), CPsiSharpIncludeImpl::new);
+        new CPreprocessorElementType(CPsiSharpInclude.class.getSimpleName(), CPsiSharpIncludeImpl::new);
 
     IElementType INDEP_INCLUDE =
-        new CPsiSharpTokenImpl(CPsiSharpIndepInclude.class.getSimpleName(), CPsiSharpIndepIncludeImpl::new);
+        new CPreprocessorElementType(CPsiSharpIndepInclude.class.getSimpleName(), CPsiSharpIndepIncludeImpl::new);
+
+    IElementType UNDEF_DIRECTIVE =
+        new CPreprocessorElementType(CPreprocessorUndefDirective.class.getSimpleName(), CPreprocessorUndefDirectiveImpl::new);
+
+    IElementType PRAGMA_DIRECTIVE =
+        new CPreprocessorElementType(CPreprocessorPragmaDirective.class.getSimpleName(), CPreprocessorPragmaDirectiveImpl::new);
 }

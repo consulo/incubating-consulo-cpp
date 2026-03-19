@@ -29,25 +29,22 @@ import org.napile.cpp4idea.lang.psi.CPsiTokens;
  * @author VISTALL
  * @date 14:28/18.12.2011
  */
-public class CPsiParserImpl implements PsiParser, CPsiTokens
-{
-	@NotNull
-	@Override
-	public ASTNode parse(IElementType root, PsiBuilder builder, LanguageVersion languageVersion)
-	{
-		builder.setDebugMode(true);
+public class CPsiParserImpl implements PsiParser, CPsiTokens {
+    @NotNull
+    @Override
+    public ASTNode parse(IElementType root, PsiBuilder builder, LanguageVersion languageVersion) {
+        builder.setDebugMode(true);
 
-		return parseMain(builder, root);
-	}
+        return parseMain(builder, root);
+    }
 
-	public static ASTNode parseMain(PsiBuilder builder, IElementType root)
-	{
-		PsiBuilder.Marker rootMarker = builder.mark();
+    public static ASTNode parseMain(PsiBuilder builder, IElementType root) {
+        PsiBuilder.Marker rootMarker = builder.mark();
 
-		MainParsing.parseElement(builder);
+        MainParsing.parseElement(builder);
 
-		rootMarker.done(root);
+        rootMarker.done(root);
 
-		return builder.getTreeBuilt();
-	}
+        return builder.getTreeBuilt();
+    }
 }

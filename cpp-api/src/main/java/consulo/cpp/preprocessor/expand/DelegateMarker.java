@@ -22,80 +22,67 @@ import consulo.localize.LocalizeValue;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
-public abstract class DelegateMarker implements PsiBuilder.Marker
-{
-	@NotNull
-	private final PsiBuilder.Marker myDelegate;
+public abstract class DelegateMarker implements PsiBuilder.Marker {
+    @NotNull
+    private final PsiBuilder.Marker myDelegate;
 
-	public DelegateMarker(@NotNull PsiBuilder.Marker delegate)
-	{
-		myDelegate = delegate;
-	}
+    public DelegateMarker(@NotNull PsiBuilder.Marker delegate) {
+        myDelegate = delegate;
+    }
 
-	@NotNull
-	public PsiBuilder.Marker getDelegate()
-	{
-		return myDelegate;
-	}
+    @NotNull
+    public PsiBuilder.Marker getDelegate() {
+        return myDelegate;
+    }
 
-	@NotNull
-	@Override
-	public PsiBuilder.Marker precede()
-	{
-		return myDelegate.precede();
-	}
+    @NotNull
+    @Override
+    public PsiBuilder.Marker precede() {
+        return myDelegate.precede();
+    }
 
-	@Override
-	public void drop()
-	{
-		myDelegate.drop();
-	}
+    @Override
+    public void drop() {
+        myDelegate.drop();
+    }
 
-	@Override
-	public void rollbackTo()
-	{
-		myDelegate.rollbackTo();
-	}
+    @Override
+    public void rollbackTo() {
+        myDelegate.rollbackTo();
+    }
 
-	@Override
-	public void done(@NotNull IElementType type)
-	{
-		myDelegate.done(type);
-	}
+    @Override
+    public void done(@NotNull IElementType type) {
+        myDelegate.done(type);
+    }
 
-	@Override
-	public void collapse(@NotNull IElementType type)
-	{
-		myDelegate.collapse(type);
-	}
+    @Override
+    public void collapse(@NotNull IElementType type) {
+        myDelegate.collapse(type);
+    }
 
-	@Override
-	public void doneBefore(@NotNull IElementType type, @NotNull PsiBuilder.Marker before)
-	{
-		myDelegate.doneBefore(type, before);
-	}
+    @Override
+    public void doneBefore(@NotNull IElementType type, @NotNull PsiBuilder.Marker before) {
+        myDelegate.doneBefore(type, before);
+    }
 
-	@Override
-	public void doneBefore(@NotNull IElementType type, @NotNull PsiBuilder.Marker before, @NotNull LocalizeValue errorMessage)
-	{
-		myDelegate.doneBefore(type, before, errorMessage);
-	}
+    @Override
+    public void doneBefore(@NotNull IElementType type, @NotNull PsiBuilder.Marker before, @NotNull LocalizeValue errorMessage) {
+        myDelegate.doneBefore(type, before, errorMessage);
+    }
 
-	@Override
-	public void error(@NotNull LocalizeValue message)
-	{
-		myDelegate.error(message);
-	}
+    @Override
+    public void error(@NotNull LocalizeValue message) {
+        myDelegate.error(message);
+    }
 
-	@Override
-	public void errorBefore(@NotNull LocalizeValue message, @NotNull PsiBuilder.Marker before)
-	{
-		myDelegate.errorBefore(message, before);
-	}
+    @Override
+    public void errorBefore(@NotNull LocalizeValue message, @NotNull PsiBuilder.Marker before) {
+        myDelegate.errorBefore(message, before);
+    }
 
-	@Override
-	public void setCustomEdgeTokenBinders(@Nullable WhitespacesAndCommentsBinder left, @Nullable WhitespacesAndCommentsBinder right)
-	{
-		myDelegate.setCustomEdgeTokenBinders(left, right);
-	}
+    @Override
+    public void setCustomEdgeTokenBinders(@Nullable WhitespacesAndCommentsBinder left, @Nullable WhitespacesAndCommentsBinder right) {
+        myDelegate.setCustomEdgeTokenBinders(left, right);
+    }
 }

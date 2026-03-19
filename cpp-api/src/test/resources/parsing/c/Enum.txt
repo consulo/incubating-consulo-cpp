@@ -1,0 +1,17 @@
+FILE
+  CPsiEnumImpl: enum Color { RED, GREEN };
+    PsiElement(ENUM_KEYWORD)('enum')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('Color')
+    PsiWhiteSpace(' ')
+    PsiElement(LBRACE)('{')
+    PsiWhiteSpace(' ')
+    CPsiEnumConstantImpl: RED
+      PsiElement(IDENTIFIER)('RED')
+    PsiElement(COMMA)(',')
+    PsiWhiteSpace(' ')
+    CPsiEnumConstantImpl: GREEN
+      PsiElement(IDENTIFIER)('GREEN')
+    PsiWhiteSpace(' ')
+    PsiElement(RBRACE)('}')
+    PsiElement(SEMICOLON)(';')

@@ -38,10 +38,18 @@ public class CPreprocessorDirectiveParser extends CPreprocessorParserHelper {
             else if (builder.getTokenType() == S_DEFINE_KEYWORD) {
                 parseDefine(builder);
             }
-            else if (builder.getTokenType() == S_IFNDEF_KEYWORD || builder.getTokenType() == S_IFDEF_KEYWORD) {
+            else if (builder.getTokenType() == S_UNDEF_KEYWORD) {
+                parseUndef(builder);
+            }
+            else if (builder.getTokenType() == S_PRAGMA_KEYWORD) {
+                parsePragma(builder);
+            }
+            else if (builder.getTokenType() == S_IFNDEF_KEYWORD || builder.getTokenType() == S_IFDEF_KEYWORD
+                    || builder.getTokenType() == S_IF_KEYWORD) {
                 parseIf(builder);
             }
-            else if (builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD) {
+            else if (builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD
+                    || builder.getTokenType() == S_ELIF_KEYWORD) {
                 if (isSet(f, EAT_LAST_END_IF)) {
                     error(builder, "S_IFDEF.or.S_IFNDEF.expected");
                     advanceLexerAndSkipLines(builder);
@@ -105,19 +113,60 @@ public class CPreprocessorDirectiveParser extends CPreprocessorParserHelper {
         skipLines(builder);
     }
 
-    public static void parseIf(PsiBuilder builder) {
+    public static void parseUndef(PsiBuilder builder) {
         PsiBuilder.Marker marker = builder.mark();
 
-        builder.advanceLexer();
+        // #undef
+        advanceLexerAndSkipLines(builder);
 
+        // macro name
         if (builder.getTokenType() == IDENTIFIER) {
-            doneOneToken(builder, CPreprocessorElementTypes.MACRO_REFERENCE);
+            builder.advanceLexer();
         }
         else {
             error(builder, "IDENTIFIER.expected");
         }
 
+        marker.done(CPreprocessorElementTypes.UNDEF_DIRECTIVE);
+
+        skipLines(builder);
+    }
+
+    public static void parsePragma(PsiBuilder builder) {
+        PsiBuilder.Marker marker = builder.mark();
+
+        // #pragma — consume everything until end-of-line
+        while (!builder.eof() && builder.getTokenType() != NEW_LINE) {
+            builder.advanceLexer();
+        }
+
+        marker.done(CPreprocessorElementTypes.PRAGMA_DIRECTIVE);
+
+        skipLines(builder);
+    }
+
+    public static void parseIf(PsiBuilder builder) {
+        PsiBuilder.Marker marker = builder.mark();
+
+        boolean isIfDef = builder.getTokenType() == S_IFDEF_KEYWORD || builder.getTokenType() == S_IFNDEF_KEYWORD;
+
         builder.advanceLexer();
+
+        if (isIfDef) {
+            // #ifdef / #ifndef: expect a single identifier
+            if (builder.getTokenType() == IDENTIFIER) {
+                doneOneToken(builder, CPreprocessorElementTypes.MACRO_REFERENCE);
+            }
+            else {
+                error(builder, "IDENTIFIER.expected");
+            }
+        }
+        else {
+            // #if: consume the condition expression tokens until end-of-line
+            while (!builder.eof() && builder.getTokenType() != NEW_LINE) {
+                builder.advanceLexer();
+            }
+        }
 
         if (builder.getTokenType() == NEW_LINE) {
             builder.advanceLexer();
@@ -131,12 +180,39 @@ public class CPreprocessorDirectiveParser extends CPreprocessorParserHelper {
             while (!builder.eof()) {
                 parse(builder, 0);
 
-                if (builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD) {
+                if (builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD
+                        || builder.getTokenType() == S_ELIF_KEYWORD) {
                     break;
                 }
             }
 
             bodyMarker.done(CPreprocessorElementTypes.IF_BODY);
+
+            // handle #elif chains
+            while (builder.getTokenType() == S_ELIF_KEYWORD) {
+                builder.advanceLexer();
+
+                // consume the #elif condition until end-of-line
+                while (!builder.eof() && builder.getTokenType() != NEW_LINE) {
+                    builder.advanceLexer();
+                }
+                if (builder.getTokenType() == NEW_LINE) {
+                    builder.advanceLexer();
+                }
+                skipLines(builder);
+
+                PsiBuilder.Marker elifBody = builder.mark();
+
+                while (!builder.eof()) {
+                    parse(builder, 0);
+
+                    if (builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD
+                            || builder.getTokenType() == S_ELIF_KEYWORD) {
+                        break;
+                    }
+                }
+                elifBody.done(CPreprocessorElementTypes.IF_BODY);
+            }
 
             if (builder.getTokenType() == S_ELSE_KEYWORD) {
                 builder.advanceLexer();

@@ -1,0 +1,18 @@
+CPreprocessorFile:Ifdef.c
+  CPreprocessorIfBlockImpl: #ifdef FOO
+int x;
+#endif
+    PsiElement(S_IFDEF_KEYWORD)('#ifdef')
+    PsiWhiteSpace(' ')
+    CPreprocessorMacroReferenceImpl(CPreprocessorMacroReference)
+      PsiElement(IDENTIFIER)('FOO')
+    PsiElement(NEW_LINE)('\n')
+    CPsiSharpIfBodyImpl: int x;
+
+      PsiElement(IDENTIFIER)('int')
+      PsiWhiteSpace(' ')
+      PsiElement(IDENTIFIER)('x')
+      PsiElement(SEMICOLON)(';')
+      PsiElement(NEW_LINE)('\n')
+    PsiElement(S_ENDIF_KEYWORD)('#endif')
+  PsiElement(NEW_LINE)('\n')

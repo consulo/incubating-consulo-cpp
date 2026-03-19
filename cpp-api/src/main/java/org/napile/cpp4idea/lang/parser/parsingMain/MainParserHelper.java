@@ -28,83 +28,66 @@ import org.napile.cpp4idea.lang.psi.CTokenElements;
  * @author VISTALL
  * @date 15:26/29.12.12
  */
-public class MainParserHelper implements CPsiTokens
-{
-	@Deprecated
-	public static void advanceLexerAndSkipLines(PsiBuilder builder)
-	{
-		builder.advanceLexer();
-	}
+public class MainParserHelper implements CPsiTokens {
+    @Deprecated
+    public static void advanceLexerAndSkipLines(PsiBuilder builder) {
+        builder.advanceLexer();
+    }
 
-	@Deprecated
-	public static void skipLines(PsiBuilder builder)
-	{
-		// just remove usage of this method
-	}
+    @Deprecated
+    public static void skipLines(PsiBuilder builder) {
+        // just remove usage of this method
+    }
 
-	public static IElementType lookAheadIgnoreLines(PsiBuilder builder, int step)
-	{
-		while(!builder.eof())
-		{
-			IElementType elementType = builder.lookAhead(step);
-			if(elementType == null)
-			{
-				break;
-			}
+    public static IElementType lookAheadIgnoreLines(PsiBuilder builder, int step) {
+        while (!builder.eof()) {
+            IElementType elementType = builder.lookAhead(step);
+            if (elementType == null) {
+                break;
+            }
 
-			if(elementType == NEW_LINE)
-			{
-				step++;
-			}
-			else
-			{
-				return elementType;
-			}
-		}
-		return null;
-	}
+            if (elementType == NEW_LINE) {
+                step++;
+            }
+            else {
+                return elementType;
+            }
+        }
+        return null;
+    }
 
-	public static void doneOneToken(PsiBuilder builder, Class<? extends CPsiElement> clazz)
-	{
-		PsiBuilder.Marker marker = builder.mark();
+    public static void doneOneToken(PsiBuilder builder, Class<? extends CPsiElement> clazz) {
+        PsiBuilder.Marker marker = builder.mark();
 
-		builder.advanceLexer();
+        builder.advanceLexer();
 
-		done(marker, clazz);
-	}
+        done(marker, clazz);
+    }
 
-	protected static void expect(final PsiBuilder builder, final IElementType token, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message)
-	{
-		if(builder.getTokenType() == token)
-		{
-			advanceLexerAndSkipLines(builder);
-		}
-		else
-		{
-			builder.error(CBundle.message(message));
-		}
-	}
+    protected static void expect(final PsiBuilder builder, final IElementType token, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message) {
+        if (builder.getTokenType() == token) {
+            advanceLexerAndSkipLines(builder);
+        }
+        else {
+            builder.error(CBundle.message(message));
+        }
+    }
 
-	protected static boolean consumeIf(final PsiBuilder builder, final IElementType token)
-	{
-		if(builder.getTokenType() == token)
-		{
-			advanceLexerAndSkipLines(builder);
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-	}
+    protected static boolean consumeIf(final PsiBuilder builder, final IElementType token) {
+        if (builder.getTokenType() == token) {
+            advanceLexerAndSkipLines(builder);
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 
-	protected static void error(final PsiBuilder builder, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message)
-	{
-		builder.error(CBundle.message(message));
-	}
+    protected static void error(final PsiBuilder builder, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message) {
+        builder.error(CBundle.message(message));
+    }
 
-	public static void done(PsiBuilder.Marker marker, Class<? extends CPsiElement> clazz)
-	{
-		marker.done(CTokenElements.element(clazz));
-	}
+    public static void done(PsiBuilder.Marker marker, Class<? extends CPsiElement> clazz) {
+        marker.done(CTokenElements.element(clazz));
+    }
 }

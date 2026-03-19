@@ -1,0 +1,25 @@
+FILE
+  CPsiNamespaceDeclarationImpl: namespace std {
+    void foo();
+}
+    PsiElement(NAMESPACE_KEYWORD)('namespace')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('std')
+    PsiWhiteSpace(' ')
+    PsiElement(LBRACE)('{')
+    PsiWhiteSpace('\n    ')
+    CPsiDeclarationMethodImpl: void foo();
+      CPsiModifierListImpl: 
+        <empty list>
+      CPsiTypeRefImpl: void
+        PsiElement(VOID_KEYWORD)('void')
+      PsiWhiteSpace(' ')
+      PsiElement(IDENTIFIER)('foo')
+      CPsiParameterListImpl: ()
+        PsiElement(LPARENTH)('(')
+        PsiElement(RPARENTH)(')')
+      PsiElement(SEMICOLON)(';')
+    PsiWhiteSpace('\n')
+    CPsiModifierListImpl: 
+      <empty list>
+    PsiElement(RBRACE)('}')

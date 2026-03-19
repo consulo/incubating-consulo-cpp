@@ -14,19 +14,17 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.lang.psi;
+package org.napile.cpp4idea.lang.psi.impl;
 
-import consulo.language.ast.IElementType;
-import org.napile.cpp4idea.CLanguage;
+import consulo.language.ast.ASTNode;
+import org.napile.cpp4idea.lang.psi.CPsiForStatement;
 
 /**
  * @author VISTALL
- * @date 8:57/10.12.2011
+ * @since 2026-03-19
  */
-public class CTokenImpl extends IElementType
-{
-	public CTokenImpl(@org.jetbrains.annotations.NotNull @org.jetbrains.annotations.NonNls String debugName)
-	{
-		super(debugName, CLanguage.INSTANCE);
-	}
+public class CPsiForStatementImpl extends CPsiElementBaseImpl implements CPsiForStatement {
+    public CPsiForStatementImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
+        super(node);
+    }
 }

@@ -17,7 +17,7 @@
 package consulo.cpp.preprocessor.psi;
 
 import consulo.language.ast.IElementType;
-import org.napile.cpp4idea.lang.psi.CTokenImpl;
+import org.napile.cpp4idea.lang.psi.CBaseElementType;
 
 /**
  * @author VISTALL
@@ -26,13 +26,16 @@ import org.napile.cpp4idea.lang.psi.CTokenImpl;
 public interface CPreprocessorTokenTypes
 {
 	// sharp keywords
-	IElementType S_INCLUDE_KEYWORD = new CTokenImpl("S_INCLUDE_KEYWORD"); // #include
-	IElementType S_DEFINE_KEYWORD = new CTokenImpl("S_DEFINE_KEYWORD"); // #define
-	IElementType S_IFDEF_KEYWORD = new CTokenImpl("S_IFDEF_KEYWORD"); // #ifdef
-	IElementType S_IFNDEF_KEYWORD = new CTokenImpl("S_IFNDEF_KEYWORD"); // #ifndef
-	IElementType S_ENDIF_KEYWORD = new CTokenImpl("S_ENDIF_KEYWORD"); // #endif
-	IElementType S_ELSE_KEYWORD = new CTokenImpl("S_ELSE_KEYWORD"); // #else
-	IElementType S_PRAGMA_KEYWORD = new CTokenImpl("S_PRAGMA_KEYWORD"); // #pragma
+	IElementType S_INCLUDE_KEYWORD = new CBaseElementType("S_INCLUDE_KEYWORD"); // #include
+	IElementType S_DEFINE_KEYWORD = new CBaseElementType("S_DEFINE_KEYWORD"); // #define
+	IElementType S_IFDEF_KEYWORD = new CBaseElementType("S_IFDEF_KEYWORD"); // #ifdef
+	IElementType S_IFNDEF_KEYWORD = new CBaseElementType("S_IFNDEF_KEYWORD"); // #ifndef
+	IElementType S_ENDIF_KEYWORD = new CBaseElementType("S_ENDIF_KEYWORD"); // #endif
+	IElementType S_ELSE_KEYWORD = new CBaseElementType("S_ELSE_KEYWORD"); // #else
+	IElementType S_PRAGMA_KEYWORD = new CBaseElementType("S_PRAGMA_KEYWORD"); // #pragma
+	IElementType S_UNDEF_KEYWORD = new CBaseElementType("S_UNDEF_KEYWORD"); // #undef
+	IElementType S_IF_KEYWORD = new CBaseElementType("S_IF_KEYWORD"); // #if
+	IElementType S_ELIF_KEYWORD = new CBaseElementType("S_ELIF_KEYWORD"); // #elif
 
-	IElementType SYMBOL = new CTokenImpl("C_PREPROCESSOR_SYMBOL");
+	IElementType SYMBOL = new CBaseElementType("C_PREPROCESSOR_SYMBOL");
 }

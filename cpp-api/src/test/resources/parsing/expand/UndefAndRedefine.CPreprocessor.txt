@@ -1,0 +1,27 @@
+CPreprocessorFile:UndefAndRedefine.c
+  CPreprocessorDefineDirectiveImpl: #define MY_INT int
+    PsiElement(S_DEFINE_KEYWORD)('#define')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('MY_INT')
+    PsiWhiteSpace(' ')
+    CPsiSharpDefineValueImpl: int
+      PsiElement(IDENTIFIER)('int')
+  PsiElement(NEW_LINE)('\n')
+  CPreprocessorUndefDirectiveImpl: #undef MY_INT
+    PsiElement(S_UNDEF_KEYWORD)('#undef')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('MY_INT')
+  PsiElement(NEW_LINE)('\n')
+  CPreprocessorDefineDirectiveImpl: #define MY_INT long
+    PsiElement(S_DEFINE_KEYWORD)('#define')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('MY_INT')
+    PsiWhiteSpace(' ')
+    CPsiSharpDefineValueImpl: long
+      PsiElement(IDENTIFIER)('long')
+  PsiElement(NEW_LINE)('\n')
+  PsiElement(IDENTIFIER)('MY_INT')
+  PsiWhiteSpace(' ')
+  PsiElement(IDENTIFIER)('x')
+  PsiElement(SEMICOLON)(';')
+  PsiElement(NEW_LINE)('\n')

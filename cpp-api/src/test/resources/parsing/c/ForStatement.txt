@@ -1,0 +1,66 @@
+FILE
+  CPsiImplementingMethodImpl: void foo() {
+    for (int i = 0; i < 10; i++) {
+        x++;
+    }
+}
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: void
+      PsiElement(VOID_KEYWORD)('void')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('foo')
+    CPsiParameterListImpl: ()
+      PsiElement(LPARENTH)('(')
+      PsiElement(RPARENTH)(')')
+    PsiWhiteSpace(' ')
+    CPsiCodeBlockImpl: {
+    for (int i = 0; i < 10; i++) {
+        x++;
+    }
+}
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n    ')
+      CPsiForStatementImpl: for (int i = 0; i < 10; i++) {
+        x++;
+    }
+        PsiElement(FOR_KEYWORD)('for')
+        PsiWhiteSpace(' ')
+        PsiElement(LPARENTH)('(')
+        PsiElement(INT_KEYWORD)('int')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('i')
+        PsiWhiteSpace(' ')
+        PsiElement(EQ)('=')
+        PsiWhiteSpace(' ')
+        PsiElement(INTEGER_LITERAL)('0')
+        PsiElement(SEMICOLON)(';')
+        PsiWhiteSpace(' ')
+        CPsiBinaryExpressionImpl: i < 10
+          CPsiReferenceExpressionImpl: i
+            PsiElement(IDENTIFIER)('i')
+          PsiWhiteSpace(' ')
+          PsiElement(LT)('<')
+          PsiWhiteSpace(' ')
+          CPsiLiteralExpressionImpl: 10
+            PsiElement(INTEGER_LITERAL)('10')
+        PsiElement(SEMICOLON)(';')
+        PsiWhiteSpace(' ')
+        CPsiPostfixExpressionImpl: i++
+          CPsiReferenceExpressionImpl: i
+            PsiElement(IDENTIFIER)('i')
+          PsiElement(PLUSPLUS)('++')
+        PsiElement(RPARENTH)(')')
+        PsiWhiteSpace(' ')
+        CPsiCodeBlockImpl: {
+        x++;
+    }
+          PsiElement(LBRACE)('{')
+          PsiWhiteSpace('\n        ')
+          PsiElement(IDENTIFIER)('x')
+          PsiElement(PLUSPLUS)('++')
+          PsiElement(SEMICOLON)(';')
+          PsiWhiteSpace('\n    ')
+          PsiElement(RBRACE)('}')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')

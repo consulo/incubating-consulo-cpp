@@ -18,82 +18,177 @@ package org.napile.cpp4idea.lang.parser.parsingMain;
 
 import consulo.language.parser.PsiBuilder;
 import org.napile.cpp4idea.CBundle;
-import org.napile.cpp4idea.lang.psi.CPsiCodeBlock;
-import org.napile.cpp4idea.lang.psi.CPsiParameterList;
-import org.napile.cpp4idea.lang.psi.CPsiReturnStatement;
+import org.napile.cpp4idea.lang.psi.*;
 
 /**
  * @author VISTALL
  * @date 10:36/13.12.2011
  */
-public class CodeBlockParsing extends MainParsing
-{
-	public static void parseCodeBlock(PsiBuilder builder)
-	{
-		PsiBuilder.Marker marker;
+public class CodeBlockParsing extends MainParsing {
+    public static void parseCodeBlock(PsiBuilder builder) {
+        PsiBuilder.Marker marker;
 
-		if(builder.getTokenType() != LBRACE)
-		{
-			builder.error(CBundle.message("LBRACE.expected"));
-			marker = builder.mark();
-			builder.advanceLexer();
+        if (builder.getTokenType() != LBRACE) {
+            builder.error(CBundle.message("LBRACE.expected"));
+            marker = builder.mark();
+            builder.advanceLexer();
 
-			done(marker, CPsiParameterList.class);
-			return;
-		}
-		else
-		{
-			marker = builder.mark();
-			builder.advanceLexer();
-		}
+            done(marker, CPsiParameterList.class);
+            return;
+        }
+        else {
+            marker = builder.mark();
+            builder.advanceLexer();
+        }
 
-		if(builder.getTokenType() != RBRACE)
-		{
-			while(!builder.eof())
-			{
-				parseStatement(builder);
+        if (builder.getTokenType() != RBRACE) {
+            while (!builder.eof()) {
+                parseStatement(builder);
 
-				if(builder.getTokenType() == RBRACE)
-				{
-					break;
-				}
-			}
+                if (builder.getTokenType() == RBRACE) {
+                    break;
+                }
+            }
 
-			if(builder.getTokenType() != RBRACE)
-			{
-				builder.error(CBundle.message("RBRACE.expected"));
-			}
-		}
+            if (builder.getTokenType() != RBRACE) {
+                builder.error(CBundle.message("RBRACE.expected"));
+            }
+        }
 
-		builder.advanceLexer();
+        builder.advanceLexer();
 
-		done(marker, CPsiCodeBlock.class);
-	}
+        done(marker, CPsiCodeBlock.class);
+    }
 
-	private static void parseStatement(PsiBuilder builder)
-	{
-		if(builder.getTokenType() == RETURN_KEYWORD)
-		{
-			PsiBuilder.Marker marker = builder.mark();
+    static void parseStatement(PsiBuilder builder) {
+        if (builder.getTokenType() == RETURN_KEYWORD) {
+            parseReturnStatement(builder);
+        }
+        else if (builder.getTokenType() == IF_KEYWORD) {
+            parseIfStatement(builder);
+        }
+        else if (builder.getTokenType() == WHILE_KEYWORD) {
+            parseWhileStatement(builder);
+        }
+        else if (builder.getTokenType() == FOR_KEYWORD) {
+            parseForStatement(builder);
+        }
+        else if (builder.getTokenType() == BREAK_KEYWORD) {
+            PsiBuilder.Marker marker = builder.mark();
+            builder.advanceLexer();
+            consumeIf(builder, SEMICOLON);
+            done(marker, CPsiBreakStatement.class);
+        }
+        else if (builder.getTokenType() == CONTINUE_KEYWORD) {
+            PsiBuilder.Marker marker = builder.mark();
+            builder.advanceLexer();
+            consumeIf(builder, SEMICOLON);
+            done(marker, CPsiContinueStatement.class);
+        }
+        else if (builder.getTokenType() == LBRACE) {
+            parseCodeBlock(builder);
+        }
+        else {
+            builder.advanceLexer();
+        }
+    }
 
-			builder.advanceLexer();
+    private static void parseReturnStatement(PsiBuilder builder) {
+        PsiBuilder.Marker marker = builder.mark();
 
-			ExpressionParsing.parseExpression(builder);
+        builder.advanceLexer(); // consume 'return'
 
-			if(builder.getTokenType() != SEMICOLON)
-			{
-				builder.error(CBundle.message("SEMICOLON.expected"));
-			}
-			else
-			{
-				builder.advanceLexer();
-			}
+        // Only parse an expression when not immediately followed by ';' (void return)
+        if (builder.getTokenType() != SEMICOLON) {
+            ExpressionParsing.parseExpression(builder);
+        }
 
-			done(marker, CPsiReturnStatement.class);
-		}
-		else
-		{
-			builder.advanceLexer();
-		}
-	}
+        if (builder.getTokenType() != SEMICOLON) {
+            builder.error(CBundle.message("SEMICOLON.expected"));
+        }
+        else {
+            builder.advanceLexer();
+        }
+
+        done(marker, CPsiReturnStatement.class);
+    }
+
+    private static void parseIfStatement(PsiBuilder builder) {
+        PsiBuilder.Marker marker = builder.mark();
+
+        builder.advanceLexer(); // consume 'if'
+
+        if (builder.getTokenType() == LPARENTH) {
+            builder.advanceLexer(); // consume '('
+            ExpressionParsing.parseExpression(builder);
+            consumeIf(builder, RPARENTH);
+        }
+        else {
+            builder.error(CBundle.message("LPARENTH.expected"));
+        }
+
+        parseStatement(builder); // then-branch
+
+        if (builder.getTokenType() == ELSE_KEYWORD) {
+            builder.advanceLexer(); // consume 'else'
+            parseStatement(builder); // else-branch
+        }
+
+        done(marker, CPsiIfStatement.class);
+    }
+
+    private static void parseWhileStatement(PsiBuilder builder) {
+        PsiBuilder.Marker marker = builder.mark();
+
+        builder.advanceLexer(); // consume 'while'
+
+        if (builder.getTokenType() == LPARENTH) {
+            builder.advanceLexer(); // consume '('
+            ExpressionParsing.parseExpression(builder);
+            consumeIf(builder, RPARENTH);
+        }
+        else {
+            builder.error(CBundle.message("LPARENTH.expected"));
+        }
+
+        parseStatement(builder); // body
+
+        done(marker, CPsiWhileStatement.class);
+    }
+
+    private static void parseForStatement(PsiBuilder builder) {
+        PsiBuilder.Marker marker = builder.mark();
+
+        builder.advanceLexer(); // consume 'for'
+
+        if (builder.getTokenType() == LPARENTH) {
+            builder.advanceLexer(); // consume '('
+
+            // init: consume until first ';' (may be a declaration or expression)
+            while (!builder.eof() && builder.getTokenType() != SEMICOLON && builder.getTokenType() != RPARENTH) {
+                builder.advanceLexer();
+            }
+            consumeIf(builder, SEMICOLON);
+
+            // condition expression
+            if (builder.getTokenType() != SEMICOLON) {
+                ExpressionParsing.parseExpression(builder);
+            }
+            consumeIf(builder, SEMICOLON);
+
+            // update expression
+            if (builder.getTokenType() != RPARENTH) {
+                ExpressionParsing.parseExpression(builder);
+            }
+
+            consumeIf(builder, RPARENTH);
+        }
+        else {
+            builder.error(CBundle.message("LPARENTH.expected"));
+        }
+
+        parseStatement(builder); // body
+
+        done(marker, CPsiForStatement.class);
+    }
 }

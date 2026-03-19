@@ -26,80 +26,66 @@ import org.napile.cpp4idea.lang.psi.CPsiTokens;
  * @author VISTALL
  * @date 14:38/11.12.2011
  */
-public class ParameterListParsing extends MainParsing
-{
-	public static void parseParameterList(PsiBuilder builder)
-	{
-		PsiBuilder.Marker marker;
+public class ParameterListParsing extends MainParsing {
+    public static void parseParameterList(PsiBuilder builder) {
+        PsiBuilder.Marker marker;
 
-		if(builder.getTokenType() != LPARENTH)
-		{
-			builder.error(CBundle.message("LPARENTH.expected"));
-			marker = builder.mark();
-			builder.advanceLexer();
-			done(marker, CPsiParameterList.class);
-			return;
-		}
-		else
-		{
-			marker = builder.mark();
-			advanceLexerAndSkipLines(builder);
-		}
+        if (builder.getTokenType() != LPARENTH) {
+            builder.error(CBundle.message("LPARENTH.expected"));
+            marker = builder.mark();
+            builder.advanceLexer();
+            done(marker, CPsiParameterList.class);
+            return;
+        }
+        else {
+            marker = builder.mark();
+            advanceLexerAndSkipLines(builder);
+        }
 
-		if(builder.getTokenType() != RPARENTH)
-		{
-			while(true)
-			{
-				if(builder.getTokenType() == ELLIPSIS)
-				{
-					doneOneToken(builder, CPsiParameter.class);
-				}
-				else
-				{
-					VariableParsing.parseVariable(CPsiParameter.class, builder);
-				}
+        if (builder.getTokenType() != RPARENTH) {
+            while (true) {
+                if (builder.getTokenType() == ELLIPSIS) {
+                    doneOneToken(builder, CPsiParameter.class);
+                }
+                else {
+                    VariableParsing.parseVariable(CPsiParameter.class, builder);
+                }
 
-				if(!consumeIf(builder, COMMA))
-				{
-					break;
-				}
-			}
+                if (!consumeIf(builder, COMMA)) {
+                    break;
+                }
+            }
 
-			expect(builder, RPARENTH, "RPARENTH.expected");
-		}
-		else
-		{
-			advanceLexerAndSkipLines(builder);
-		}
+            expect(builder, RPARENTH, "RPARENTH.expected");
+        }
+        else {
+            advanceLexerAndSkipLines(builder);
+        }
 
-		done(marker, CPsiParameterList.class);
-	}
+        done(marker, CPsiParameterList.class);
+    }
 
-	private static void parserParameter(PsiBuilder builder)
-	{
-		PsiBuilder.Marker marker = builder.mark();
+    private static void parserParameter(PsiBuilder builder) {
+        PsiBuilder.Marker marker = builder.mark();
 
-		// goto parameter name
-		parseTypeRef(builder);
+        // goto parameter name
+        parseTypeRef(builder);
 
-		if(builder.getTokenType() == IDENTIFIER)
-		{
-			advanceLexerAndSkipLines(builder);
-		}
+        if (builder.getTokenType() == IDENTIFIER) {
+            advanceLexerAndSkipLines(builder);
+        }
 
-		if(builder.getTokenType() == CPsiTokens.LBRACKET)
-		{
-			advanceLexerAndSkipLines(builder);
-			expect(builder, CPsiTokens.RBRACKET, "RBRACKET.expected");
-		}
+        if (builder.getTokenType() == CPsiTokens.LBRACKET) {
+            advanceLexerAndSkipLines(builder);
+            expect(builder, CPsiTokens.RBRACKET, "RBRACKET.expected");
+        }
 
-		done(marker, CPsiParameter.class);
+        done(marker, CPsiParameter.class);
 
-		while(builder.getTokenType() == COMMA)
-		{
-			advanceLexerAndSkipLines(builder); // skip COMMA
+        while (builder.getTokenType() == COMMA) {
+            advanceLexerAndSkipLines(builder); // skip COMMA
 
-			parserParameter(builder);
-		}
-	}
+            parserParameter(builder);
+        }
+    }
 }

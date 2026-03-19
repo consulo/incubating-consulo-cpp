@@ -1,0 +1,30 @@
+FILE
+  CPsiClassImpl: class Base {
+};
+    PsiElement(CLASS_KEYWORD)('class')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('Base')
+    PsiWhiteSpace(' ')
+    PsiElement(LBRACE)('{')
+    PsiWhiteSpace('\n')
+    PsiElement(RBRACE)('}')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')
+  CPsiClassImpl: class Child : public Base {
+};
+    PsiElement(CLASS_KEYWORD)('class')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('Child')
+    PsiWhiteSpace(' ')
+    CPsiSuperClassListImpl: : public Base
+      PsiElement(COLON)(':')
+      PsiWhiteSpace(' ')
+      CPsiSuperClassImpl: public Base
+        PsiElement(PUBLIC_KEYWORD)('public')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('Base')
+    PsiWhiteSpace(' ')
+    PsiElement(LBRACE)('{')
+    PsiWhiteSpace('\n')
+    PsiElement(RBRACE)('}')
+    PsiElement(SEMICOLON)(';')
