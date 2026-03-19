@@ -22,6 +22,5 @@ import consulo.language.psi.PsiElement;
  * @author VISTALL
  * @date 15:22/29.12.12
  */
-public interface CPreprocessorElement extends PsiElement
-{
+public interface CPreprocessorElement extends PsiElement {
 }

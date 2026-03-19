@@ -25,163 +25,136 @@ import org.jetbrains.annotations.NotNull;
  * @author VISTALL
  * @date 13:34/29.12.12
  */
-public class CPreprocessorDirectiveParser extends CPreprocessorParserHelper
-{
-	public static final int EAT_LAST_END_IF = 1 << 0;
+public class CPreprocessorDirectiveParser extends CPreprocessorParserHelper {
+    public static final int EAT_LAST_END_IF = 1 << 0;
 
-	public static void parse(@NotNull PsiBuilder builder, int f)
-	{
-		while(!builder.eof())
-		{
-			skipLines(builder);
+    public static void parse(@NotNull PsiBuilder builder, int f) {
+        while (!builder.eof()) {
+            skipLines(builder);
 
-			if(builder.getTokenType() == S_INCLUDE_KEYWORD)
-			{
-				parseInclude(builder);
-			}
-			else if(builder.getTokenType() == S_DEFINE_KEYWORD)
-			{
-				parseDefine(builder);
-			}
-			else if(builder.getTokenType() == S_IFNDEF_KEYWORD || builder.getTokenType() == S_IFDEF_KEYWORD)
-			{
-				parseIf(builder);
-			}
-			else if(builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD)
-			{
-				if(isSet(f, EAT_LAST_END_IF))
-				{
-					error(builder, "S_IFDEF.or.S_IFNDEF.expected");
-					advanceLexerAndSkipLines(builder);
-				}
-				else
-				{
-					break;
-				}
-			}
-			else
-			{
-				builder.advanceLexer();
-			}
-		}
-	}
+            if (builder.getTokenType() == S_INCLUDE_KEYWORD) {
+                parseInclude(builder);
+            }
+            else if (builder.getTokenType() == S_DEFINE_KEYWORD) {
+                parseDefine(builder);
+            }
+            else if (builder.getTokenType() == S_IFNDEF_KEYWORD || builder.getTokenType() == S_IFDEF_KEYWORD) {
+                parseIf(builder);
+            }
+            else if (builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD) {
+                if (isSet(f, EAT_LAST_END_IF)) {
+                    error(builder, "S_IFDEF.or.S_IFNDEF.expected");
+                    advanceLexerAndSkipLines(builder);
+                }
+                else {
+                    break;
+                }
+            }
+            else {
+                builder.advanceLexer();
+            }
+        }
+    }
 
-	public static void parseInclude(PsiBuilder builder)
-	{
-		PsiBuilder.Marker marker = builder.mark();
+    public static void parseInclude(PsiBuilder builder) {
+        PsiBuilder.Marker marker = builder.mark();
 
-		IElementType nextElement = builder.lookAhead(1);
+        IElementType nextElement = builder.lookAhead(1);
 
-		if(nextElement != STRING_LITERAL && nextElement != STRING_INCLUDE_LITERAL)
-		{
-			builder.error("Incorrect include name");
-		}
-		else
-		{
-			builder.advanceLexer();
-		}
+        if (nextElement != STRING_LITERAL && nextElement != STRING_INCLUDE_LITERAL) {
+            builder.error("Incorrect include name");
+        }
+        else {
+            builder.advanceLexer();
+        }
 
-		builder.advanceLexer();
+        builder.advanceLexer();
 
-		done(marker, nextElement == STRING_LITERAL ? CPsiSharpInclude.class : CPsiSharpIndepInclude.class);
+        marker.done(nextElement == STRING_LITERAL ? CPreprocessorElementTypes.INCLUDE : CPreprocessorElementTypes.INDEP_INCLUDE);
 
-		skipLines(builder);
-	}
+        skipLines(builder);
+    }
 
-	public static void parseDefine(PsiBuilder builder)
-	{
-		PsiBuilder.Marker maker = builder.mark();
+    public static void parseDefine(PsiBuilder builder) {
+        PsiBuilder.Marker maker = builder.mark();
 
-		// #define
-		advanceLexerAndSkipLines(builder);
+        // #define
+        advanceLexerAndSkipLines(builder);
 
-		// var name
-		builder.advanceLexer();
+        // var name
+        builder.advanceLexer();
 
-		PsiBuilder.Marker valueMarker = builder.mark();
+        PsiBuilder.Marker valueMarker = builder.mark();
 
-		while(!builder.eof())
-		{
-			if(builder.getTokenType() == NEW_LINE)
-			{
-				break;
-			}
+        while (!builder.eof()) {
+            if (builder.getTokenType() == NEW_LINE) {
+                break;
+            }
 
-			if(builder.getTokenType() == NEXT_LINE)
-			{
-				builder.advanceLexer();
-			}
+            if (builder.getTokenType() == NEXT_LINE) {
+                builder.advanceLexer();
+            }
 
-			builder.advanceLexer();
-		}
+            builder.advanceLexer();
+        }
 
-		done(valueMarker, CPsiSharpDefineValue.class);
+        valueMarker.done(CPreprocessorElementTypes.DEFINE_VALUE);
 
-		done(maker, CPreprocessorDefineDirective.class);
+        maker.done(CPreprocessorElementTypes.DEFINE_DIRECTIVE);
 
-		skipLines(builder);
-	}
+        skipLines(builder);
+    }
 
-	public static void parseIf(PsiBuilder builder)
-	{
-		PsiBuilder.Marker marker = builder.mark();
+    public static void parseIf(PsiBuilder builder) {
+        PsiBuilder.Marker marker = builder.mark();
 
-		builder.advanceLexer();
+        builder.advanceLexer();
 
-		if(builder.getTokenType() == IDENTIFIER)
-		{
-			doneOneToken(builder, CPreprocessorMacroReference.class);
-		}
-		else
-		{
-			error(builder, "IDENTIFIER.expected");
-		}
+        if (builder.getTokenType() == IDENTIFIER) {
+            doneOneToken(builder, CPreprocessorElementTypes.MACRO_REFERENCE);
+        }
+        else {
+            error(builder, "IDENTIFIER.expected");
+        }
 
-		builder.advanceLexer();
+        builder.advanceLexer();
 
-		if(builder.getTokenType() == NEW_LINE)
-		{
-			builder.advanceLexer();
-		}
+        if (builder.getTokenType() == NEW_LINE) {
+            builder.advanceLexer();
+        }
 
-		skipLines(builder);
+        skipLines(builder);
 
-		if(builder.getTokenType() != S_ENDIF_KEYWORD)
-		{
-			PsiBuilder.Marker bodyMarker = builder.mark();
+        if (builder.getTokenType() != S_ENDIF_KEYWORD) {
+            PsiBuilder.Marker bodyMarker = builder.mark();
 
-			while(!builder.eof())
-			{
-				parse(builder, 0);
+            while (!builder.eof()) {
+                parse(builder, 0);
 
-				if(builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD)
-				{
-					break;
-				}
-			}
+                if (builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD) {
+                    break;
+                }
+            }
 
-			done(bodyMarker, CPsiSharpIfBody.class);
+            bodyMarker.done(CPreprocessorElementTypes.IF_BODY);
 
-			if(builder.getTokenType() == S_ELSE_KEYWORD)
-			{
-				builder.advanceLexer();
+            if (builder.getTokenType() == S_ELSE_KEYWORD) {
+                builder.advanceLexer();
 
-				PsiBuilder.Marker elseBody = builder.mark();
+                PsiBuilder.Marker elseBody = builder.mark();
 
-				while(!builder.eof())
-				{
-					parse(builder, 0);
+                while (!builder.eof()) {
+                    parse(builder, 0);
 
-					if(builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD)
-					{
-						break;
-					}
-				}
-				done(elseBody, CPsiSharpIfBody.class);
-			}
-		}
-		checkMatchesWithoutLines(builder, S_ENDIF_KEYWORD, "S_END_IF.expected");
+                    if (builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD) {
+                        break;
+                    }
+                }
+                elseBody.done(CPreprocessorElementTypes.IF_BODY);
+            }
+        }
+        checkMatchesWithoutLines(builder, S_ENDIF_KEYWORD, "S_END_IF.expected");
 
-		done(marker, CPreprocessorIfBlock.class);
-	}
+        marker.done(CPreprocessorElementTypes.IF_BLOCK);
+    }
 }

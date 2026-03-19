@@ -24,7 +24,6 @@ import consulo.language.psi.PsiNamedElement;
  * @author VISTALL
  * @date 7:23/11.12.2011
  */
-public interface CPreprocessorDefineDirective extends CPreprocessorElement, PsiNameIdentifierOwner, PsiNamedElement
-{
-	CPsiSharpDefineValue getValue();
+public interface CPreprocessorDefineDirective extends CPreprocessorElement, PsiNameIdentifierOwner, PsiNamedElement {
+    CPsiSharpDefineValue getValue();
 }

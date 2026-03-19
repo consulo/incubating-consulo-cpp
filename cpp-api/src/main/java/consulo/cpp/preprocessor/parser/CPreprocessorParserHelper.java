@@ -16,10 +16,8 @@
 
 package consulo.cpp.preprocessor.parser;
 
-import consulo.language.parser.PsiBuilder;
 import consulo.language.ast.IElementType;
-import consulo.cpp.preprocessor.psi.CSharpTokenElements;
-import consulo.language.psi.PsiElement;
+import consulo.language.parser.PsiBuilder;
 import org.jetbrains.annotations.PropertyKey;
 import org.napile.cpp4idea.CBundle;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
@@ -29,50 +27,49 @@ import org.napile.cpp4idea.lang.psi.CPsiTokens;
  * @date 13:36/29.12.12
  */
 public class CPreprocessorParserHelper implements CPsiTokens {
-	public static boolean isSet(int val, int constant) {
-		return (val & constant) != 0;
-	}
+    public static boolean isSet(int val, int constant) {
+        return (val & constant) != 0;
+    }
 
-	public static void advanceLexerAndSkipLines(PsiBuilder builder) {
-		builder.advanceLexer();
+    public static void advanceLexerAndSkipLines(PsiBuilder builder) {
+        builder.advanceLexer();
 
-		skipLines(builder);
-	}
+        skipLines(builder);
+    }
 
-	public static void skipLines(PsiBuilder builder) {
-		while (builder.getTokenType() == NEW_LINE)
-			builder.advanceLexer();
-	}
+    public static void skipLines(PsiBuilder builder) {
+        while (builder.getTokenType() == NEW_LINE)
+            builder.advanceLexer();
+    }
 
-	public static void doneOneToken(PsiBuilder builder, Class<? extends PsiElement> clazz) {
-		PsiBuilder.Marker marker = builder.mark();
+    public static void doneOneToken(PsiBuilder builder, IElementType type) {
+        PsiBuilder.Marker marker = builder.mark();
 
-		builder.advanceLexer();
+        builder.advanceLexer();
 
-		done(marker, clazz);
-	}
+        marker.done(type);
+    }
 
-	protected static void checkMatches(final PsiBuilder builder, final IElementType token, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message) {
-		if (builder.getTokenType() == token) {
-			advanceLexerAndSkipLines(builder);
-		} else {
-			builder.error(CBundle.message(message));
-		}
-	}
+    protected static void checkMatches(final PsiBuilder builder, final IElementType token, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message) {
+        if (builder.getTokenType() == token) {
+            advanceLexerAndSkipLines(builder);
+        }
+        else {
+            builder.error(CBundle.message(message));
+        }
+    }
 
-	protected static void checkMatchesWithoutLines(final PsiBuilder builder, final IElementType token, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message) {
-		if (builder.getTokenType() == token) {
-			builder.advanceLexer();
-		} else {
-			builder.error(CBundle.message(message));
-		}
-	}
+    protected static void checkMatchesWithoutLines(final PsiBuilder builder, final IElementType token, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message) {
+        if (builder.getTokenType() == token) {
+            builder.advanceLexer();
+        }
+        else {
+            builder.error(CBundle.message(message));
+        }
+    }
 
-	protected static void error(final PsiBuilder builder, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message) {
-		builder.error(CBundle.message(message));
-	}
+    protected static void error(final PsiBuilder builder, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message) {
+        builder.error(CBundle.message(message));
+    }
 
-	public static void done(PsiBuilder.Marker marker, Class<? extends PsiElement> clazz) {
-		marker.done(CSharpTokenElements.element(clazz));
-	}
 }
