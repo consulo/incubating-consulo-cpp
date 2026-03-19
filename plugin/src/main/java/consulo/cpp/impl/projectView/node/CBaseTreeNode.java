@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.ide.projectView.nodes;
+package consulo.cpp.impl.projectView.node;
 
 import consulo.language.editor.util.LanguageEditorNavigationUtil;
 import consulo.language.icon.IconDescriptorUpdaters;

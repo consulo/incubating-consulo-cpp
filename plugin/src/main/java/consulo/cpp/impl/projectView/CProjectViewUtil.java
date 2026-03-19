@@ -14,15 +14,15 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.ide.projectView;
+package consulo.cpp.impl.projectView;
 
+import consulo.cpp.impl.projectView.node.CClassTreeNode;
+import consulo.cpp.impl.projectView.node.CMethodTreeNode;
+import consulo.project.Project;
 import consulo.project.ui.view.tree.AbstractTreeNode;
 import consulo.project.ui.view.tree.ViewSettings;
-import consulo.project.Project;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.ide.projectView.nodes.CClassTreeNode;
-import org.napile.cpp4idea.ide.projectView.nodes.CMethodTreeNode;
 import org.napile.cpp4idea.lang.psi.CPsiClass;
 import org.napile.cpp4idea.lang.psi.CPsiDeclaration;
 import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
@@ -35,19 +35,20 @@ import java.util.List;
  * @date 17:23/07.01.13
  */
 public class CProjectViewUtil {
-	@Nullable
-	public static CPsiClass findSingleClass(@NotNull CPsiFile f) {
-		CPsiDeclaration[] declarations = f.getDeclarations();
-		return declarations.length == 1 && declarations[0] instanceof CPsiClass ? (CPsiClass) declarations[0] : null;
-	}
+    @Nullable
+    public static CPsiClass findSingleClass(@NotNull CPsiFile f) {
+        CPsiDeclaration[] declarations = f.getDeclarations();
+        return declarations.length == 1 && declarations[0] instanceof CPsiClass ? (CPsiClass) declarations[0] : null;
+    }
 
-	public static void addChildren(Project p, ViewSettings viewSettings, List<AbstractTreeNode> list, CPsiDeclaration[] declarations) {
-		for (CPsiDeclaration declaration : declarations) {
-			if (declaration instanceof CPsiClass) {
-				list.add(new CClassTreeNode(p, (CPsiClass) declaration, viewSettings));
-			} else if (declaration instanceof CPsiDeclarationMethod) {
-				list.add(new CMethodTreeNode(p, (CPsiDeclarationMethod) declaration, viewSettings));
-			}
-		}
-	}
+    public static void addChildren(Project p, ViewSettings viewSettings, List<AbstractTreeNode> list, CPsiDeclaration[] declarations) {
+        for (CPsiDeclaration declaration : declarations) {
+            if (declaration instanceof CPsiClass) {
+                list.add(new CClassTreeNode(p, (CPsiClass) declaration, viewSettings));
+            }
+            else if (declaration instanceof CPsiDeclarationMethod) {
+                list.add(new CMethodTreeNode(p, (CPsiDeclarationMethod) declaration, viewSettings));
+            }
+        }
+    }
 }

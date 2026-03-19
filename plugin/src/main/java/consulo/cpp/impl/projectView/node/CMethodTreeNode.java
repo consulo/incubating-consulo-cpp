@@ -14,29 +14,18 @@
  * limitations under the License.
  */
 
-package org.napile.cpp4idea.ide.projectView.nodes;
+package consulo.cpp.impl.projectView.node;
 
 import consulo.project.ui.view.tree.ViewSettings;
-import consulo.project.ui.view.tree.AbstractTreeNode;
+import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
 import consulo.project.Project;
-import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.psi.CPsiClass;
-
-import java.util.Collection;
-import java.util.Collections;
 
 /**
  * @author VISTALL
- * @date 17:25/07.01.13
+ * @date 19:08/07.01.13
  */
-public class CClassTreeNode extends CBaseTreeNode<CPsiClass> {
-	public CClassTreeNode(Project project, CPsiClass cPsiClass, ViewSettings viewSettings) {
-		super(project, cPsiClass, viewSettings);
-	}
-
-	@NotNull
-	@Override
-	public Collection<? extends AbstractTreeNode<?>> getChildren() {
-		return Collections.emptyList();
+public class CMethodTreeNode extends CBaseTreeNode<CPsiDeclarationMethod> {
+	public CMethodTreeNode(Project project, CPsiDeclarationMethod cPsiDeclarationMethod, ViewSettings viewSettings) {
+		super(project, cPsiDeclarationMethod, viewSettings);
 	}
 }
