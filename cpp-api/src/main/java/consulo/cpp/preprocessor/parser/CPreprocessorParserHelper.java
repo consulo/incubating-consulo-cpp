@@ -18,8 +18,7 @@ package consulo.cpp.preprocessor.parser;
 
 import consulo.language.ast.IElementType;
 import consulo.language.parser.PsiBuilder;
-import org.jetbrains.annotations.PropertyKey;
-import org.napile.cpp4idea.CBundle;
+import consulo.localize.LocalizeValue;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
 
 /**
@@ -50,26 +49,26 @@ public class CPreprocessorParserHelper implements CPsiTokens {
         marker.done(type);
     }
 
-    protected static void checkMatches(final PsiBuilder builder, final IElementType token, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message) {
+    protected static void checkMatches(final PsiBuilder builder, final IElementType token, final LocalizeValue message) {
         if (builder.getTokenType() == token) {
             advanceLexerAndSkipLines(builder);
         }
         else {
-            builder.error(CBundle.message(message));
+            builder.error(message.get());
         }
     }
 
-    protected static void checkMatchesWithoutLines(final PsiBuilder builder, final IElementType token, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message) {
+    protected static void checkMatchesWithoutLines(final PsiBuilder builder, final IElementType token, final LocalizeValue message) {
         if (builder.getTokenType() == token) {
             builder.advanceLexer();
         }
         else {
-            builder.error(CBundle.message(message));
+            builder.error(message.get());
         }
     }
 
-    protected static void error(final PsiBuilder builder, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message) {
-        builder.error(CBundle.message(message));
+    protected static void error(final PsiBuilder builder, final LocalizeValue message) {
+        builder.error(message.get());
     }
 
 }

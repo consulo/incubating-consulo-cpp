@@ -1,0 +1,49 @@
+FILE
+  CPsiImplementingMethodImpl: void foo() {
+    goto end;
+    x++;
+end:
+    return;
+}
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: void
+      PsiElement(VOID_KEYWORD)('void')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('foo')
+    CPsiParameterListImpl: ()
+      PsiElement(LPARENTH)('(')
+      PsiElement(RPARENTH)(')')
+    PsiWhiteSpace(' ')
+    CPsiCodeBlockImpl: {
+    goto end;
+    x++;
+end:
+    return;
+}
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n    ')
+      CPsiGotoStatementImpl: goto end;
+        PsiElement(GOTO_KEYWORD)('goto')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('end')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiExpressionStatementImpl: x++;
+        CPsiPostfixExpressionImpl: x++
+          CPsiReferenceExpressionImpl: x
+            PsiElement(IDENTIFIER)('x')
+          PsiElement(PLUSPLUS)('++')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n')
+      CPsiLabeledStatementImpl: end:
+    return;
+        PsiElement(IDENTIFIER)('end')
+        PsiElement(COLON)(':')
+        PsiWhiteSpace('\n    ')
+        CPsiReturnStatementImpl: return;
+          PsiElement(RETURN_KEYWORD)('return')
+          PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')
+  PsiWhiteSpace('\n')

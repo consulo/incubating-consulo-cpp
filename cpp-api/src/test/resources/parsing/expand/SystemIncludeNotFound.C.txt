@@ -1,0 +1,12 @@
+FILE
+  PsiElement(OUTER)('#include <stdio.h>')
+  PsiWhiteSpace('\n')
+  CPsiFieldImpl: int x;
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: int
+      PsiElement(INT_KEYWORD)('int')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('x')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')

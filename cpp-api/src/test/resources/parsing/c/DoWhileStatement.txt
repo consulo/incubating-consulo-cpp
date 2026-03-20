@@ -1,0 +1,58 @@
+FILE
+  CPsiImplementingMethodImpl: void foo() {
+    do {
+        x++;
+    } while (x < 10);
+}
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: void
+      PsiElement(VOID_KEYWORD)('void')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('foo')
+    CPsiParameterListImpl: ()
+      PsiElement(LPARENTH)('(')
+      PsiElement(RPARENTH)(')')
+    PsiWhiteSpace(' ')
+    CPsiCodeBlockImpl: {
+    do {
+        x++;
+    } while (x < 10);
+}
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n    ')
+      CPsiDoWhileStatementImpl: do {
+        x++;
+    } while (x < 10);
+        PsiElement(DO_KEYWORD)('do')
+        PsiWhiteSpace(' ')
+        CPsiCodeBlockImpl: {
+        x++;
+    }
+          PsiElement(LBRACE)('{')
+          PsiWhiteSpace('\n        ')
+          CPsiExpressionStatementImpl: x++;
+            CPsiPostfixExpressionImpl: x++
+              CPsiReferenceExpressionImpl: x
+                PsiElement(IDENTIFIER)('x')
+              PsiElement(PLUSPLUS)('++')
+            PsiElement(SEMICOLON)(';')
+          PsiWhiteSpace('\n    ')
+          PsiElement(RBRACE)('}')
+        PsiWhiteSpace(' ')
+        PsiElement(WHILE_KEYWORD)('while')
+        PsiWhiteSpace(' ')
+        PsiElement(LPARENTH)('(')
+        CPsiBinaryExpressionImpl: x < 10
+          CPsiReferenceExpressionImpl: x
+            PsiElement(IDENTIFIER)('x')
+          PsiWhiteSpace(' ')
+          PsiElement(LT)('<')
+          PsiWhiteSpace(' ')
+          CPsiLiteralExpressionImpl: 10
+            PsiElement(INTEGER_LITERAL)('10')
+        PsiElement(RPARENTH)(')')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')
+  PsiWhiteSpace('\n')

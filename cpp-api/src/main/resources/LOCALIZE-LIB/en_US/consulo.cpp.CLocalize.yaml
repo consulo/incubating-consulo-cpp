@@ -1,0 +1,58 @@
+lbrace.expected:
+  text: "'{' expected"
+rbrace.expected:
+  text: "'}' expected"
+lparenth.expected:
+  text: "'(' expected"
+rparenth.expected:
+  text: "')' expected"
+lbracket.expected:
+  text: "'[' expected"
+rbracket.expected:
+  text: "']' expected"
+semicolon.expected:
+  text: "';' expected"
+colon.expected:
+  text: "':' expected"
+eq.expected:
+  text: "'=' expected"
+comma.expected:
+  text: "',' expected"
+identifier.expected:
+  text: "Identifier expected"
+s.ifdef.or.s.ifndef.expected:
+  text: "#ifdef/#ifndef expected"
+s.end.if.expected:
+  text: "#endif expected"
+index.expected:
+  text: "Index expected"
+expression.expected:
+  text: "Expression expected"
+not.find.header:
+  text: "Not find header {0}"
+name.expected:
+  text: "Name expected"
+constant.expected:
+  text: "constant expected"
+invalid.token:
+  text: "Invalid Token"
+duplicate.enum.constant:
+  text: "Duplicate enum constant"
+keyword:
+  text: "Keyword"
+number:
+  text: "Number"
+constant:
+  text: "Constant"
+string:
+  text: "String"
+compiler.variable:
+  text: "Compiler variable"
+comma:
+  text: "Comma"
+dot:
+  text: "Dot"
+line.comment:
+  text: "Line Comment"
+block.comment:
+  text: "Block Comment"

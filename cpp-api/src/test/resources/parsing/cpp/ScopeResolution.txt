@@ -1,0 +1,44 @@
+FILE
+  CPsiImplementingMethodImpl: void foo() {
+    std::cout << result << std::endl;
+}
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: void
+      PsiElement(VOID_KEYWORD)('void')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('foo')
+    CPsiParameterListImpl: ()
+      PsiElement(LPARENTH)('(')
+      PsiElement(RPARENTH)(')')
+    PsiWhiteSpace(' ')
+    CPsiCodeBlockImpl: {
+    std::cout << result << std::endl;
+}
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n    ')
+      CPsiExpressionStatementImpl: std::cout << result << std::endl;
+        CPsiBinaryExpressionImpl: std::cout << result << std::endl
+          CPsiBinaryExpressionImpl: std::cout << result
+            CPsiReferenceExpressionImpl: std::cout
+              CPsiReferenceExpressionImpl: std
+                PsiElement(IDENTIFIER)('std')
+              PsiElement(DOUBLE_COLON)('::')
+              PsiElement(IDENTIFIER)('cout')
+            PsiWhiteSpace(' ')
+            PsiElement(LTLT)('<<')
+            PsiWhiteSpace(' ')
+            CPsiReferenceExpressionImpl: result
+              PsiElement(IDENTIFIER)('result')
+          PsiWhiteSpace(' ')
+          PsiElement(LTLT)('<<')
+          PsiWhiteSpace(' ')
+          CPsiReferenceExpressionImpl: std::endl
+            CPsiReferenceExpressionImpl: std
+              PsiElement(IDENTIFIER)('std')
+            PsiElement(DOUBLE_COLON)('::')
+            PsiElement(IDENTIFIER)('endl')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')
+  PsiWhiteSpace('\n')

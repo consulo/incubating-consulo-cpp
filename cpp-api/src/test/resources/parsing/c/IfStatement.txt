@@ -50,8 +50,6 @@ FILE
           PsiWhiteSpace('\n        ')
           CPsiReturnStatementImpl: return;
             PsiElement(RETURN_KEYWORD)('return')
-            PsiErrorElement:Expression expected
-              <empty list>
             PsiElement(SEMICOLON)(';')
           PsiWhiteSpace('\n    ')
           PsiElement(RBRACE)('}')
@@ -65,8 +63,6 @@ FILE
           PsiWhiteSpace('\n        ')
           CPsiReturnStatementImpl: return;
             PsiElement(RETURN_KEYWORD)('return')
-            PsiErrorElement:Expression expected
-              <empty list>
             PsiElement(SEMICOLON)(';')
           PsiWhiteSpace('\n    ')
           PsiElement(RBRACE)('}')

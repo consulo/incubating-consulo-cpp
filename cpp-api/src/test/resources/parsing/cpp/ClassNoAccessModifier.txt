@@ -1,0 +1,22 @@
+FILE
+  CPsiClassImpl: class Foo {
+    int x;
+};
+    PsiElement(CLASS_KEYWORD)('class')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('Foo')
+    PsiWhiteSpace(' ')
+    PsiElement(LBRACE)('{')
+    PsiWhiteSpace('\n    ')
+    CPsiDeclarationFieldImpl: int x;
+      CPsiModifierListImpl: 
+        <empty list>
+      CPsiTypeRefImpl: int
+        PsiElement(INT_KEYWORD)('int')
+      PsiWhiteSpace(' ')
+      PsiElement(IDENTIFIER)('x')
+      PsiElement(SEMICOLON)(';')
+    PsiWhiteSpace('\n')
+    PsiElement(RBRACE)('}')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')

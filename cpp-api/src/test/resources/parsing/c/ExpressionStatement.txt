@@ -1,0 +1,45 @@
+FILE
+  CPsiImplementingMethodImpl: void foo() {
+    x++;
+    add(3, 4);
+}
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: void
+      PsiElement(VOID_KEYWORD)('void')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('foo')
+    CPsiParameterListImpl: ()
+      PsiElement(LPARENTH)('(')
+      PsiElement(RPARENTH)(')')
+    PsiWhiteSpace(' ')
+    CPsiCodeBlockImpl: {
+    x++;
+    add(3, 4);
+}
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n    ')
+      CPsiExpressionStatementImpl: x++;
+        CPsiPostfixExpressionImpl: x++
+          CPsiReferenceExpressionImpl: x
+            PsiElement(IDENTIFIER)('x')
+          PsiElement(PLUSPLUS)('++')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiExpressionStatementImpl: add(3, 4);
+        CPsiCallExpressionImpl: add(3, 4)
+          CPsiReferenceExpressionImpl: add
+            PsiElement(IDENTIFIER)('add')
+          CPsiArgumentListImpl: (3, 4)
+            PsiElement(LPARENTH)('(')
+            CPsiLiteralExpressionImpl: 3
+              PsiElement(INTEGER_LITERAL)('3')
+            PsiElement(COMMA)(',')
+            PsiWhiteSpace(' ')
+            CPsiLiteralExpressionImpl: 4
+              PsiElement(INTEGER_LITERAL)('4')
+            PsiElement(RPARENTH)(')')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')
+  PsiWhiteSpace('\n')

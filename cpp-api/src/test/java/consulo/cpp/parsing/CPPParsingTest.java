@@ -67,4 +67,21 @@ public class CPPParsingTest extends CParsingBaseTest {
     public void testInheritance(Context context) throws Exception {
         doTest(context, null);
     }
+
+    /**
+     * {@code std::cout << result << std::endl;} – scope-resolution ({@code ::})
+     * and stream-insertion ({@code <<}) inside a function body must parse without errors.
+     */
+    @Test
+    public void testScopeResolution(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * {@code class Foo { int x; };} – class with a field but no access specifier
+     */
+    @Test
+    public void testClassNoAccessModifier(Context context) throws Exception {
+        doTest(context, null);
+    }
 }

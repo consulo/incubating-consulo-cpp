@@ -1,0 +1,35 @@
+FILE
+  CPsiImplementingMethodImpl: void foo() {
+    @
+    x++;
+}
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: void
+      PsiElement(VOID_KEYWORD)('void')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('foo')
+    CPsiParameterListImpl: ()
+      PsiElement(LPARENTH)('(')
+      PsiElement(RPARENTH)(')')
+    PsiWhiteSpace(' ')
+    CPsiCodeBlockImpl: {
+    @
+    x++;
+}
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n    ')
+      CPsiExpressionStatementImpl: @
+        PsiErrorElement:Unexpected token
+          <empty list>
+        PsiElement(AT)('@')
+      PsiWhiteSpace('\n    ')
+      CPsiExpressionStatementImpl: x++;
+        CPsiPostfixExpressionImpl: x++
+          CPsiReferenceExpressionImpl: x
+            PsiElement(IDENTIFIER)('x')
+          PsiElement(PLUSPLUS)('++')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')
+  PsiWhiteSpace('\n')

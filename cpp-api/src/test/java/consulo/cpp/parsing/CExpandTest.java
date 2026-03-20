@@ -74,4 +74,22 @@ public class CExpandTest extends CParsingBaseTest {
     public void testUndefAndRedefine(Context context) throws Exception {
         doTest(context, null);
     }
+
+    /**
+     * {@code #include "defs.h"} where the file cannot be resolved (light-file context).
+     * Verifies the directive is cleanly stripped from the C view without crashing.
+     */
+    @Test
+    public void testIncludeNotFound(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * {@code #include <stdio.h>} where no include paths are configured (light-file context).
+     * Verifies the directive is cleanly stripped from the C view without crashing.
+     */
+    @Test
+    public void testSystemIncludeNotFound(Context context) throws Exception {
+        doTest(context, null);
+    }
 }

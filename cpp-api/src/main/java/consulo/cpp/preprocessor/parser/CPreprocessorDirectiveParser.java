@@ -16,6 +16,7 @@
 
 package consulo.cpp.preprocessor.parser;
 
+import consulo.cpp.localize.CLocalize;
 import consulo.cpp.preprocessor.psi.*;
 import consulo.language.ast.IElementType;
 import consulo.language.parser.PsiBuilder;
@@ -51,7 +52,7 @@ public class CPreprocessorDirectiveParser extends CPreprocessorParserHelper {
             else if (builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD
                     || builder.getTokenType() == S_ELIF_KEYWORD) {
                 if (isSet(f, EAT_LAST_END_IF)) {
-                    error(builder, "S_IFDEF.or.S_IFNDEF.expected");
+                    error(builder, CLocalize.sIfdefOrSIfndefExpected());
                     advanceLexerAndSkipLines(builder);
                 }
                 else {
@@ -124,7 +125,7 @@ public class CPreprocessorDirectiveParser extends CPreprocessorParserHelper {
             builder.advanceLexer();
         }
         else {
-            error(builder, "IDENTIFIER.expected");
+            error(builder, CLocalize.identifierExpected());
         }
 
         marker.done(CPreprocessorElementTypes.UNDEF_DIRECTIVE);
@@ -158,7 +159,7 @@ public class CPreprocessorDirectiveParser extends CPreprocessorParserHelper {
                 doneOneToken(builder, CPreprocessorElementTypes.MACRO_REFERENCE);
             }
             else {
-                error(builder, "IDENTIFIER.expected");
+                error(builder, CLocalize.identifierExpected());
             }
         }
         else {
@@ -229,7 +230,7 @@ public class CPreprocessorDirectiveParser extends CPreprocessorParserHelper {
                 elseBody.done(CPreprocessorElementTypes.IF_BODY);
             }
         }
-        checkMatchesWithoutLines(builder, S_ENDIF_KEYWORD, "S_END_IF.expected");
+        checkMatchesWithoutLines(builder, S_ENDIF_KEYWORD, CLocalize.sEndIfExpected());
 
         marker.done(CPreprocessorElementTypes.IF_BLOCK);
     }

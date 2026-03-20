@@ -11,8 +11,7 @@ public interface CPreprocessorElementTypes {
     IElementType DEFINE_VALUE =
         new CPreprocessorElementType(CPsiSharpDefineValue.class.getSimpleName(), CPsiSharpDefineValueImpl::new);
 
-    IElementType DEFINE_DIRECTIVE =
-        new CPreprocessorElementType(CPreprocessorDefineDirective.class.getSimpleName(), CPreprocessorDefineDirectiveImpl::new);
+    IElementType DEFINE_DIRECTIVE = CPreprocessorDefineStubElementType.INSTANCE;
 
     IElementType MACRO_REFERENCE =
         new CPreprocessorElementType(CPreprocessorMacroReference.class.getSimpleName(), CPreprocessorMacroReferenceImpl::new);
@@ -23,8 +22,7 @@ public interface CPreprocessorElementTypes {
     IElementType IF_BODY =
         new CPreprocessorElementType(CPsiSharpIfBody.class.getSimpleName(), CPsiSharpIfBodyImpl::new);
 
-    IElementType INCLUDE =
-        new CPreprocessorElementType(CPsiSharpInclude.class.getSimpleName(), CPsiSharpIncludeImpl::new);
+    IElementType INCLUDE = CPreprocessorIncludeStubElementType.INSTANCE;
 
     IElementType INDEP_INCLUDE =
         new CPreprocessorElementType(CPsiSharpIndepInclude.class.getSimpleName(), CPsiSharpIndepIncludeImpl::new);

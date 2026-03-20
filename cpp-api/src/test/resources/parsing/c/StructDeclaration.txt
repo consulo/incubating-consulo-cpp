@@ -1,0 +1,32 @@
+FILE
+  CPsiStructDeclarationImpl: struct Point {
+    int x;
+    int y;
+};
+    PsiElement(STRUCT_KEYWORD)('struct')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('Point')
+    PsiWhiteSpace(' ')
+    PsiElement(LBRACE)('{')
+    PsiWhiteSpace('\n    ')
+    CPsiDeclarationFieldImpl: int x;
+      CPsiModifierListImpl: 
+        <empty list>
+      CPsiTypeRefImpl: int
+        PsiElement(INT_KEYWORD)('int')
+      PsiWhiteSpace(' ')
+      PsiElement(IDENTIFIER)('x')
+      PsiElement(SEMICOLON)(';')
+    PsiWhiteSpace('\n    ')
+    CPsiDeclarationFieldImpl: int y;
+      CPsiModifierListImpl: 
+        <empty list>
+      CPsiTypeRefImpl: int
+        PsiElement(INT_KEYWORD)('int')
+      PsiWhiteSpace(' ')
+      PsiElement(IDENTIFIER)('y')
+      PsiElement(SEMICOLON)(';')
+    PsiWhiteSpace('\n')
+    PsiElement(RBRACE)('}')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')

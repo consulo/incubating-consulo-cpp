@@ -123,7 +123,13 @@ ESCAPE_SEQUENCE=\\[^\r\n]
 <YYINITIAL> "char" { return CPsiTokens.CHAR_KEYWORD; }
 <YYINITIAL> "__int64" { return CPsiTokens.__INT64_KEYWORD; }
 <YYINITIAL> "int" { return CPsiTokens.INT_KEYWORD; }
+<YYINITIAL> "short" { return CPsiTokens.SHORT_KEYWORD; }
+<YYINITIAL> "float" { return CPsiTokens.FLOAT_KEYWORD; }
+<YYINITIAL> "double" { return CPsiTokens.DOUBLE_KEYWORD; }
 <YYINITIAL> "bool" { return CPsiTokens.BOOL_KEYWORD; }
+<YYINITIAL> "struct" { return CPsiTokens.STRUCT_KEYWORD; }
+<YYINITIAL> "union" { return CPsiTokens.UNION_KEYWORD; }
+<YYINITIAL> "sizeof" { return CPsiTokens.SIZEOF_KEYWORD; }
 
 <YYINITIAL> "true" { return CPsiTokens.BOOL_LITERAL; }
 <YYINITIAL> "false" { return CPsiTokens.BOOL_LITERAL; }

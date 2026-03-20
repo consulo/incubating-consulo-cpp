@@ -18,71 +18,94 @@ package consulo.cpp.preprocessor.psi.impl;
 
 import consulo.cpp.preprocessor.psi.CPreprocessorDefineDirective;
 import consulo.cpp.preprocessor.psi.CPsiSharpDefineValue;
+import consulo.cpp.preprocessor.psi.stub.CPreprocessorDefineStub;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
 import consulo.language.ast.ASTNode;
+import consulo.language.impl.psi.stub.StubBasedPsiElementBase;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.stub.IStubElementType;
 import consulo.language.util.IncorrectOperationException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
-import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
 
 /**
  * @author VISTALL
  * @date 7:23/11.12.2011
  */
-public class CPreprocessorDefineDirectiveImpl extends CPsiElementBaseImpl implements CPreprocessorDefineDirective
+public class CPreprocessorDefineDirectiveImpl
+        extends StubBasedPsiElementBase<CPreprocessorDefineStub>
+        implements CPreprocessorDefineDirective
 {
-	public CPreprocessorDefineDirectiveImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
-		super(node);
-	}
+    /** AST mode - used by the parser. */
+    public CPreprocessorDefineDirectiveImpl(@NotNull ASTNode node)
+    {
+        super(node);
+    }
 
-	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if(visitor instanceof CPreprocessorElementVisitor)
-		{
-			((CPreprocessorElementVisitor) visitor).visitSDefine(this);
-		}
-		else
-		{
-			super.accept(visitor);
-		}
-	}
+    /** Stub mode - used when the file is accessed via the stub index. */
+    public CPreprocessorDefineDirectiveImpl(@NotNull CPreprocessorDefineStub stub,
+                                             @NotNull IStubElementType<?, ?> elementType)
+    {
+        super(stub, elementType);
+    }
 
-	@Override
-	public String getName()
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		return nameIdentifier == null ? null : nameIdentifier.getText();
-	}
+    @Override
+    public void accept(@NotNull PsiElementVisitor visitor)
+    {
+        if(visitor instanceof CPreprocessorElementVisitor)
+        {
+            ((CPreprocessorElementVisitor) visitor).visitSDefine(this);
+        }
+        else
+        {
+            super.accept(visitor);
+        }
+    }
 
-	@Override
-	public CPsiSharpDefineValue getValue()
-	{
-		return findChildByClass(CPsiSharpDefineValue.class);
-	}
+    @Override
+    public String getName()
+    {
+        // Fast path: read from stub if available (avoids AST loading)
+        CPreprocessorDefineStub stub = getStub();
+        if (stub != null)
+        {
+            return stub.getName();
+        }
+        PsiElement nameIdentifier = getNameIdentifier();
+        return nameIdentifier == null ? null : nameIdentifier.getText();
+    }
 
-	@Override
-	public int getTextOffset()
-	{
-		PsiElement nameIdentifier = getNameIdentifier();
-		return nameIdentifier == null ? super.getTextOffset() : nameIdentifier.getTextOffset();
-	}
+    @Override
+    public CPsiSharpDefineValue getValue()
+    {
+        return findChildByClass(CPsiSharpDefineValue.class);
+    }
 
-	@Override
-	public
-	@Nullable
-	PsiElement getNameIdentifier()
-	{
-		return findChildByType(CPsiTokens.IDENTIFIER);
-	}
+    @Override
+    public int getTextOffset()
+    {
+        PsiElement nameIdentifier = getNameIdentifier();
+        return nameIdentifier == null ? super.getTextOffset() : nameIdentifier.getTextOffset();
+    }
 
-	@Override
-	public PsiElement setName(@NotNull String name) throws IncorrectOperationException
-	{
-		return null;
-	}
+    @Override
+    @Nullable
+    public PsiElement getNameIdentifier()
+    {
+        return findChildByType(CPsiTokens.IDENTIFIER);
+    }
+
+    @Override
+    public PsiElement setName(@NotNull String name) throws IncorrectOperationException
+    {
+        return null;
+    }
+
+    @Override
+    public String toString()
+    {
+        return getClass().getSimpleName() + ": " + getText();
+    }
 }

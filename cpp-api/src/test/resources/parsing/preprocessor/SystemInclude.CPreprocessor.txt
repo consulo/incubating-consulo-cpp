@@ -1,0 +1,6 @@
+CPreprocessorFile:SystemInclude.c
+  CPsiSharpIndepIncludeImpl: #include <stdio.h>
+    PsiElement(S_INCLUDE_KEYWORD)('#include')
+    PsiWhiteSpace(' ')
+    PsiElement(STRING_INCLUDE_LITERAL)('<stdio.h>')
+  PsiElement(NEW_LINE)('\n')

@@ -16,15 +16,16 @@
 
 package org.napile.cpp4idea.lang.parser.parsingMain;
 
+import consulo.cpp.localize.CLocalize;
+import consulo.language.ast.IElementType;
 import consulo.language.parser.PsiBuilder;
-import org.napile.cpp4idea.lang.psi.CPsiElement;
 
 /**
  * @author VISTALL
  * @date 12:27/07.01.13
  */
 public class VariableParsing extends MainParserHelper {
-    public static boolean parseVariable(Class<? extends CPsiElement> clazz, PsiBuilder builder) {
+    public static boolean parseVariable(IElementType elementType, PsiBuilder builder) {
         PsiBuilder.Marker variableMarker = builder.mark();
         if (!MainParsing.parseTypeRef(builder)) {
             variableMarker.drop();
@@ -36,14 +37,14 @@ public class VariableParsing extends MainParserHelper {
         consumeIf(builder, ASTERISK);
 
         if (!consumeIf(builder, IDENTIFIER)) {
-            error(builder, "IDENTIFIER.expected");
-            done(variableMarker, clazz);
+            error(builder, CLocalize.identifierExpected());
+            variableMarker.done(elementType);
             return true;
         }
 
         while (consumeIf(builder, LBRACKET)) {
             if (!consumeIf(builder, RBRACKET)) {
-                error(builder, "RBRACKET.expected");
+                error(builder, CLocalize.rbracketExpected());
                 break;
             }
         }
@@ -52,7 +53,7 @@ public class VariableParsing extends MainParserHelper {
             ExpressionParsing.parsePrimaryExpression(builder);
         }
 
-        done(variableMarker, clazz);
+        variableMarker.done(elementType);
         return true;
     }
 }

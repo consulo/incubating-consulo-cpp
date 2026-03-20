@@ -17,56 +17,78 @@
 package consulo.cpp.preprocessor.psi.impl;
 
 import consulo.cpp.preprocessor.psi.CPsiSharpInclude;
+import consulo.cpp.preprocessor.psi.stub.CPreprocessorIncludeStub;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
 import consulo.language.ast.ASTNode;
+import consulo.language.impl.psi.stub.StubBasedPsiElementBase;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.stub.IStubElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
-import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
 
 /**
  * @author VISTALL
  * @date 1:53/11.12.2011
  */
-public class CPsiSharpIncludeImpl extends CPsiElementBaseImpl implements CPsiSharpInclude
+public class CPsiSharpIncludeImpl extends StubBasedPsiElementBase<CPreprocessorIncludeStub> implements CPsiSharpInclude
 {
-	public CPsiSharpIncludeImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
-		super(node);
-	}
+    /** AST mode - used by the parser. */
+    public CPsiSharpIncludeImpl(@NotNull ASTNode node)
+    {
+        super(node);
+    }
 
-	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if(visitor instanceof CPreprocessorElementVisitor)
-		{
-			((CPreprocessorElementVisitor) visitor).visitSInclude(this);
-		}
-		else
-		{
-			super.accept(visitor);
-		}
-	}
+    /** Stub mode - used when the file is accessed via stub index. */
+    public CPsiSharpIncludeImpl(@NotNull CPreprocessorIncludeStub stub, @NotNull IStubElementType<?, ?> elementType)
+    {
+        super(stub, elementType);
+    }
 
-	@Override
-	public PsiElement getIncludeElement()
-	{
-		return findChildByType(CPsiTokens.STRING_LITERAL);
-	}
+    @Override
+    public void accept(@NotNull PsiElementVisitor visitor)
+    {
+        if(visitor instanceof CPreprocessorElementVisitor)
+        {
+            ((CPreprocessorElementVisitor) visitor).visitSInclude(this);
+        }
+        else
+        {
+            super.accept(visitor);
+        }
+    }
 
-	@Override
-	@Nullable
-	public String getIncludeName()
-	{
-		PsiElement element = getIncludeElement();
-		if(element == null)
-		{
-			return null;
-		}
+    @Override
+    public PsiElement getIncludeElement()
+    {
+        return findChildByType(CPsiTokens.STRING_LITERAL);
+    }
 
-		String text = element.getText();
-		return text.substring(1, text.length() - 1);
-	}
+    @Override
+    @Nullable
+    public String getIncludeName()
+    {
+        // Fast path: read from stub if available (avoids AST loading)
+        CPreprocessorIncludeStub stub = getStub();
+        if (stub != null)
+        {
+            return stub.getIncludePath();
+        }
+
+        PsiElement element = getIncludeElement();
+        if(element == null)
+        {
+            return null;
+        }
+
+        String text = element.getText();
+        return text.substring(1, text.length() - 1);
+    }
+
+    @Override
+    public String toString()
+    {
+        return getClass().getSimpleName() + ": " + getText();
+    }
 }

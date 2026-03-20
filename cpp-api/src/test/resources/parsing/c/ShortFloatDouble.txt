@@ -1,0 +1,61 @@
+FILE
+  CPsiImplementingMethodImpl: void foo() {
+    short s = 1;
+    float f = 1.5f;
+    double d = 2.5;
+}
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: void
+      PsiElement(VOID_KEYWORD)('void')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('foo')
+    CPsiParameterListImpl: ()
+      PsiElement(LPARENTH)('(')
+      PsiElement(RPARENTH)(')')
+    PsiWhiteSpace(' ')
+    CPsiCodeBlockImpl: {
+    short s = 1;
+    float f = 1.5f;
+    double d = 2.5;
+}
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n    ')
+      CPsiLocalVariableImpl: short s = 1;
+        CPsiTypeRefImpl: short
+          PsiElement(SHORT_KEYWORD)('short')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('s')
+        PsiWhiteSpace(' ')
+        PsiElement(EQ)('=')
+        PsiWhiteSpace(' ')
+        CPsiLiteralExpressionImpl: 1
+          PsiElement(INTEGER_LITERAL)('1')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiLocalVariableImpl: float f = 1.5f;
+        CPsiTypeRefImpl: float
+          PsiElement(FLOAT_KEYWORD)('float')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('f')
+        PsiWhiteSpace(' ')
+        PsiElement(EQ)('=')
+        PsiWhiteSpace(' ')
+        CPsiLiteralExpressionImpl: 1.5f
+          PsiElement(FLOAT_LITERAL)('1.5f')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiLocalVariableImpl: double d = 2.5;
+        CPsiTypeRefImpl: double
+          PsiElement(DOUBLE_KEYWORD)('double')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('d')
+        PsiWhiteSpace(' ')
+        PsiElement(EQ)('=')
+        PsiWhiteSpace(' ')
+        CPsiLiteralExpressionImpl: 2.5
+          PsiElement(DOUBLE_LITERAL)('2.5')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')
+  PsiWhiteSpace('\n')

@@ -1,0 +1,11 @@
+CPreprocessorFile:IncludeNotFound.c
+  CPsiSharpIncludeImpl: #include "defs.h"
+    PsiElement(S_INCLUDE_KEYWORD)('#include')
+    PsiWhiteSpace(' ')
+    PsiElement(STRING_LITERAL)('"defs.h"')
+  PsiElement(NEW_LINE)('\n')
+  PsiElement(IDENTIFIER)('int')
+  PsiWhiteSpace(' ')
+  PsiElement(IDENTIFIER)('x')
+  PsiElement(SEMICOLON)(';')
+  PsiElement(NEW_LINE)('\n')

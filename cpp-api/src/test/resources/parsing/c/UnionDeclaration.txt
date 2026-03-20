@@ -1,0 +1,32 @@
+FILE
+  CPsiUnionDeclarationImpl: union Data {
+    int i;
+    int j;
+};
+    PsiElement(UNION_KEYWORD)('union')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('Data')
+    PsiWhiteSpace(' ')
+    PsiElement(LBRACE)('{')
+    PsiWhiteSpace('\n    ')
+    CPsiDeclarationFieldImpl: int i;
+      CPsiModifierListImpl: 
+        <empty list>
+      CPsiTypeRefImpl: int
+        PsiElement(INT_KEYWORD)('int')
+      PsiWhiteSpace(' ')
+      PsiElement(IDENTIFIER)('i')
+      PsiElement(SEMICOLON)(';')
+    PsiWhiteSpace('\n    ')
+    CPsiDeclarationFieldImpl: int j;
+      CPsiModifierListImpl: 
+        <empty list>
+      CPsiTypeRefImpl: int
+        PsiElement(INT_KEYWORD)('int')
+      PsiWhiteSpace(' ')
+      PsiElement(IDENTIFIER)('j')
+      PsiElement(SEMICOLON)(';')
+    PsiWhiteSpace('\n')
+    PsiElement(RBRACE)('}')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')

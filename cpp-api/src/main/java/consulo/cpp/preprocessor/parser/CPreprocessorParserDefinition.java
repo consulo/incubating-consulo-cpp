@@ -3,7 +3,10 @@ package consulo.cpp.preprocessor.parser;
 import consulo.annotation.component.ExtensionImpl;
 import consulo.cpp.preprocessor.CPreprocessorLanguage;
 import consulo.cpp.preprocessor.lexer._CPreprocessorLexer;
+import consulo.cpp.preprocessor.psi.CPreprocessorDefineStubElementType;
 import consulo.cpp.preprocessor.psi.CPreprocessorElementType;
+import consulo.cpp.preprocessor.psi.CPreprocessorFileElementType;
+import consulo.cpp.preprocessor.psi.CPreprocessorIncludeStubElementType;
 import consulo.cpp.preprocessor.psi.impl.CPreprocessorFileImpl;
 import consulo.language.Language;
 import consulo.language.ast.ASTNode;
@@ -26,7 +29,7 @@ import jakarta.annotation.Nonnull;
  */
 @ExtensionImpl
 public class CPreprocessorParserDefinition implements ParserDefinition {
-    public static final IFileElementType FILE_TYPE = new IFileElementType(CPreprocessorLanguage.INSTANCE);
+    public static final IFileElementType FILE_TYPE = CPreprocessorFileElementType.INSTANCE;
 
     @Nonnull
     @Override
@@ -77,6 +80,13 @@ public class CPreprocessorParserDefinition implements ParserDefinition {
     public PsiElement createElement(ASTNode node) {
         if (node.getElementType() instanceof CPreprocessorElementType) {
             return ((CPreprocessorElementType) node.getElementType()).createPsi(node);
+        }
+        // Stub-backed element types delegate AST→PSI creation via createPsiFromNode()
+        if (node.getElementType() == CPreprocessorDefineStubElementType.INSTANCE) {
+            return CPreprocessorDefineStubElementType.INSTANCE.createPsiFromNode(node);
+        }
+        if (node.getElementType() == CPreprocessorIncludeStubElementType.INSTANCE) {
+            return CPreprocessorIncludeStubElementType.INSTANCE.createPsiFromNode(node);
         }
 
         throw new IllegalArgumentException("Illegal argument : " + node.getElementType());

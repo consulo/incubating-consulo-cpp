@@ -1,0 +1,56 @@
+FILE
+  CPsiImplementingMethodImpl: void foo() {
+    int result = add(3, 4);
+    char buf[256];
+}
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: void
+      PsiElement(VOID_KEYWORD)('void')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('foo')
+    CPsiParameterListImpl: ()
+      PsiElement(LPARENTH)('(')
+      PsiElement(RPARENTH)(')')
+    PsiWhiteSpace(' ')
+    CPsiCodeBlockImpl: {
+    int result = add(3, 4);
+    char buf[256];
+}
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n    ')
+      CPsiLocalVariableImpl: int result = add(3, 4);
+        CPsiTypeRefImpl: int
+          PsiElement(INT_KEYWORD)('int')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('result')
+        PsiWhiteSpace(' ')
+        PsiElement(EQ)('=')
+        PsiWhiteSpace(' ')
+        CPsiCallExpressionImpl: add(3, 4)
+          CPsiReferenceExpressionImpl: add
+            PsiElement(IDENTIFIER)('add')
+          CPsiArgumentListImpl: (3, 4)
+            PsiElement(LPARENTH)('(')
+            CPsiLiteralExpressionImpl: 3
+              PsiElement(INTEGER_LITERAL)('3')
+            PsiElement(COMMA)(',')
+            PsiWhiteSpace(' ')
+            CPsiLiteralExpressionImpl: 4
+              PsiElement(INTEGER_LITERAL)('4')
+            PsiElement(RPARENTH)(')')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiLocalVariableImpl: char buf[256];
+        CPsiTypeRefImpl: char
+          PsiElement(CHAR_KEYWORD)('char')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('buf')
+        PsiElement(LBRACKET)('[')
+        CPsiLiteralExpressionImpl: 256
+          PsiElement(INTEGER_LITERAL)('256')
+        PsiElement(RBRACKET)(']')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')
+  PsiWhiteSpace('\n')

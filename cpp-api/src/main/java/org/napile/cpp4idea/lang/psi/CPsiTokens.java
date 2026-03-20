@@ -42,7 +42,7 @@ public interface CPsiTokens extends TokenType, CPreprocessorTokenTypes
 	IElementType DO_KEYWORD = new CBaseElementType("DO_KEYWORD");
 	IElementType CONST_KEYWORD = new CBaseElementType("CONST_KEYWORD");
 	IElementType SIGNED_KEYWORD = new CBaseElementType("SIGNED_KEYWORD");   //signed
-	IElementType UNSIGNED_KEYWORD = new CBaseElementType("UNSIGNED_KEYWORD");   //signed
+	IElementType UNSIGNED_KEYWORD = new CBaseElementType("UNSIGNED_KEYWORD");
 	IElementType ELSE_KEYWORD = new CBaseElementType("ELSE_KEYWORD");
 	IElementType BREAK_KEYWORD = new CBaseElementType("BREAK_KEYWORD");
 	IElementType RETURN_KEYWORD = new CBaseElementType("RETURN_KEYWORD");
@@ -61,13 +61,19 @@ public interface CPsiTokens extends TokenType, CPreprocessorTokenTypes
 	IElementType EXTERN_KEYWORD = new CBaseElementType("EXTERN_KEYWORD"); // extern
 	IElementType ENUM_KEYWORD = new CBaseElementType("ENUM_KEYWORD"); // enum
 	IElementType CLASS_KEYWORD = new CBaseElementType("CLASS_KEYWORD"); // class
+	IElementType STRUCT_KEYWORD = new CBaseElementType("STRUCT_KEYWORD"); // struct
+	IElementType UNION_KEYWORD = new CBaseElementType("UNION_KEYWORD"); // union
+	IElementType SIZEOF_KEYWORD = new CBaseElementType("SIZEOF_KEYWORD"); // sizeof
 
 	// types
 	IElementType CHAR_KEYWORD = new CBaseElementType("CHAR_KEYWORD"); // char
 	IElementType BOOL_KEYWORD = new CBaseElementType("BOOL_KEYWORD"); // bool
+	IElementType SHORT_KEYWORD = new CBaseElementType("SHORT_KEYWORD"); // short
+	IElementType INT_KEYWORD = new CBaseElementType("INT_KEYWORD"); // int
 	IElementType LONG_KEYWORD = new CBaseElementType("LONG_KEYWORD"); // long
 	IElementType __INT64_KEYWORD = new CBaseElementType("__INT64_KEYWORD"); // __int64
-	IElementType INT_KEYWORD = new CBaseElementType("INT_KEYWORD"); // int
+	IElementType FLOAT_KEYWORD = new CBaseElementType("FLOAT_KEYWORD"); // float
+	IElementType DOUBLE_KEYWORD = new CBaseElementType("DOUBLE_KEYWORD"); // double
 
 	// data
 	IElementType INTEGER_LITERAL = new CBaseElementType("INTEGER_LITERAL");
@@ -143,16 +149,21 @@ public interface CPsiTokens extends TokenType, CPreprocessorTokenTypes
 
 	TokenSet EQUALITY_OPERATIONS = TokenSet.create(EQEQ, NE);
 	TokenSet ASSIGNMENT_OPERATIONS = TokenSet.create(EQ, PLUSEQ, MINUSEQ, ASTERISKEQ, PERCEQ, LTLTEQ, GTGTEQ, GTGTGTEQ, ANDEQ, OREQ, XOREQ, DIVEQ);
-	TokenSet UNARY_OPERATIONS = TokenSet.create(PLUS, MINUS, PLUSPLUS, MINUSMINUS, TILDE, EXCL);
+	/** Unary prefix operators — includes address-of ({@code &}) and dereference ({@code *}). */
+	TokenSet UNARY_OPERATIONS = TokenSet.create(PLUS, MINUS, PLUSPLUS, MINUSMINUS, TILDE, EXCL, AND, ASTERISK);
 	TokenSet SHIFT_OPERATIONS = TokenSet.create(LTLT, GTGT, GTGTGT);
 	TokenSet ADDITIVE_OPERATIONS = TokenSet.create(PLUS, MINUS);
 	TokenSet MULTIPLICATIVE_OPERATIONS = TokenSet.create(ASTERISK, DIV, PERC);
 	TokenSet RELATIONAL_OPERATIONS = TokenSet.create(LT, GT, LE, GE);
 
-	TokenSet TYPES = TokenSet.create
-			(
-					INT_KEYWORD, __INT64_KEYWORD, BOOL_KEYWORD, CHAR_KEYWORD, LONG_KEYWORD, VOID_KEYWORD
-			);
+	/** Primitive type keywords and {@code void}. */
+	TokenSet TYPES = TokenSet.create(
+			INT_KEYWORD, __INT64_KEYWORD, BOOL_KEYWORD, CHAR_KEYWORD,
+			SHORT_KEYWORD, LONG_KEYWORD, FLOAT_KEYWORD, DOUBLE_KEYWORD, VOID_KEYWORD
+	);
+
+	/** Aggregate-type starters: {@code struct} and {@code union}. */
+	TokenSet AGGREGATE_TYPES = TokenSet.create(STRUCT_KEYWORD, UNION_KEYWORD);
 
 	TokenSet OPERATION_SET = TokenSet.create
 			(
@@ -169,10 +180,12 @@ public interface CPsiTokens extends TokenType, CPreprocessorTokenTypes
 					NEW_KEYWORD, PUBLIC_KEYWORD, RETURN_KEYWORD,
 					SWITCH_KEYWORD, VOID_KEYWORD, WHILE_KEYWORD,
 					CONST_KEYWORD, TYPEDEF_KEYWORD, SIGNED_KEYWORD, UNSIGNED_KEYWORD,
-					CHAR_KEYWORD, __INT64_KEYWORD, LONG_KEYWORD,
+					CHAR_KEYWORD, SHORT_KEYWORD, INT_KEYWORD, LONG_KEYWORD, __INT64_KEYWORD,
+					FLOAT_KEYWORD, DOUBLE_KEYWORD,
 					S_INCLUDE_KEYWORD, S_DEFINE_KEYWORD, S_IFDEF_KEYWORD, S_IFNDEF_KEYWORD, S_ELSE_KEYWORD, S_ENDIF_KEYWORD,
-					ENUM_KEYWORD, EXTERN_KEYWORD, INT_KEYWORD, BOOL_KEYWORD,
+					ENUM_KEYWORD, EXTERN_KEYWORD, BOOL_KEYWORD,
 					PRIVATE_KEYWORD, STATIC_KEYWORD, CLASS_KEYWORD, NAMESPACE_KEYWORD,
-					VIRTUAL_KEYWORD, EXPLICIT_KEYWORD
+					VIRTUAL_KEYWORD, EXPLICIT_KEYWORD,
+					STRUCT_KEYWORD, UNION_KEYWORD, SIZEOF_KEYWORD
 			);
 }

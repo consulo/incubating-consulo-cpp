@@ -92,4 +92,14 @@ public class CPreprocessorParsingTest extends CParsingBaseTest {
     public void testIfElifElse(Context context) throws Exception {
         doTest(context, null);
     }
+
+    /**
+     * {@code #include <stdio.h>} – system include directive, parsed as
+     * {@code CPsiSharpIndepIncludeImpl} in the preprocessor tree and
+     * treated as an {@code OUTER} range in the primary C tree.
+     */
+    @Test
+    public void testSystemInclude(Context context) throws Exception {
+        doTest(context, null);
+    }
 }

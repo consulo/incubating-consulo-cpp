@@ -107,4 +107,104 @@ public class CParsingTest extends CParsingBaseTest {
     public void testBreakContinue(Context context) throws Exception {
         doTest(context, null);
     }
+
+    /**
+     * Local variable declarations inside a function body:
+     * {@code int result = add(3, 4);} and {@code char buf[256];}
+     */
+    @Test
+    public void testLocalVariable(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * Expression statements inside a function body:
+     * {@code x++;} and {@code add(3, 4);}
+     */
+    @Test
+    public void testExpressionStatement(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * A stray {@code @} token (not an expression starter) inside a function body
+     * must not cause an infinite loop — the parser must report an error, skip the
+     * bad token, and continue parsing the next statement ({@code x++;}) normally.
+     */
+    @Test
+    public void testUnexpectedToken(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * {@code do { x++; } while (x < 10);} – do/while loop
+     */
+    @Test
+    public void testDoWhileStatement(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * {@code switch (x) { case 1: return; default: x++; }} – switch with case/default labels
+     */
+    @Test
+    public void testSwitchStatement(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * {@code goto end; … end: return;} – goto statement
+     */
+    @Test
+    public void testGotoStatement(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * {@code start: x++; end: return;} – labeled statements
+     */
+    @Test
+    public void testLabeledStatement(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * {@code int n = sizeof(int);} – sizeof expression with a type argument
+     */
+    @Test
+    public void testSizeofExpression(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * {@code -x; &x;} – unary prefix expressions (negate and address-of)
+     */
+    @Test
+    public void testPrefixExpression(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * {@code struct Point { int x; int y; };} – struct declaration with two fields
+     */
+    @Test
+    public void testStructDeclaration(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * {@code union Data { int i; int j; };} – union declaration with two fields
+     */
+    @Test
+    public void testUnionDeclaration(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * Local variable declarations using {@code short}, {@code float}, and {@code double} types
+     */
+    @Test
+    public void testShortFloatDouble(Context context) throws Exception {
+        doTest(context, null);
+    }
 }

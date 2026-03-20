@@ -11,7 +11,6 @@ public:
     PsiWhiteSpace('\n')
     CPsiAccessorOwnerImpl: public:
     void bar();
-
       PsiElement(PUBLIC_KEYWORD)('public')
       PsiElement(COLON)(':')
       PsiWhiteSpace('\n    ')
@@ -26,8 +25,6 @@ public:
           PsiElement(LPARENTH)('(')
           PsiElement(RPARENTH)(')')
         PsiElement(SEMICOLON)(';')
-      PsiWhiteSpace('\n')
-      CPsiModifierListImpl: 
-        <empty list>
+    PsiWhiteSpace('\n')
     PsiElement(RBRACE)('}')
     PsiElement(SEMICOLON)(';')

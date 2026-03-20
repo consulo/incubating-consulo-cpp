@@ -18,11 +18,8 @@ package org.napile.cpp4idea.lang.parser.parsingMain;
 
 import consulo.language.ast.IElementType;
 import consulo.language.parser.PsiBuilder;
-import org.jetbrains.annotations.PropertyKey;
-import org.napile.cpp4idea.CBundle;
-import org.napile.cpp4idea.lang.psi.CPsiElement;
+import consulo.localize.LocalizeValue;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
-import org.napile.cpp4idea.lang.psi.CTokenElements;
 
 /**
  * @author VISTALL
@@ -56,20 +53,18 @@ public class MainParserHelper implements CPsiTokens {
         return null;
     }
 
-    public static void doneOneToken(PsiBuilder builder, Class<? extends CPsiElement> clazz) {
+    public static void doneOneToken(PsiBuilder builder, IElementType elementType) {
         PsiBuilder.Marker marker = builder.mark();
-
         builder.advanceLexer();
-
-        done(marker, clazz);
+        marker.done(elementType);
     }
 
-    protected static void expect(final PsiBuilder builder, final IElementType token, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message) {
+    protected static void expect(final PsiBuilder builder, final IElementType token, final LocalizeValue message) {
         if (builder.getTokenType() == token) {
             advanceLexerAndSkipLines(builder);
         }
         else {
-            builder.error(CBundle.message(message));
+            builder.error(message.get());
         }
     }
 
@@ -83,11 +78,7 @@ public class MainParserHelper implements CPsiTokens {
         }
     }
 
-    protected static void error(final PsiBuilder builder, @PropertyKey(resourceBundle = CBundle.PATH_TO_BUNDLE) final String message) {
-        builder.error(CBundle.message(message));
-    }
-
-    public static void done(PsiBuilder.Marker marker, Class<? extends CPsiElement> clazz) {
-        marker.done(CTokenElements.element(clazz));
+    protected static void error(final PsiBuilder builder, final LocalizeValue message) {
+        builder.error(message.get());
     }
 }

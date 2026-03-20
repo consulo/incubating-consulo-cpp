@@ -16,10 +16,9 @@
 
 package org.napile.cpp4idea.lang.parser.parsingMain;
 
+import consulo.cpp.localize.CLocalize;
 import consulo.language.parser.PsiBuilder;
-import org.napile.cpp4idea.CBundle;
-import org.napile.cpp4idea.lang.psi.CPsiParameter;
-import org.napile.cpp4idea.lang.psi.CPsiParameterList;
+import org.napile.cpp4idea.lang.psi.CElementTypes;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
 
 /**
@@ -31,10 +30,10 @@ public class ParameterListParsing extends MainParsing {
         PsiBuilder.Marker marker;
 
         if (builder.getTokenType() != LPARENTH) {
-            builder.error(CBundle.message("LPARENTH.expected"));
+            builder.error(CLocalize.lparenthExpected().get());
             marker = builder.mark();
             builder.advanceLexer();
-            done(marker, CPsiParameterList.class);
+            marker.done(CElementTypes.PARAMETER_LIST);
             return;
         }
         else {
@@ -45,10 +44,10 @@ public class ParameterListParsing extends MainParsing {
         if (builder.getTokenType() != RPARENTH) {
             while (true) {
                 if (builder.getTokenType() == ELLIPSIS) {
-                    doneOneToken(builder, CPsiParameter.class);
+                    doneOneToken(builder, CElementTypes.PARAMETER);
                 }
                 else {
-                    VariableParsing.parseVariable(CPsiParameter.class, builder);
+                    VariableParsing.parseVariable(CElementTypes.PARAMETER, builder);
                 }
 
                 if (!consumeIf(builder, COMMA)) {
@@ -56,13 +55,13 @@ public class ParameterListParsing extends MainParsing {
                 }
             }
 
-            expect(builder, RPARENTH, "RPARENTH.expected");
+            expect(builder, RPARENTH, CLocalize.rparenthExpected());
         }
         else {
             advanceLexerAndSkipLines(builder);
         }
 
-        done(marker, CPsiParameterList.class);
+        marker.done(CElementTypes.PARAMETER_LIST);
     }
 
     private static void parserParameter(PsiBuilder builder) {
@@ -77,10 +76,10 @@ public class ParameterListParsing extends MainParsing {
 
         if (builder.getTokenType() == CPsiTokens.LBRACKET) {
             advanceLexerAndSkipLines(builder);
-            expect(builder, CPsiTokens.RBRACKET, "RBRACKET.expected");
+            expect(builder, CPsiTokens.RBRACKET, CLocalize.rbracketExpected());
         }
 
-        done(marker, CPsiParameter.class);
+        marker.done(CElementTypes.PARAMETER);
 
         while (builder.getTokenType() == COMMA) {
             advanceLexerAndSkipLines(builder); // skip COMMA

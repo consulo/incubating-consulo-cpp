@@ -1,0 +1,100 @@
+FILE
+  CPsiImplementingMethodImpl: void foo(int x) {
+    switch (x) {
+        case 1:
+            return;
+        case 2:
+            break;
+        default:
+            x++;
+    }
+}
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: void
+      PsiElement(VOID_KEYWORD)('void')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('foo')
+    CPsiParameterListImpl: (int x)
+      PsiElement(LPARENTH)('(')
+      CPsiParameterImpl: int x
+        CPsiTypeRefImpl: int
+          PsiElement(INT_KEYWORD)('int')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('x')
+      PsiElement(RPARENTH)(')')
+    PsiWhiteSpace(' ')
+    CPsiCodeBlockImpl: {
+    switch (x) {
+        case 1:
+            return;
+        case 2:
+            break;
+        default:
+            x++;
+    }
+}
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n    ')
+      CPsiSwitchStatementImpl: switch (x) {
+        case 1:
+            return;
+        case 2:
+            break;
+        default:
+            x++;
+    }
+        PsiElement(SWITCH_KEYWORD)('switch')
+        PsiWhiteSpace(' ')
+        PsiElement(LPARENTH)('(')
+        CPsiReferenceExpressionImpl: x
+          PsiElement(IDENTIFIER)('x')
+        PsiElement(RPARENTH)(')')
+        PsiWhiteSpace(' ')
+        CPsiCodeBlockImpl: {
+        case 1:
+            return;
+        case 2:
+            break;
+        default:
+            x++;
+    }
+          PsiElement(LBRACE)('{')
+          PsiWhiteSpace('\n        ')
+          CPsiCaseStatementImpl: case 1:
+            PsiElement(CASE_KEYWORD)('case')
+            PsiWhiteSpace(' ')
+            CPsiLiteralExpressionImpl: 1
+              PsiElement(INTEGER_LITERAL)('1')
+            PsiElement(COLON)(':')
+          PsiWhiteSpace('\n            ')
+          CPsiReturnStatementImpl: return;
+            PsiElement(RETURN_KEYWORD)('return')
+            PsiElement(SEMICOLON)(';')
+          PsiWhiteSpace('\n        ')
+          CPsiCaseStatementImpl: case 2:
+            PsiElement(CASE_KEYWORD)('case')
+            PsiWhiteSpace(' ')
+            CPsiLiteralExpressionImpl: 2
+              PsiElement(INTEGER_LITERAL)('2')
+            PsiElement(COLON)(':')
+          PsiWhiteSpace('\n            ')
+          CPsiBreakStatementImpl: break;
+            PsiElement(BREAK_KEYWORD)('break')
+            PsiElement(SEMICOLON)(';')
+          PsiWhiteSpace('\n        ')
+          CPsiDefaultStatementImpl: default:
+            PsiElement(DEFAULT_KEYWORD)('default')
+            PsiElement(COLON)(':')
+          PsiWhiteSpace('\n            ')
+          CPsiExpressionStatementImpl: x++;
+            CPsiPostfixExpressionImpl: x++
+              CPsiReferenceExpressionImpl: x
+                PsiElement(IDENTIFIER)('x')
+              PsiElement(PLUSPLUS)('++')
+            PsiElement(SEMICOLON)(';')
+          PsiWhiteSpace('\n    ')
+          PsiElement(RBRACE)('}')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')
+  PsiWhiteSpace('\n')

@@ -57,9 +57,12 @@ FILE
     }
           PsiElement(LBRACE)('{')
           PsiWhiteSpace('\n        ')
-          PsiElement(IDENTIFIER)('x')
-          PsiElement(PLUSPLUS)('++')
-          PsiElement(SEMICOLON)(';')
+          CPsiExpressionStatementImpl: x++;
+            CPsiPostfixExpressionImpl: x++
+              CPsiReferenceExpressionImpl: x
+                PsiElement(IDENTIFIER)('x')
+              PsiElement(PLUSPLUS)('++')
+            PsiElement(SEMICOLON)(';')
           PsiWhiteSpace('\n    ')
           PsiElement(RBRACE)('}')
       PsiWhiteSpace('\n')
