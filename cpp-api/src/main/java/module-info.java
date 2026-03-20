@@ -26,8 +26,6 @@ module consulo.cpp.api
     exports org.napile.cpp4idea.config.sdk.sdkdialect;
     exports org.napile.cpp4idea.config.sdk.sdkdialect.impl;
     exports org.napile.cpp4idea.ide.highlight;
-    exports org.napile.cpp4idea.ide.projectView;
-    exports org.napile.cpp4idea.ide.projectView.nodes;
     exports org.napile.cpp4idea.lang;
     exports org.napile.cpp4idea.lang.lexer;
     exports org.napile.cpp4idea.lang.parser;
