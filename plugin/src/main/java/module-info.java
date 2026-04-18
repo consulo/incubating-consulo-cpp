@@ -3,10 +3,15 @@
  * @since 15/01/2023
  */
 module consulo.cpp {
-    requires consulo.ide.api;
+    requires consulo.application.api;
+    requires consulo.color.scheme.api;
+    requires consulo.language.api;
+    requires consulo.language.editor.api;
+    requires consulo.project.api;
+    requires consulo.project.ui.view.api;
+    requires consulo.ui.api;
+    requires consulo.ui.ex.api;
+    requires consulo.virtual.file.system.api;
 
     requires consulo.cpp.api;
-
-    // try to fix issue with text attributes search
-    opens consulo.cpp.impl;
 }
