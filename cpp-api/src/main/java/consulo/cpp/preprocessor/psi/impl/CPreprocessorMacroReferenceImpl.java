@@ -1,5 +1,7 @@
 package consulo.cpp.preprocessor.psi.impl;
 
+import consulo.cpp.moduleAware.CDefineEnv;
+import java.util.Collections;
 import consulo.cpp.preprocessor.CPreprocessorLanguage;
 import consulo.cpp.preprocessor.expand.ExpandedMacro;
 import consulo.cpp.preprocessor.expand.PreprocessorExpander;
@@ -68,7 +70,8 @@ public class CPreprocessorMacroReferenceImpl extends ASTWrapperPsiElement implem
 	{
 		PsiFile preprocessorPsi = getContainingFile().getViewProvider().getPsi(CPreprocessorLanguage.INSTANCE);
 		ParserDefinition parserDefinition = ParserDefinition.forLanguage(CLanguage.INSTANCE);
-		PreprocessorExpander expander = new PreprocessorExpander(preprocessorPsi, parserDefinition);
+		PreprocessorExpander expander =
+				new PreprocessorExpander(preprocessorPsi, parserDefinition, CDefineEnv.includeRootsFor(this), CDefineEnv.seedFor(this));
 
 		ExpandedMacro macro = expander.getMacro(getCanonicalText());
 		if(macro == null)

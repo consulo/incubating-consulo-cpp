@@ -1,0 +1,14 @@
+FILE
+  PsiElement(OUTER)('#ifdef FOO\nint x;\n#else')
+  PsiWhiteSpace('\n')
+  CPsiFieldImpl: int y;
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: int
+      PsiElement(INT_KEYWORD)('int')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('y')
+    PsiElement(SEMICOLON)(';')
+  PsiElement(OUTER)('#endif')
+  PsiWhiteSpace('\n')
+  PsiWhiteSpace('\n')

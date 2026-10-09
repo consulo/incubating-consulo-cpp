@@ -1,5 +1,6 @@
 package consulo.cpp.lang.psi.impl;
 
+import consulo.cpp.moduleAware.CDefineEnv;
 import consulo.cpp.preprocessor.CPreprocessorLanguage;
 import consulo.cpp.preprocessor.expand.CPreprocessorDirectiveCollector;
 import consulo.cpp.preprocessor.expand.PreprocessorExpander;
@@ -36,133 +37,119 @@ import org.napile.cpp4idea.CLanguage;
  * @see TemplateDataElementType
  * @since 15:16/2020-07-31
  */
-public class CFileElementType extends IStubFileElementType<PsiFileStub<PsiFile>>
-{
-	public static final CFileElementType INSTANCE = new CFileElementType();
+public class CFileElementType extends IStubFileElementType<PsiFileStub<PsiFile>> {
+    public static final CFileElementType INSTANCE = new CFileElementType();
 
-	public CFileElementType()
-	{
-		super(CLanguage.INSTANCE);
-	}
+    public CFileElementType() {
+        super(CLanguage.INSTANCE);
+    }
 
-	@Override
-	protected ASTNode doParseContents(@NotNull ASTNode chameleon, @NotNull PsiElement psi)
-	{
-		final CharTable charTable = SharedImplUtil.findCharTableByTree(chameleon);
+    @Override
+    protected ASTNode doParseContents(@NotNull ASTNode chameleon, @NotNull PsiElement psi) {
+        final CharTable charTable = SharedImplUtil.findCharTableByTree(chameleon);
 
-		CFileViewProvider viewProvider = (CFileViewProvider) ((PsiFile) psi).getViewProvider();
+        CFileViewProvider viewProvider = (CFileViewProvider) ((PsiFile) psi).getViewProvider();
 
-		PsiFile preprocessorFile = viewProvider.getPsi(CPreprocessorLanguage.INSTANCE);
+        PsiFile preprocessorFile = viewProvider.getPsi(CPreprocessorLanguage.INSTANCE);
 
-		ParserDefinition parserDefinition = ParserDefinition.forLanguage(CLanguage.INSTANCE);
+        ParserDefinition parserDefinition = ParserDefinition.forLanguage(CLanguage.INSTANCE);
 
-		PreprocessorExpander expander = new PreprocessorExpander(preprocessorFile, parserDefinition);
+        PreprocessorExpander expander =
+            new PreprocessorExpander(preprocessorFile, parserDefinition, CDefineEnv.includeRootsFor(psi), CDefineEnv.seedFor(psi));
 
-		CharSequence sourceCode = chameleon.getChars();
+        CharSequence sourceCode = chameleon.getChars();
 
-		CharSequence onlyCSourceCode = expander.buildText(sourceCode);
+        CharSequence onlyCSourceCode = expander.buildText(sourceCode);
 
-		CPreprocessorDirectiveCollector collector = expander.getRangeCollector();
+        CPreprocessorDirectiveCollector collector = expander.getRangeCollector();
 
-		final PsiFile templatePsiFile = createPsiFileFromSource(CLanguage.INSTANCE, onlyCSourceCode, psi.getManager(), expander);
-		final FileElement templateFileElement = ((PsiFileImpl) templatePsiFile).calcTreeElement();
+        final PsiFile templatePsiFile = createPsiFileFromSource(CLanguage.INSTANCE, onlyCSourceCode, psi.getManager(), expander);
+        final FileElement templateFileElement = ((PsiFileImpl) templatePsiFile).calcTreeElement();
 
-		return DebugUtil.performPsiModification("template language parsing", () -> {
-			expander.insertDummyNodes(templateFileElement);
+        return DebugUtil.performPsiModification("template language parsing", () -> {
+            expander.insertDummyNodes(templateFileElement);
 
-			collector.insertOuterElementsAndRemoveRanges(templateFileElement, sourceCode, charTable, templateFileElement.getPsi().getLanguage());
+            collector.insertOuterElementsAndRemoveRanges(templateFileElement, sourceCode, charTable, templateFileElement.getPsi().getLanguage());
 
-			TreeElement childNode = templateFileElement.getFirstChildNode();
+            TreeElement childNode = templateFileElement.getFirstChildNode();
 
-			DebugUtil.checkTreeStructure(templateFileElement);
-			DebugUtil.checkTreeStructure(chameleon);
+            DebugUtil.checkTreeStructure(templateFileElement);
+            DebugUtil.checkTreeStructure(chameleon);
 
-			return childNode;
-		});
-	}
+            return childNode;
+        });
+    }
 
-	protected PsiFile createPsiFileFromSource(final Language language, CharSequence sourceCode, PsiManager manager, PreprocessorExpander expander)
-	{
-		LightVirtualFile virtualFile = new LightVirtualFile("foo", createTemplateFakeFileType(language), sourceCode, LocalTimeCounter.currentTime());
+    protected PsiFile createPsiFileFromSource(final Language language, CharSequence sourceCode, PsiManager manager, PreprocessorExpander expander) {
+        LightVirtualFile virtualFile = new LightVirtualFile("foo", createTemplateFakeFileType(language), sourceCode, LocalTimeCounter.currentTime());
 
-		FileViewProvider viewProvider = new SingleRootFileViewProvider(manager, virtualFile, false)
-		{
-			@Override
-			@NotNull
-			public Language getBaseLanguage()
-			{
-				return language;
-			}
+        FileViewProvider viewProvider = new SingleRootFileViewProvider(manager, virtualFile, false) {
+            @Override
+            @NotNull
+            public Language getBaseLanguage() {
+                return language;
+            }
 
-			@Override
-			protected
-			@Nullable
-			PsiFile createFile(@NotNull Language lang)
-			{
-				PsiFile file = super.createFile(lang);
-				if(file == null)
-				{
-					return null;
-				}
+            @Override
+            protected
+            @Nullable
+            PsiFile createFile(@NotNull Language lang) {
+                PsiFile file = super.createFile(lang);
+                if (file == null) {
+                    return null;
+                }
 
-				PsiFileImpl fileImpl = (PsiFileImpl) file;
-				fileImpl.setContentElementType(CFileInnerElementType.INSTANCE);
-				return fileImpl;
-			}
-		};
+                PsiFileImpl fileImpl = (PsiFileImpl) file;
+                fileImpl.setContentElementType(CFileInnerElementType.INSTANCE);
+                return fileImpl;
+            }
+        };
 
-		viewProvider.putUserData(PreprocessorExpander.EXPANDER_KEY, expander);
+        viewProvider.putUserData(PreprocessorExpander.EXPANDER_KEY, expander);
 
-		// Since we're already inside a template language PSI that was built regardless of the file size (for whatever reason),
-		// there should also be no file size checks for template data files.
-		SingleRootFileViewProvider.doNotCheckFileSizeLimit(virtualFile);
+        // Since we're already inside a template language PSI that was built regardless of the file size (for whatever reason),
+        // there should also be no file size checks for template data files.
+        SingleRootFileViewProvider.doNotCheckFileSizeLimit(virtualFile);
 
-		return viewProvider.getPsi(language);
-	}
+        return viewProvider.getPsi(language);
+    }
 
-	protected LanguageFileType createTemplateFakeFileType(final Language language)
-	{
-		return new TemplateFileType(language);
-	}
+    protected LanguageFileType createTemplateFakeFileType(final Language language) {
+        return new TemplateFileType(language);
+    }
 
-	protected static class TemplateFileType extends LanguageFileType
-	{
-		private final Language myLanguage;
+    protected static class TemplateFileType extends LanguageFileType {
+        private final Language myLanguage;
 
-		protected TemplateFileType(final Language language)
-		{
-			super(language);
-			myLanguage = language;
-		}
+        protected TemplateFileType(final Language language) {
+            super(language);
+            myLanguage = language;
+        }
 
-		@Override
-		@NotNull
-		public String getDefaultExtension()
-		{
-			return "";
-		}
+        @Override
+        @NotNull
+        public String getDefaultExtension() {
+            return "";
+        }
 
-		@Override
-		@NotNull
-		@NonNls
-		public LocalizeValue getDescription()
-		{
-			return LocalizeValue.localizeTODO("fake for language" + myLanguage.getID());
-		}
+        @Override
+        @NotNull
+        @NonNls
+        public LocalizeValue getDescription() {
+            return LocalizeValue.localizeTODO("fake for language" + myLanguage.getID());
+        }
 
-		@Override
-		@Nullable
-		public Image getIcon()
-		{
-			return null;
-		}
+        @Override
+        @Nullable
+        public Image getIcon() {
+            return null;
+        }
 
-		@Override
-		@NotNull
-		@NonNls
-		public String getId()
-		{
-			return myLanguage.getID();
-		}
-	}
+        @Override
+        @NotNull
+        @NonNls
+        public String getId() {
+            return myLanguage.getID();
+        }
+    }
 }

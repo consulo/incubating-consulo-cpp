@@ -16,19 +16,16 @@ public interface CPreprocessorElementTypes {
     IElementType MACRO_REFERENCE =
         new CPreprocessorElementType(CPreprocessorMacroReference.class.getSimpleName(), CPreprocessorMacroReferenceImpl::new);
 
-    IElementType IF_BLOCK =
-        new CPreprocessorElementType(CPreprocessorIfBlock.class.getSimpleName(), CPreprocessorIfBlockImpl::new);
+    IElementType IF_BLOCK = CPreprocessorIfBlockStubElementType.INSTANCE;
 
-    IElementType IF_BODY =
-        new CPreprocessorElementType(CPsiSharpIfBody.class.getSimpleName(), CPsiSharpIfBodyImpl::new);
+    IElementType IF_BODY = CPreprocessorIfBodyStubElementType.INSTANCE;
 
     IElementType INCLUDE = CPreprocessorIncludeStubElementType.INSTANCE;
 
     IElementType INDEP_INCLUDE =
         new CPreprocessorElementType(CPsiSharpIndepInclude.class.getSimpleName(), CPsiSharpIndepIncludeImpl::new);
 
-    IElementType UNDEF_DIRECTIVE =
-        new CPreprocessorElementType(CPreprocessorUndefDirective.class.getSimpleName(), CPreprocessorUndefDirectiveImpl::new);
+    IElementType UNDEF_DIRECTIVE = CPreprocessorUndefStubElementType.INSTANCE;
 
     IElementType PRAGMA_DIRECTIVE =
         new CPreprocessorElementType(CPreprocessorPragmaDirective.class.getSimpleName(), CPreprocessorPragmaDirectiveImpl::new);

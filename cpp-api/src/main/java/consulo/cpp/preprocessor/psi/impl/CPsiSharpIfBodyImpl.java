@@ -16,6 +16,12 @@
 
 package consulo.cpp.preprocessor.psi.impl;
 
+import consulo.language.psi.stub.IStubElementType;
+
+import consulo.language.impl.psi.stub.StubBasedPsiElementBase;
+
+import consulo.cpp.preprocessor.psi.stub.CPreprocessorIfBodyStub;
+
 import consulo.cpp.preprocessor.psi.CPreprocessorIfBlock;
 import consulo.cpp.preprocessor.psi.CPsiSharpIfBody;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
@@ -28,11 +34,22 @@ import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
  * @author VISTALL
  * @date 14:06/29.12.12
  */
-public class CPsiSharpIfBodyImpl extends CPsiElementBaseImpl implements CPsiSharpIfBody
+public class CPsiSharpIfBodyImpl extends StubBasedPsiElementBase<CPreprocessorIfBodyStub> implements CPsiSharpIfBody
 {
 	public CPsiSharpIfBodyImpl(@NotNull ASTNode node)
 	{
 		super(node);
+	}
+
+	public CPsiSharpIfBodyImpl(@NotNull CPreprocessorIfBodyStub stub, @NotNull IStubElementType<?, ?> elementType)
+	{
+		super(stub, elementType);
+	}
+
+	@Override
+	public String toString()
+	{
+		return getClass().getSimpleName() + ": " + getText();
 	}
 
 	@Override
@@ -51,6 +68,11 @@ public class CPsiSharpIfBodyImpl extends CPsiElementBaseImpl implements CPsiShar
 	@Override
 	public boolean isElseBody()
 	{
+		CPreprocessorIfBodyStub stub = getStub();
+		if(stub != null)
+		{
+			return stub.isElseBody();
+		}
 		return getIfDef().getElseBody() == this;
 	}
 

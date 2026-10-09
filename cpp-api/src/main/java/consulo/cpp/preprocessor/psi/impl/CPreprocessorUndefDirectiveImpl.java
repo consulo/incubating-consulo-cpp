@@ -16,6 +16,12 @@
 
 package consulo.cpp.preprocessor.psi.impl;
 
+import consulo.language.psi.stub.IStubElementType;
+
+import consulo.language.impl.psi.stub.StubBasedPsiElementBase;
+
+import consulo.cpp.preprocessor.psi.stub.CPreprocessorUndefStub;
+
 import consulo.cpp.preprocessor.psi.CPreprocessorUndefDirective;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
 import consulo.language.ast.ASTNode;
@@ -24,22 +30,34 @@ import consulo.language.psi.PsiElementVisitor;
 import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
 import org.napile.cpp4idea.lang.psi.CPsiTokens;
-import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
 
 /**
  * @author VISTALL
  * @since 2026-03-19
  */
-public class CPreprocessorUndefDirectiveImpl extends CPsiElementBaseImpl implements CPreprocessorUndefDirective {
+public class CPreprocessorUndefDirectiveImpl extends StubBasedPsiElementBase<CPreprocessorUndefStub> implements CPreprocessorUndefDirective {
     public CPreprocessorUndefDirectiveImpl(@NotNull ASTNode node) {
         super(node);
+    }
+
+    public CPreprocessorUndefDirectiveImpl(@NotNull CPreprocessorUndefStub stub, @NotNull IStubElementType<?, ?> elementType) {
+        super(stub, elementType);
     }
 
     @Nullable
     @Override
     public String getName() {
+        CPreprocessorUndefStub stub = getStub();
+        if (stub != null) {
+            return stub.getName();
+        }
         PsiElement nameId = findChildByType(CPsiTokens.IDENTIFIER);
         return nameId == null ? null : nameId.getText();
+    }
+
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + ": " + getText();
     }
 
     @Override

@@ -22,6 +22,8 @@ import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
 import consulo.language.ast.ASTNode;
 import consulo.language.impl.psi.stub.StubBasedPsiElementBase;
 import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiReference;
+import consulo.document.util.TextRange;
 import consulo.language.psi.PsiElementVisitor;
 import consulo.language.psi.stub.IStubElementType;
 import org.jetbrains.annotations.NotNull;
@@ -57,6 +59,25 @@ public class CPsiSharpIncludeImpl extends StubBasedPsiElementBase<CPreprocessorI
         {
             super.accept(visitor);
         }
+    }
+
+    @Override
+    public PsiReference getReference()
+    {
+        PsiElement includeElement = getIncludeElement();
+        if (includeElement == null)
+        {
+            return null;
+        }
+
+        int start = includeElement.getStartOffsetInParent();
+        int length = includeElement.getTextLength();
+        CharSequence text = includeElement.getNode().getChars();
+        if (length >= 2 && text.charAt(0) == '"' && text.charAt(length - 1) == '"')
+        {
+            return new CIncludeReference(this, new TextRange(start + 1, start + length - 1));
+        }
+        return new CIncludeReference(this, new TextRange(start, start + length));
     }
 
     @Override

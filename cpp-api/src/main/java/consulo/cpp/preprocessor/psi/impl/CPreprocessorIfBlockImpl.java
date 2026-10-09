@@ -21,82 +21,84 @@ import consulo.cpp.preprocessor.psi.CPreprocessorMacroReference;
 import consulo.cpp.preprocessor.psi.CPreprocessorTokenTypes;
 import consulo.cpp.preprocessor.psi.CPsiSharpIfBody;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
+import consulo.cpp.preprocessor.psi.stub.CPreprocessorIfBlockStub;
 import consulo.language.ast.ASTNode;
+import consulo.language.impl.psi.stub.StubBasedPsiElementBase;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiElementVisitor;
+import consulo.language.psi.stub.IStubElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
 
 /**
  * @author VISTALL
  * @date 14:07/11.12.2011
  */
-public class CPreprocessorIfBlockImpl extends CPsiElementBaseImpl implements CPreprocessorIfBlock
-{
-	public CPreprocessorIfBlockImpl(@org.jetbrains.annotations.NotNull ASTNode node)
-	{
-		super(node);
-	}
+public class CPreprocessorIfBlockImpl extends StubBasedPsiElementBase<CPreprocessorIfBlockStub> implements CPreprocessorIfBlock {
+    public CPreprocessorIfBlockImpl(@org.jetbrains.annotations.NotNull ASTNode node) {
+        super(node);
+    }
 
-	@Override
-	public CPreprocessorMacroReference getVariable()
-	{
-		return findChildByClass(CPreprocessorMacroReference.class);
-	}
+    public CPreprocessorIfBlockImpl(@org.jetbrains.annotations.NotNull CPreprocessorIfBlockStub stub, @org.jetbrains.annotations.NotNull IStubElementType<?, ?> elementType) {
+        super(stub, elementType);
+    }
 
-	@Nullable
-	@Override
-	public CPsiSharpIfBody getBody()
-	{
-		return findChildByClass(CPsiSharpIfBody.class);
-	}
+    @Override
+    public String toString() {
+        return getClass().getSimpleName() + ": " + getText();
+    }
 
-	@Nullable
-	@Override
-	public PsiElement getElseKeyword()
-	{
-		return findChildByType(CPreprocessorTokenTypes.S_ELSE_KEYWORD);
-	}
+    @Override
+    public CPreprocessorMacroReference getVariable() {
+        return findChildByClass(CPreprocessorMacroReference.class);
+    }
 
-	@Nullable
-	@Override
-	public CPsiSharpIfBody getElseBody()
-	{
-		CPsiSharpIfBody body = getBody();
-		if(body == null)
-		{
-			return null;
-		}
+    @Nullable
+    @Override
+    public CPsiSharpIfBody getBody() {
+        return findChildByClass(CPsiSharpIfBody.class);
+    }
 
-		PsiElement element = body.getNextSibling();
-		while(element != null)
-		{
-			if(element instanceof CPsiSharpIfBody)
-			{
-				return (CPsiSharpIfBody) element;
-			}
-			element = element.getNextSibling();
-		}
-		return null;
-	}
+    @Nullable
+    @Override
+    public PsiElement getElseKeyword() {
+        return findChildByType(CPreprocessorTokenTypes.S_ELSE_KEYWORD);
+    }
 
-	@Override
-	public void accept(@NotNull PsiElementVisitor visitor)
-	{
-		if(visitor instanceof CPreprocessorElementVisitor)
-		{
-			((CPreprocessorElementVisitor) visitor).visitPreprocessorIfBlock(this);
-		}
-		else
-		{
-			super.accept(visitor);
-		}
-	}
+    @Nullable
+    @Override
+    public CPsiSharpIfBody getElseBody() {
+        CPsiSharpIfBody body = getBody();
+        if (body == null) {
+            return null;
+        }
 
-	@Override
-	public boolean isReverted()
-	{
-		return findChildByType(CPreprocessorTokenTypes.S_IFNDEF_KEYWORD) != null;
-	}
+        PsiElement element = body.getNextSibling();
+        while (element != null) {
+            if (element instanceof CPsiSharpIfBody) {
+                return (CPsiSharpIfBody) element;
+            }
+            element = element.getNextSibling();
+        }
+        return null;
+    }
+
+    @Override
+    public void accept(@NotNull PsiElementVisitor visitor) {
+        if (visitor instanceof CPreprocessorElementVisitor) {
+            ((CPreprocessorElementVisitor) visitor).visitPreprocessorIfBlock(this);
+        }
+        else {
+            super.accept(visitor);
+        }
+    }
+
+    @Override
+    public boolean isReverted() {
+        CPreprocessorIfBlockStub stub = getStub();
+        if (stub != null) {
+            return stub.isReverted();
+        }
+        return findChildByType(CPreprocessorTokenTypes.S_IFNDEF_KEYWORD) != null;
+    }
 }

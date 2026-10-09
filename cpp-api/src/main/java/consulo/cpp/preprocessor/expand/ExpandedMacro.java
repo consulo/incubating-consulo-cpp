@@ -33,6 +33,10 @@ public class ExpandedMacro {
         myText = text;
     }
 
+    public CharSequence getText() {
+        return myText;
+    }
+
     public CPreprocessorDefineDirective getElement() {
         return myElement;
     }

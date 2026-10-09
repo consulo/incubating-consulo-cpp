@@ -1,0 +1,15 @@
+FILE
+  PsiElement(OUTER)('#define FOO')
+  PsiElement(OUTER)('#ifdef FOO\n#define INNER 1')
+  PsiWhiteSpace('\n')
+  PsiWhiteSpace('\n')
+  CPsiFieldImpl: int x;
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: int
+      PsiElement(INT_KEYWORD)('int')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('x')
+    PsiElement(SEMICOLON)(';')
+  PsiElement(OUTER)('#else\nint y;\n#endif')
+  PsiWhiteSpace('\n\n')

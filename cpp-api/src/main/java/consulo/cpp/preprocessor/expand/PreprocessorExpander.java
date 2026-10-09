@@ -7,9 +7,14 @@ import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorRecursiveElementVi
 import consulo.cpp.preprocessor.psi.stub.CPreprocessorDefineStub;
 import consulo.cpp.preprocessor.psi.stub.CPreprocessorFileStub;
 import consulo.cpp.preprocessor.psi.stub.CPreprocessorIncludeStub;
+import consulo.language.psi.stub.StubElement;
+import consulo.cpp.preprocessor.psi.stub.CPreprocessorIfBodyStub;
+import consulo.cpp.preprocessor.psi.stub.CPreprocessorIfBlockStub;
+import consulo.cpp.preprocessor.psi.stub.CPreprocessorUndefStub;
 import consulo.document.util.TextRange;
 import consulo.language.ast.ASTNode;
 import consulo.language.ast.IElementType;
+import consulo.language.psi.PsiElement;
 import consulo.language.impl.ast.CompositeElement;
 import consulo.language.impl.ast.LeafElement;
 import consulo.language.impl.ast.TreeElement;
@@ -26,6 +31,7 @@ import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
@@ -46,6 +52,8 @@ public class PreprocessorExpander {
 
     private final CPreprocessorDirectiveCollector rangeCollector = new CPreprocessorDirectiveCollector();
 
+    private final List<TextRange> myInactiveRanges = new ArrayList<>();
+
     private final PsiFile myPreprocessorFile;
     private final ParserDefinition myParserDefinition;
     private final Set<VirtualFile> myProcessedFiles;
@@ -58,23 +66,39 @@ public class PreprocessorExpander {
     private final List<VirtualFile> myIncludePaths;
 
     public PreprocessorExpander(PsiFile preprocessorFile, ParserDefinition parserDefinition) {
-        this(preprocessorFile, parserDefinition, new HashSet<>(), Collections.emptyList());
+        this(preprocessorFile, parserDefinition, new HashSet<>(), Collections.emptyList(), Collections.emptyMap());
     }
 
     public PreprocessorExpander(PsiFile preprocessorFile,
                                 ParserDefinition parserDefinition,
                                 @NotNull List<VirtualFile> includePaths) {
-        this(preprocessorFile, parserDefinition, new HashSet<>(), includePaths);
+        this(preprocessorFile, parserDefinition, new HashSet<>(), includePaths, Collections.emptyMap());
+    }
+
+    /**
+     * Expands with {@code seedDefines} already in scope, as if every name had been defined above the first line.
+     * This is how per-module defines and the defines of an including file reach the expansion.
+     */
+    public PreprocessorExpander(PsiFile preprocessorFile,
+                                ParserDefinition parserDefinition,
+                                @NotNull List<VirtualFile> includePaths,
+                                @NotNull Map<String, String> seedDefines) {
+        this(preprocessorFile, parserDefinition, new HashSet<>(), includePaths, seedDefines);
     }
 
     private PreprocessorExpander(PsiFile preprocessorFile,
                                  ParserDefinition parserDefinition,
                                  Set<VirtualFile> processedFiles,
-                                 List<VirtualFile> includePaths) {
+                                 List<VirtualFile> includePaths,
+                                 Map<String, String> seedDefines) {
         myPreprocessorFile = preprocessorFile;
         myParserDefinition = parserDefinition;
         myProcessedFiles = processedFiles;
         myIncludePaths = includePaths;
+
+        for (Map.Entry<String, String> seed : seedDefines.entrySet()) {
+            myDefines.put(seed.getKey(), new ExpandedMacro(parserDefinition, null, seed.getValue()));
+        }
 
         VirtualFile vFile = preprocessorFile.getVirtualFile();
         if (vFile != null) {
@@ -89,7 +113,8 @@ public class PreprocessorExpander {
 
                 myModifications.addOuterRange(element.getTextRange());
 
-                myDefines.put(text, new ExpandedMacro(parserDefinition, element, value.getNode().getChars()));
+                CharSequence macroText = value == null ? "" : value.getNode().getChars();
+                myDefines.put(text, new ExpandedMacro(parserDefinition, element, macroText));
             }
 
             @Override
@@ -111,10 +136,24 @@ public class PreprocessorExpander {
 
             @Override
             public void visitPreprocessorIfBlock(CPreprocessorIfBlock element) {
-                // Mark the whole #if/#ifdef/#ifndef...#endif block as an outer range so
-                // the preprocessor tokens do not appear as errors in the primary C root.
-                // TODO: conditionally include the body content based on active defines.
-                myModifications.addOuterRange(element.getTextRange());
+                TextRange blockRange = element.getTextRange();
+                CPsiSharpIfBody activeBody = selectActiveBody(element);
+
+                if (activeBody == null) {
+                    myModifications.addOuterRange(blockRange);
+                }
+                else {
+                    TextRange activeRange = activeBody.getTextRange();
+                    addOuterRange(blockRange.getStartOffset(), activeRange.getStartOffset());
+                    activeBody.acceptChildren(this);
+                    addOuterRange(activeRange.getEndOffset(), blockRange.getEndOffset());
+                }
+
+                for (PsiElement branch = element.getFirstChild(); branch != null; branch = branch.getNextSibling()) {
+                    if (branch instanceof CPsiSharpIfBody && branch != activeBody) {
+                        myInactiveRanges.add(branch.getTextRange());
+                    }
+                }
             }
 
             @Override
@@ -250,8 +289,10 @@ public class PreprocessorExpander {
 
         // Recursively expand the included file, sharing the processed-files set and include paths
         PreprocessorExpander childExpander =
-                new PreprocessorExpander(preprocessorRoot, myParserDefinition, myProcessedFiles, myIncludePaths);
-        // Merge child defines; later definitions override earlier ones (standard C behaviour)
+                new PreprocessorExpander(preprocessorRoot, myParserDefinition, myProcessedFiles, myIncludePaths, definesView());
+        // The child started from our defines, so its final state is the state after the include: names it
+        // undefined are gone, the rest are added or overridden.
+        myDefines.keySet().retainAll(childExpander.myDefines.keySet());
         myDefines.putAll(childExpander.myDefines);
     }
 
@@ -266,25 +307,45 @@ public class PreprocessorExpander {
      */
     private void processDefinesFromFileStub(@NotNull CPreprocessorFileStub fileStub,
                                             @NotNull VirtualFile includedVFile) {
-        VirtualFile dir = includedVFile.getParent();
+        processStubChildren(fileStub, includedVFile.getParent());
+    }
 
-        for (Stub child : fileStub.getChildrenStubs()) {
+    /**
+     * Walks a stub subtree applying its directives in order. Conditionals are evaluated against the defines
+     * gathered so far and only the active branch is descended into, so a header contributes the defines of the
+     * branch that is really compiled rather than of every branch it contains.
+     */
+    private void processStubChildren(@NotNull StubElement<?> parent, @Nullable VirtualFile dir) {
+        for (StubElement<?> child : parent.getChildrenStubs()) {
             if (child instanceof CPreprocessorDefineStub) {
                 CPreprocessorDefineStub defineStub = (CPreprocessorDefineStub) child;
                 String name = defineStub.getName();
                 String valueText = defineStub.getValueText();
                 if (name != null) {
-                    // null element is fine — getElement() returns null (unresolved reference),
-                    // but expand() and getSymbols() work purely from the text
-                    myDefines.put(name, new ExpandedMacro(myParserDefinition, null,
-                            valueText != null ? valueText : ""));
+                    myDefines.put(name, new ExpandedMacro(myParserDefinition, null, valueText != null ? valueText : ""));
+                }
+            }
+            else if (child instanceof CPreprocessorUndefStub) {
+                String name = ((CPreprocessorUndefStub) child).getName();
+                if (name != null) {
+                    myDefines.remove(name);
                 }
             }
             else if (child instanceof CPreprocessorIncludeStub && dir != null) {
-                CPreprocessorIncludeStub includeStub = (CPreprocessorIncludeStub) child;
-                // Recursively follow transitive #include chains through the stub tree;
-                // processIncludeFromDir also falls back to myIncludePaths if not found in dir
-                processIncludeFromDir(includeStub.getIncludePath(), dir);
+                processIncludeFromDir(((CPreprocessorIncludeStub) child).getIncludePath(), dir);
+            }
+            else if (child instanceof CPreprocessorIfBlockStub) {
+                CPreprocessorIfBlockStub block = (CPreprocessorIfBlockStub) child;
+                String name = block.getVariableName();
+                boolean defined = name != null && myDefines.containsKey(name);
+                boolean thenActive = defined != block.isReverted();
+
+                for (StubElement<?> body : block.getChildrenStubs()) {
+                    if (body instanceof CPreprocessorIfBodyStub
+                        && ((CPreprocessorIfBodyStub) body).isElseBody() != thenActive) {
+                        processStubChildren(body, dir);
+                    }
+                }
             }
         }
     }
@@ -292,6 +353,90 @@ public class PreprocessorExpander {
     // -----------------------------------------------------------------------
     // Public API
     // -----------------------------------------------------------------------
+
+    private Map<String, String> definesView() {
+        Map<String, String> view = new LinkedHashMap<>();
+        for (Map.Entry<String, ExpandedMacro> entry : myDefines.entrySet()) {
+            view.put(entry.getKey(), entry.getValue().getText().toString());
+        }
+        return view;
+    }
+
+    /**
+     * Picks the branch of a conditional that is really compiled. The block is a flat run of keyword, condition
+     * and body, so the branches are scanned in source order and the first one whose condition holds wins -
+     * which is what makes {@code #elif} chains behave, with {@code #else} as the branch that always holds.
+     */
+    private CPsiSharpIfBody selectActiveBody(CPreprocessorIfBlock element) {
+        Map<String, String> defines = definesView();
+        BranchKind kind = null;
+        StringBuilder condition = new StringBuilder();
+
+        for (PsiElement child = element.getFirstChild(); child != null; child = child.getNextSibling()) {
+            IElementType type = child.getNode().getElementType();
+
+            if (type == CPreprocessorTokenTypes.S_IF_KEYWORD) {
+                kind = BranchKind.IF;
+                condition.setLength(0);
+            }
+            else if (type == CPreprocessorTokenTypes.S_IFDEF_KEYWORD) {
+                kind = BranchKind.IFDEF;
+                condition.setLength(0);
+            }
+            else if (type == CPreprocessorTokenTypes.S_IFNDEF_KEYWORD) {
+                kind = BranchKind.IFNDEF;
+                condition.setLength(0);
+            }
+            else if (type == CPreprocessorTokenTypes.S_ELIF_KEYWORD) {
+                kind = BranchKind.ELIF;
+                condition.setLength(0);
+            }
+            else if (type == CPreprocessorTokenTypes.S_ELSE_KEYWORD) {
+                kind = BranchKind.ELSE;
+                condition.setLength(0);
+            }
+            else if (child instanceof CPsiSharpIfBody) {
+                if (kind != null && isBranchActive(kind, condition.toString(), defines)) {
+                    return (CPsiSharpIfBody) child;
+                }
+                kind = null;
+            }
+            else if (kind != null) {
+                condition.append(child.getText());
+            }
+        }
+        return null;
+    }
+
+    private static boolean isBranchActive(BranchKind kind, String condition, Map<String, String> defines) {
+        return switch (kind) {
+            case IFDEF -> defines.containsKey(condition.trim());
+            case IFNDEF -> !defines.containsKey(condition.trim());
+            case ELSE -> true;
+            case IF, ELIF -> CPreprocessorConditionEvaluator.evaluate(condition, defines);
+        };
+    }
+
+    private enum BranchKind {
+        IF,
+        IFDEF,
+        IFNDEF,
+        ELIF,
+        ELSE
+    }
+
+    private void addOuterRange(int startOffset, int endOffset) {
+        if (endOffset > startOffset) {
+            myModifications.addOuterRange(new TextRange(startOffset, endOffset));
+        }
+    }
+
+    /**
+     * Ranges of the conditional branches which this expansion excluded, for painting them as inactive code.
+     */
+    public List<TextRange> getInactiveRanges() {
+        return myInactiveRanges;
+    }
 
     public CharSequence buildText(CharSequence sequence) {
         return rangeCollector.applyTemplateDataModifications(sequence, myModifications);

@@ -16,6 +16,7 @@
 
 <consulo-plugin url="https://github.com/consulo/incubating-consulo-cpp">
     <id>consulo.cpp</id>
+    <depends>consulo.nativeDev</depends>
     <name>C/C++</name>
     <description>Support for C/C++ language.</description>
     <version>SNAPSHOT</version>

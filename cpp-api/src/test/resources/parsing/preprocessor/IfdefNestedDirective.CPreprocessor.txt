@@ -1,0 +1,47 @@
+CPreprocessorFile:IfdefNestedDirective.c
+  CPreprocessorDefineDirectiveImpl: #define FOO
+    PsiElement(S_DEFINE_KEYWORD)('#define')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('FOO')
+    CPsiSharpDefineValueImpl: 
+      <empty list>
+  PsiElement(NEW_LINE)('\n')
+  CPreprocessorIfBlockImpl: #ifdef FOO
+#define INNER 1
+int x;
+#else
+int y;
+#endif
+    PsiElement(S_IFDEF_KEYWORD)('#ifdef')
+    PsiWhiteSpace(' ')
+    CPreprocessorMacroReferenceImpl(CPreprocessorMacroReference)
+      PsiElement(IDENTIFIER)('FOO')
+    PsiElement(NEW_LINE)('\n')
+    CPsiSharpIfBodyImpl: #define INNER 1
+int x;
+
+      CPreprocessorDefineDirectiveImpl: #define INNER 1
+        PsiElement(S_DEFINE_KEYWORD)('#define')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('INNER')
+        PsiWhiteSpace(' ')
+        CPsiSharpDefineValueImpl: 1
+          PsiElement(C_PREPROCESSOR_SYMBOL)('1')
+      PsiElement(NEW_LINE)('\n')
+      PsiElement(IDENTIFIER)('int')
+      PsiWhiteSpace(' ')
+      PsiElement(IDENTIFIER)('x')
+      PsiElement(SEMICOLON)(';')
+      PsiElement(NEW_LINE)('\n')
+    PsiElement(S_ELSE_KEYWORD)('#else')
+    CPsiSharpIfBodyImpl: 
+int y;
+
+      PsiElement(NEW_LINE)('\n')
+      PsiElement(IDENTIFIER)('int')
+      PsiWhiteSpace(' ')
+      PsiElement(IDENTIFIER)('y')
+      PsiElement(SEMICOLON)(';')
+      PsiElement(NEW_LINE)('\n')
+    PsiElement(S_ENDIF_KEYWORD)('#endif')
+  PsiElement(NEW_LINE)('\n')

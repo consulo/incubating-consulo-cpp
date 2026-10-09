@@ -86,10 +86,45 @@ public class CPreprocessorParsingTest extends CParsingBaseTest {
     }
 
     /**
+     * {@code #define FOO} then {@code #ifdef FOO ... #else ... #endif} – the defined branch is the one that
+     * reaches the C parse; the other branch is dropped.
+     */
+    @Test
+    public void testIfdefActiveBranch(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * The same block with {@code FOO} undefined – the {@code #else} branch is the one that reaches the C parse.
+     */
+    @Test
+    public void testIfdefElseBranch(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * A directive inside the branch that is kept: the ranges dropped around it must still be produced in
+     * ascending order, which a plain declaration in the branch does not exercise.
+     */
+    @Test
+    public void testIfdefNestedDirective(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
      * {@code #if 1 ... #elif 0 ... #else ... #endif} – if / elif / else block
      */
     @Test
     public void testIfElifElse(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * The first branch whose condition holds wins, so a false {@code #if} followed by a true {@code #elif}
+     * compiles the {@code #elif} body and not the {@code #else}.
+     */
+    @Test
+    public void testElifSelected(Context context) throws Exception {
         doTest(context, null);
     }
 

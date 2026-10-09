@@ -7,6 +7,9 @@ import consulo.cpp.preprocessor.psi.CPreprocessorDefineStubElementType;
 import consulo.cpp.preprocessor.psi.CPreprocessorElementType;
 import consulo.cpp.preprocessor.psi.CPreprocessorFileElementType;
 import consulo.cpp.preprocessor.psi.CPreprocessorIncludeStubElementType;
+import consulo.cpp.preprocessor.psi.CPreprocessorUndefStubElementType;
+import consulo.cpp.preprocessor.psi.CPreprocessorIfBodyStubElementType;
+import consulo.cpp.preprocessor.psi.CPreprocessorIfBlockStubElementType;
 import consulo.cpp.preprocessor.psi.impl.CPreprocessorFileImpl;
 import consulo.language.Language;
 import consulo.language.ast.ASTNode;
@@ -87,6 +90,15 @@ public class CPreprocessorParserDefinition implements ParserDefinition {
         }
         if (node.getElementType() == CPreprocessorIncludeStubElementType.INSTANCE) {
             return CPreprocessorIncludeStubElementType.INSTANCE.createPsiFromNode(node);
+        }
+        if (node.getElementType() == CPreprocessorUndefStubElementType.INSTANCE) {
+            return CPreprocessorUndefStubElementType.INSTANCE.createPsiFromNode(node);
+        }
+        if (node.getElementType() == CPreprocessorIfBlockStubElementType.INSTANCE) {
+            return CPreprocessorIfBlockStubElementType.INSTANCE.createPsiFromNode(node);
+        }
+        if (node.getElementType() == CPreprocessorIfBodyStubElementType.INSTANCE) {
+            return CPreprocessorIfBodyStubElementType.INSTANCE.createPsiFromNode(node);
         }
 
         throw new IllegalArgumentException("Illegal argument : " + node.getElementType());

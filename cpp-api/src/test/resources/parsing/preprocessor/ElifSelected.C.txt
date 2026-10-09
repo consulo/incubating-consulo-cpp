@@ -1,0 +1,19 @@
+FILE
+  CPsiFieldImpl: #if 0
+int x;
+#elif 1
+int y;
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: #if 0
+int x;
+#elif 1
+int
+      PsiElement(OUTER)('#if 0\nint x;\n#elif 1\n')
+      PsiElement(INT_KEYWORD)('int')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('y')
+    PsiElement(SEMICOLON)(';')
+  PsiElement(OUTER)('#else\nint z;\n#endif')
+  PsiWhiteSpace('\n')
+  PsiWhiteSpace('\n')

@@ -14,7 +14,7 @@ import java.io.IOException;
  * Replaces the plain {@code IFileElementType} previously used in
  * {@link consulo.cpp.preprocessor.parser.CPreprocessorParserDefinition}.
  * Enabling stubs for the preprocessor language allows
- * {@link consulo.cpp.preprocessor.expand.PreprocessorExpander} to read
+ * {@link consulo.bcpp.preprocessor.expand.PreprocessorExpander} to read
  * {@code #define} macros from included files via the stub index without
  * triggering a full PSI load of those files.
  *
@@ -28,7 +28,7 @@ public class CPreprocessorFileElementType extends IStubFileElementType<CPreproce
      * Bump this version whenever the stub serialization format changes so that
      * existing stubs on disk are invalidated and rebuilt.
      */
-    private static final int STUB_VERSION = 1;
+    private static final int STUB_VERSION = 3;
 
     private CPreprocessorFileElementType() {
         super("cpp.preprocessor.file", CPreprocessorLanguage.INSTANCE);
