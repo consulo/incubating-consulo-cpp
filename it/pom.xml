@@ -191,6 +191,16 @@
 			<groupId>consulo.plugin</groupId>
 			<artifactId>consulo.cpp</artifactId>
 			<version>${project.version}</version>
+			<exclusions>
+				<exclusion>
+					<groupId>consulo.plugin</groupId>
+					<artifactId>consulo.cpp-msbuild</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>consulo.plugin</groupId>
+					<artifactId>consulo.cpp-cmake</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 	</dependencies>
 </project>
