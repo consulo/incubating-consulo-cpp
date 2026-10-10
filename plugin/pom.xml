@@ -50,6 +50,10 @@
 					<repositoryChannel>nightly</repositoryChannel>
 					<dependencies>
 						<dependency>consulo.nativeDev</dependency>
+						<dependency>consulo.dap</dependency>
+						<dependency>com.intellij.xml</dependency>
+						<dependency>consulo.msbuild</dependency>
+						<dependency>consulo.cmake</dependency>
 					</dependencies>
 					<packaging>
 						<skip>${dev.mode}</skip>
@@ -135,6 +139,17 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>consulo.cpp-cpp.api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>consulo.cpp-msbuild</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>consulo.cpp-cmake</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 

@@ -35,6 +35,11 @@ public class CHighlightVisitor extends CPsiElementVisitor implements HighlightVi
 		PsiElement referenceElement = reference.getReferenceElement();
 		if(element == null)
 		{
+			if(reference.isDefined())
+			{
+				return;
+			}
+
 			String errorText = "Not '" + referenceElement.getText() + "' resolved";
 			myHolder.add(HighlightInfo.newHighlightInfo(HighlightInfoType.WRONG_REF).descriptionAndTooltip(errorText).range(referenceElement).create());
 		}

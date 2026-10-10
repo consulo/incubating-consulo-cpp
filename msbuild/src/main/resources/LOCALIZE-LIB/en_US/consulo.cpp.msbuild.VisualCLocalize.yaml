@@ -1,0 +1,20 @@
+extension.name:
+    text: Visual C++ (MSBuild)
+extension.configuration.type.label:
+    text: 'Configuration type:'
+extension.debugger.command.label:
+    text: 'Debugger command:'
+run.configuration.type.name:
+    text: Visual C++
+run.configuration.type.description:
+    text: Visual C++ application from an MSBuild project
+run.configuration.module.label:
+    text: 'Module:'
+run.configuration.module.not.specified:
+    text: Module is not specified
+run.configuration.not.runnable:
+    text: Module ''{0}'' has no Visual C++ executable to run
+extension.defines.label:
+    text: 'Defines:'
+extension.include.paths.label:
+    text: 'Include directories:'

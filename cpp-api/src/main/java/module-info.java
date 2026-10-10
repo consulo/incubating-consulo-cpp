@@ -10,6 +10,7 @@ module consulo.cpp.api
 
     exports consulo.cpp.api.icon;
     exports consulo.cpp.lang;
+    exports consulo.cpp.module.extension;
     exports consulo.cpp.moduleAware;
     exports consulo.cpp.lang.editor.highlight;
     exports consulo.cpp.lang.psi.impl;

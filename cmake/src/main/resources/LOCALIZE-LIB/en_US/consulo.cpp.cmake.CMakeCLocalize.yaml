@@ -1,0 +1,10 @@
+extension.name:
+    text: C/C++ (CMake)
+extension.defines.label:
+    text: 'Defines:'
+extension.include.paths.label:
+    text: 'Include directories:'
+extension.c.standard.label:
+    text: 'C standard:'
+extension.cpp.standard.label:
+    text: 'C++ standard:'

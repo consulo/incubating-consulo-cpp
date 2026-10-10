@@ -23,7 +23,7 @@ import consulo.language.psi.util.PsiTreeUtil;
 import consulo.language.psi.PsiManager;
 import consulo.language.psi.PsiFile;
 import consulo.application.ReadAction;
-import consulo.cpp.impl.module.extension.CMutableModuleExtension;
+import consulo.cpp.module.extension.CDefaultMutableModuleExtension;
 import consulo.cpp.moduleAware.CDefineEnv;
 import consulo.cpp.moduleAware.CPreprocessorOptions;
 import consulo.it.AllowLogError;
@@ -186,7 +186,7 @@ public class CModuleAwareIndexTest {
             ModifiableRootModel rootModel = ModuleRootManager.getInstance(module).getModifiableModel();
             rootModel.addContentEntry(directoryFile);
 
-            CMutableModuleExtension extension = rootModel.getExtensionWithoutCheck(CMutableModuleExtension.class);
+            CDefaultMutableModuleExtension extension = rootModel.getExtensionWithoutCheck(CDefaultMutableModuleExtension.class);
             assertNotNull(extension, "the C/C++ module extension must be registered");
             extension.setEnabled(true);
             extension.setDefines(defines);

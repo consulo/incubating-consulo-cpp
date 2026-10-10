@@ -13,12 +13,11 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package consulo.cpp.impl.module.extension;
+package consulo.cpp.module.extension;
 
 import consulo.disposer.Disposable;
 import consulo.localize.LocalizeValue;
 import consulo.module.content.layer.ModuleRootLayer;
-import consulo.module.extension.MutableModuleExtension;
 import consulo.ui.Component;
 import consulo.ui.Label;
 import consulo.ui.TextBox;
@@ -26,22 +25,22 @@ import consulo.ui.annotation.RequiredUIAccess;
 import consulo.ui.layout.VerticalLayout;
 import org.jetbrains.annotations.Nullable;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.TreeMap;
 
-public class CMutableModuleExtension extends CModuleExtension implements MutableModuleExtension<CModuleExtension> {
-    public CMutableModuleExtension(String id, ModuleRootLayer moduleRootLayer) {
+public class CDefaultMutableModuleExtension extends CDefaultModuleExtension implements CMutableModuleExtension<CDefaultModuleExtension> {
+    public CDefaultMutableModuleExtension(String id, ModuleRootLayer moduleRootLayer) {
         super(id, moduleRootLayer);
     }
 
+    @Override
     public void setDefines(Map<String, String> defines) {
-        myDefines = new TreeMap<>(defines);
+        myCompileSettings.setDefines(defines);
     }
 
+    @Override
     public void setIncludePaths(List<String> includePaths) {
-        myIncludePaths = new ArrayList<>(includePaths);
+        myCompileSettings.setIncludePaths(includePaths);
     }
 
     @Override
@@ -50,10 +49,9 @@ public class CMutableModuleExtension extends CModuleExtension implements Mutable
     }
 
     @Override
-    public boolean isModified(CModuleExtension originalExtension) {
+    public boolean isModified(CDefaultModuleExtension originalExtension) {
         return myIsEnabled != originalExtension.isEnabled()
-            || !myDefines.equals(originalExtension.getDefines())
-            || !myIncludePaths.equals(originalExtension.getIncludePaths());
+            || !myCompileSettings.equals(originalExtension.myCompileSettings);
     }
 
     @RequiredUIAccess
@@ -63,17 +61,17 @@ public class CMutableModuleExtension extends CModuleExtension implements Mutable
         VerticalLayout layout = VerticalLayout.create();
         layout.add(Label.create(LocalizeValue.localizeTODO("Defines (NAME=VALUE; NAME2)")));
 
-        TextBox definesBox = TextBox.create(formatDefines(myDefines));
+        TextBox definesBox = TextBox.create(CModuleExtension.formatDefines(getDefines()));
         definesBox.addValueListener(event -> {
-            setDefines(parseDefines(event.getValue()));
+            setDefines(CModuleExtension.parseDefines(event.getValue()));
             updateOnCheck.run();
         });
         layout.add(definesBox);
 
         layout.add(Label.create(LocalizeValue.localizeTODO("Include directories (path; path)")));
-        TextBox includeBox = TextBox.create(formatIncludePaths(myIncludePaths));
+        TextBox includeBox = TextBox.create(CModuleExtension.formatIncludePaths(getIncludePaths()));
         includeBox.addValueListener(event -> {
-            setIncludePaths(parseIncludePaths(event.getValue()));
+            setIncludePaths(CModuleExtension.parseIncludePaths(event.getValue()));
             updateOnCheck.run();
         });
         layout.add(includeBox);

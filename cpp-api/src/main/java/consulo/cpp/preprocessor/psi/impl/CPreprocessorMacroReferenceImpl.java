@@ -68,18 +68,29 @@ public class CPreprocessorMacroReferenceImpl extends ASTWrapperPsiElement implem
 	@Nullable
 	PsiElement resolve()
 	{
-		PsiFile preprocessorPsi = getContainingFile().getViewProvider().getPsi(CPreprocessorLanguage.INSTANCE);
-		ParserDefinition parserDefinition = ParserDefinition.forLanguage(CLanguage.INSTANCE);
-		PreprocessorExpander expander =
-				new PreprocessorExpander(preprocessorPsi, parserDefinition, CDefineEnv.includeRootsFor(this), CDefineEnv.seedFor(this));
-
-		ExpandedMacro macro = expander.getMacro(getCanonicalText());
+		ExpandedMacro macro = findMacro();
 		if(macro == null)
 		{
 			// FIXME [VISTALL] this is unknown case, when psi logic different from parser
 			return null;
 		}
 		return macro.getElement();
+	}
+
+	@Override
+	public boolean isDefined()
+	{
+		return findMacro() != null;
+	}
+
+	@Nullable
+	private ExpandedMacro findMacro()
+	{
+		PsiFile preprocessorPsi = getContainingFile().getViewProvider().getPsi(CPreprocessorLanguage.INSTANCE);
+		ParserDefinition parserDefinition = ParserDefinition.forLanguage(CLanguage.INSTANCE);
+		PreprocessorExpander expander =
+				new PreprocessorExpander(preprocessorPsi, parserDefinition, CDefineEnv.includeRootsFor(this), CDefineEnv.seedFor(this));
+		return expander.getMacro(getCanonicalText());
 	}
 
 	@Override

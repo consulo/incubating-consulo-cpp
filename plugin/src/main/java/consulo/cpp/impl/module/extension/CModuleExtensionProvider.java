@@ -17,6 +17,8 @@ package consulo.cpp.impl.module.extension;
 
 import consulo.annotation.component.ExtensionImpl;
 import consulo.cpp.api.icon.CppApiIconGroup;
+import consulo.cpp.module.extension.CDefaultModuleExtension;
+import consulo.cpp.module.extension.CDefaultMutableModuleExtension;
 import consulo.localize.LocalizeValue;
 import consulo.module.content.layer.ModuleExtensionProvider;
 import consulo.module.content.layer.ModuleRootLayer;
@@ -25,10 +27,10 @@ import consulo.module.extension.MutableModuleExtension;
 import consulo.ui.image.Image;
 
 @ExtensionImpl
-public class CModuleExtensionProvider implements ModuleExtensionProvider<CModuleExtension> {
+public class CModuleExtensionProvider implements ModuleExtensionProvider<CDefaultModuleExtension> {
     @Override
     public String getId() {
-        return "cpp";
+        return CDefaultModuleExtension.ID;
     }
 
     @Override
@@ -42,12 +44,12 @@ public class CModuleExtensionProvider implements ModuleExtensionProvider<CModule
     }
 
     @Override
-    public ModuleExtension<CModuleExtension> createImmutableExtension(ModuleRootLayer layer) {
-        return new CModuleExtension(getId(), layer);
+    public ModuleExtension<CDefaultModuleExtension> createImmutableExtension(ModuleRootLayer layer) {
+        return new CDefaultModuleExtension(getId(), layer);
     }
 
     @Override
-    public MutableModuleExtension<CModuleExtension> createMutableExtension(ModuleRootLayer layer) {
-        return new CMutableModuleExtension(getId(), layer);
+    public MutableModuleExtension<CDefaultModuleExtension> createMutableExtension(ModuleRootLayer layer) {
+        return new CDefaultMutableModuleExtension(getId(), layer);
     }
 }

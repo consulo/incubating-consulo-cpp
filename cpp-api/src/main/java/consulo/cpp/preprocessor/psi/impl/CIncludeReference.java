@@ -15,7 +15,9 @@
  */
 package consulo.cpp.preprocessor.psi.impl;
 
+import consulo.cpp.moduleAware.CDefineEnv;
 import consulo.cpp.preprocessor.psi.CPsiSharpInclude;
+import consulo.cpp.preprocessor.psi.CPsiSharpIndepInclude;
 import consulo.document.util.TextRange;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiFile;
@@ -25,8 +27,9 @@ import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.annotations.Nullable;
 
 /**
- * Resolves {@code #include "name"} to the included file, relative to the directory of the file holding the
- * directive - the same order {@code PreprocessorExpander} uses when it expands the include.
+ * Resolves {@code #include "name"} relative to the directory of the file holding the directive, then through the
+ * module include paths; {@code #include <name>} only through the include paths - the same order
+ * {@code PreprocessorExpander} uses when it expands the include.
  */
 public class CIncludeReference extends PsiReferenceBase<CPsiSharpInclude> {
     public CIncludeReference(CPsiSharpInclude element, TextRange rangeInElement) {
@@ -47,16 +50,26 @@ public class CIncludeReference extends PsiReferenceBase<CPsiSharpInclude> {
             return null;
         }
 
-        VirtualFile parent = currentFile.getParent();
-        if (parent == null) {
-            return null;
+        VirtualFile target = null;
+        if (!(getElement() instanceof CPsiSharpIndepInclude)) {
+            VirtualFile parent = currentFile.getParent();
+            target = parent == null ? null : findFile(parent, includeName);
         }
+        if (target == null) {
+            for (VirtualFile root : CDefineEnv.includeRootsFor(getElement())) {
+                target = findFile(root, includeName);
+                if (target != null) {
+                    break;
+                }
+            }
+        }
+        return target == null ? null : PsiManager.getInstance(getElement().getProject()).findFile(target);
+    }
 
-        VirtualFile target = parent.findFileByRelativePath(includeName);
-        if (target == null || target.isDirectory()) {
-            return null;
-        }
-        return PsiManager.getInstance(getElement().getProject()).findFile(target);
+    @Nullable
+    private static VirtualFile findFile(VirtualFile directory, String includeName) {
+        VirtualFile file = directory.findFileByRelativePath(includeName);
+        return file == null || file.isDirectory() ? null : file;
     }
 
     @Override

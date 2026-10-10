@@ -16,7 +16,7 @@
 package consulo.cpp.impl.moduleAware;
 
 import consulo.annotation.component.ExtensionImpl;
-import consulo.cpp.impl.module.extension.CModuleExtension;
+import consulo.cpp.module.extension.CModuleExtension;
 import consulo.cpp.lang.CHeaderFileType;
 import consulo.cpp.lang.CPPHeaderFileType;
 import consulo.cpp.lang.CPPSourceFileType;
@@ -78,7 +78,7 @@ public class CModuleAwareIndexOptionProvider implements ModuleAwareIndexOptionPr
 
     @Override
     public IndexOption getOptions(Module module, VirtualFile file) {
-        CModuleExtension extension = module.getExtension(CModuleExtension.class);
+        CModuleExtension<?> extension = module.getExtension(CModuleExtension.class);
         if (extension == null) {
             return IndexOption.fullySharable();
         }
