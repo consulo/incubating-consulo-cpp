@@ -54,7 +54,7 @@ public class VisualCRunConfigurationLayout extends CommonProgramParametersLayout
         }
 
         ComboBox<Module> moduleBox = ComboBox.create(modules);
-        moduleBox.setRender((presentation, item) -> {
+        moduleBox.setRenderer((presentation, item) -> {
             Module module = item.getValue();
             if (module != null) {
                 presentation.withIcon(PlatformIconGroup.nodesModule());
