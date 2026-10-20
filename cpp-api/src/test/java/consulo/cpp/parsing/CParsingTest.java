@@ -265,6 +265,15 @@ public class CParsingTest extends CParsingBaseTest {
     }
 
     /**
+     * Basic and extended GCC asm - a template of two literals, operands and clobbers - an MSVC {@code __asm} block,
+     * and an asm label on a declaration
+     */
+    @Test
+    public void testInlineAsm(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
      * Adjacent string literals, string macros whose definition is not visible, prefixed literals
      */
     @Test

@@ -41,6 +41,14 @@ public interface CModuleExtension<T extends CModuleExtension<T>> extends ModuleE
 
     @Nullable CLanguageVersion getCppStandard();
 
+    /**
+     * The target the module compiles for, as a target triple - {@code x86_64-pc-linux-gnu}, {@code aarch64-none-elf},
+     * {@code arm-none-eabi}; {@code null} when unknown, and then the code runs where the IDE does.
+     */
+    default @Nullable String getTarget() {
+        return null;
+    }
+
     static String formatIncludePaths(List<String> includePaths) {
         return String.join("; ", includePaths);
     }

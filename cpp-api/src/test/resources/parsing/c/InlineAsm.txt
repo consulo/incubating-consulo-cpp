@@ -1,0 +1,105 @@
+FILE
+  CPsiFieldImpl: int counter asm("my_counter");
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: int
+      PsiElement(INT_KEYWORD)('int')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('counter')
+    PsiWhiteSpace(' ')
+    CPsiAsmImpl: asm("my_counter")
+      PsiElement(ASM_KEYWORD)('asm')
+      PsiElement(LPARENTH)('(')
+      PsiElement(STRING_LITERAL)('"my_counter"')
+      PsiElement(RPARENTH)(')')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n\n')
+  CPsiImplementingMethodImpl: void f(int x) {
+    asm("nop");
+    __asm__ volatile ("movl %1, %%eax\n\t"
+                      "addl $1, %%eax" : "=a"(x) : "r"(x) : "cc");
+    __asm { mov eax, 1 }
+}
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: void
+      PsiElement(VOID_KEYWORD)('void')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('f')
+    CPsiParameterListImpl: (int x)
+      PsiElement(LPARENTH)('(')
+      CPsiParameterImpl: int x
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: int
+          PsiElement(INT_KEYWORD)('int')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('x')
+      PsiElement(RPARENTH)(')')
+    PsiWhiteSpace(' ')
+    CPsiCodeBlockImpl: {
+    asm("nop");
+    __asm__ volatile ("movl %1, %%eax\n\t"
+                      "addl $1, %%eax" : "=a"(x) : "r"(x) : "cc");
+    __asm { mov eax, 1 }
+}
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n    ')
+      CPsiAsmImpl: asm("nop");
+        PsiElement(ASM_KEYWORD)('asm')
+        PsiElement(LPARENTH)('(')
+        CPsiAsmTemplateImpl: "nop"
+          PsiElement(STRING_LITERAL)('"nop"')
+        PsiElement(RPARENTH)(')')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiAsmImpl: __asm__ volatile ("movl %1, %%eax\n\t"
+                      "addl $1, %%eax" : "=a"(x) : "r"(x) : "cc");
+        PsiElement(ASM_KEYWORD)('__asm__')
+        PsiWhiteSpace(' ')
+        PsiElement(VOLATILE_KEYWORD)('volatile')
+        PsiWhiteSpace(' ')
+        PsiElement(LPARENTH)('(')
+        CPsiAsmTemplateImpl: "movl %1, %%eax\n\t"
+                      "addl $1, %%eax"
+          PsiElement(STRING_LITERAL)('"movl %1, %%eax\n\t"')
+          PsiWhiteSpace('\n                      ')
+          PsiElement(STRING_LITERAL)('"addl $1, %%eax"')
+        PsiWhiteSpace(' ')
+        PsiElement(COLON)(':')
+        PsiWhiteSpace(' ')
+        PsiElement(STRING_LITERAL)('"=a"')
+        PsiElement(LPARENTH)('(')
+        PsiElement(IDENTIFIER)('x')
+        PsiElement(RPARENTH)(')')
+        PsiWhiteSpace(' ')
+        PsiElement(COLON)(':')
+        PsiWhiteSpace(' ')
+        PsiElement(STRING_LITERAL)('"r"')
+        PsiElement(LPARENTH)('(')
+        PsiElement(IDENTIFIER)('x')
+        PsiElement(RPARENTH)(')')
+        PsiWhiteSpace(' ')
+        PsiElement(COLON)(':')
+        PsiWhiteSpace(' ')
+        PsiElement(STRING_LITERAL)('"cc"')
+        PsiElement(RPARENTH)(')')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiAsmImpl: __asm { mov eax, 1 }
+        PsiElement(ASM_KEYWORD)('__asm')
+        PsiWhiteSpace(' ')
+        CPsiAsmBlockImpl: { mov eax, 1 }
+          PsiElement(LBRACE)('{')
+          PsiWhiteSpace(' ')
+          PsiElement(IDENTIFIER)('mov')
+          PsiWhiteSpace(' ')
+          PsiElement(IDENTIFIER)('eax')
+          PsiElement(COMMA)(',')
+          PsiWhiteSpace(' ')
+          PsiElement(INTEGER_LITERAL)('1')
+          PsiWhiteSpace(' ')
+          PsiElement(RBRACE)('}')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')
+  PsiWhiteSpace('\n')

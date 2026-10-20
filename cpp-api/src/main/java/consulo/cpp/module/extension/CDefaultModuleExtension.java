@@ -58,6 +58,11 @@ public class CDefaultModuleExtension extends ModuleExtensionBase<CDefaultModuleE
         return myCompileSettings.getCppStandard();
     }
 
+    @Override
+    public @Nullable String getTarget() {
+        return myCompileSettings.getTarget();
+    }
+
     @RequiredReadAction
     @Override
     public void commit(CDefaultModuleExtension mutableModuleExtension) {

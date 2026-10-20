@@ -45,6 +45,7 @@
 		<module>cpp-api</module>
 		<module>msbuild</module>
 		<module>cmake</module>
+		<module>asm</module>
 		<module>plugin</module>
 		<module>it</module>
 	</modules>

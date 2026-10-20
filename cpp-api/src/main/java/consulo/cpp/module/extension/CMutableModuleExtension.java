@@ -17,6 +17,8 @@ package consulo.cpp.module.extension;
 
 import consulo.module.extension.MutableModuleExtension;
 
+import org.jspecify.annotations.Nullable;
+
 import java.util.List;
 import java.util.Map;
 
@@ -28,4 +30,6 @@ public interface CMutableModuleExtension<T extends CModuleExtension<T>> extends 
     void setDefines(Map<String, String> defines);
 
     void setIncludePaths(List<String> includePaths);
+
+    void setTarget(@Nullable String target);
 }

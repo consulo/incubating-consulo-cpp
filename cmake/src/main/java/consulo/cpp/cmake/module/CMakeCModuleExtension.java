@@ -60,6 +60,11 @@ public class CMakeCModuleExtension extends ModuleExtensionBase<CMakeCModuleExten
         return myCompileSettings.getCppStandard();
     }
 
+    @Override
+    public @Nullable String getTarget() {
+        return myCompileSettings.getTarget();
+    }
+
     @RequiredReadAction
     @Override
     public void commit(CMakeCModuleExtension mutableModuleExtension) {

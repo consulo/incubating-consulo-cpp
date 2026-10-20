@@ -96,6 +96,11 @@ public class VisualCModuleExtension extends MSBuildModuleExtensionBase<VisualCMo
         return myCompileSettings.getCppStandard();
     }
 
+    @Override
+    public @Nullable String getTarget() {
+        return myCompileSettings.getTarget();
+    }
+
     public boolean isRunnable() {
         String debuggerCommand = myDebuggerCommand;
         return debuggerCommand != null

@@ -70,6 +70,11 @@ public class VisualCMutableModuleExtension extends VisualCModuleExtension implem
         myCompileSettings.setIncludePaths(includePaths);
     }
 
+    @Override
+    public void setTarget(@Nullable String target) {
+        myCompileSettings.setTarget(target);
+    }
+
     public void setCStandard(@Nullable CLanguageVersion standard) {
         myCompileSettings.setCStandard(standard);
     }

@@ -1227,14 +1227,42 @@ public class CDeclarationParsing extends CParsingBase {
             advance();
         }
         if (at(LPARENTH)) {
-            skipBalanced();
+            advance();
+            parseAsmTemplate();
+            // operands, clobbers and goto labels, up to the closing parenthesis
+            while (!eof() && !at(RPARENTH)) {
+                if (at(LPARENTH) || at(LBRACKET) || at(LBRACE)) {
+                    skipBalanced();
+                }
+                else {
+                    advance();
+                }
+            }
+            consume(RPARENTH);
         }
         else if (at(LBRACE)) {
             // MSVC, __asm { ... }
+            PsiBuilder.Marker block = mark();
             skipBalanced();
+            block.done(CElementTypes.ASM_BLOCK);
         }
         consume(SEMICOLON);
         marker.done(CElementTypes.ASM);
+    }
+
+    /**
+     * The assembly of {@code asm("...")}: adjacent string literals, and the macros among them which expand to more of
+     * them - {@code LOCK_PREFIX "xadd %0, %1"}.
+     */
+    private void parseAsmTemplate() {
+        if (!at(STRING_LITERAL) && !at(IDENTIFIER)) {
+            return;
+        }
+        PsiBuilder.Marker template = mark();
+        while (at(STRING_LITERAL) || at(IDENTIFIER)) {
+            advance();
+        }
+        template.done(CElementTypes.ASM_TEMPLATE);
     }
 
     private void parseAsmLabel() {

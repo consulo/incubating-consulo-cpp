@@ -51,6 +51,11 @@ public class CMakeCMutableModuleExtension extends CMakeCModuleExtension implemen
         myCompileSettings.setIncludePaths(includePaths);
     }
 
+    @Override
+    public void setTarget(@Nullable String target) {
+        myCompileSettings.setTarget(target);
+    }
+
     public void setCompileSettings(CCompileSettings settings) {
         myCompileSettings.copyFrom(settings);
     }

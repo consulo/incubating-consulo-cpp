@@ -33,12 +33,14 @@ import java.util.TreeMap;
 public final class CCompileSettings {
     private static final String ATTR_C_STANDARD = "c-standard";
     private static final String ATTR_CPP_STANDARD = "cpp-standard";
+    private static final String ATTR_TARGET = "target";
 
     private Map<String, String> myDefines = new TreeMap<>();
     private List<String> myIncludePaths = new ArrayList<>();
     // version ids rather than versions, so a standard contributed by a plugin which is not loaded right now survives a save
     private String myCStandardId = "";
     private String myCppStandardId = "";
+    private String myTarget = "";
 
     public Map<String, String> getDefines() {
         return Map.copyOf(myDefines);
@@ -78,11 +80,24 @@ public final class CCompileSettings {
         myCppStandardId = standard == null ? "" : standard.getId();
     }
 
+    /**
+     * The target the module compiles for, as a target triple - {@code x86_64-pc-linux-gnu}, {@code arm-none-eabi} -
+     * {@code null} when not configured: then the code runs where the IDE does.
+     */
+    public @Nullable String getTarget() {
+        return myTarget.isEmpty() ? null : myTarget;
+    }
+
+    public void setTarget(@Nullable String target) {
+        myTarget = target == null ? "" : target.trim();
+    }
+
     public void copyFrom(CCompileSettings settings) {
         myDefines = new TreeMap<>(settings.myDefines);
         myIncludePaths = new ArrayList<>(settings.myIncludePaths);
         myCStandardId = settings.myCStandardId;
         myCppStandardId = settings.myCppStandardId;
+        myTarget = settings.myTarget;
     }
 
     public void write(Element element) {
@@ -92,6 +107,9 @@ public final class CCompileSettings {
         if (!myCppStandardId.isEmpty()) {
             element.setAttribute(ATTR_CPP_STANDARD, myCppStandardId);
         }
+        if (!myTarget.isEmpty()) {
+            element.setAttribute(ATTR_TARGET, myTarget);
+        }
         CModuleExtension.writeDefines(element, myDefines);
         CModuleExtension.writeIncludePaths(element, myIncludePaths);
     }
@@ -99,6 +117,7 @@ public final class CCompileSettings {
     public void read(Element element) {
         myCStandardId = element.getAttributeValue(ATTR_C_STANDARD, "");
         myCppStandardId = element.getAttributeValue(ATTR_CPP_STANDARD, "");
+        myTarget = element.getAttributeValue(ATTR_TARGET, "");
         myDefines = new TreeMap<>(CModuleExtension.readDefines(element));
         myIncludePaths = new ArrayList<>(CModuleExtension.readIncludePaths(element));
     }
@@ -114,11 +133,12 @@ public final class CCompileSettings {
         return myDefines.equals(that.myDefines)
             && myIncludePaths.equals(that.myIncludePaths)
             && myCStandardId.equals(that.myCStandardId)
-            && myCppStandardId.equals(that.myCppStandardId);
+            && myCppStandardId.equals(that.myCppStandardId)
+            && myTarget.equals(that.myTarget);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(myDefines, myIncludePaths, myCStandardId, myCppStandardId);
+        return Objects.hash(myDefines, myIncludePaths, myCStandardId, myCppStandardId, myTarget);
     }
 }

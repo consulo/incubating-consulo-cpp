@@ -54,6 +54,7 @@
 						<dependency>com.intellij.xml</dependency>
 						<dependency>consulo.msbuild</dependency>
 						<dependency>consulo.cmake</dependency>
+						<dependency>consulo.asm</dependency>
 					</dependencies>
 					<packaging>
 						<skip>${dev.mode}</skip>
@@ -150,6 +151,11 @@
 		<dependency>
 			<groupId>${project.groupId}</groupId>
 			<artifactId>consulo.cpp-cmake</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>${project.groupId}</groupId>
+			<artifactId>consulo.cpp-asm</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 

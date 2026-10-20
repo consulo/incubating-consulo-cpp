@@ -44,6 +44,11 @@ public class CDefaultMutableModuleExtension extends CDefaultModuleExtension impl
     }
 
     @Override
+    public void setTarget(@Nullable String target) {
+        myCompileSettings.setTarget(target);
+    }
+
+    @Override
     public void setEnabled(boolean val) {
         myIsEnabled = val;
     }
@@ -75,6 +80,15 @@ public class CDefaultMutableModuleExtension extends CDefaultModuleExtension impl
             updateOnCheck.run();
         });
         layout.add(includeBox);
+
+        layout.add(Label.create(LocalizeValue.localizeTODO("Target (x86_64-pc-linux-gnu, arm-none-eabi; empty - the IDE's machine)")));
+        String target = getTarget();
+        TextBox targetBox = TextBox.create(target == null ? "" : target);
+        targetBox.addValueListener(event -> {
+            setTarget(event.getValue());
+            updateOnCheck.run();
+        });
+        layout.add(targetBox);
         return layout;
     }
 }

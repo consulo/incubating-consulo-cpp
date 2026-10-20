@@ -194,4 +194,10 @@ public interface CElementTypes {
 
     IElementType ASM =
         new CElementType(CPsiAsm.class.getSimpleName(), CPsiAsmImpl::new);
+
+    IElementType ASM_TEMPLATE =
+        new CElementType(CPsiAsmTemplate.class.getSimpleName(), CPsiAsmTemplateImpl::new);
+
+    IElementType ASM_BLOCK =
+        new CElementType(CPsiAsmBlock.class.getSimpleName(), CPsiAsmBlockImpl::new);
 }
