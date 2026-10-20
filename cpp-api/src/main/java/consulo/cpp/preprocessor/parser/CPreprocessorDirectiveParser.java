@@ -85,33 +85,69 @@ public class CPreprocessorDirectiveParser extends CPreprocessorParserHelper {
     }
 
     public static void parseDefine(PsiBuilder builder) {
-        PsiBuilder.Marker maker = builder.mark();
+        PsiBuilder.Marker marker = builder.mark();
 
         // #define
-        advanceLexerAndSkipLines(builder);
-
-        // var name
         builder.advanceLexer();
+
+        if (builder.getTokenType() == IDENTIFIER) {
+            builder.advanceLexer();
+
+            // a '(' right after the name - no space between - makes the macro function-like
+            if (builder.getTokenType() == LPARENTH && builder.rawLookup(-1) == IDENTIFIER) {
+                parseDefineParameters(builder);
+            }
+        }
+        else {
+            error(builder, CLocalize.identifierExpected());
+        }
 
         PsiBuilder.Marker valueMarker = builder.mark();
 
-        while (!builder.eof()) {
-            if (builder.getTokenType() == NEW_LINE) {
-                break;
-            }
-
-            if (builder.getTokenType() == NEXT_LINE) {
-                builder.advanceLexer();
-            }
+        while (!builder.eof() && builder.getTokenType() != NEW_LINE) {
+            boolean continuation = builder.getTokenType() == NEXT_LINE;
 
             builder.advanceLexer();
+
+            // a backslash at the end of the line continues the macro on the next one
+            if (continuation && builder.getTokenType() == NEW_LINE) {
+                builder.advanceLexer();
+            }
         }
 
         valueMarker.done(CPreprocessorElementTypes.DEFINE_VALUE);
 
-        maker.done(CPreprocessorElementTypes.DEFINE_DIRECTIVE);
+        marker.done(CPreprocessorElementTypes.DEFINE_DIRECTIVE);
 
         skipLines(builder);
+    }
+
+    private static void parseDefineParameters(PsiBuilder builder) {
+        PsiBuilder.Marker marker = builder.mark();
+
+        // (
+        builder.advanceLexer();
+
+        while (!builder.eof() && builder.getTokenType() != RPARENTH && builder.getTokenType() != NEW_LINE) {
+            if (builder.getTokenType() == IDENTIFIER || builder.getTokenType() == ELLIPSIS) {
+                builder.advanceLexer();
+            }
+            else {
+                error(builder, CLocalize.identifierExpected());
+                break;
+            }
+
+            if (builder.getTokenType() == COMMA) {
+                builder.advanceLexer();
+            }
+            else {
+                break;
+            }
+        }
+
+        checkMatchesWithoutLines(builder, RPARENTH, CLocalize.rparenthExpected());
+
+        marker.done(CPreprocessorElementTypes.DEFINE_PARAMETER_LIST);
     }
 
     public static void parseUndef(PsiBuilder builder) {
@@ -223,7 +259,10 @@ public class CPreprocessorDirectiveParser extends CPreprocessorParserHelper {
                 while (!builder.eof()) {
                     parse(builder, 0);
 
-                    if (builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD) {
+                    // parse() stops without advancing at any of these, so a stray #elif after #else must end the
+                    // body too - otherwise this loop never moves on
+                    if (builder.getTokenType() == S_ENDIF_KEYWORD || builder.getTokenType() == S_ELSE_KEYWORD
+                            || builder.getTokenType() == S_ELIF_KEYWORD) {
                         break;
                     }
                 }

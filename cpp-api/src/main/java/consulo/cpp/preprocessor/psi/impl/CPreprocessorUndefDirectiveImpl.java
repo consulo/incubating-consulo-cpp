@@ -29,7 +29,7 @@ import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiElementVisitor;
 import jakarta.annotation.Nullable;
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.psi.CPsiTokens;
+import consulo.cpp.lang.psi.CPsiTokens;
 
 /**
  * @author VISTALL

@@ -1,5 +1,6 @@
 package consulo.cpp.preprocessor.psi.stub;
 
+import consulo.cpp.preprocessor.expand.CPreprocessorExpandContext;
 import consulo.cpp.preprocessor.psi.CPsiSharpInclude;
 import consulo.language.psi.stub.StubElement;
 import org.jetbrains.annotations.Nullable;
@@ -14,7 +15,7 @@ import org.jetbrains.annotations.Nullable;
  *
  * @author VISTALL
  */
-public interface CPreprocessorIncludeStub extends StubElement<CPsiSharpInclude> {
+public interface CPreprocessorIncludeStub extends StubElement<CPsiSharpInclude>, CPreprocessorDirectiveStub {
 
     /**
      * The raw include path as it appears between the quotes in the source,
@@ -23,4 +24,12 @@ public interface CPreprocessorIncludeStub extends StubElement<CPsiSharpInclude> 
      */
     @Nullable
     String getIncludePath();
+
+    @Override
+    default void expand(CPreprocessorExpandContext context) {
+        String path = getIncludePath();
+        if (path != null) {
+            context.include(path, false);
+        }
+    }
 }

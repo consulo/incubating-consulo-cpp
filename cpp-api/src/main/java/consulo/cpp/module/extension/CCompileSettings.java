@@ -15,8 +15,10 @@
  */
 package consulo.cpp.module.extension;
 
+import consulo.cpp.lang.version.CLanguageVersion;
+import consulo.cpp.lang.version.CLanguageVersions;
 import org.jdom.Element;
-import org.jetbrains.annotations.Nullable;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,8 +36,9 @@ public final class CCompileSettings {
 
     private Map<String, String> myDefines = new TreeMap<>();
     private List<String> myIncludePaths = new ArrayList<>();
-    private CLanguageStandard myCStandard = CLanguageStandard.DEFAULT;
-    private CLanguageStandard myCppStandard = CLanguageStandard.DEFAULT;
+    // version ids rather than versions, so a standard contributed by a plugin which is not loaded right now survives a save
+    private String myCStandardId = "";
+    private String myCppStandardId = "";
 
     public Map<String, String> getDefines() {
         return Map.copyOf(myDefines);
@@ -53,56 +56,51 @@ public final class CCompileSettings {
         myIncludePaths = new ArrayList<>(includePaths);
     }
 
-    public CLanguageStandard getCStandard() {
-        return myCStandard;
+    /**
+     * The C standard the module compiles with, {@code null} when not configured.
+     */
+    public @Nullable CLanguageVersion getCStandard() {
+        return CLanguageVersions.findById(myCStandardId);
     }
 
-    public void setCStandard(CLanguageStandard standard) {
-        myCStandard = standard;
+    public void setCStandard(@Nullable CLanguageVersion standard) {
+        myCStandardId = standard == null ? "" : standard.getId();
     }
 
-    public CLanguageStandard getCppStandard() {
-        return myCppStandard;
+    /**
+     * The C++ standard the module compiles with, {@code null} when not configured.
+     */
+    public @Nullable CLanguageVersion getCppStandard() {
+        return CLanguageVersions.findById(myCppStandardId);
     }
 
-    public void setCppStandard(CLanguageStandard standard) {
-        myCppStandard = standard;
+    public void setCppStandard(@Nullable CLanguageVersion standard) {
+        myCppStandardId = standard == null ? "" : standard.getId();
     }
 
     public void copyFrom(CCompileSettings settings) {
         myDefines = new TreeMap<>(settings.myDefines);
         myIncludePaths = new ArrayList<>(settings.myIncludePaths);
-        myCStandard = settings.myCStandard;
-        myCppStandard = settings.myCppStandard;
+        myCStandardId = settings.myCStandardId;
+        myCppStandardId = settings.myCppStandardId;
     }
 
     public void write(Element element) {
-        if (myCStandard != CLanguageStandard.DEFAULT) {
-            element.setAttribute(ATTR_C_STANDARD, myCStandard.name());
+        if (!myCStandardId.isEmpty()) {
+            element.setAttribute(ATTR_C_STANDARD, myCStandardId);
         }
-        if (myCppStandard != CLanguageStandard.DEFAULT) {
-            element.setAttribute(ATTR_CPP_STANDARD, myCppStandard.name());
+        if (!myCppStandardId.isEmpty()) {
+            element.setAttribute(ATTR_CPP_STANDARD, myCppStandardId);
         }
         CModuleExtension.writeDefines(element, myDefines);
         CModuleExtension.writeIncludePaths(element, myIncludePaths);
     }
 
     public void read(Element element) {
-        myCStandard = readStandard(element.getAttributeValue(ATTR_C_STANDARD));
-        myCppStandard = readStandard(element.getAttributeValue(ATTR_CPP_STANDARD));
+        myCStandardId = element.getAttributeValue(ATTR_C_STANDARD, "");
+        myCppStandardId = element.getAttributeValue(ATTR_CPP_STANDARD, "");
         myDefines = new TreeMap<>(CModuleExtension.readDefines(element));
         myIncludePaths = new ArrayList<>(CModuleExtension.readIncludePaths(element));
-    }
-
-    private static CLanguageStandard readStandard(@Nullable String value) {
-        if (value != null) {
-            for (CLanguageStandard standard : CLanguageStandard.values()) {
-                if (standard.name().equals(value)) {
-                    return standard;
-                }
-            }
-        }
-        return CLanguageStandard.DEFAULT;
     }
 
     @Override
@@ -115,12 +113,12 @@ public final class CCompileSettings {
         }
         return myDefines.equals(that.myDefines)
             && myIncludePaths.equals(that.myIncludePaths)
-            && myCStandard == that.myCStandard
-            && myCppStandard == that.myCppStandard;
+            && myCStandardId.equals(that.myCStandardId)
+            && myCppStandardId.equals(that.myCppStandardId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(myDefines, myIncludePaths, myCStandard, myCppStandard);
+        return Objects.hash(myDefines, myIncludePaths, myCStandardId, myCppStandardId);
     }
 }

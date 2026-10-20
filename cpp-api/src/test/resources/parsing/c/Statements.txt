@@ -1,0 +1,226 @@
+FILE
+  CPsiImplementingMethodImpl: int foo(int argc, char** argv) {
+    for (int i = 0; i < argc; i++) {
+        if (argv[i] == NULL) continue;
+        else break;
+    }
+    do { argc--; } while (argc > 0);
+    switch (argc) {
+        case 1 ... 3:
+            goto done;
+        default:
+            ;
+    }
+done:
+    return argc;
+}
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: int
+      PsiElement(INT_KEYWORD)('int')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('foo')
+    CPsiParameterListImpl: (int argc, char** argv)
+      PsiElement(LPARENTH)('(')
+      CPsiParameterImpl: int argc
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: int
+          PsiElement(INT_KEYWORD)('int')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('argc')
+      PsiElement(COMMA)(',')
+      PsiWhiteSpace(' ')
+      CPsiParameterImpl: char** argv
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: char
+          PsiElement(CHAR_KEYWORD)('char')
+        PsiElement(ASTERISK)('*')
+        PsiElement(ASTERISK)('*')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('argv')
+      PsiElement(RPARENTH)(')')
+    PsiWhiteSpace(' ')
+    CPsiCodeBlockImpl: {
+    for (int i = 0; i < argc; i++) {
+        if (argv[i] == NULL) continue;
+        else break;
+    }
+    do { argc--; } while (argc > 0);
+    switch (argc) {
+        case 1 ... 3:
+            goto done;
+        default:
+            ;
+    }
+done:
+    return argc;
+}
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n    ')
+      CPsiForStatementImpl: for (int i = 0; i < argc; i++) {
+        if (argv[i] == NULL) continue;
+        else break;
+    }
+        PsiElement(FOR_KEYWORD)('for')
+        PsiWhiteSpace(' ')
+        PsiElement(LPARENTH)('(')
+        CPsiLocalVariableImpl: int i = 0;
+          CPsiModifierListImpl: 
+            <empty list>
+          CPsiTypeRefImpl: int
+            PsiElement(INT_KEYWORD)('int')
+          PsiWhiteSpace(' ')
+          PsiElement(IDENTIFIER)('i')
+          PsiWhiteSpace(' ')
+          PsiElement(EQ)('=')
+          PsiWhiteSpace(' ')
+          CPsiLiteralExpressionImpl: 0
+            PsiElement(INTEGER_LITERAL)('0')
+          PsiElement(SEMICOLON)(';')
+        PsiWhiteSpace(' ')
+        CPsiBinaryExpressionImpl: i < argc
+          CPsiReferenceExpressionImpl: i
+            PsiElement(IDENTIFIER)('i')
+          PsiWhiteSpace(' ')
+          PsiElement(LT)('<')
+          PsiWhiteSpace(' ')
+          CPsiReferenceExpressionImpl: argc
+            PsiElement(IDENTIFIER)('argc')
+        PsiElement(SEMICOLON)(';')
+        PsiWhiteSpace(' ')
+        CPsiPostfixExpressionImpl: i++
+          CPsiReferenceExpressionImpl: i
+            PsiElement(IDENTIFIER)('i')
+          PsiElement(PLUSPLUS)('++')
+        PsiElement(RPARENTH)(')')
+        PsiWhiteSpace(' ')
+        CPsiCodeBlockImpl: {
+        if (argv[i] == NULL) continue;
+        else break;
+    }
+          PsiElement(LBRACE)('{')
+          PsiWhiteSpace('\n        ')
+          CPsiIfStatementImpl: if (argv[i] == NULL) continue;
+        else break;
+            PsiElement(IF_KEYWORD)('if')
+            PsiWhiteSpace(' ')
+            PsiElement(LPARENTH)('(')
+            CPsiBinaryExpressionImpl: argv[i] == NULL
+              CPsiIndexedPropertyAccessExpressionImpl: argv[i]
+                CPsiReferenceExpressionImpl: argv
+                  PsiElement(IDENTIFIER)('argv')
+                PsiElement(LBRACKET)('[')
+                CPsiReferenceExpressionImpl: i
+                  PsiElement(IDENTIFIER)('i')
+                PsiElement(RBRACKET)(']')
+              PsiWhiteSpace(' ')
+              PsiElement(EQEQ)('==')
+              PsiWhiteSpace(' ')
+              CPsiReferenceExpressionImpl: NULL
+                PsiElement(IDENTIFIER)('NULL')
+            PsiElement(RPARENTH)(')')
+            PsiWhiteSpace(' ')
+            CPsiContinueStatementImpl: continue;
+              PsiElement(CONTINUE_KEYWORD)('continue')
+              PsiElement(SEMICOLON)(';')
+            PsiWhiteSpace('\n        ')
+            PsiElement(ELSE_KEYWORD)('else')
+            PsiWhiteSpace(' ')
+            CPsiBreakStatementImpl: break;
+              PsiElement(BREAK_KEYWORD)('break')
+              PsiElement(SEMICOLON)(';')
+          PsiWhiteSpace('\n    ')
+          PsiElement(RBRACE)('}')
+      PsiWhiteSpace('\n    ')
+      CPsiDoWhileStatementImpl: do { argc--; } while (argc > 0);
+        PsiElement(DO_KEYWORD)('do')
+        PsiWhiteSpace(' ')
+        CPsiCodeBlockImpl: { argc--; }
+          PsiElement(LBRACE)('{')
+          PsiWhiteSpace(' ')
+          CPsiExpressionStatementImpl: argc--;
+            CPsiPostfixExpressionImpl: argc--
+              CPsiReferenceExpressionImpl: argc
+                PsiElement(IDENTIFIER)('argc')
+              PsiElement(MINUSMINUS)('--')
+            PsiElement(SEMICOLON)(';')
+          PsiWhiteSpace(' ')
+          PsiElement(RBRACE)('}')
+        PsiWhiteSpace(' ')
+        PsiElement(WHILE_KEYWORD)('while')
+        PsiWhiteSpace(' ')
+        PsiElement(LPARENTH)('(')
+        CPsiBinaryExpressionImpl: argc > 0
+          CPsiReferenceExpressionImpl: argc
+            PsiElement(IDENTIFIER)('argc')
+          PsiWhiteSpace(' ')
+          PsiElement(GT)('>')
+          PsiWhiteSpace(' ')
+          CPsiLiteralExpressionImpl: 0
+            PsiElement(INTEGER_LITERAL)('0')
+        PsiElement(RPARENTH)(')')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiSwitchStatementImpl: switch (argc) {
+        case 1 ... 3:
+            goto done;
+        default:
+            ;
+    }
+        PsiElement(SWITCH_KEYWORD)('switch')
+        PsiWhiteSpace(' ')
+        PsiElement(LPARENTH)('(')
+        CPsiReferenceExpressionImpl: argc
+          PsiElement(IDENTIFIER)('argc')
+        PsiElement(RPARENTH)(')')
+        PsiWhiteSpace(' ')
+        CPsiCodeBlockImpl: {
+        case 1 ... 3:
+            goto done;
+        default:
+            ;
+    }
+          PsiElement(LBRACE)('{')
+          PsiWhiteSpace('\n        ')
+          CPsiCaseStatementImpl: case 1 ... 3:
+            PsiElement(CASE_KEYWORD)('case')
+            PsiWhiteSpace(' ')
+            CPsiLiteralExpressionImpl: 1
+              PsiElement(INTEGER_LITERAL)('1')
+            PsiWhiteSpace(' ')
+            PsiElement(ELLIPSIS)('...')
+            PsiWhiteSpace(' ')
+            CPsiLiteralExpressionImpl: 3
+              PsiElement(INTEGER_LITERAL)('3')
+            PsiElement(COLON)(':')
+          PsiWhiteSpace('\n            ')
+          CPsiGotoStatementImpl: goto done;
+            PsiElement(GOTO_KEYWORD)('goto')
+            PsiWhiteSpace(' ')
+            PsiElement(IDENTIFIER)('done')
+            PsiElement(SEMICOLON)(';')
+          PsiWhiteSpace('\n        ')
+          CPsiDefaultStatementImpl: default:
+            PsiElement(DEFAULT_KEYWORD)('default')
+            PsiElement(COLON)(':')
+          PsiWhiteSpace('\n            ')
+          PsiElement(SEMICOLON)(';')
+          PsiWhiteSpace('\n    ')
+          PsiElement(RBRACE)('}')
+      PsiWhiteSpace('\n')
+      CPsiLabeledStatementImpl: done:
+    return argc;
+        PsiElement(IDENTIFIER)('done')
+        PsiElement(COLON)(':')
+        PsiWhiteSpace('\n    ')
+        CPsiReturnStatementImpl: return argc;
+          PsiElement(RETURN_KEYWORD)('return')
+          PsiWhiteSpace(' ')
+          CPsiReferenceExpressionImpl: argc
+            PsiElement(IDENTIFIER)('argc')
+          PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')
+  PsiWhiteSpace('\n')

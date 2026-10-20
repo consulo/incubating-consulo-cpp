@@ -18,6 +18,8 @@ FILE
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       CPsiLocalVariableImpl: int n = sizeof(int);
+        CPsiModifierListImpl: 
+          <empty list>
         CPsiTypeRefImpl: int
           PsiElement(INT_KEYWORD)('int')
         PsiWhiteSpace(' ')

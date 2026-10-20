@@ -23,7 +23,6 @@
     <description>Support for C/C++ language.</description>
     <version>SNAPSHOT</version>
     <vendor>consulo.io</vendor>
-    <resource-bundle>org.napile.cpp4idea.CBundle</resource-bundle>
     <category>Custom Languages</category>
     <experimental>true</experimental>
 

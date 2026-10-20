@@ -17,7 +17,7 @@ package consulo.cpp.cmake.module;
 
 import consulo.cpp.cmake.localize.CMakeCLocalize;
 import consulo.cpp.module.extension.CCompileSettings;
-import consulo.cpp.module.extension.CLanguageStandard;
+import consulo.cpp.lang.version.CLanguageVersion;
 import consulo.cpp.module.extension.CModuleExtension;
 import consulo.cpp.module.extension.CMutableModuleExtension;
 import consulo.disposer.Disposable;
@@ -76,7 +76,7 @@ public class CMakeCMutableModuleExtension extends CMakeCModuleExtension implemen
             .build();
     }
 
-    private static String standardName(CLanguageStandard standard) {
-        return standard == CLanguageStandard.DEFAULT ? "" : standard.name();
+    private static String standardName(@Nullable CLanguageVersion standard) {
+        return standard == null ? "" : standard.getPresentableName();
     }
 }

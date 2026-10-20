@@ -16,24 +16,27 @@
 package consulo.cpp.impl.moduleAware;
 
 import consulo.annotation.component.ExtensionImpl;
+import consulo.cpp.lang.CLanguage;
 import consulo.cpp.module.extension.CModuleExtension;
-import consulo.cpp.lang.CHeaderFileType;
-import consulo.cpp.lang.CPPHeaderFileType;
-import consulo.cpp.lang.CPPSourceFileType;
-import consulo.cpp.lang.CSourceFileType;
 import consulo.cpp.moduleAware.CDefineEnv;
 import consulo.cpp.moduleAware.CIncludeWalker;
 import consulo.cpp.moduleAware.CPreprocessorOptions;
 import consulo.cpp.moduleAware.CPreprocessorOptionsExternalizer;
+import consulo.language.file.LanguageFileType;
 import consulo.language.psi.stub.IndexOption;
 import consulo.language.psi.stub.ModuleAwareIndexOptionProvider;
 import consulo.localize.LocalizeValue;
 import consulo.module.Module;
+import consulo.module.content.ProjectFileIndex;
 import consulo.virtualFileSystem.LocalFileSystem;
 import consulo.virtualFileSystem.VirtualFile;
 import consulo.virtualFileSystem.fileType.FileType;
+import consulo.virtualFileSystem.fileType.FileTypeRegistry;
+import jakarta.inject.Inject;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -43,12 +46,22 @@ import java.util.Set;
  */
 @ExtensionImpl
 public class CModuleAwareIndexOptionProvider implements ModuleAwareIndexOptionProvider {
-    private static final Set<FileType> FILE_TYPES = Set.of(
-        CSourceFileType.INSTANCE,
-        CPPSourceFileType.INSTANCE,
-        CHeaderFileType.INSTANCE,
-        CPPHeaderFileType.INSTANCE
-    );
+    private final Set<FileType> myFileTypes;
+
+    /**
+     * Claims every file type of the C language, so the files of a dialect plugin - {@code .m}, {@code .ino} - get
+     * their module's defines and standard too.
+     */
+    @Inject
+    public CModuleAwareIndexOptionProvider(FileTypeRegistry fileTypeRegistry) {
+        Set<FileType> fileTypes = new LinkedHashSet<>();
+        for (FileType fileType : fileTypeRegistry.getRegisteredFileTypes()) {
+            if (fileType instanceof LanguageFileType languageFileType && languageFileType.getLanguage() == CLanguage.INSTANCE) {
+                fileTypes.add(fileType);
+            }
+        }
+        myFileTypes = Collections.unmodifiableSet(fileTypes);
+    }
 
     @Override
     public String getId() {
@@ -57,12 +70,13 @@ public class CModuleAwareIndexOptionProvider implements ModuleAwareIndexOptionPr
 
     @Override
     public int getVersion() {
-        return 1;
+        // 2: options carry the language version id
+        return 2;
     }
 
     @Override
     public Set<FileType> getInputFileTypes() {
-        return FILE_TYPES;
+        return myFileTypes;
     }
 
     private static List<VirtualFile> resolveIncludeRoots(List<String> includePaths) {
@@ -76,6 +90,18 @@ public class CModuleAwareIndexOptionProvider implements ModuleAwareIndexOptionPr
         return roots;
     }
 
+    /**
+     * What makes an edit to an included header re-index the files including it. A file of a library - a system header
+     * reached through the module's header library - is not edited in the project, and walking the includes of every
+     * one of the thousands of headers there would cost more than the whole index, so it has none.
+     */
+    private static String includeFingerprint(Module module, CModuleExtension<?> extension, VirtualFile file) {
+        if (ProjectFileIndex.getInstance(module.getProject()).getModuleForFile(file) == null) {
+            return "";
+        }
+        return CIncludeWalker.fingerprintFor(file, resolveIncludeRoots(extension.getIncludePaths()));
+    }
+
     @Override
     public IndexOption getOptions(Module module, VirtualFile file) {
         CModuleExtension<?> extension = module.getExtension(CModuleExtension.class);
@@ -83,12 +109,7 @@ public class CModuleAwareIndexOptionProvider implements ModuleAwareIndexOptionPr
             return IndexOption.fullySharable();
         }
 
-        List<VirtualFile> includeRoots = resolveIncludeRoots(extension.getIncludePaths());
-        CPreprocessorOptions options = new CPreprocessorOptions(
-            extension.getDefines(),
-            extension.getIncludePaths(),
-            CIncludeWalker.fingerprintFor(file, includeRoots)
-        );
+        CPreprocessorOptions options = CPreprocessorOptions.of(extension, file, includeFingerprint(module, extension, file));
         if (options.isEmpty()) {
             return IndexOption.fullySharable();
         }

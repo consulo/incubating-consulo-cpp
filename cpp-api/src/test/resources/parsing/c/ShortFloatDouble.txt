@@ -22,6 +22,8 @@ FILE
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       CPsiLocalVariableImpl: short s = 1;
+        CPsiModifierListImpl: 
+          <empty list>
         CPsiTypeRefImpl: short
           PsiElement(SHORT_KEYWORD)('short')
         PsiWhiteSpace(' ')
@@ -34,6 +36,8 @@ FILE
         PsiElement(SEMICOLON)(';')
       PsiWhiteSpace('\n    ')
       CPsiLocalVariableImpl: float f = 1.5f;
+        CPsiModifierListImpl: 
+          <empty list>
         CPsiTypeRefImpl: float
           PsiElement(FLOAT_KEYWORD)('float')
         PsiWhiteSpace(' ')
@@ -46,6 +50,8 @@ FILE
         PsiElement(SEMICOLON)(';')
       PsiWhiteSpace('\n    ')
       CPsiLocalVariableImpl: double d = 2.5;
+        CPsiModifierListImpl: 
+          <empty list>
         CPsiTypeRefImpl: double
           PsiElement(DOUBLE_KEYWORD)('double')
         PsiWhiteSpace(' ')

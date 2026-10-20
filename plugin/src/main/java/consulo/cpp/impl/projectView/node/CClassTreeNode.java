@@ -20,7 +20,7 @@ import consulo.project.ui.view.tree.ViewSettings;
 import consulo.project.ui.view.tree.AbstractTreeNode;
 import consulo.project.Project;
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.psi.CPsiClass;
+import consulo.cpp.lang.psi.CPsiClass;
 
 import java.util.Collection;
 import java.util.Collections;

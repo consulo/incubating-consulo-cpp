@@ -23,10 +23,10 @@ import consulo.project.ui.view.tree.AbstractTreeNode;
 import consulo.project.ui.view.tree.ViewSettings;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.lang.psi.CPsiClass;
-import org.napile.cpp4idea.lang.psi.CPsiDeclaration;
-import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
-import org.napile.cpp4idea.lang.psi.CPsiFile;
+import consulo.cpp.lang.psi.CPsiClass;
+import consulo.cpp.lang.psi.CPsiDeclaration;
+import consulo.cpp.lang.psi.CPsiDeclarationMethod;
+import consulo.cpp.lang.psi.CPsiFile;
 
 import java.util.List;
 

@@ -1,0 +1,237 @@
+FILE
+  CPsiImplementingMethodImpl: void foo(int a, int b) {
+    int c = a >= b ? a >> 1 : b << 2;
+    c >>= 1;
+    c |= a & ~b;
+    if (a != b && !(a <= 0) || b % 2 == 1) c++;
+    c = sizeof(int) + sizeof c + sizeof(struct point);
+    p->next->value += (a, b);
+}
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: void
+      PsiElement(VOID_KEYWORD)('void')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('foo')
+    CPsiParameterListImpl: (int a, int b)
+      PsiElement(LPARENTH)('(')
+      CPsiParameterImpl: int a
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: int
+          PsiElement(INT_KEYWORD)('int')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('a')
+      PsiElement(COMMA)(',')
+      PsiWhiteSpace(' ')
+      CPsiParameterImpl: int b
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: int
+          PsiElement(INT_KEYWORD)('int')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('b')
+      PsiElement(RPARENTH)(')')
+    PsiWhiteSpace(' ')
+    CPsiCodeBlockImpl: {
+    int c = a >= b ? a >> 1 : b << 2;
+    c >>= 1;
+    c |= a & ~b;
+    if (a != b && !(a <= 0) || b % 2 == 1) c++;
+    c = sizeof(int) + sizeof c + sizeof(struct point);
+    p->next->value += (a, b);
+}
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n    ')
+      CPsiLocalVariableImpl: int c = a >= b ? a >> 1 : b << 2;
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: int
+          PsiElement(INT_KEYWORD)('int')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('c')
+        PsiWhiteSpace(' ')
+        PsiElement(EQ)('=')
+        PsiWhiteSpace(' ')
+        CPsiConditionalExpressionImpl: a >= b ? a >> 1 : b << 2
+          CPsiBinaryExpressionImpl: a >= b
+            CPsiReferenceExpressionImpl: a
+              PsiElement(IDENTIFIER)('a')
+            PsiWhiteSpace(' ')
+            PsiElement(GE)('>=')
+            PsiWhiteSpace(' ')
+            CPsiReferenceExpressionImpl: b
+              PsiElement(IDENTIFIER)('b')
+          PsiWhiteSpace(' ')
+          PsiElement(QUEST)('?')
+          PsiWhiteSpace(' ')
+          CPsiBinaryExpressionImpl: a >> 1
+            CPsiReferenceExpressionImpl: a
+              PsiElement(IDENTIFIER)('a')
+            PsiWhiteSpace(' ')
+            PsiElement(GTGT)('>>')
+            PsiWhiteSpace(' ')
+            CPsiLiteralExpressionImpl: 1
+              PsiElement(INTEGER_LITERAL)('1')
+          PsiWhiteSpace(' ')
+          PsiElement(COLON)(':')
+          PsiWhiteSpace(' ')
+          CPsiBinaryExpressionImpl: b << 2
+            CPsiReferenceExpressionImpl: b
+              PsiElement(IDENTIFIER)('b')
+            PsiWhiteSpace(' ')
+            PsiElement(LTLT)('<<')
+            PsiWhiteSpace(' ')
+            CPsiLiteralExpressionImpl: 2
+              PsiElement(INTEGER_LITERAL)('2')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiExpressionStatementImpl: c >>= 1;
+        CPsiAssignmentExpressionImpl: c >>= 1
+          CPsiReferenceExpressionImpl: c
+            PsiElement(IDENTIFIER)('c')
+          PsiWhiteSpace(' ')
+          PsiElement(GTGTEQ)('>>=')
+          PsiWhiteSpace(' ')
+          CPsiLiteralExpressionImpl: 1
+            PsiElement(INTEGER_LITERAL)('1')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiExpressionStatementImpl: c |= a & ~b;
+        CPsiAssignmentExpressionImpl: c |= a & ~b
+          CPsiReferenceExpressionImpl: c
+            PsiElement(IDENTIFIER)('c')
+          PsiWhiteSpace(' ')
+          PsiElement(OREQ)('|=')
+          PsiWhiteSpace(' ')
+          CPsiBinaryExpressionImpl: a & ~b
+            CPsiReferenceExpressionImpl: a
+              PsiElement(IDENTIFIER)('a')
+            PsiWhiteSpace(' ')
+            PsiElement(AND)('&')
+            PsiWhiteSpace(' ')
+            CPsiPrefixExpressionImpl: ~b
+              PsiElement(TILDE)('~')
+              CPsiReferenceExpressionImpl: b
+                PsiElement(IDENTIFIER)('b')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiIfStatementImpl: if (a != b && !(a <= 0) || b % 2 == 1) c++;
+        PsiElement(IF_KEYWORD)('if')
+        PsiWhiteSpace(' ')
+        PsiElement(LPARENTH)('(')
+        CPsiBinaryExpressionImpl: a != b && !(a <= 0) || b % 2 == 1
+          CPsiBinaryExpressionImpl: a != b && !(a <= 0)
+            CPsiBinaryExpressionImpl: a != b
+              CPsiReferenceExpressionImpl: a
+                PsiElement(IDENTIFIER)('a')
+              PsiWhiteSpace(' ')
+              PsiElement(NE)('!=')
+              PsiWhiteSpace(' ')
+              CPsiReferenceExpressionImpl: b
+                PsiElement(IDENTIFIER)('b')
+            PsiWhiteSpace(' ')
+            PsiElement(ANDAND)('&&')
+            PsiWhiteSpace(' ')
+            CPsiPrefixExpressionImpl: !(a <= 0)
+              PsiElement(EXCL)('!')
+              CPsiParenthesizedExpressionImpl: (a <= 0)
+                PsiElement(LPARENTH)('(')
+                CPsiBinaryExpressionImpl: a <= 0
+                  CPsiReferenceExpressionImpl: a
+                    PsiElement(IDENTIFIER)('a')
+                  PsiWhiteSpace(' ')
+                  PsiElement(LE)('<=')
+                  PsiWhiteSpace(' ')
+                  CPsiLiteralExpressionImpl: 0
+                    PsiElement(INTEGER_LITERAL)('0')
+                PsiElement(RPARENTH)(')')
+          PsiWhiteSpace(' ')
+          PsiElement(OROR)('||')
+          PsiWhiteSpace(' ')
+          CPsiBinaryExpressionImpl: b % 2 == 1
+            CPsiBinaryExpressionImpl: b % 2
+              CPsiReferenceExpressionImpl: b
+                PsiElement(IDENTIFIER)('b')
+              PsiWhiteSpace(' ')
+              PsiElement(PERC)('%')
+              PsiWhiteSpace(' ')
+              CPsiLiteralExpressionImpl: 2
+                PsiElement(INTEGER_LITERAL)('2')
+            PsiWhiteSpace(' ')
+            PsiElement(EQEQ)('==')
+            PsiWhiteSpace(' ')
+            CPsiLiteralExpressionImpl: 1
+              PsiElement(INTEGER_LITERAL)('1')
+        PsiElement(RPARENTH)(')')
+        PsiWhiteSpace(' ')
+        CPsiExpressionStatementImpl: c++;
+          CPsiPostfixExpressionImpl: c++
+            CPsiReferenceExpressionImpl: c
+              PsiElement(IDENTIFIER)('c')
+            PsiElement(PLUSPLUS)('++')
+          PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiExpressionStatementImpl: c = sizeof(int) + sizeof c + sizeof(struct point);
+        CPsiAssignmentExpressionImpl: c = sizeof(int) + sizeof c + sizeof(struct point)
+          CPsiReferenceExpressionImpl: c
+            PsiElement(IDENTIFIER)('c')
+          PsiWhiteSpace(' ')
+          PsiElement(EQ)('=')
+          PsiWhiteSpace(' ')
+          CPsiBinaryExpressionImpl: sizeof(int) + sizeof c + sizeof(struct point)
+            CPsiBinaryExpressionImpl: sizeof(int) + sizeof c
+              CPsiSizeofExpressionImpl: sizeof(int)
+                PsiElement(SIZEOF_KEYWORD)('sizeof')
+                PsiElement(LPARENTH)('(')
+                CPsiTypeRefImpl: int
+                  PsiElement(INT_KEYWORD)('int')
+                PsiElement(RPARENTH)(')')
+              PsiWhiteSpace(' ')
+              PsiElement(PLUS)('+')
+              PsiWhiteSpace(' ')
+              CPsiSizeofExpressionImpl: sizeof c
+                PsiElement(SIZEOF_KEYWORD)('sizeof')
+                PsiWhiteSpace(' ')
+                CPsiReferenceExpressionImpl: c
+                  PsiElement(IDENTIFIER)('c')
+            PsiWhiteSpace(' ')
+            PsiElement(PLUS)('+')
+            PsiWhiteSpace(' ')
+            CPsiSizeofExpressionImpl: sizeof(struct point)
+              PsiElement(SIZEOF_KEYWORD)('sizeof')
+              PsiElement(LPARENTH)('(')
+              CPsiTypeRefImpl: struct point
+                PsiElement(STRUCT_KEYWORD)('struct')
+                PsiWhiteSpace(' ')
+                PsiElement(IDENTIFIER)('point')
+              PsiElement(RPARENTH)(')')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiExpressionStatementImpl: p->next->value += (a, b);
+        CPsiAssignmentExpressionImpl: p->next->value += (a, b)
+          CPsiReferenceExpressionImpl: p->next->value
+            CPsiReferenceExpressionImpl: p->next
+              CPsiReferenceExpressionImpl: p
+                PsiElement(IDENTIFIER)('p')
+              PsiElement(ARROW)('->')
+              PsiElement(IDENTIFIER)('next')
+            PsiElement(ARROW)('->')
+            PsiElement(IDENTIFIER)('value')
+          PsiWhiteSpace(' ')
+          PsiElement(PLUSEQ)('+=')
+          PsiWhiteSpace(' ')
+          CPsiParenthesizedExpressionImpl: (a, b)
+            PsiElement(LPARENTH)('(')
+            CPsiCommaExpressionImpl: a, b
+              CPsiReferenceExpressionImpl: a
+                PsiElement(IDENTIFIER)('a')
+              PsiElement(COMMA)(',')
+              PsiWhiteSpace(' ')
+              CPsiReferenceExpressionImpl: b
+                PsiElement(IDENTIFIER)('b')
+            PsiElement(RPARENTH)(')')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')
+  PsiWhiteSpace('\n')

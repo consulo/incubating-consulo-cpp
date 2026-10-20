@@ -17,8 +17,8 @@ package consulo.cpp.it;
 
 import consulo.application.Application;
 import consulo.application.WriteAction;
-import org.napile.cpp4idea.lang.psi.CPsiField;
-import org.napile.cpp4idea.CLanguage;
+import consulo.cpp.lang.psi.CPsiField;
+import consulo.cpp.lang.CLanguage;
 import consulo.language.psi.util.PsiTreeUtil;
 import consulo.language.psi.PsiManager;
 import consulo.language.psi.PsiFile;
@@ -26,7 +26,11 @@ import consulo.application.ReadAction;
 import consulo.cpp.module.extension.CDefaultMutableModuleExtension;
 import consulo.cpp.moduleAware.CDefineEnv;
 import consulo.cpp.moduleAware.CPreprocessorOptions;
+import consulo.cpp.preprocessor.CPreprocessorLanguage;
+import consulo.cpp.preprocessor.psi.CPsiSharpInclude;
 import consulo.it.AllowLogError;
+import consulo.language.psi.PsiElement;
+import consulo.language.psi.PsiReference;
 import consulo.it.HeadlessApplicationExtension;
 import consulo.module.ModifiableModuleModel;
 import consulo.module.Module;
@@ -39,11 +43,13 @@ import consulo.project.ProjectManager;
 import consulo.project.ProjectOpenContext;
 import consulo.virtualFileSystem.LocalFileSystem;
 import consulo.virtualFileSystem.VirtualFile;
+import org.jspecify.annotations.Nullable;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
@@ -144,6 +150,46 @@ public class CModuleAwareIndexTest {
     }
 
     /**
+     * What a CMake import sets up: the module searches a directory outside its content - as the compiler searches
+     * {@code /usr/include} - so {@code #include <...>} resolves there, and the defines of the header it finds decide
+     * which branch is parsed.
+     */
+    @Test
+    public void includePathOutsideTheProjectIsSearched(Application application, ProjectManager projectManager) throws Exception {
+        Path includeDirectory = Files.createTempDirectory("consulo-cpp-it-system-include");
+        Path header = includeDirectory.resolve("config.h");
+        Files.writeString(header, "#define FEATURE 1\n");
+
+        Path directory = Files.createTempDirectory("consulo-cpp-it-include");
+        Path source = directory.resolve("main.c");
+        Files.writeString(source, "#include <config.h>\n#ifdef FEATURE\nint enabled;\n#else\nint disabled;\n#endif\n");
+
+        Project project = openProjectWithModule(application, projectManager, directory, Map.of(), List.of(includeDirectory.toString()));
+        VirtualFile file = LocalFileSystem.getInstance().refreshAndFindFileByNioFile(source);
+        VirtualFile headerFile = LocalFileSystem.getInstance().refreshAndFindFileByNioFile(header);
+        assertNotNull(file);
+        assertNotNull(headerFile);
+
+        waitFor("the include must resolve through the module include path", () -> headerFile.equals(includeTargetOf(project, file)));
+        waitFor("the define of the included header must decide the branch", () -> declarationsOf(project, file).contains("enabled"));
+        assertFalse(declarationsOf(project, file).contains("disabled"), "the #else declaration must not be parsed");
+    }
+
+    /**
+     * @return the file the first {@code #include} of {@code file} resolves to
+     */
+    private static @Nullable VirtualFile includeTargetOf(Project project, VirtualFile file) {
+        return ReadAction.compute(() -> {
+            PsiFile psiFile = PsiManager.getInstance(project).findFile(file);
+            PsiFile preprocessorRoot = psiFile == null ? null : psiFile.getViewProvider().getPsi(CPreprocessorLanguage.INSTANCE);
+            CPsiSharpInclude include = preprocessorRoot == null ? null : PsiTreeUtil.findChildOfType(preprocessorRoot, CPsiSharpInclude.class);
+            PsiReference reference = include == null ? null : include.getReference();
+            PsiElement target = reference == null ? null : reference.resolve();
+            return target instanceof PsiFile targetFile ? targetFile.getVirtualFile() : null;
+        });
+    }
+
+    /**
      * @return the text of every declaration the C parse actually produced, which is how the active branch is
      * observed - the inactive branch survives only as dropped text around it, never as a declaration
      */
@@ -169,6 +215,14 @@ public class CModuleAwareIndexTest {
                                                  ProjectManager projectManager,
                                                  Path directory,
                                                  Map<String, String> defines) throws Exception {
+        return openProjectWithModule(application, projectManager, directory, defines, List.of());
+    }
+
+    private static Project openProjectWithModule(Application application,
+                                                 ProjectManager projectManager,
+                                                 Path directory,
+                                                 Map<String, String> defines,
+                                                 List<String> includePaths) throws Exception {
         Project project = projectManager
             .openProjectAsync(directory, application.getLastUIAccess(), new ProjectOpenContext())
             .get(TIMEOUT_SECONDS, TimeUnit.SECONDS);
@@ -190,6 +244,7 @@ public class CModuleAwareIndexTest {
             assertNotNull(extension, "the C/C++ module extension must be registered");
             extension.setEnabled(true);
             extension.setDefines(defines);
+            extension.setIncludePaths(includePaths);
 
             rootModel.commit();
         });

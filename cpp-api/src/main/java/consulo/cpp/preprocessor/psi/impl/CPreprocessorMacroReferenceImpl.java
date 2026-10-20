@@ -1,25 +1,19 @@
 package consulo.cpp.preprocessor.psi.impl;
 
-import consulo.cpp.moduleAware.CDefineEnv;
 import java.util.Collections;
-import consulo.cpp.preprocessor.CPreprocessorLanguage;
 import consulo.cpp.preprocessor.expand.ExpandedMacro;
-import consulo.cpp.preprocessor.expand.PreprocessorExpander;
 import consulo.cpp.preprocessor.psi.CPreprocessorMacroReference;
 import consulo.document.util.TextRange;
 import consulo.language.ast.ASTNode;
 import consulo.language.impl.psi.ASTWrapperPsiElement;
-import consulo.language.parser.ParserDefinition;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiElementVisitor;
-import consulo.language.psi.PsiFile;
 import consulo.language.psi.PsiReference;
 import consulo.language.util.IncorrectOperationException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.CLanguage;
-import org.napile.cpp4idea.lang.psi.CPsiTokens;
-import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
+import consulo.cpp.lang.psi.CPsiTokens;
+import consulo.cpp.lang.psi.visitor.CPsiElementVisitor;
 
 /**
  * @author VISTALL
@@ -60,7 +54,8 @@ public class CPreprocessorMacroReferenceImpl extends ASTWrapperPsiElement implem
 	@Override
 	public @NotNull TextRange getRangeInElement()
 	{
-		return new TextRange(0, getElement().getTextLength());
+		// the name only: a call of a function-like macro also holds its arguments
+		return new TextRange(0, getReferenceElement().getTextLength());
 	}
 
 	@Override
@@ -86,11 +81,7 @@ public class CPreprocessorMacroReferenceImpl extends ASTWrapperPsiElement implem
 	@Nullable
 	private ExpandedMacro findMacro()
 	{
-		PsiFile preprocessorPsi = getContainingFile().getViewProvider().getPsi(CPreprocessorLanguage.INSTANCE);
-		ParserDefinition parserDefinition = ParserDefinition.forLanguage(CLanguage.INSTANCE);
-		PreprocessorExpander expander =
-				new PreprocessorExpander(preprocessorPsi, parserDefinition, CDefineEnv.includeRootsFor(this), CDefineEnv.seedFor(this));
-		return expander.getMacro(getCanonicalText());
+		return CMacroReferenceResolver.findMacro(this, getCanonicalText());
 	}
 
 	@Override
@@ -102,7 +93,7 @@ public class CPreprocessorMacroReferenceImpl extends ASTWrapperPsiElement implem
 	@Override
 	public @NotNull String getCanonicalText()
 	{
-		return getText();
+		return getReferenceElement().getText();
 	}
 
 	@Override

@@ -16,11 +16,23 @@
 
 package consulo.cpp.preprocessor.psi;
 
+import consulo.annotation.access.RequiredReadAction;
+import consulo.cpp.preprocessor.expand.CPreprocessorExpandContext;
+
 /**
  * PSI element for the {@code #pragma} preprocessor directive.
  *
  * @author VISTALL
  * @since 2026-03-19
  */
-public interface CPreprocessorPragmaDirective extends CPreprocessorElement {
+public interface CPreprocessorPragmaDirective extends CPreprocessorDirective {
+
+    /**
+     * A pragma means nothing to the C parse; it is only taken out of the text.
+     */
+    @Override
+    @RequiredReadAction
+    default void expand(CPreprocessorExpandContext context) {
+        context.removeFromSource(getTextRange());
+    }
 }

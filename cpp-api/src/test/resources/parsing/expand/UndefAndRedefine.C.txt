@@ -8,8 +8,7 @@ FILE
     CPsiModifierListImpl: 
       <empty list>
     CPsiTypeRefImpl: MY_INT
-      CPreprocessorMacroReferenceImpl(CPreprocessorMacroReference)
-        PsiElement(IDENTIFIER)('MY_INT')
+      CPreprocessorMacroInvocation(MY_INT)('MY_INT')
       ForeignLeaf(LONG_KEYWORD: long)('long')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('x')

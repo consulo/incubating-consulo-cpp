@@ -1,0 +1,203 @@
+FILE
+  CPsiImplementingMethodImpl: void foo(void* p, int n) {
+    struct event* e = (struct event*) &p[n];
+    long l = (long) n;
+    size_t s = (size_t)(n + 1);
+    char c = (char) -1;
+    int sum = (n) - 1;
+    struct point q = (struct point) { 1, 2 };
+}
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: void
+      PsiElement(VOID_KEYWORD)('void')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('foo')
+    CPsiParameterListImpl: (void* p, int n)
+      PsiElement(LPARENTH)('(')
+      CPsiParameterImpl: void* p
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: void
+          PsiElement(VOID_KEYWORD)('void')
+        PsiElement(ASTERISK)('*')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('p')
+      PsiElement(COMMA)(',')
+      PsiWhiteSpace(' ')
+      CPsiParameterImpl: int n
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: int
+          PsiElement(INT_KEYWORD)('int')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('n')
+      PsiElement(RPARENTH)(')')
+    PsiWhiteSpace(' ')
+    CPsiCodeBlockImpl: {
+    struct event* e = (struct event*) &p[n];
+    long l = (long) n;
+    size_t s = (size_t)(n + 1);
+    char c = (char) -1;
+    int sum = (n) - 1;
+    struct point q = (struct point) { 1, 2 };
+}
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n    ')
+      CPsiLocalVariableImpl: struct event* e = (struct event*) &p[n];
+        CPsiTypeRefImpl: struct event
+          PsiElement(STRUCT_KEYWORD)('struct')
+          PsiWhiteSpace(' ')
+          PsiElement(IDENTIFIER)('event')
+        PsiElement(ASTERISK)('*')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('e')
+        PsiWhiteSpace(' ')
+        PsiElement(EQ)('=')
+        PsiWhiteSpace(' ')
+        CPsiCastExpressionImpl: (struct event*) &p[n]
+          PsiElement(LPARENTH)('(')
+          CPsiTypeRefImpl: struct event
+            PsiElement(STRUCT_KEYWORD)('struct')
+            PsiWhiteSpace(' ')
+            PsiElement(IDENTIFIER)('event')
+          PsiElement(ASTERISK)('*')
+          PsiElement(RPARENTH)(')')
+          PsiWhiteSpace(' ')
+          CPsiPrefixExpressionImpl: &p[n]
+            PsiElement(AND)('&')
+            CPsiIndexedPropertyAccessExpressionImpl: p[n]
+              CPsiReferenceExpressionImpl: p
+                PsiElement(IDENTIFIER)('p')
+              PsiElement(LBRACKET)('[')
+              CPsiReferenceExpressionImpl: n
+                PsiElement(IDENTIFIER)('n')
+              PsiElement(RBRACKET)(']')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiLocalVariableImpl: long l = (long) n;
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: long
+          PsiElement(LONG_KEYWORD)('long')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('l')
+        PsiWhiteSpace(' ')
+        PsiElement(EQ)('=')
+        PsiWhiteSpace(' ')
+        CPsiCastExpressionImpl: (long) n
+          PsiElement(LPARENTH)('(')
+          CPsiTypeRefImpl: long
+            PsiElement(LONG_KEYWORD)('long')
+          PsiElement(RPARENTH)(')')
+          PsiWhiteSpace(' ')
+          CPsiReferenceExpressionImpl: n
+            PsiElement(IDENTIFIER)('n')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiLocalVariableImpl: size_t s = (size_t)(n + 1);
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: size_t
+          PsiElement(IDENTIFIER)('size_t')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('s')
+        PsiWhiteSpace(' ')
+        PsiElement(EQ)('=')
+        PsiWhiteSpace(' ')
+        CPsiCastExpressionImpl: (size_t)(n + 1)
+          PsiElement(LPARENTH)('(')
+          CPsiTypeRefImpl: size_t
+            PsiElement(IDENTIFIER)('size_t')
+          PsiElement(RPARENTH)(')')
+          CPsiParenthesizedExpressionImpl: (n + 1)
+            PsiElement(LPARENTH)('(')
+            CPsiBinaryExpressionImpl: n + 1
+              CPsiReferenceExpressionImpl: n
+                PsiElement(IDENTIFIER)('n')
+              PsiWhiteSpace(' ')
+              PsiElement(PLUS)('+')
+              PsiWhiteSpace(' ')
+              CPsiLiteralExpressionImpl: 1
+                PsiElement(INTEGER_LITERAL)('1')
+            PsiElement(RPARENTH)(')')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiLocalVariableImpl: char c = (char) -1;
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: char
+          PsiElement(CHAR_KEYWORD)('char')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('c')
+        PsiWhiteSpace(' ')
+        PsiElement(EQ)('=')
+        PsiWhiteSpace(' ')
+        CPsiCastExpressionImpl: (char) -1
+          PsiElement(LPARENTH)('(')
+          CPsiTypeRefImpl: char
+            PsiElement(CHAR_KEYWORD)('char')
+          PsiElement(RPARENTH)(')')
+          PsiWhiteSpace(' ')
+          CPsiPrefixExpressionImpl: -1
+            PsiElement(MINUS)('-')
+            CPsiLiteralExpressionImpl: 1
+              PsiElement(INTEGER_LITERAL)('1')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiLocalVariableImpl: int sum = (n) - 1;
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: int
+          PsiElement(INT_KEYWORD)('int')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('sum')
+        PsiWhiteSpace(' ')
+        PsiElement(EQ)('=')
+        PsiWhiteSpace(' ')
+        CPsiBinaryExpressionImpl: (n) - 1
+          CPsiParenthesizedExpressionImpl: (n)
+            PsiElement(LPARENTH)('(')
+            CPsiReferenceExpressionImpl: n
+              PsiElement(IDENTIFIER)('n')
+            PsiElement(RPARENTH)(')')
+          PsiWhiteSpace(' ')
+          PsiElement(MINUS)('-')
+          PsiWhiteSpace(' ')
+          CPsiLiteralExpressionImpl: 1
+            PsiElement(INTEGER_LITERAL)('1')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiLocalVariableImpl: struct point q = (struct point) { 1, 2 };
+        CPsiTypeRefImpl: struct point
+          PsiElement(STRUCT_KEYWORD)('struct')
+          PsiWhiteSpace(' ')
+          PsiElement(IDENTIFIER)('point')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('q')
+        PsiWhiteSpace(' ')
+        PsiElement(EQ)('=')
+        PsiWhiteSpace(' ')
+        CPsiCastExpressionImpl: (struct point) { 1, 2 }
+          PsiElement(LPARENTH)('(')
+          CPsiTypeRefImpl: struct point
+            PsiElement(STRUCT_KEYWORD)('struct')
+            PsiWhiteSpace(' ')
+            PsiElement(IDENTIFIER)('point')
+          PsiElement(RPARENTH)(')')
+          PsiWhiteSpace(' ')
+          CPsiInitializerListImpl: { 1, 2 }
+            PsiElement(LBRACE)('{')
+            PsiWhiteSpace(' ')
+            CPsiLiteralExpressionImpl: 1
+              PsiElement(INTEGER_LITERAL)('1')
+            PsiElement(COMMA)(',')
+            PsiWhiteSpace(' ')
+            CPsiLiteralExpressionImpl: 2
+              PsiElement(INTEGER_LITERAL)('2')
+            PsiWhiteSpace(' ')
+            PsiElement(RBRACE)('}')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')
+  PsiWhiteSpace('\n')

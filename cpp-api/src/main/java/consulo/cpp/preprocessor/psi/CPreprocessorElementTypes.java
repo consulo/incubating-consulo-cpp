@@ -2,6 +2,7 @@ package consulo.cpp.preprocessor.psi;
 
 import consulo.cpp.preprocessor.psi.impl.*;
 import consulo.language.ast.IElementType;
+import consulo.language.impl.psi.ASTWrapperPsiElement;
 
 /**
  * @author VISTALL
@@ -12,6 +13,16 @@ public interface CPreprocessorElementTypes {
         new CPreprocessorElementType(CPsiSharpDefineValue.class.getSimpleName(), CPsiSharpDefineValueImpl::new);
 
     IElementType DEFINE_DIRECTIVE = CPreprocessorDefineStubElementType.INSTANCE;
+
+    /**
+     * The parameters of a function-like macro, {@code (a, b, ...)}.
+     */
+    IElementType DEFINE_PARAMETER_LIST = new CPreprocessorElementType("DEFINE_PARAMETER_LIST", ASTWrapperPsiElement::new);
+
+    /**
+     * A macro use in the C text - see {@link consulo.cpp.preprocessor.expand.CMacroExpandingLexer}.
+     */
+    IElementType MACRO_INVOCATION = new CMacroInvocationElementType();
 
     IElementType MACRO_REFERENCE =
         new CPreprocessorElementType(CPreprocessorMacroReference.class.getSimpleName(), CPreprocessorMacroReferenceImpl::new);

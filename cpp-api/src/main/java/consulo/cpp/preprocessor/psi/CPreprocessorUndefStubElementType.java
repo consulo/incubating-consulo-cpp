@@ -20,6 +20,7 @@ import consulo.cpp.preprocessor.psi.impl.CPreprocessorUndefDirectiveImpl;
 import consulo.cpp.preprocessor.psi.stub.CPreprocessorUndefStub;
 import consulo.cpp.preprocessor.psi.stub.impl.CPreprocessorUndefStubImpl;
 import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementTypeAsPsiFactory;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.stub.IStubElementType;
 import consulo.language.psi.stub.IndexSink;
@@ -31,7 +32,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 
 public class CPreprocessorUndefStubElementType
-        extends IStubElementType<CPreprocessorUndefStub, CPreprocessorUndefDirective> {
+        extends IStubElementType<CPreprocessorUndefStub, CPreprocessorUndefDirective>
+        implements IElementTypeAsPsiFactory {
 
     public static final CPreprocessorUndefStubElementType INSTANCE = new CPreprocessorUndefStubElementType();
 
@@ -39,7 +41,8 @@ public class CPreprocessorUndefStubElementType
         super(CPreprocessorUndefDirective.class.getSimpleName(), CPreprocessorLanguage.INSTANCE);
     }
 
-    public PsiElement createPsiFromNode(@NotNull ASTNode node) {
+    @Override
+    public PsiElement createElement(ASTNode node) {
         return new CPreprocessorUndefDirectiveImpl(node);
     }
 

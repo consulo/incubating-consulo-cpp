@@ -5,6 +5,7 @@ import consulo.cpp.preprocessor.psi.impl.CPsiSharpIncludeImpl;
 import consulo.cpp.preprocessor.psi.stub.CPreprocessorIncludeStub;
 import consulo.cpp.preprocessor.psi.stub.impl.CPreprocessorIncludeStubImpl;
 import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementTypeAsPsiFactory;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.stub.*;
 import org.jetbrains.annotations.NotNull;
@@ -22,7 +23,8 @@ import java.io.IOException;
  * @author VISTALL
  */
 public class CPreprocessorIncludeStubElementType
-        extends IStubElementType<CPreprocessorIncludeStub, CPsiSharpInclude> {
+        extends IStubElementType<CPreprocessorIncludeStub, CPsiSharpInclude>
+        implements IElementTypeAsPsiFactory {
 
     public static final CPreprocessorIncludeStubElementType INSTANCE = new CPreprocessorIncludeStubElementType();
 
@@ -31,10 +33,11 @@ public class CPreprocessorIncludeStubElementType
     }
 
     // -----------------------------------------------------------------------
-    // AST → PSI  (called by CPreprocessorParserDefinition.createElement)
+    // AST → PSI  (IElementTypeAsPsiFactory)
     // -----------------------------------------------------------------------
 
-    public PsiElement createPsiFromNode(@NotNull ASTNode node) {
+    @Override
+    public PsiElement createElement(ASTNode node) {
         return new CPsiSharpIncludeImpl(node);
     }
 

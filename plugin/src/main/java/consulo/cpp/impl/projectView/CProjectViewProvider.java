@@ -25,8 +25,8 @@ import consulo.project.ui.view.tree.AbstractTreeNode;
 import consulo.project.ui.view.tree.SelectableTreeStructureProvider;
 import consulo.project.ui.view.tree.ViewSettings;
 import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.lang.psi.CPsiClass;
-import org.napile.cpp4idea.lang.psi.CPsiFile;
+import consulo.cpp.lang.psi.CPsiClass;
+import consulo.cpp.lang.psi.CPsiFile;
 
 import java.util.ArrayList;
 import java.util.Collection;

@@ -27,14 +27,19 @@ FILE
         PsiElement(FOR_KEYWORD)('for')
         PsiWhiteSpace(' ')
         PsiElement(LPARENTH)('(')
-        PsiElement(INT_KEYWORD)('int')
-        PsiWhiteSpace(' ')
-        PsiElement(IDENTIFIER)('i')
-        PsiWhiteSpace(' ')
-        PsiElement(EQ)('=')
-        PsiWhiteSpace(' ')
-        PsiElement(INTEGER_LITERAL)('0')
-        PsiElement(SEMICOLON)(';')
+        CPsiLocalVariableImpl: int i = 0;
+          CPsiModifierListImpl: 
+            <empty list>
+          CPsiTypeRefImpl: int
+            PsiElement(INT_KEYWORD)('int')
+          PsiWhiteSpace(' ')
+          PsiElement(IDENTIFIER)('i')
+          PsiWhiteSpace(' ')
+          PsiElement(EQ)('=')
+          PsiWhiteSpace(' ')
+          CPsiLiteralExpressionImpl: 0
+            PsiElement(INTEGER_LITERAL)('0')
+          PsiElement(SEMICOLON)(';')
         PsiWhiteSpace(' ')
         CPsiBinaryExpressionImpl: i < 10
           CPsiReferenceExpressionImpl: i

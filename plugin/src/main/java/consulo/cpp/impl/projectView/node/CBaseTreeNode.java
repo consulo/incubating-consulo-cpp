@@ -26,7 +26,7 @@ import consulo.project.ui.view.tree.ViewSettings;
 import consulo.ui.ex.tree.PresentationData;
 import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.psi.CPsiDeclaration;
+import consulo.cpp.lang.psi.CPsiDeclaration;
 
 import java.util.Collection;
 import java.util.Collections;

@@ -17,7 +17,7 @@
 package consulo.cpp.impl.projectView.node;
 
 import consulo.project.ui.view.tree.ViewSettings;
-import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
+import consulo.cpp.lang.psi.CPsiDeclarationMethod;
 import consulo.project.Project;
 
 /**

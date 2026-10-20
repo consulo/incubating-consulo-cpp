@@ -1,0 +1,22 @@
+CPreprocessorFile:NestedMacro.c
+  CPreprocessorDefineDirectiveImpl: #define BASE int
+    PsiElement(S_DEFINE_KEYWORD)('#define')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('BASE')
+    PsiWhiteSpace(' ')
+    CPsiSharpDefineValueImpl: int
+      PsiElement(IDENTIFIER)('int')
+  PsiElement(NEW_LINE)('\n')
+  CPreprocessorDefineDirectiveImpl: #define ALIAS BASE
+    PsiElement(S_DEFINE_KEYWORD)('#define')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('ALIAS')
+    PsiWhiteSpace(' ')
+    CPsiSharpDefineValueImpl: BASE
+      PsiElement(IDENTIFIER)('BASE')
+  PsiElement(NEW_LINE)('\n')
+  PsiElement(IDENTIFIER)('ALIAS')
+  PsiWhiteSpace(' ')
+  PsiElement(IDENTIFIER)('value')
+  PsiElement(SEMICOLON)(';')
+  PsiElement(NEW_LINE)('\n')

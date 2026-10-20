@@ -1,5 +1,7 @@
 package consulo.cpp.lang.psi.impl;
 
+import consulo.cpp.lang.version.CLanguageVersion;
+import consulo.cpp.lang.version.CLanguageVersions;
 import consulo.cpp.moduleAware.CDefineEnv;
 import consulo.cpp.preprocessor.CPreprocessorLanguage;
 import consulo.cpp.preprocessor.expand.CPreprocessorDirectiveCollector;
@@ -17,20 +19,23 @@ import consulo.language.impl.ast.TreeElement;
 import consulo.language.impl.file.SingleRootFileViewProvider;
 import consulo.language.impl.psi.PsiFileImpl;
 import consulo.language.impl.psi.template.TemplateDataElementType;
-import consulo.language.parser.ParserDefinition;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiFile;
 import consulo.language.psi.PsiManager;
 import consulo.language.psi.stub.IStubFileElementType;
 import consulo.language.psi.stub.PsiFileStub;
+import consulo.language.psi.stub.PsiFileStubImpl;
+import consulo.language.psi.stub.StubBuilder;
+import consulo.language.psi.stub.StubElement;
 import consulo.language.util.CharTable;
+import consulo.language.version.LanguageVersion;
 import consulo.localize.LocalizeValue;
 import consulo.ui.image.Image;
 import consulo.util.lang.LocalTimeCounter;
 import org.jetbrains.annotations.NonNls;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.CLanguage;
+import consulo.cpp.lang.CLanguage;
 
 /**
  * @author VISTALL
@@ -44,6 +49,26 @@ public class CFileElementType extends IStubFileElementType<PsiFileStub<PsiFile>>
         super(CLanguage.INSTANCE);
     }
 
+    /**
+     * The C tree has no stubs of its own - only the file's - so building them needs no parse. The default builder parses
+     * the file to walk a tree without stub elements, and that parse expands every macro and follows every include:
+     * indexing the thousands of headers of a system include directory would do all of it for nothing.
+     */
+    @Override
+    public StubBuilder getBuilder() {
+        return new StubBuilder() {
+            @Override
+            public StubElement buildStubTree(PsiFile file) {
+                return new PsiFileStubImpl<>(file);
+            }
+
+            @Override
+            public boolean skipChildProcessingWhenBuildingStubs(ASTNode parent, ASTNode node) {
+                return true;
+            }
+        };
+    }
+
     @Override
     protected ASTNode doParseContents(@NotNull ASTNode chameleon, @NotNull PsiElement psi) {
         final CharTable charTable = SharedImplUtil.findCharTableByTree(chameleon);
@@ -52,10 +77,10 @@ public class CFileElementType extends IStubFileElementType<PsiFileStub<PsiFile>>
 
         PsiFile preprocessorFile = viewProvider.getPsi(CPreprocessorLanguage.INSTANCE);
 
-        ParserDefinition parserDefinition = ParserDefinition.forLanguage(CLanguage.INSTANCE);
+        CLanguageVersion languageVersion = CLanguageVersions.of(psi);
 
         PreprocessorExpander expander =
-            new PreprocessorExpander(preprocessorFile, parserDefinition, CDefineEnv.includeRootsFor(psi), CDefineEnv.seedFor(psi));
+            new PreprocessorExpander(preprocessorFile, languageVersion, CDefineEnv.includeRootsFor(psi), CDefineEnv.seedFor(psi));
 
         CharSequence sourceCode = chameleon.getChars();
 
@@ -63,12 +88,10 @@ public class CFileElementType extends IStubFileElementType<PsiFileStub<PsiFile>>
 
         CPreprocessorDirectiveCollector collector = expander.getRangeCollector();
 
-        final PsiFile templatePsiFile = createPsiFileFromSource(CLanguage.INSTANCE, onlyCSourceCode, psi.getManager(), expander);
+        final PsiFile templatePsiFile = createPsiFileFromSource(CLanguage.INSTANCE, languageVersion, onlyCSourceCode, psi.getManager(), expander);
         final FileElement templateFileElement = ((PsiFileImpl) templatePsiFile).calcTreeElement();
 
         return DebugUtil.performPsiModification("template language parsing", () -> {
-            expander.insertDummyNodes(templateFileElement);
-
             collector.insertOuterElementsAndRemoveRanges(templateFileElement, sourceCode, charTable, templateFileElement.getPsi().getLanguage());
 
             TreeElement childNode = templateFileElement.getFirstChildNode();
@@ -80,8 +103,14 @@ public class CFileElementType extends IStubFileElementType<PsiFileStub<PsiFile>>
         });
     }
 
-    protected PsiFile createPsiFileFromSource(final Language language, CharSequence sourceCode, PsiManager manager, PreprocessorExpander expander) {
+    protected PsiFile createPsiFileFromSource(final Language language,
+                                              CLanguageVersion languageVersion,
+                                              CharSequence sourceCode,
+                                              PsiManager manager,
+                                              PreprocessorExpander expander) {
         LightVirtualFile virtualFile = new LightVirtualFile("foo", createTemplateFakeFileType(language), sourceCode, LocalTimeCounter.currentTime());
+        // the directive-free text is parsed with the version of the real file, not resolved again for the light one
+        virtualFile.putUserData(LanguageVersion.KEY, languageVersion);
 
         FileViewProvider viewProvider = new SingleRootFileViewProvider(manager, virtualFile, false) {
             @Override

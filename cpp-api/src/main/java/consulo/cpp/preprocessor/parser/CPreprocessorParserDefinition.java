@@ -2,28 +2,16 @@ package consulo.cpp.preprocessor.parser;
 
 import consulo.annotation.component.ExtensionImpl;
 import consulo.cpp.preprocessor.CPreprocessorLanguage;
-import consulo.cpp.preprocessor.lexer._CPreprocessorLexer;
-import consulo.cpp.preprocessor.psi.CPreprocessorDefineStubElementType;
-import consulo.cpp.preprocessor.psi.CPreprocessorElementType;
 import consulo.cpp.preprocessor.psi.CPreprocessorFileElementType;
-import consulo.cpp.preprocessor.psi.CPreprocessorIncludeStubElementType;
-import consulo.cpp.preprocessor.psi.CPreprocessorUndefStubElementType;
-import consulo.cpp.preprocessor.psi.CPreprocessorIfBodyStubElementType;
-import consulo.cpp.preprocessor.psi.CPreprocessorIfBlockStubElementType;
 import consulo.cpp.preprocessor.psi.impl.CPreprocessorFileImpl;
 import consulo.language.Language;
 import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementTypeAsPsiFactory;
 import consulo.language.ast.IFileElementType;
-import consulo.language.ast.TokenSet;
-import consulo.language.ast.TokenType;
 import consulo.language.file.FileViewProvider;
-import consulo.language.lexer.FlexAdapter;
-import consulo.language.lexer.Lexer;
-import consulo.language.parser.ParserDefinition;
-import consulo.language.parser.PsiParser;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiFile;
-import consulo.language.version.LanguageVersion;
+import consulo.language.version.LanguageVersionableParserDefinition;
 import jakarta.annotation.Nonnull;
 
 /**
@@ -31,7 +19,7 @@ import jakarta.annotation.Nonnull;
  * @since 20:35/2020-07-25
  */
 @ExtensionImpl
-public class CPreprocessorParserDefinition implements ParserDefinition {
+public class CPreprocessorParserDefinition extends LanguageVersionableParserDefinition {
     public static final IFileElementType FILE_TYPE = CPreprocessorFileElementType.INSTANCE;
 
     @Nonnull
@@ -42,63 +30,16 @@ public class CPreprocessorParserDefinition implements ParserDefinition {
 
     @Nonnull
     @Override
-    public Lexer createLexer(@Nonnull LanguageVersion languageVersion) {
-        return new FlexAdapter(new _CPreprocessorLexer());
-    }
-
-    @Nonnull
-    @Override
-    public PsiParser createParser(@Nonnull LanguageVersion languageVersion) {
-        return new CPreprocessorParser();
-    }
-
-    @Nonnull
-    @Override
     public IFileElementType getFileNodeType() {
         return FILE_TYPE;
     }
 
     @Nonnull
     @Override
-    public TokenSet getWhitespaceTokens(@Nonnull LanguageVersion languageVersion) {
-        return TokenSet.create(TokenType.WHITE_SPACE);
-        // TODO [VISTALL]  remove NEW_LINE?
-        //return TokenSet.create(TokenType.WHITE_SPACE, CPsiTokens.NEW_LINE);
-    }
-
-    @Nonnull
-    @Override
-    public TokenSet getCommentTokens(@Nonnull LanguageVersion languageVersion) {
-        return TokenSet.EMPTY;
-    }
-
-    @Nonnull
-    @Override
-    public TokenSet getStringLiteralElements(@Nonnull LanguageVersion languageVersion) {
-        return TokenSet.EMPTY;
-    }
-
-    @Nonnull
-    @Override
     public PsiElement createElement(ASTNode node) {
-        if (node.getElementType() instanceof CPreprocessorElementType) {
-            return ((CPreprocessorElementType) node.getElementType()).createPsi(node);
-        }
-        // Stub-backed element types delegate AST→PSI creation via createPsiFromNode()
-        if (node.getElementType() == CPreprocessorDefineStubElementType.INSTANCE) {
-            return CPreprocessorDefineStubElementType.INSTANCE.createPsiFromNode(node);
-        }
-        if (node.getElementType() == CPreprocessorIncludeStubElementType.INSTANCE) {
-            return CPreprocessorIncludeStubElementType.INSTANCE.createPsiFromNode(node);
-        }
-        if (node.getElementType() == CPreprocessorUndefStubElementType.INSTANCE) {
-            return CPreprocessorUndefStubElementType.INSTANCE.createPsiFromNode(node);
-        }
-        if (node.getElementType() == CPreprocessorIfBlockStubElementType.INSTANCE) {
-            return CPreprocessorIfBlockStubElementType.INSTANCE.createPsiFromNode(node);
-        }
-        if (node.getElementType() == CPreprocessorIfBodyStubElementType.INSTANCE) {
-            return CPreprocessorIfBodyStubElementType.INSTANCE.createPsiFromNode(node);
+        // element types build their own PSI, which is what lets a dialect plugin add nodes of its own
+        if (node.getElementType() instanceof IElementTypeAsPsiFactory factory) {
+            return factory.createElement(node);
         }
 
         throw new IllegalArgumentException("Illegal argument : " + node.getElementType());

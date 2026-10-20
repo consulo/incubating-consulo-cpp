@@ -207,4 +207,68 @@ public class CParsingTest extends CParsingBaseTest {
     public void testShortFloatDouble(Context context) throws Exception {
         doTest(context, null);
     }
+
+    /**
+     * Typedefs of a builtin type, a struct tag, an anonymous enum and an anonymous struct; the names then used as types
+     */
+    @Test
+    public void testTypedefs(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * Several declarators per declaration, arrays, pointers, qualifiers, variadic and {@code (void)} parameters, bit-fields
+     */
+    @Test
+    public void testDeclarators(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * Function pointer parameters, variables, typedefs and arrays
+     */
+    @Test
+    public void testFunctionPointers(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * Casts to pointer, builtin and typedef types, a parenthesised operand that is no cast, a compound literal
+     */
+    @Test
+    public void testCasts(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * Designated, indexed and nested initializers
+     */
+    @Test
+    public void testInitializers(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * Comparison, shift, compound assignment, logical and sizeof operators
+     */
+    @Test
+    public void testOperators(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * for with a declaration, do/while, a case range, goto and a label
+     */
+    @Test
+    public void testStatements(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * Adjacent string literals, string macros whose definition is not visible, prefixed literals
+     */
+    @Test
+    public void testStrings(Context context) throws Exception {
+        doTest(context, null);
+    }
 }

@@ -28,7 +28,7 @@ import consulo.language.psi.PsiElementVisitor;
 import consulo.language.psi.stub.IStubElementType;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.lang.psi.CPsiTokens;
+import consulo.cpp.lang.psi.CPsiTokens;
 
 /**
  * @author VISTALL

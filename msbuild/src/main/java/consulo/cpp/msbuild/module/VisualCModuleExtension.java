@@ -17,7 +17,7 @@ package consulo.cpp.msbuild.module;
 
 import consulo.annotation.access.RequiredReadAction;
 import consulo.cpp.module.extension.CCompileSettings;
-import consulo.cpp.module.extension.CLanguageStandard;
+import consulo.cpp.lang.version.CLanguageVersion;
 import consulo.cpp.module.extension.CModuleExtension;
 import consulo.cpp.msbuild.VisualCProjectModel;
 import consulo.module.content.layer.ModuleRootLayer;
@@ -87,12 +87,12 @@ public class VisualCModuleExtension extends MSBuildModuleExtensionBase<VisualCMo
     }
 
     @Override
-    public CLanguageStandard getCStandard() {
+    public @Nullable CLanguageVersion getCStandard() {
         return myCompileSettings.getCStandard();
     }
 
     @Override
-    public CLanguageStandard getCppStandard() {
+    public @Nullable CLanguageVersion getCppStandard() {
         return myCompileSettings.getCppStandard();
     }
 

@@ -1,0 +1,22 @@
+FILE
+  PsiElement(OUTER)('#define EXPORT')
+  PsiWhiteSpace('\n')
+  CPsiDeclarationMethodImpl: EXPORT int foo(void);
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: EXPORT int
+      CPreprocessorMacroInvocation(EXPORT)('EXPORT')
+      PsiWhiteSpace(' ')
+      PsiElement(INT_KEYWORD)('int')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('foo')
+    CPsiParameterListImpl: (void)
+      PsiElement(LPARENTH)('(')
+      CPsiParameterImpl: void
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: void
+          PsiElement(VOID_KEYWORD)('void')
+      PsiElement(RPARENTH)(')')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')

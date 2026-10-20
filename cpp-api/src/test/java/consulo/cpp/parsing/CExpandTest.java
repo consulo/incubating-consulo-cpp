@@ -92,4 +92,61 @@ public class CExpandTest extends CParsingBaseTest {
     public void testSystemIncludeNotFound(Context context) throws Exception {
         doTest(context, null);
     }
+
+    /**
+     * A function-like macro called with arguments
+     */
+    @Test
+    public void testFunctionLikeMacro(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * A macro expanding to nothing in front of a declaration
+     */
+    @Test
+    public void testEmptyMacro(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * {@code #define UINT unsigned int} - a body of several tokens
+     */
+    @Test
+    public void testMultiTokenMacro(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * glibc's {@code FD_ZERO}: a function-like macro continued over several lines - tabs before each backslash -
+     * expanding to {@code do { ... } while (0)} through another function-like macro
+     */
+    @Test
+    public void testMultiLineMacro(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * Directives written with blanks after the {@code #} - {@code # define} - as system headers nest them
+     */
+    @Test
+    public void testSpacedDirectives(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * A macro expanding to another macro
+     */
+    @Test
+    public void testNestedMacro(Context context) throws Exception {
+        doTest(context, null);
+    }
+
+    /**
+     * {@code #} and {@code ##} in function-like macros
+     */
+    @Test
+    public void testStringizeAndPaste(Context context) throws Exception {
+        doTest(context, null);
+    }
 }

@@ -6,7 +6,7 @@ import consulo.colorScheme.EditorColorSchemeExtender;
 import consulo.colorScheme.EditorColorsScheme;
 import consulo.ui.color.RGBColor;
 import jakarta.annotation.Nonnull;
-import org.napile.cpp4idea.ide.highlight.CSyntaxHighlighter;
+import consulo.cpp.lang.editor.highlight.CSyntaxHighlighter;
 
 /**
  * @author VISTALL

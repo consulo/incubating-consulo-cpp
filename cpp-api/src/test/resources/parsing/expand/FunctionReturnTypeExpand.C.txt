@@ -5,8 +5,7 @@ FILE
     CPsiModifierListImpl: 
       <empty list>
     CPsiTypeRefImpl: VOID
-      CPreprocessorMacroReferenceImpl(CPreprocessorMacroReference)
-        PsiElement(IDENTIFIER)('VOID')
+      CPreprocessorMacroInvocation(VOID)('VOID')
       ForeignLeaf(VOID_KEYWORD: void)('void')
     PsiWhiteSpace(' ')
     PsiElement(IDENTIFIER)('foo')

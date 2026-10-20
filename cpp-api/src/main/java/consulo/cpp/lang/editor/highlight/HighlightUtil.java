@@ -18,13 +18,13 @@ package consulo.cpp.lang.editor.highlight;
 
 import consulo.colorScheme.TextAttributesKey;
 import consulo.cpp.preprocessor.psi.CPreprocessorDefineDirective;
+import consulo.document.util.TextRange;
 import consulo.language.editor.rawHighlight.HighlightInfo;
 import consulo.language.editor.rawHighlight.HighlightInfoHolder;
 import consulo.language.editor.rawHighlight.HighlightInfoType;
 import consulo.language.psi.PsiElement;
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.ide.highlight.CSyntaxHighlighter;
-import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
+import consulo.cpp.lang.psi.CPsiEnumConstant;
 
 /**
  * @author VISTALL
@@ -37,6 +37,13 @@ public class HighlightUtil
 		TextAttributesKey key = getKey(target);
 
 		holder.add(HighlightInfo.newHighlightInfo(HighlightInfoType.INFORMATION).textAttributes(key).range(nameElement).create());
+	}
+
+	public static void highlight(@NotNull PsiElement target, @NotNull TextRange nameRange, @NotNull HighlightInfoHolder holder)
+	{
+		TextAttributesKey key = getKey(target);
+
+		holder.add(HighlightInfo.newHighlightInfo(HighlightInfoType.INFORMATION).textAttributes(key).range(nameRange).create());
 	}
 
 	private static TextAttributesKey getKey(PsiElement target)

@@ -20,6 +20,4 @@ FILE
         PsiElement(RPARENTH)(')')
       PsiElement(SEMICOLON)(';')
     PsiWhiteSpace('\n')
-    CPsiModifierListImpl: 
-      <empty list>
     PsiElement(RBRACE)('}')

@@ -20,6 +20,8 @@ FILE
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
       CPsiLocalVariableImpl: int result = add(3, 4);
+        CPsiModifierListImpl: 
+          <empty list>
         CPsiTypeRefImpl: int
           PsiElement(INT_KEYWORD)('int')
         PsiWhiteSpace(' ')
@@ -42,6 +44,8 @@ FILE
         PsiElement(SEMICOLON)(';')
       PsiWhiteSpace('\n    ')
       CPsiLocalVariableImpl: char buf[256];
+        CPsiModifierListImpl: 
+          <empty list>
         CPsiTypeRefImpl: char
           PsiElement(CHAR_KEYWORD)('char')
         PsiWhiteSpace(' ')

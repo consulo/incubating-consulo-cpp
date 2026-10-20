@@ -4,9 +4,9 @@ import consulo.language.file.FileViewProvider;
 import consulo.language.impl.psi.PsiFileBase;
 import consulo.virtualFileSystem.fileType.FileType;
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.CLanguage;
-import org.napile.cpp4idea.lang.psi.CPsiDeclaration;
-import org.napile.cpp4idea.lang.psi.CPsiFile;
+import consulo.cpp.lang.CLanguage;
+import consulo.cpp.lang.psi.CPsiDeclaration;
+import consulo.cpp.lang.psi.CPsiFile;
 
 /**
  * @author VISTALL

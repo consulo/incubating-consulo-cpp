@@ -19,9 +19,7 @@ FILE
 }
       PsiElement(LBRACE)('{')
       PsiWhiteSpace('\n    ')
-      CPsiExpressionStatementImpl: @
-        PsiErrorElement:Unexpected token
-          <empty list>
+      PsiErrorElement:[consulo.cpp.CLocalize@statement.expected]
         PsiElement(AT)('@')
       PsiWhiteSpace('\n    ')
       CPsiExpressionStatementImpl: x++;

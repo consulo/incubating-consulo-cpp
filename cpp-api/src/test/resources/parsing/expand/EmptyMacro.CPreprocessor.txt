@@ -1,0 +1,18 @@
+CPreprocessorFile:EmptyMacro.c
+  CPreprocessorDefineDirectiveImpl: #define EXPORT
+    PsiElement(S_DEFINE_KEYWORD)('#define')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('EXPORT')
+    CPsiSharpDefineValueImpl: 
+      <empty list>
+  PsiElement(NEW_LINE)('\n')
+  PsiElement(IDENTIFIER)('EXPORT')
+  PsiWhiteSpace(' ')
+  PsiElement(IDENTIFIER)('int')
+  PsiWhiteSpace(' ')
+  PsiElement(IDENTIFIER)('foo')
+  PsiElement(LPARENTH)('(')
+  PsiElement(IDENTIFIER)('void')
+  PsiElement(RPARENTH)(')')
+  PsiElement(SEMICOLON)(';')
+  PsiElement(NEW_LINE)('\n')

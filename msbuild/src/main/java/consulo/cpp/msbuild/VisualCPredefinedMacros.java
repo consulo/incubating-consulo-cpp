@@ -15,6 +15,7 @@
  */
 package consulo.cpp.msbuild;
 
+import consulo.cpp.lang.version.CLanguageVersion;
 import org.jspecify.annotations.Nullable;
 
 import java.util.Locale;
@@ -70,13 +71,15 @@ public final class VisualCPredefinedMacros {
 
         fillRuntimeLibrary(defines, settings.runtimeLibrary());
 
-        if (settings.hasCpp()) {
-            String standard = settings.cppStandard().getVersionMacroValue();
+        CLanguageVersion cppStandard = settings.cppStandard();
+        CLanguageVersion cStandard = settings.cStandard();
+        if (settings.hasCpp() && cppStandard != null) {
+            String standard = cppStandard.getVersionMacroValue();
             defines.putIfAbsent("_MSVC_LANG", standard);
             defines.putIfAbsent("__cplusplus", settings.conformingCplusplus() ? standard : LEGACY_CPLUSPLUS);
         }
-        else if (settings.hasC()) {
-            String standard = settings.cStandard().getVersionMacroValue();
+        else if (settings.hasC() && cStandard != null) {
+            String standard = cStandard.getVersionMacroValue();
             if (!standard.isEmpty()) {
                 defines.putIfAbsent("__STDC_VERSION__", standard);
             }

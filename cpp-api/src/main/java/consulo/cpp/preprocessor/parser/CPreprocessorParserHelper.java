@@ -19,7 +19,7 @@ package consulo.cpp.preprocessor.parser;
 import consulo.language.ast.IElementType;
 import consulo.language.parser.PsiBuilder;
 import consulo.localize.LocalizeValue;
-import org.napile.cpp4idea.lang.psi.CPsiTokens;
+import consulo.cpp.lang.psi.CPsiTokens;
 
 /**
  * @author VISTALL

@@ -1,0 +1,105 @@
+FILE
+  CPsiImplementingMethodImpl: void foo(void) {
+    puts("one " "two");
+    printf("version " VERSION "\n");
+    log_error("cannot open " MOUNTS_PATH);
+    const char* wide = L"wide";
+    char c = '\n';
+}
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: void
+      PsiElement(VOID_KEYWORD)('void')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('foo')
+    CPsiParameterListImpl: (void)
+      PsiElement(LPARENTH)('(')
+      CPsiParameterImpl: void
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: void
+          PsiElement(VOID_KEYWORD)('void')
+      PsiElement(RPARENTH)(')')
+    PsiWhiteSpace(' ')
+    CPsiCodeBlockImpl: {
+    puts("one " "two");
+    printf("version " VERSION "\n");
+    log_error("cannot open " MOUNTS_PATH);
+    const char* wide = L"wide";
+    char c = '\n';
+}
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n    ')
+      CPsiExpressionStatementImpl: puts("one " "two");
+        CPsiCallExpressionImpl: puts("one " "two")
+          CPsiReferenceExpressionImpl: puts
+            PsiElement(IDENTIFIER)('puts')
+          CPsiArgumentListImpl: ("one " "two")
+            PsiElement(LPARENTH)('(')
+            CPsiLiteralExpressionImpl: "one " "two"
+              PsiElement(STRING_LITERAL)('"one "')
+              PsiWhiteSpace(' ')
+              PsiElement(STRING_LITERAL)('"two"')
+            PsiElement(RPARENTH)(')')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiExpressionStatementImpl: printf("version " VERSION "\n");
+        CPsiCallExpressionImpl: printf("version " VERSION "\n")
+          CPsiReferenceExpressionImpl: printf
+            PsiElement(IDENTIFIER)('printf')
+          CPsiArgumentListImpl: ("version " VERSION "\n")
+            PsiElement(LPARENTH)('(')
+            CPsiLiteralExpressionImpl: "version " VERSION "\n"
+              PsiElement(STRING_LITERAL)('"version "')
+              PsiWhiteSpace(' ')
+              PsiElement(IDENTIFIER)('VERSION')
+              PsiWhiteSpace(' ')
+              PsiElement(STRING_LITERAL)('"\n"')
+            PsiElement(RPARENTH)(')')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiExpressionStatementImpl: log_error("cannot open " MOUNTS_PATH);
+        CPsiCallExpressionImpl: log_error("cannot open " MOUNTS_PATH)
+          CPsiReferenceExpressionImpl: log_error
+            PsiElement(IDENTIFIER)('log_error')
+          CPsiArgumentListImpl: ("cannot open " MOUNTS_PATH)
+            PsiElement(LPARENTH)('(')
+            CPsiLiteralExpressionImpl: "cannot open " MOUNTS_PATH
+              PsiElement(STRING_LITERAL)('"cannot open "')
+              PsiWhiteSpace(' ')
+              PsiElement(IDENTIFIER)('MOUNTS_PATH')
+            PsiElement(RPARENTH)(')')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiLocalVariableImpl: const char* wide = L"wide";
+        CPsiModifierListImpl: const
+          PsiElement(CONST_KEYWORD)('const')
+        PsiWhiteSpace(' ')
+        CPsiTypeRefImpl: char
+          PsiElement(CHAR_KEYWORD)('char')
+        PsiElement(ASTERISK)('*')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('wide')
+        PsiWhiteSpace(' ')
+        PsiElement(EQ)('=')
+        PsiWhiteSpace(' ')
+        CPsiLiteralExpressionImpl: L"wide"
+          PsiElement(STRING_LITERAL)('L"wide"')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n    ')
+      CPsiLocalVariableImpl: char c = '\n';
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: char
+          PsiElement(CHAR_KEYWORD)('char')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('c')
+        PsiWhiteSpace(' ')
+        PsiElement(EQ)('=')
+        PsiWhiteSpace(' ')
+        CPsiLiteralExpressionImpl: '\n'
+          PsiElement(CHARACTER_LITERAL)(''\n'')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')
+  PsiWhiteSpace('\n')

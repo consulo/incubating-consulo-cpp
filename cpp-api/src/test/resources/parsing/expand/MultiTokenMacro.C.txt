@@ -1,0 +1,14 @@
+FILE
+  PsiElement(OUTER)('#define UINT unsigned int')
+  PsiWhiteSpace('\n')
+  CPsiFieldImpl: UINT counter;
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: UINT
+      CPreprocessorMacroInvocation(UINT)('UINT')
+      ForeignLeaf(UNSIGNED_KEYWORD: unsigned)('unsigned')
+      ForeignLeaf(INT_KEYWORD: int)('int')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('counter')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')

@@ -28,7 +28,7 @@ public class CPreprocessorFileElementType extends IStubFileElementType<CPreproce
      * Bump this version whenever the stub serialization format changes so that
      * existing stubs on disk are invalidated and rebuilt.
      */
-    private static final int STUB_VERSION = 3;
+    private static final int STUB_VERSION = 6;
 
     private CPreprocessorFileElementType() {
         super("cpp.preprocessor.file", CPreprocessorLanguage.INSTANCE);

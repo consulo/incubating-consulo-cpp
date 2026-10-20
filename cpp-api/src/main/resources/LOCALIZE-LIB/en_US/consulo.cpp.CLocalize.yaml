@@ -56,3 +56,19 @@ line.comment:
   text: "Line Comment"
 block.comment:
   text: "Block Comment"
+type.expected:
+  text: "Type expected"
+declaration.expected:
+  text: "Declaration expected"
+statement.expected:
+  text: "Statement expected"
+unexpected.token:
+  text: "Unexpected token"
+while.expected:
+  text: "'while' expected"
+string.literal.expected:
+  text: "String literal expected"
+lt.expected:
+  text: "'<' expected"
+gt.expected:
+  text: "'>' expected"

@@ -2,198 +2,95 @@ package consulo.cpp.preprocessor.expand;
 
 import consulo.cpp.preprocessor.psi.CPreprocessorElementTypes;
 import consulo.language.ast.IElementType;
+import consulo.language.impl.ast.TokenWrapper;
 import consulo.language.parser.PsiBuilder;
 import consulo.language.parser.PsiBuilderAdapter;
-import consulo.localize.LocalizeValue;
-import consulo.util.lang.Pair;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.lang.psi.CPsiTokens;
-
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Deque;
-import java.util.List;
+import org.jspecify.annotations.Nullable;
 
 /**
+ * Presents the {@link CMacroExpandingLexer expanded} token stream to the C parser as plain tokens. An expanded token
+ * reads as the token it stands for; a macro invocation is not seen at all, and is consumed together with the first
+ * token after it - so it lands in the same node as the start of its expansion.
+ *
  * @author VISTALL
  * @since 21:20/2020-07-31
  */
 public class PreprocessorExpandPsiBuilder extends PsiBuilderAdapter {
-    private static class ExpandedMacroPosition {
-        public ExpandedMacro macro;
-
-        public int offset;
-
-        public int position;
-
-        public List<Pair<IElementType, String>> elements;
-    }
-
-    private static class AdvanceToken {
-        private ExpandedMacro myExpandedMacro;
-
-        private int myTokenIndex;
-
-        private int myTokenOffset;
-
-        private AdvanceToken(ExpandedMacro expandedMacro, int tokenIndex, int tokenOffset) {
-            myExpandedMacro = expandedMacro;
-            myTokenIndex = tokenIndex;
-            myTokenOffset = tokenOffset;
-        }
-    }
-
-    protected class ExpandMarker extends DelegateMarker {
-        private final List<AdvanceToken> myAdvancedTokens = new ArrayList<>();
-        private final int myStartOffset;
-
-        public ExpandMarker(@NotNull Marker delegate, int startOffset) {
-            super(delegate);
-            myStartOffset = startOffset;
-        }
-
-        public void advanceToken(AdvanceToken token) {
-            myAdvancedTokens.add(token);
-        }
-
-        @Override
-        public void drop() {
-            super.drop();
-
-            removeMarker(this, null);
-        }
-
-        @Override
-        public void rollbackTo() {
-            super.rollbackTo();
-        }
-
-        @Override
-        public void done(@NotNull IElementType type) {
-            super.done(type);
-
-            removeMarker(this, type);
-        }
-
-        @Override
-        public void doneBefore(@NotNull IElementType type, @NotNull Marker before) {
-            super.doneBefore(type, before);
-
-            removeMarker(this, type);
-        }
-
-        @Override
-        public void doneBefore(@NotNull IElementType type, @NotNull Marker before, @NotNull LocalizeValue errorMessage) {
-            super.doneBefore(type, before, errorMessage);
-
-            removeMarker(this, type);
-        }
-
-        @Override
-        public void collapse(@NotNull IElementType type) {
-            super.collapse(type);
-
-            removeMarker(this, type);
-        }
-    }
-
-    private final PreprocessorExpander myExpander;
-
-    private ExpandedMacroPosition myExpandedMacroPosition;
-
-    private final Deque<ExpandMarker> myMarkers = new ArrayDeque<>();
-
-    public PreprocessorExpandPsiBuilder(@NotNull PsiBuilder delegate, PreprocessorExpander expander) {
+    public PreprocessorExpandPsiBuilder(PsiBuilder delegate) {
         super(delegate);
-        myExpander = expander;
     }
 
     @Override
-    public
-    @Nullable
-    IElementType getTokenType() {
-        ExpandedMacroPosition position = lookForExpand();
-
-        if (position != null) {
-            return position.elements.get(position.position).getFirst();
+    public @Nullable IElementType getTokenType() {
+        IElementType type = super.getTokenType();
+        if (type != CPreprocessorElementTypes.MACRO_INVOCATION) {
+            return unwrap(type);
         }
-        return super.getTokenType();
+
+        IElementType next = lookAhead(0);
+        if (next == null) {
+            // nothing but macros expanding to nothing up to the end: they go to the node being finished
+            while (super.getTokenType() == CPreprocessorElementTypes.MACRO_INVOCATION) {
+                super.advanceLexer();
+            }
+        }
+        return next;
+    }
+
+    @Override
+    public @Nullable String getTokenText() {
+        int step = 0;
+        IElementType type;
+        while ((type = rawLookup(step)) != null && isSkipped(type)) {
+            step++;
+        }
+        if (type == null) {
+            return null;
+        }
+        if (type instanceof TokenWrapper wrapper) {
+            return wrapper.getValue().toString();
+        }
+        return getOriginalText().subSequence(rawTokenTypeStart(step), rawTokenTypeStart(step + 1)).toString();
+    }
+
+    @Override
+    public boolean eof() {
+        return getTokenType() == null;
     }
 
     @Override
     public void advanceLexer() {
-        ExpandedMacroPosition position = lookForExpand();
-
-        if (position != null) {
-            int tokenPosition = position.position++;
-
-            ExpandMarker last = myMarkers.peekLast();
-            if (last != null) {
-                last.advanceToken(new AdvanceToken(position.macro, tokenPosition, position.offset));
-            }
-
-            // macro finished
-            if (position.position == position.elements.size()) {
-                myExpandedMacroPosition = null;
-
-                Marker mark = super.mark();
-                super.advanceLexer(); // macro reference advance
-                mark.done(CPreprocessorElementTypes.MACRO_REFERENCE);
-            }
-        }
-        else {
+        while (super.getTokenType() == CPreprocessorElementTypes.MACRO_INVOCATION) {
             super.advanceLexer();
         }
+        super.advanceLexer();
     }
 
+    /**
+     * The token {@code steps} ahead, macro invocations not counted.
+     */
     @Override
-    public @NotNull Marker mark() {
-        ExpandMarker marker = new ExpandMarker(super.mark(), super.getCurrentOffset());
-        myMarkers.addLast(marker);
-        return marker;
-    }
-
-    private void removeMarker(ExpandMarker marker, @Nullable IElementType doneElementType) {
-        myMarkers.remove(marker);
-
-        if (marker.myAdvancedTokens.isEmpty()) {
-            return;
-        }
-
-        if (doneElementType != null) {
-            List<AdvanceToken> doneInfos = marker.myAdvancedTokens;
-            for (AdvanceToken advancedToken : doneInfos) {
-                ExpandedMacro macro = advancedToken.myExpandedMacro;
-
-                macro.addSymbolDoneInfo(new PreprocessorSymbolDoneInfo(advancedToken.myTokenOffset, advancedToken.myTokenIndex, new AstElementTypeId(marker.myStartOffset, doneElementType)));
+    public @Nullable IElementType lookAhead(int steps) {
+        int remaining = steps;
+        for (int step = 0; ; step++) {
+            IElementType type = super.lookAhead(step);
+            if (type == null) {
+                return null;
+            }
+            if (type == CPreprocessorElementTypes.MACRO_INVOCATION) {
+                continue;
+            }
+            if (remaining-- == 0) {
+                return unwrap(type);
             }
         }
     }
 
-    @Nullable
-    private ExpandedMacroPosition lookForExpand() {
-        ExpandedMacroPosition currentPosition = myExpandedMacroPosition;
-        if (currentPosition != null) {
-            return currentPosition;
-        }
+    private boolean isSkipped(IElementType type) {
+        return type == CPreprocessorElementTypes.MACRO_INVOCATION || isWhitespaceOrCommentType(type);
+    }
 
-        IElementType tokenType = super.getTokenType();
-
-        if (tokenType == CPsiTokens.IDENTIFIER) {
-            ExpandedMacro expandedMacro = myExpander.tryToExpand(super.getTokenText());
-
-            if (expandedMacro != null) {
-                ExpandedMacroPosition position = new ExpandedMacroPosition();
-                position.macro = expandedMacro;
-                position.offset = super.getCurrentOffset();
-
-                myExpandedMacroPosition = position;
-                myExpandedMacroPosition.elements = expandedMacro.getSymbols();
-                return position;
-            }
-        }
-
-        return null;
+    private static @Nullable IElementType unwrap(@Nullable IElementType type) {
+        return type instanceof TokenWrapper wrapper ? wrapper.getDelegate() : type;
     }
 }

@@ -20,6 +20,7 @@ import consulo.cpp.preprocessor.psi.impl.CPreprocessorIfBlockImpl;
 import consulo.cpp.preprocessor.psi.stub.CPreprocessorIfBlockStub;
 import consulo.cpp.preprocessor.psi.stub.impl.CPreprocessorIfBlockStubImpl;
 import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementTypeAsPsiFactory;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.stub.IStubElementType;
 import consulo.language.psi.stub.IndexSink;
@@ -31,7 +32,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 
 public class CPreprocessorIfBlockStubElementType
-        extends IStubElementType<CPreprocessorIfBlockStub, CPreprocessorIfBlock> {
+        extends IStubElementType<CPreprocessorIfBlockStub, CPreprocessorIfBlock>
+        implements IElementTypeAsPsiFactory {
 
     public static final CPreprocessorIfBlockStubElementType INSTANCE = new CPreprocessorIfBlockStubElementType();
 
@@ -39,7 +41,8 @@ public class CPreprocessorIfBlockStubElementType
         super(CPreprocessorIfBlock.class.getSimpleName(), CPreprocessorLanguage.INSTANCE);
     }
 
-    public PsiElement createPsiFromNode(@NotNull ASTNode node) {
+    @Override
+    public PsiElement createElement(ASTNode node) {
         return new CPreprocessorIfBlockImpl(node);
     }
 

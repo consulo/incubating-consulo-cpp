@@ -17,7 +17,7 @@
 package consulo.cpp.preprocessor.psi;
 
 import consulo.language.ast.IElementType;
-import org.napile.cpp4idea.lang.psi.CBaseElementType;
+import consulo.cpp.lang.psi.CBaseElementType;
 
 /**
  * @author VISTALL

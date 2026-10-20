@@ -1,0 +1,15 @@
+FILE
+  PsiElement(OUTER)('#define BASE int')
+  PsiElement(OUTER)('#define ALIAS BASE')
+  PsiWhiteSpace('\n')
+  PsiWhiteSpace('\n')
+  CPsiFieldImpl: ALIAS value;
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: ALIAS
+      CPreprocessorMacroInvocation(ALIAS)('ALIAS')
+      ForeignLeaf(INT_KEYWORD: int)('int')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('value')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')

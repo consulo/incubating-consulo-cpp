@@ -1,79 +1,93 @@
 package consulo.cpp.preprocessor.expand;
 
+import consulo.cpp.lang.psi.CPsiTokens;
+import consulo.cpp.lang.version.CLanguageVersion;
 import consulo.cpp.preprocessor.psi.CPreprocessorDefineDirective;
 import consulo.language.ast.IElementType;
-import consulo.language.ast.TokenType;
 import consulo.language.lexer.Lexer;
-import consulo.language.parser.ParserDefinition;
-import consulo.util.lang.Pair;
-import consulo.util.lang.StringUtil;
-import org.jetbrains.annotations.NotNull;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
+ * A macro in scope: its name, the parameters of a function-like one, and its replacement text, which is lexed into
+ * {@link #getBody() tokens} on first use. Whitespace and comments are no part of the body - only the tokens the
+ * parser will see.
+ *
  * @author VISTALL
  * @since 21:52/2020-07-31
  */
 public class ExpandedMacro {
-    private final List<Pair<IElementType, String>> mySymbols = new ArrayList<>();
-
-    private final ParserDefinition myParserDefinition;
-    private final CPreprocessorDefineDirective myElement;
+    private final CLanguageVersion myLanguageVersion;
+    private final String myName;
+    private final @Nullable List<String> myParameters;
+    private final @Nullable CPreprocessorDefineDirective myElement;
     private final CharSequence myText;
 
-    private boolean myExpanded;
+    private @Nullable List<CMacroToken> myBody;
 
-    private final List<PreprocessorSymbolDoneInfo> mySymbolDoneInfos = new ArrayList<>();
-
-    public ExpandedMacro(ParserDefinition parserDefinition, CPreprocessorDefineDirective element, CharSequence text) {
-        myParserDefinition = parserDefinition;
+    public ExpandedMacro(CLanguageVersion languageVersion,
+                         String name,
+                         @Nullable List<String> parameters,
+                         @Nullable CPreprocessorDefineDirective element,
+                         CharSequence text) {
+        myLanguageVersion = languageVersion;
+        myName = name;
+        myParameters = parameters;
         myElement = element;
         myText = text;
+    }
+
+    public String getName() {
+        return myName;
+    }
+
+    /**
+     * The parameters of a function-like macro, {@code null} for an object-like one.
+     */
+    public @Nullable List<String> getParameters() {
+        return myParameters;
+    }
+
+    public boolean isFunctionLike() {
+        return myParameters != null;
     }
 
     public CharSequence getText() {
         return myText;
     }
 
-    public CPreprocessorDefineDirective getElement() {
+    public @Nullable CPreprocessorDefineDirective getElement() {
         return myElement;
     }
 
-    public void addSymbolDoneInfo(@NotNull PreprocessorSymbolDoneInfo doneInfo) {
-        mySymbolDoneInfos.add(doneInfo);
-    }
-
-    public List<PreprocessorSymbolDoneInfo> getSymbolDoneInfos() {
-        return mySymbolDoneInfos;
-    }
-
-    public void expand() {
-        if (myExpanded) {
-            return;
+    public List<CMacroToken> getBody() {
+        List<CMacroToken> body = myBody;
+        if (body == null) {
+            myBody = body = Collections.unmodifiableList(lex(myLanguageVersion, myText));
         }
+        return body;
+    }
 
-        myExpanded = true;
+    /**
+     * The significant tokens of {@code text}: no whitespace, no comments, no line continuations.
+     */
+    public static List<CMacroToken> lex(CLanguageVersion languageVersion, CharSequence text) {
+        List<CMacroToken> tokens = new ArrayList<>();
+        Lexer lexer = languageVersion.createLexer();
+        lexer.start(text);
 
-        if (!StringUtil.isEmpty(myText)) {
-            Lexer lexer = myParserDefinition.createLexer(null);
-            lexer.start(myText);
-
-            IElementType type;
-            while ((type = lexer.getTokenType()) != null) {
-                mySymbols.add(Pair.create(type, lexer.getTokenText()));
-
-                lexer.advance();
+        IElementType type;
+        while ((type = lexer.getTokenType()) != null) {
+            if (!languageVersion.getWhitespaceTokens().contains(type)
+                && !languageVersion.getCommentTokens().contains(type)
+                && type != CPsiTokens.NEXT_LINE) {
+                tokens.add(new CMacroToken(type, lexer.getTokenText()));
             }
+            lexer.advance();
         }
-
-        if (mySymbols.isEmpty()) {
-            mySymbols.add(Pair.create(TokenType.WHITE_SPACE, ""));
-        }
-    }
-
-    public List<Pair<IElementType, String>> getSymbols() {
-        return mySymbols;
+        return tokens;
     }
 }

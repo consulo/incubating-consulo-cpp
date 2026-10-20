@@ -16,9 +16,11 @@
 package consulo.cpp.module.extension;
 
 import consulo.annotation.access.RequiredReadAction;
+import consulo.cpp.lang.version.CLanguageVersion;
 import consulo.module.content.layer.ModuleRootLayer;
 import consulo.module.content.layer.extension.ModuleExtensionBase;
 import org.jdom.Element;
+import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
@@ -47,12 +49,12 @@ public class CDefaultModuleExtension extends ModuleExtensionBase<CDefaultModuleE
     }
 
     @Override
-    public CLanguageStandard getCStandard() {
+    public @Nullable CLanguageVersion getCStandard() {
         return myCompileSettings.getCStandard();
     }
 
     @Override
-    public CLanguageStandard getCppStandard() {
+    public @Nullable CLanguageVersion getCppStandard() {
         return myCompileSettings.getCppStandard();
     }
 

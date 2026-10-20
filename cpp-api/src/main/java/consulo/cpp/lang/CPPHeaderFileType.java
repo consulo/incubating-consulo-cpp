@@ -5,7 +5,6 @@ import consulo.language.file.LanguageFileType;
 import consulo.localize.LocalizeValue;
 import consulo.ui.image.Image;
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.CLanguage;
 
 import jakarta.annotation.Nonnull;
 

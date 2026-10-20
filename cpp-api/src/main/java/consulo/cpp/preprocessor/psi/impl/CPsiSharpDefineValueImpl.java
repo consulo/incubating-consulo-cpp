@@ -21,7 +21,7 @@ import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorElementVisitor;
 import consulo.language.ast.ASTNode;
 import consulo.language.psi.PsiElementVisitor;
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.psi.impl.CPsiElementBaseImpl;
+import consulo.cpp.lang.psi.impl.CPsiElementBaseImpl;
 
 /**
  * @author VISTALL

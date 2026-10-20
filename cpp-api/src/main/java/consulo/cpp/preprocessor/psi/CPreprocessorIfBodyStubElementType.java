@@ -20,6 +20,7 @@ import consulo.cpp.preprocessor.psi.impl.CPsiSharpIfBodyImpl;
 import consulo.cpp.preprocessor.psi.stub.CPreprocessorIfBodyStub;
 import consulo.cpp.preprocessor.psi.stub.impl.CPreprocessorIfBodyStubImpl;
 import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementTypeAsPsiFactory;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.stub.IStubElementType;
 import consulo.language.psi.stub.IndexSink;
@@ -31,7 +32,8 @@ import org.jetbrains.annotations.NotNull;
 import java.io.IOException;
 
 public class CPreprocessorIfBodyStubElementType
-        extends IStubElementType<CPreprocessorIfBodyStub, CPsiSharpIfBody> {
+        extends IStubElementType<CPreprocessorIfBodyStub, CPsiSharpIfBody>
+        implements IElementTypeAsPsiFactory {
 
     public static final CPreprocessorIfBodyStubElementType INSTANCE = new CPreprocessorIfBodyStubElementType();
 
@@ -39,7 +41,8 @@ public class CPreprocessorIfBodyStubElementType
         super(CPsiSharpIfBody.class.getSimpleName(), CPreprocessorLanguage.INSTANCE);
     }
 
-    public PsiElement createPsiFromNode(@NotNull ASTNode node) {
+    @Override
+    public PsiElement createElement(ASTNode node) {
         return new CPsiSharpIfBodyImpl(node);
     }
 

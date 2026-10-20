@@ -11,6 +11,8 @@ FILE
     CPsiParameterListImpl: (int a, int b)
       PsiElement(LPARENTH)('(')
       CPsiParameterImpl: int a
+        CPsiModifierListImpl: 
+          <empty list>
         CPsiTypeRefImpl: int
           PsiElement(INT_KEYWORD)('int')
         PsiWhiteSpace(' ')
@@ -18,6 +20,8 @@ FILE
       PsiElement(COMMA)(',')
       PsiWhiteSpace(' ')
       CPsiParameterImpl: int b
+        CPsiModifierListImpl: 
+          <empty list>
         CPsiTypeRefImpl: int
           PsiElement(INT_KEYWORD)('int')
         PsiWhiteSpace(' ')

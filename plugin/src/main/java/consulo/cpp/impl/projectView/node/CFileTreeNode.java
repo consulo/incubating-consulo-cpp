@@ -22,7 +22,7 @@ import consulo.project.ui.view.tree.PsiFileNode;
 import consulo.project.ui.view.tree.AbstractTreeNode;
 import consulo.project.Project;
 import consulo.cpp.impl.projectView.CProjectViewUtil;
-import org.napile.cpp4idea.lang.psi.CPsiFile;
+import consulo.cpp.lang.psi.CPsiFile;
 
 import java.util.ArrayList;
 import java.util.Collection;

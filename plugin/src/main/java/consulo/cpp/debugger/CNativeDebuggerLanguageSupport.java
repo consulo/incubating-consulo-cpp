@@ -8,7 +8,7 @@ import consulo.language.psi.PsiFileFactory;
 import consulo.nativeDev.debugger.NativeDebuggerLanguageSupport;
 import consulo.project.Project;
 import jakarta.annotation.Nullable;
-import org.napile.cpp4idea.CLanguage;
+import consulo.cpp.lang.CLanguage;
 
 /**
  * @author VISTALL

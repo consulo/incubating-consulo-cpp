@@ -17,11 +17,12 @@ package consulo.cpp.cmake.module;
 
 import consulo.annotation.access.RequiredReadAction;
 import consulo.cpp.module.extension.CCompileSettings;
-import consulo.cpp.module.extension.CLanguageStandard;
+import consulo.cpp.lang.version.CLanguageVersion;
 import consulo.cpp.module.extension.CModuleExtension;
 import consulo.module.content.layer.ModuleRootLayer;
 import consulo.module.content.layer.extension.ModuleExtensionBase;
 import org.jdom.Element;
+import org.jspecify.annotations.Nullable;
 
 import java.util.List;
 import java.util.Map;
@@ -50,12 +51,12 @@ public class CMakeCModuleExtension extends ModuleExtensionBase<CMakeCModuleExten
     }
 
     @Override
-    public CLanguageStandard getCStandard() {
+    public @Nullable CLanguageVersion getCStandard() {
         return myCompileSettings.getCStandard();
     }
 
     @Override
-    public CLanguageStandard getCppStandard() {
+    public @Nullable CLanguageVersion getCppStandard() {
         return myCompileSettings.getCppStandard();
     }
 

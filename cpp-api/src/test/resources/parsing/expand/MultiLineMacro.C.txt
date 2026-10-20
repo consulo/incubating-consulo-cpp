@@ -1,0 +1,142 @@
+FILE
+  PsiElement(OUTER)('#define __FD_ZERO(s) \\n  do {\t\t\t\t\t\t\t\t\t      \\n    unsigned int __i;\t\t\t\t\t\t\t      \\n    fd_set *__arr = (s);\t\t\t\t\t\t      \\n    for (__i = 0; __i < sizeof (fd_set) / sizeof (__fd_mask); ++__i)\t      \\n      __FDS_BITS (__arr)[__i] = 0;\t\t\t\t\t      \\n  } while (0)')
+  PsiElement(OUTER)('#define\tFD_ZERO(fdsetp)\t\t__FD_ZERO (fdsetp)')
+  PsiWhiteSpace('\n')
+  PsiWhiteSpace('\n')
+  CPsiImplementingMethodImpl: void loop(void) {
+  while (1) {
+    FD_ZERO(&rfds);
+  }
+}
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: void
+      PsiElement(VOID_KEYWORD)('void')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('loop')
+    CPsiParameterListImpl: (void)
+      PsiElement(LPARENTH)('(')
+      CPsiParameterImpl: void
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: void
+          PsiElement(VOID_KEYWORD)('void')
+      PsiElement(RPARENTH)(')')
+    PsiWhiteSpace(' ')
+    CPsiCodeBlockImpl: {
+  while (1) {
+    FD_ZERO(&rfds);
+  }
+}
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n  ')
+      CPsiWhileStatementImpl: while (1) {
+    FD_ZERO(&rfds);
+  }
+        PsiElement(WHILE_KEYWORD)('while')
+        PsiWhiteSpace(' ')
+        PsiElement(LPARENTH)('(')
+        CPsiLiteralExpressionImpl: 1
+          PsiElement(INTEGER_LITERAL)('1')
+        PsiElement(RPARENTH)(')')
+        PsiWhiteSpace(' ')
+        CPsiCodeBlockImpl: {
+    FD_ZERO(&rfds);
+  }
+          PsiElement(LBRACE)('{')
+          PsiWhiteSpace('\n    ')
+          CPsiDoWhileStatementImpl: FD_ZERO(&rfds);
+            CPreprocessorMacroInvocation(FD_ZERO)('FD_ZERO(&rfds)')
+            ForeignLeaf(DO_KEYWORD: do)('do')
+            CPsiCodeBlockImpl: 
+              ForeignLeaf(LBRACE: {)('{')
+              CPsiLocalVariableImpl: 
+                CPsiModifierListImpl: 
+                  <empty list>
+                CPsiTypeRefImpl: 
+                  ForeignLeaf(UNSIGNED_KEYWORD: unsigned)('unsigned')
+                  ForeignLeaf(INT_KEYWORD: int)('int')
+                ForeignLeaf(IDENTIFIER: __i)('__i')
+                ForeignLeaf(SEMICOLON: ;)(';')
+              CPsiLocalVariableImpl: 
+                CPsiModifierListImpl: 
+                  <empty list>
+                CPsiTypeRefImpl: 
+                  ForeignLeaf(IDENTIFIER: fd_set)('fd_set')
+                ForeignLeaf(ASTERISK: *)('*')
+                ForeignLeaf(IDENTIFIER: __arr)('__arr')
+                ForeignLeaf(EQ: =)('=')
+                CPsiParenthesizedExpressionImpl: 
+                  ForeignLeaf(LPARENTH: ()('(')
+                  CPsiPrefixExpressionImpl: 
+                    ForeignLeaf(AND: &)('&')
+                    CPsiReferenceExpressionImpl: 
+                      ForeignLeaf(IDENTIFIER: rfds)('rfds')
+                  ForeignLeaf(RPARENTH: ))(')')
+                ForeignLeaf(SEMICOLON: ;)(';')
+              CPsiForStatementImpl: 
+                ForeignLeaf(FOR_KEYWORD: for)('for')
+                ForeignLeaf(LPARENTH: ()('(')
+                CPsiAssignmentExpressionImpl: 
+                  CPsiReferenceExpressionImpl: 
+                    ForeignLeaf(IDENTIFIER: __i)('__i')
+                  ForeignLeaf(EQ: =)('=')
+                  CPsiLiteralExpressionImpl: 
+                    ForeignLeaf(INTEGER_LITERAL: 0)('0')
+                ForeignLeaf(SEMICOLON: ;)(';')
+                CPsiBinaryExpressionImpl: 
+                  CPsiReferenceExpressionImpl: 
+                    ForeignLeaf(IDENTIFIER: __i)('__i')
+                  ForeignLeaf(LT: <)('<')
+                  CPsiBinaryExpressionImpl: 
+                    CPsiSizeofExpressionImpl: 
+                      ForeignLeaf(SIZEOF_KEYWORD: sizeof)('sizeof')
+                      ForeignLeaf(LPARENTH: ()('(')
+                      CPsiTypeRefImpl: 
+                        ForeignLeaf(IDENTIFIER: fd_set)('fd_set')
+                      ForeignLeaf(RPARENTH: ))(')')
+                    ForeignLeaf(DIV: /)('/')
+                    CPsiSizeofExpressionImpl: 
+                      ForeignLeaf(SIZEOF_KEYWORD: sizeof)('sizeof')
+                      CPsiParenthesizedExpressionImpl: 
+                        ForeignLeaf(LPARENTH: ()('(')
+                        CPsiReferenceExpressionImpl: 
+                          ForeignLeaf(IDENTIFIER: __fd_mask)('__fd_mask')
+                        ForeignLeaf(RPARENTH: ))(')')
+                ForeignLeaf(SEMICOLON: ;)(';')
+                CPsiPrefixExpressionImpl: 
+                  ForeignLeaf(PLUSPLUS: ++)('++')
+                  CPsiReferenceExpressionImpl: 
+                    ForeignLeaf(IDENTIFIER: __i)('__i')
+                ForeignLeaf(RPARENTH: ))(')')
+                CPsiExpressionStatementImpl: 
+                  CPsiAssignmentExpressionImpl: 
+                    CPsiIndexedPropertyAccessExpressionImpl: 
+                      CPsiCallExpressionImpl: 
+                        CPsiReferenceExpressionImpl: 
+                          ForeignLeaf(IDENTIFIER: __FDS_BITS)('__FDS_BITS')
+                        CPsiArgumentListImpl: 
+                          ForeignLeaf(LPARENTH: ()('(')
+                          CPsiReferenceExpressionImpl: 
+                            ForeignLeaf(IDENTIFIER: __arr)('__arr')
+                          ForeignLeaf(RPARENTH: ))(')')
+                      ForeignLeaf(LBRACKET: [)('[')
+                      CPsiReferenceExpressionImpl: 
+                        ForeignLeaf(IDENTIFIER: __i)('__i')
+                      ForeignLeaf(RBRACKET: ])(']')
+                    ForeignLeaf(EQ: =)('=')
+                    CPsiLiteralExpressionImpl: 
+                      ForeignLeaf(INTEGER_LITERAL: 0)('0')
+                  ForeignLeaf(SEMICOLON: ;)(';')
+              ForeignLeaf(RBRACE: })('}')
+            ForeignLeaf(WHILE_KEYWORD: while)('while')
+            ForeignLeaf(LPARENTH: ()('(')
+            CPsiLiteralExpressionImpl: 
+              ForeignLeaf(INTEGER_LITERAL: 0)('0')
+            ForeignLeaf(RPARENTH: ))(')')
+            PsiElement(SEMICOLON)(';')
+          PsiWhiteSpace('\n  ')
+          PsiElement(RBRACE)('}')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')
+  PsiWhiteSpace('\n')

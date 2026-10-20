@@ -4,7 +4,7 @@ package consulo.cpp.preprocessor.lexer;
 import consulo.cpp.preprocessor.psi.CPreprocessorTokenTypes;
 import consulo.language.ast.IElementType;
 import consulo.language.lexer.FlexLexer;
-import org.napile.cpp4idea.lang.psi.CPsiTokens;
+import consulo.cpp.lang.psi.CPsiTokens;
 
 @SuppressWarnings({"ALL"})
 %%
@@ -29,8 +29,14 @@ import org.napile.cpp4idea.lang.psi.CPsiTokens;
 %eof{  return;
 %eof}
 
+// right after #include, where <...> names a header rather than starting a comparison
+%state AFTER_INCLUDE
+
 WHITE_SPACE_CHAR=[\ \r\t\f]
 NEW_LINE_CHAR=[\n]
+
+// '#' may be followed by blanks before the directive name - '# define' - as system headers nest them
+DIRECTIVE_START="#"[\ \t]*
 
 IDENTIFIER=[:jletter:] [:jletterdigit:]*
 
@@ -73,7 +79,7 @@ HEX_SIGNIFICAND={HEX_INTEGER_LITERAL}|{HEX_INTEGER_LITERAL}.|0[Xx]{HEX_DIGITS}?.
 
 CHARACTER_LITERAL="'"([^\\\'\r\n]|{ESCAPE_SEQUENCE})*("'"|\\)?
 STRING_LITERAL=\"([^\\\"\r\n]|{ESCAPE_SEQUENCE})*(\"|\\)?
-STRING_INCLUDE_LITERAL=\<([^\\\<\r\n]|{ESCAPE_SEQUENCE})*(\>|\\)?
+STRING_INCLUDE_LITERAL=\<([^\\<>\r\n]|{ESCAPE_SEQUENCE})*\>?
 ESCAPE_SEQUENCE=\\[^\r\n]
 
 %%
@@ -87,16 +93,20 @@ ESCAPE_SEQUENCE=\\[^\r\n]
 <YYINITIAL> {CHARACTER_LITERAL} { return CPsiTokens.CHARACTER_LITERAL; }
 <YYINITIAL> {STRING_LITERAL} { return CPsiTokens.STRING_LITERAL; }
 
-<YYINITIAL> "#include" { return CPreprocessorTokenTypes.S_INCLUDE_KEYWORD; }
-<YYINITIAL> "#define" { return CPreprocessorTokenTypes.S_DEFINE_KEYWORD; }
-<YYINITIAL> "#ifndef" { return CPreprocessorTokenTypes.S_IFNDEF_KEYWORD; }
-<YYINITIAL> "#ifdef" { return CPreprocessorTokenTypes.S_IFDEF_KEYWORD; }
-<YYINITIAL> "#endif" { return CPreprocessorTokenTypes.S_ENDIF_KEYWORD; }
-<YYINITIAL> "#else" { return CPreprocessorTokenTypes.S_ELSE_KEYWORD; }
-<YYINITIAL> "#pragma" { return CPreprocessorTokenTypes.S_PRAGMA_KEYWORD; }
-<YYINITIAL> "#undef" { return CPreprocessorTokenTypes.S_UNDEF_KEYWORD; }
-<YYINITIAL> "#elif" { return CPreprocessorTokenTypes.S_ELIF_KEYWORD; }
-<YYINITIAL> "#if" { return CPreprocessorTokenTypes.S_IF_KEYWORD; }
+<YYINITIAL> {DIRECTIVE_START}"include" { yybegin(AFTER_INCLUDE); return CPreprocessorTokenTypes.S_INCLUDE_KEYWORD; }
+
+<AFTER_INCLUDE> {WHITE_SPACE_CHAR}+ { return CPsiTokens.WHITE_SPACE; }
+<AFTER_INCLUDE> {STRING_INCLUDE_LITERAL} { yybegin(YYINITIAL); return CPsiTokens.STRING_INCLUDE_LITERAL; }
+<AFTER_INCLUDE> [^] { yypushback(1); yybegin(YYINITIAL); }
+<YYINITIAL> {DIRECTIVE_START}"define" { return CPreprocessorTokenTypes.S_DEFINE_KEYWORD; }
+<YYINITIAL> {DIRECTIVE_START}"ifndef" { return CPreprocessorTokenTypes.S_IFNDEF_KEYWORD; }
+<YYINITIAL> {DIRECTIVE_START}"ifdef" { return CPreprocessorTokenTypes.S_IFDEF_KEYWORD; }
+<YYINITIAL> {DIRECTIVE_START}"endif" { return CPreprocessorTokenTypes.S_ENDIF_KEYWORD; }
+<YYINITIAL> {DIRECTIVE_START}"else" { return CPreprocessorTokenTypes.S_ELSE_KEYWORD; }
+<YYINITIAL> {DIRECTIVE_START}"pragma" { return CPreprocessorTokenTypes.S_PRAGMA_KEYWORD; }
+<YYINITIAL> {DIRECTIVE_START}"undef" { return CPreprocessorTokenTypes.S_UNDEF_KEYWORD; }
+<YYINITIAL> {DIRECTIVE_START}"elif" { return CPreprocessorTokenTypes.S_ELIF_KEYWORD; }
+<YYINITIAL> {DIRECTIVE_START}"if" { return CPreprocessorTokenTypes.S_IF_KEYWORD; }
 
 <YYINITIAL> {IDENTIFIER} { return CPsiTokens.IDENTIFIER; }
 
@@ -150,7 +160,5 @@ ESCAPE_SEQUENCE=\\[^\r\n]
 <YYINITIAL> "^" { return CPsiTokens.XOR; }
 <YYINITIAL> "%" { return CPsiTokens.PERC; }
 <YYINITIAL> "@" { return CPsiTokens.AT; }
-
-<YYINITIAL> {STRING_INCLUDE_LITERAL} { return CPsiTokens.STRING_INCLUDE_LITERAL; }
 
 <YYINITIAL> . { return CPreprocessorTokenTypes.SYMBOL; }

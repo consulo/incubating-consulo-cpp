@@ -1,0 +1,18 @@
+FILE
+  PsiElement(OUTER)('#ifndef GUARD\n# define GUARD')
+  PsiElement(OUTER)('# ifdef GUARD\n#  define VALUE int')
+  PsiWhiteSpace('\n')
+  PsiElement(OUTER)('# else\n#  define VALUE char\n# endif')
+  PsiElement(OUTER)('#endif')
+  PsiWhiteSpace('\n')
+  PsiWhiteSpace('\n\n')
+  CPsiFieldImpl: VALUE x;
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: VALUE
+      CPreprocessorMacroInvocation(VALUE)('VALUE')
+      ForeignLeaf(INT_KEYWORD: int)('int')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('x')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')

@@ -1,0 +1,44 @@
+FILE
+  PsiElement(OUTER)('#define MAX(a, b) ((a) > (b) ? (a) : (b))')
+  PsiWhiteSpace('\n')
+  CPsiFieldImpl: int biggest = MAX(1, 2);
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: int
+      PsiElement(INT_KEYWORD)('int')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('biggest')
+    PsiWhiteSpace(' ')
+    PsiElement(EQ)('=')
+    PsiWhiteSpace(' ')
+    CPsiParenthesizedExpressionImpl: MAX(1, 2)
+      CPreprocessorMacroInvocation(MAX)('MAX(1, 2)')
+      ForeignLeaf(LPARENTH: ()('(')
+      CPsiConditionalExpressionImpl: 
+        CPsiBinaryExpressionImpl: 
+          CPsiParenthesizedExpressionImpl: 
+            ForeignLeaf(LPARENTH: ()('(')
+            CPsiLiteralExpressionImpl: 
+              ForeignLeaf(INTEGER_LITERAL: 1)('1')
+            ForeignLeaf(RPARENTH: ))(')')
+          ForeignLeaf(GT: >)('>')
+          CPsiParenthesizedExpressionImpl: 
+            ForeignLeaf(LPARENTH: ()('(')
+            CPsiLiteralExpressionImpl: 
+              ForeignLeaf(INTEGER_LITERAL: 2)('2')
+            ForeignLeaf(RPARENTH: ))(')')
+        ForeignLeaf(QUEST: ?)('?')
+        CPsiParenthesizedExpressionImpl: 
+          ForeignLeaf(LPARENTH: ()('(')
+          CPsiLiteralExpressionImpl: 
+            ForeignLeaf(INTEGER_LITERAL: 1)('1')
+          ForeignLeaf(RPARENTH: ))(')')
+        ForeignLeaf(COLON: :)(':')
+        CPsiParenthesizedExpressionImpl: 
+          ForeignLeaf(LPARENTH: ()('(')
+          CPsiLiteralExpressionImpl: 
+            ForeignLeaf(INTEGER_LITERAL: 2)('2')
+          ForeignLeaf(RPARENTH: ))(')')
+      ForeignLeaf(RPARENTH: ))(')')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')

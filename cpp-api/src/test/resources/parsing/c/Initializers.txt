@@ -1,0 +1,130 @@
+FILE
+  CPsiFieldImpl: struct point p = { .x = 1, .y = 2 };
+    CPsiTypeRefImpl: struct point
+      PsiElement(STRUCT_KEYWORD)('struct')
+      PsiWhiteSpace(' ')
+      PsiElement(IDENTIFIER)('point')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('p')
+    PsiWhiteSpace(' ')
+    PsiElement(EQ)('=')
+    PsiWhiteSpace(' ')
+    CPsiInitializerListImpl: { .x = 1, .y = 2 }
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace(' ')
+      PsiElement(DOT)('.')
+      PsiElement(IDENTIFIER)('x')
+      PsiWhiteSpace(' ')
+      PsiElement(EQ)('=')
+      PsiWhiteSpace(' ')
+      CPsiLiteralExpressionImpl: 1
+        PsiElement(INTEGER_LITERAL)('1')
+      PsiElement(COMMA)(',')
+      PsiWhiteSpace(' ')
+      PsiElement(DOT)('.')
+      PsiElement(IDENTIFIER)('y')
+      PsiWhiteSpace(' ')
+      PsiElement(EQ)('=')
+      PsiWhiteSpace(' ')
+      CPsiLiteralExpressionImpl: 2
+        PsiElement(INTEGER_LITERAL)('2')
+      PsiWhiteSpace(' ')
+      PsiElement(RBRACE)('}')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')
+  CPsiFieldImpl: int squares[] = { [0] = 0, [1] = 1, [2] = 4, };
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: int
+      PsiElement(INT_KEYWORD)('int')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('squares')
+    PsiElement(LBRACKET)('[')
+    PsiElement(RBRACKET)(']')
+    PsiWhiteSpace(' ')
+    PsiElement(EQ)('=')
+    PsiWhiteSpace(' ')
+    CPsiInitializerListImpl: { [0] = 0, [1] = 1, [2] = 4, }
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace(' ')
+      PsiElement(LBRACKET)('[')
+      CPsiLiteralExpressionImpl: 0
+        PsiElement(INTEGER_LITERAL)('0')
+      PsiElement(RBRACKET)(']')
+      PsiWhiteSpace(' ')
+      PsiElement(EQ)('=')
+      PsiWhiteSpace(' ')
+      CPsiLiteralExpressionImpl: 0
+        PsiElement(INTEGER_LITERAL)('0')
+      PsiElement(COMMA)(',')
+      PsiWhiteSpace(' ')
+      PsiElement(LBRACKET)('[')
+      CPsiLiteralExpressionImpl: 1
+        PsiElement(INTEGER_LITERAL)('1')
+      PsiElement(RBRACKET)(']')
+      PsiWhiteSpace(' ')
+      PsiElement(EQ)('=')
+      PsiWhiteSpace(' ')
+      CPsiLiteralExpressionImpl: 1
+        PsiElement(INTEGER_LITERAL)('1')
+      PsiElement(COMMA)(',')
+      PsiWhiteSpace(' ')
+      PsiElement(LBRACKET)('[')
+      CPsiLiteralExpressionImpl: 2
+        PsiElement(INTEGER_LITERAL)('2')
+      PsiElement(RBRACKET)(']')
+      PsiWhiteSpace(' ')
+      PsiElement(EQ)('=')
+      PsiWhiteSpace(' ')
+      CPsiLiteralExpressionImpl: 4
+        PsiElement(INTEGER_LITERAL)('4')
+      PsiElement(COMMA)(',')
+      PsiWhiteSpace(' ')
+      PsiElement(RBRACE)('}')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')
+  CPsiFieldImpl: struct point corners[2] = { { 0, 0 }, { 1, 1 } };
+    CPsiTypeRefImpl: struct point
+      PsiElement(STRUCT_KEYWORD)('struct')
+      PsiWhiteSpace(' ')
+      PsiElement(IDENTIFIER)('point')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('corners')
+    PsiElement(LBRACKET)('[')
+    CPsiLiteralExpressionImpl: 2
+      PsiElement(INTEGER_LITERAL)('2')
+    PsiElement(RBRACKET)(']')
+    PsiWhiteSpace(' ')
+    PsiElement(EQ)('=')
+    PsiWhiteSpace(' ')
+    CPsiInitializerListImpl: { { 0, 0 }, { 1, 1 } }
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace(' ')
+      CPsiInitializerListImpl: { 0, 0 }
+        PsiElement(LBRACE)('{')
+        PsiWhiteSpace(' ')
+        CPsiLiteralExpressionImpl: 0
+          PsiElement(INTEGER_LITERAL)('0')
+        PsiElement(COMMA)(',')
+        PsiWhiteSpace(' ')
+        CPsiLiteralExpressionImpl: 0
+          PsiElement(INTEGER_LITERAL)('0')
+        PsiWhiteSpace(' ')
+        PsiElement(RBRACE)('}')
+      PsiElement(COMMA)(',')
+      PsiWhiteSpace(' ')
+      CPsiInitializerListImpl: { 1, 1 }
+        PsiElement(LBRACE)('{')
+        PsiWhiteSpace(' ')
+        CPsiLiteralExpressionImpl: 1
+          PsiElement(INTEGER_LITERAL)('1')
+        PsiElement(COMMA)(',')
+        PsiWhiteSpace(' ')
+        CPsiLiteralExpressionImpl: 1
+          PsiElement(INTEGER_LITERAL)('1')
+        PsiWhiteSpace(' ')
+        PsiElement(RBRACE)('}')
+      PsiWhiteSpace(' ')
+      PsiElement(RBRACE)('}')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')

@@ -16,6 +16,8 @@
 
 package consulo.cpp.preprocessor.psi;
 
+import consulo.annotation.access.RequiredReadAction;
+import consulo.cpp.preprocessor.expand.CPreprocessorExpandContext;
 import jakarta.annotation.Nullable;
 
 /**
@@ -24,8 +26,19 @@ import jakarta.annotation.Nullable;
  * @author VISTALL
  * @since 2026-03-19
  */
-public interface CPreprocessorUndefDirective extends CPreprocessorElement {
+public interface CPreprocessorUndefDirective extends CPreprocessorDirective {
     /** Returns the name of the macro being undefined, or {@code null} if the directive is malformed. */
     @Nullable
     String getName();
+
+    @Override
+    @RequiredReadAction
+    default void expand(CPreprocessorExpandContext context) {
+        context.removeFromSource(getTextRange());
+
+        String name = getName();
+        if (name != null) {
+            context.undefine(name);
+        }
+    }
 }

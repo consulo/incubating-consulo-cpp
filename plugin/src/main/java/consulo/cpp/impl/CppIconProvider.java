@@ -6,8 +6,8 @@ import consulo.application.AllIcons;
 import consulo.language.icon.IconDescriptor;
 import consulo.language.icon.IconDescriptorUpdater;
 import consulo.language.psi.PsiElement;
-import org.napile.cpp4idea.lang.psi.CPsiClass;
-import org.napile.cpp4idea.lang.psi.CPsiDeclarationMethod;
+import consulo.cpp.lang.psi.CPsiClass;
+import consulo.cpp.lang.psi.CPsiDeclarationMethod;
 
 import jakarta.annotation.Nonnull;
 

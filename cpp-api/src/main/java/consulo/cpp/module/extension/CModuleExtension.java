@@ -15,8 +15,10 @@
  */
 package consulo.cpp.module.extension;
 
+import consulo.cpp.lang.version.CLanguageVersion;
 import consulo.module.extension.ModuleExtension;
 import org.jdom.Element;
+import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
@@ -35,9 +37,9 @@ public interface CModuleExtension<T extends CModuleExtension<T>> extends ModuleE
 
     List<String> getIncludePaths();
 
-    CLanguageStandard getCStandard();
+    @Nullable CLanguageVersion getCStandard();
 
-    CLanguageStandard getCppStandard();
+    @Nullable CLanguageVersion getCppStandard();
 
     static String formatIncludePaths(List<String> includePaths) {
         return String.join("; ", includePaths);

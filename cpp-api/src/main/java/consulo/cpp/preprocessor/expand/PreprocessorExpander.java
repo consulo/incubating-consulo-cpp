@@ -1,33 +1,26 @@
 package consulo.cpp.preprocessor.expand;
 
+import consulo.cpp.lang.psi.CPsiTokens;
+import consulo.cpp.lang.version.CLanguageVersion;
 import consulo.cpp.preprocessor.CPreprocessorLanguage;
 import consulo.cpp.preprocessor.psi.*;
-import consulo.cpp.preprocessor.psi.impl.CPreprocessorForeignLeafPsiElement;
 import consulo.cpp.preprocessor.psi.impl.visitor.CPreprocessorRecursiveElementVisitor;
-import consulo.cpp.preprocessor.psi.stub.CPreprocessorDefineStub;
+import consulo.cpp.preprocessor.psi.stub.CPreprocessorDirectiveStub;
 import consulo.cpp.preprocessor.psi.stub.CPreprocessorFileStub;
-import consulo.cpp.preprocessor.psi.stub.CPreprocessorIncludeStub;
 import consulo.language.psi.stub.StubElement;
 import consulo.cpp.preprocessor.psi.stub.CPreprocessorIfBodyStub;
 import consulo.cpp.preprocessor.psi.stub.CPreprocessorIfBlockStub;
-import consulo.cpp.preprocessor.psi.stub.CPreprocessorUndefStub;
 import consulo.document.util.TextRange;
-import consulo.language.ast.ASTNode;
 import consulo.language.ast.IElementType;
 import consulo.language.psi.PsiElement;
-import consulo.language.impl.ast.CompositeElement;
-import consulo.language.impl.ast.LeafElement;
-import consulo.language.impl.ast.TreeElement;
-import consulo.language.parser.ParserDefinition;
 import consulo.language.psi.PsiFile;
 import consulo.language.psi.stub.ObjectStubTree;
 import consulo.language.psi.stub.Stub;
 import consulo.language.psi.stub.StubTreeLoader;
 import consulo.project.Project;
 import consulo.util.dataholder.Key;
-import consulo.util.lang.Couple;
-import consulo.util.lang.Pair;
 import consulo.virtualFileSystem.VirtualFile;
+import consulo.virtualFileSystem.light.LightVirtualFileBase;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 
@@ -52,10 +45,12 @@ public class PreprocessorExpander {
 
     private final CPreprocessorDirectiveCollector rangeCollector = new CPreprocessorDirectiveCollector();
 
+    private final CPreprocessorExpandContext mySourceContext = new SourceContext();
+
     private final List<TextRange> myInactiveRanges = new ArrayList<>();
 
     private final PsiFile myPreprocessorFile;
-    private final ParserDefinition myParserDefinition;
+    private final CLanguageVersion myLanguageVersion;
     private final Set<VirtualFile> myProcessedFiles;
     /**
      * Configured include search directories (analogous to {@code -I} flags).
@@ -65,14 +60,14 @@ public class PreprocessorExpander {
      */
     private final List<VirtualFile> myIncludePaths;
 
-    public PreprocessorExpander(PsiFile preprocessorFile, ParserDefinition parserDefinition) {
-        this(preprocessorFile, parserDefinition, new HashSet<>(), Collections.emptyList(), Collections.emptyMap());
+    public PreprocessorExpander(PsiFile preprocessorFile, CLanguageVersion languageVersion) {
+        this(preprocessorFile, languageVersion, new HashSet<>(), Collections.emptyList(), Collections.emptyMap());
     }
 
     public PreprocessorExpander(PsiFile preprocessorFile,
-                                ParserDefinition parserDefinition,
+                                CLanguageVersion languageVersion,
                                 @NotNull List<VirtualFile> includePaths) {
-        this(preprocessorFile, parserDefinition, new HashSet<>(), includePaths, Collections.emptyMap());
+        this(preprocessorFile, languageVersion, new HashSet<>(), includePaths, Collections.emptyMap());
     }
 
     /**
@@ -80,58 +75,42 @@ public class PreprocessorExpander {
      * This is how per-module defines and the defines of an including file reach the expansion.
      */
     public PreprocessorExpander(PsiFile preprocessorFile,
-                                ParserDefinition parserDefinition,
+                                CLanguageVersion languageVersion,
                                 @NotNull List<VirtualFile> includePaths,
                                 @NotNull Map<String, String> seedDefines) {
-        this(preprocessorFile, parserDefinition, new HashSet<>(), includePaths, seedDefines);
+        this(preprocessorFile, languageVersion, new HashSet<>(), includePaths, seedMacros(languageVersion, seedDefines));
     }
 
+    /**
+     * @param inheritedMacros the macros in scope above the first line - the macros themselves, so a function-like
+     *                        macro an including file defined stays function-like here
+     */
     private PreprocessorExpander(PsiFile preprocessorFile,
-                                 ParserDefinition parserDefinition,
+                                 CLanguageVersion languageVersion,
                                  Set<VirtualFile> processedFiles,
                                  List<VirtualFile> includePaths,
-                                 Map<String, String> seedDefines) {
+                                 Map<String, ExpandedMacro> inheritedMacros) {
         myPreprocessorFile = preprocessorFile;
-        myParserDefinition = parserDefinition;
+        myLanguageVersion = languageVersion;
         myProcessedFiles = processedFiles;
         myIncludePaths = includePaths;
 
-        for (Map.Entry<String, String> seed : seedDefines.entrySet()) {
-            myDefines.put(seed.getKey(), new ExpandedMacro(parserDefinition, null, seed.getValue()));
-        }
+        myDefines.putAll(inheritedMacros);
 
-        VirtualFile vFile = preprocessorFile.getVirtualFile();
+        VirtualFile vFile = sourceFile(preprocessorFile);
         if (vFile != null) {
             myProcessedFiles.add(vFile);
         }
 
         preprocessorFile.accept(new CPreprocessorRecursiveElementVisitor() {
             @Override
-            public void visitSDefine(CPreprocessorDefineDirective element) {
-                CPsiSharpDefineValue value = element.getValue();
-                String text = element.getName();
-
-                myModifications.addOuterRange(element.getTextRange());
-
-                CharSequence macroText = value == null ? "" : value.getNode().getChars();
-                myDefines.put(text, new ExpandedMacro(parserDefinition, element, macroText));
-            }
-
-            @Override
-            public void visitSUndef(consulo.cpp.preprocessor.psi.CPreprocessorUndefDirective element) {
-                myModifications.addOuterRange(element.getTextRange());
-
-                // remove the macro from the active defines so subsequent references are not expanded
-                String name = element.getName();
-                if (name != null) {
-                    myDefines.remove(name);
+            public void visitElement(PsiElement element) {
+                if (element instanceof CPreprocessorDirective directive) {
+                    directive.expand(mySourceContext);
                 }
-            }
-
-            @Override
-            public void visitSPragma(consulo.cpp.preprocessor.psi.CPreprocessorPragmaDirective element) {
-                // #pragma directives have no effect on the C/C++ parse; remove from output
-                myModifications.addOuterRange(element.getTextRange());
+                else {
+                    super.visitElement(element);
+                }
             }
 
             @Override
@@ -155,26 +134,24 @@ public class PreprocessorExpander {
                     }
                 }
             }
-
-            @Override
-            public void visitSInclude(CPsiSharpInclude element) {
-                myModifications.addOuterRange(element.getTextRange());
-                // Resolve local #include "..." — current file's dir first, then include paths
-                processInclude(element.getIncludeName());
-            }
-
-            @Override
-            public void visitSIndependInclude(CPsiSharpIndepInclude element) {
-                myModifications.addOuterRange(element.getTextRange());
-                // System #include <...> — search configured include paths only
-                processIndependInclude(element.getIncludeName());
-            }
         });
     }
 
     // -----------------------------------------------------------------------
     // Include resolution
     // -----------------------------------------------------------------------
+
+    /**
+     * The file includes are resolved against: the file itself, or - for a light copy, such as the one completion
+     * parses - the file it was copied from.
+     */
+    private static @Nullable VirtualFile sourceFile(PsiFile file) {
+        VirtualFile virtualFile = file.getOriginalFile().getVirtualFile();
+        if (virtualFile instanceof LightVirtualFileBase light && light.getOriginalFile() != null) {
+            return light.getOriginalFile();
+        }
+        return virtualFile;
+    }
 
     /**
      * Resolve a {@code #include "name"} directive.
@@ -186,9 +163,8 @@ public class PreprocessorExpander {
             return;
         }
 
-        VirtualFile currentVFile = myPreprocessorFile.getVirtualFile();
+        VirtualFile currentVFile = sourceFile(myPreprocessorFile);
         if (currentVFile == null) {
-            // LightVirtualFile (test / in-memory context) — cannot resolve paths
             return;
         }
 
@@ -289,7 +265,7 @@ public class PreprocessorExpander {
 
         // Recursively expand the included file, sharing the processed-files set and include paths
         PreprocessorExpander childExpander =
-                new PreprocessorExpander(preprocessorRoot, myParserDefinition, myProcessedFiles, myIncludePaths, definesView());
+                new PreprocessorExpander(preprocessorRoot, myLanguageVersion, myProcessedFiles, myIncludePaths, myDefines);
         // The child started from our defines, so its final state is the state after the include: names it
         // undefined are gone, the rest are added or overridden.
         myDefines.keySet().retainAll(childExpander.myDefines.keySet());
@@ -316,23 +292,10 @@ public class PreprocessorExpander {
      * branch that is really compiled rather than of every branch it contains.
      */
     private void processStubChildren(@NotNull StubElement<?> parent, @Nullable VirtualFile dir) {
+        HeaderContext context = new HeaderContext(dir);
         for (StubElement<?> child : parent.getChildrenStubs()) {
-            if (child instanceof CPreprocessorDefineStub) {
-                CPreprocessorDefineStub defineStub = (CPreprocessorDefineStub) child;
-                String name = defineStub.getName();
-                String valueText = defineStub.getValueText();
-                if (name != null) {
-                    myDefines.put(name, new ExpandedMacro(myParserDefinition, null, valueText != null ? valueText : ""));
-                }
-            }
-            else if (child instanceof CPreprocessorUndefStub) {
-                String name = ((CPreprocessorUndefStub) child).getName();
-                if (name != null) {
-                    myDefines.remove(name);
-                }
-            }
-            else if (child instanceof CPreprocessorIncludeStub && dir != null) {
-                processIncludeFromDir(((CPreprocessorIncludeStub) child).getIncludePath(), dir);
+            if (child instanceof CPreprocessorDirectiveStub directive) {
+                directive.expand(context);
             }
             else if (child instanceof CPreprocessorIfBlockStub) {
                 CPreprocessorIfBlockStub block = (CPreprocessorIfBlockStub) child;
@@ -350,9 +313,85 @@ public class PreprocessorExpander {
         }
     }
 
+    /**
+     * Defines and undefines shared by both contexts.
+     */
+    private abstract class BaseContext implements CPreprocessorExpandContext {
+        @Override
+        public void define(String name, @Nullable List<String> parameters, CharSequence value, @Nullable CPreprocessorDefineDirective element) {
+            myDefines.put(name, new ExpandedMacro(myLanguageVersion, name, parameters, element, value));
+        }
+
+        @Override
+        public void undefine(String name) {
+            myDefines.remove(name);
+        }
+
+        @Override
+        public boolean isDefined(String name) {
+            return myDefines.containsKey(name);
+        }
+    }
+
+    /**
+     * Directives of the file being expanded: their text is taken out of what the C parser sees.
+     */
+    private final class SourceContext extends BaseContext {
+        @Override
+        public void removeFromSource(TextRange range) {
+            myModifications.addOuterRange(range);
+        }
+
+        @Override
+        public void include(String path, boolean system) {
+            if (system) {
+                processIndependInclude(path);
+            }
+            else {
+                processInclude(path);
+            }
+        }
+    }
+
+    /**
+     * Directives of an included header, applied from its stubs: only their effect on the macros matters.
+     */
+    private final class HeaderContext extends BaseContext {
+        private final @Nullable VirtualFile myDirectory;
+
+        private HeaderContext(@Nullable VirtualFile directory) {
+            myDirectory = directory;
+        }
+
+        @Override
+        public void removeFromSource(TextRange range) {
+        }
+
+        @Override
+        public void include(String path, boolean system) {
+            if (system) {
+                processIndependInclude(path);
+            }
+            else if (myDirectory != null) {
+                processIncludeFromDir(path, myDirectory);
+            }
+        }
+    }
+
     // -----------------------------------------------------------------------
     // Public API
     // -----------------------------------------------------------------------
+
+    /**
+     * Defines given as text - by the module, or predefined by the language version - are object-like macros.
+     */
+    private static Map<String, ExpandedMacro> seedMacros(CLanguageVersion languageVersion, Map<String, String> seedDefines) {
+        Map<String, ExpandedMacro> macros = new LinkedHashMap<>();
+        for (Map.Entry<String, String> seed : seedDefines.entrySet()) {
+            macros.put(seed.getKey(), new ExpandedMacro(languageVersion, seed.getKey(), null, null, seed.getValue()));
+        }
+        return macros;
+    }
 
     private Map<String, String> definesView() {
         Map<String, String> view = new LinkedHashMap<>();
@@ -446,105 +485,201 @@ public class PreprocessorExpander {
         return rangeCollector;
     }
 
+    public CLanguageVersion getLanguageVersion() {
+        return myLanguageVersion;
+    }
+
     @Nullable
     public ExpandedMacro getMacro(@NotNull String name) {
         return myDefines.get(name);
     }
 
-    @Nullable
-    public ExpandedMacro tryToExpand(String name) {
-        ExpandedMacro macro = myDefines.get(name);
-        if (macro == null) {
+    // -----------------------------------------------------------------------
+    // Expansion
+    // -----------------------------------------------------------------------
+
+    /**
+     * The tokens one use of {@code macro} stands for: the arguments of a function-like macro substituted into its
+     * body - {@code #} stringizing, {@code ##} pasting, {@code __VA_ARGS__} - and the result rescanned for further
+     * macros. A macro is not expanded again inside its own expansion, which is what stops self-reference.
+     *
+     * @param arguments the argument tokens of a function-like macro, {@code null} for an object-like one
+     */
+    public List<CMacroToken> expand(ExpandedMacro macro, @Nullable List<List<CMacroToken>> arguments) {
+        return expand(macro, arguments, new HashSet<>());
+    }
+
+    private List<CMacroToken> expand(ExpandedMacro macro, @Nullable List<List<CMacroToken>> arguments, Set<String> disabled) {
+        List<CMacroToken> tokens = macro.isFunctionLike() ? substitute(macro, arguments == null ? List.of() : arguments, disabled) : macro.getBody();
+
+        Set<String> inner = new HashSet<>(disabled);
+        inner.add(macro.getName());
+        return rescan(tokens, inner);
+    }
+
+    private List<CMacroToken> substitute(ExpandedMacro macro, List<List<CMacroToken>> arguments, Set<String> disabled) {
+        List<String> parameters = macro.getParameters();
+        List<CMacroToken> body = macro.getBody();
+        List<CMacroToken> result = new ArrayList<>();
+
+        for (int i = 0; i < body.size(); i++) {
+            CMacroToken token = body.get(i);
+
+            if (token.type() == CPsiTokens.SHARP && i + 1 < body.size()) {
+                List<CMacroToken> argument = argumentOf(parameters, arguments, body.get(i + 1));
+                if (argument != null) {
+                    result.add(stringize(argument));
+                    i++;
+                    continue;
+                }
+            }
+
+            List<CMacroToken> argument = argumentOf(parameters, arguments, token);
+            if (argument == null) {
+                result.add(token);
+            }
+            else {
+                // an operand of ## is pasted as written, any other argument is expanded first
+                boolean pasted = i > 0 && body.get(i - 1).type() == CPsiTokens.SHARPSHARP
+                    || i + 1 < body.size() && body.get(i + 1).type() == CPsiTokens.SHARPSHARP;
+                result.addAll(pasted ? argument : rescan(argument, disabled));
+            }
+        }
+        return paste(result);
+    }
+
+    private static @Nullable List<CMacroToken> argumentOf(List<String> parameters, List<List<CMacroToken>> arguments, CMacroToken token) {
+        if (token.type() != CPsiTokens.IDENTIFIER) {
             return null;
         }
 
-        macro.expand();
-        return macro;
+        int variadic = parameters.indexOf("...");
+        if (variadic >= 0 && token.text().equals("__VA_ARGS__")) {
+            List<CMacroToken> joined = new ArrayList<>();
+            for (int i = variadic; i < arguments.size(); i++) {
+                if (i > variadic) {
+                    joined.add(new CMacroToken(CPsiTokens.COMMA, ","));
+                }
+                joined.addAll(arguments.get(i));
+            }
+            return joined;
+        }
+
+        int index = parameters.indexOf(token.text());
+        if (index < 0) {
+            return null;
+        }
+        return index < arguments.size() ? arguments.get(index) : List.of();
+    }
+
+    private static CMacroToken stringize(List<CMacroToken> argument) {
+        StringBuilder text = new StringBuilder("\"");
+        for (int i = 0; i < argument.size(); i++) {
+            if (i > 0) {
+                text.append(' ');
+            }
+            String part = argument.get(i).text();
+            text.append(part.replace("\\", "\\\\").replace("\"", "\\\""));
+        }
+        return new CMacroToken(CPsiTokens.STRING_LITERAL, text.append('"').toString());
     }
 
     /**
-     * Insert zero-length element after macro reference for normalize psi tree
+     * Joins the operands of every {@code ##} into one token, re-lexed; an operand pair which does not lex as one
+     * token stays two.
      */
-    public void insertDummyNodes(TreeElement parsed) {
-        // we need insert dummy nodes before inserting outer elements, due it will change tree length
-        // this dummy nodes not change tree text length
-        int textLength = parsed.getTextLength();
-
-        // call it for parse file tree
-        parsed.getFirstChildNode();
-
-        for (Map.Entry<String, ExpandedMacro> entry : myDefines.entrySet()) {
-            String key = entry.getKey();
-            ExpandedMacro value = entry.getValue();
-
-            for (PreprocessorSymbolDoneInfo doneInfo : value.getSymbolDoneInfos()) {
-                Pair<IElementType, String> symbol = entry.getValue().getSymbols().get(doneInfo.getTokenIndex());
-
-                int tokenOffset = doneInfo.getTokenOffset();
-
-                TextRange textRange = new TextRange(tokenOffset, tokenOffset + key.length());
-
-                TreeElement node = (TreeElement) findNode(textRange, parsed, true);
-
-                Couple<TreeElement> forInsert = selectNodeForInsert(node, node, doneInfo.getDoneElementType());
-
-                TreeElement parentIn = forInsert.getFirst();
-
-                TreeElement childIn = forInsert.getSecond();
-
-                if (childIn.getPsi() instanceof CPreprocessorMacroReference) {
-                    childIn.rawInsertAfterMe(new CPreprocessorForeignLeafPsiElement(symbol.getFirst(), symbol.second));
+    private List<CMacroToken> paste(List<CMacroToken> tokens) {
+        List<CMacroToken> result = new ArrayList<>(tokens.size());
+        for (int i = 0; i < tokens.size(); i++) {
+            CMacroToken token = tokens.get(i);
+            if (token.type() == CPsiTokens.SHARPSHARP && !result.isEmpty() && i + 1 < tokens.size()) {
+                CMacroToken left = result.remove(result.size() - 1);
+                CMacroToken right = tokens.get(++i);
+                List<CMacroToken> joined = ExpandedMacro.lex(myLanguageVersion, left.text() + right.text());
+                if (joined.size() == 1) {
+                    result.add(joined.get(0));
                 }
                 else {
-                    childIn.rawInsertBeforeMe(new CPreprocessorForeignLeafPsiElement(symbol.getFirst(), symbol.second));
-                }
-            }
-        }
-    }
-
-    private static Couple<TreeElement> selectNodeForInsert(TreeElement element, TreeElement childElement, AstElementTypeId astElementTypeId) {
-        IElementType elementType = element.getElementType();
-
-        if (elementType == astElementTypeId.getElementType() && element.getStartOffset() == astElementTypeId.getStartOffset()) {
-            return Couple.of(element, childElement);
-        }
-
-        CompositeElement treeParent = element.getTreeParent();
-        if (treeParent == null) {
-            return null;
-        }
-        return selectNodeForInsert(treeParent, element, astElementTypeId);
-    }
-
-    private static ASTNode findNode(TextRange textRange, ASTNode parsed, boolean strict) {
-        ASTNode node = parsed;
-
-        while (node != null) {
-            if (node instanceof LeafElement) {
-                if (strict) {
-                    if (textRange.equals(node.getTextRange())) {
-                        return node;
-                    }
-                }
-                else {
-                    if (textRange.contains(node.getStartOffset())) {
-                        return node;
-                    }
+                    result.add(left);
+                    result.add(right);
                 }
             }
             else {
-                for (ASTNode child = node.getFirstChildNode(); child != null; child = child.getTreeNext()) {
-                    ASTNode result = findNode(textRange, child, strict);
+                result.add(token);
+            }
+        }
+        return result;
+    }
 
-                    if (result != null) {
-                        return result;
-                    }
+    /**
+     * Expands the macros used in {@code tokens} - which is how a macro body using another macro, or an argument
+     * naming one, ends up as plain tokens.
+     */
+    private List<CMacroToken> rescan(List<CMacroToken> tokens, Set<String> disabled) {
+        List<CMacroToken> result = new ArrayList<>(tokens.size());
+        for (int i = 0; i < tokens.size(); i++) {
+            CMacroToken token = tokens.get(i);
+            ExpandedMacro macro = token.type() == CPsiTokens.IDENTIFIER && !disabled.contains(token.text()) ? myDefines.get(token.text()) : null;
+            if (macro == null) {
+                result.add(token);
+            }
+            else if (!macro.isFunctionLike()) {
+                result.addAll(expand(macro, null, disabled));
+            }
+            else {
+                int close = i + 1 < tokens.size() && tokens.get(i + 1).type() == CPsiTokens.LPARENTH ? closingParenthesis(tokens, i + 1) : -1;
+                if (close < 0) {
+                    // a function-like macro name which is not called stays a name
+                    result.add(token);
+                }
+                else {
+                    result.addAll(expand(macro, splitArguments(tokens.subList(i + 2, close)), disabled));
+                    i = close;
                 }
             }
-
-            node = node.getTreeNext();
         }
+        return result;
+    }
 
-        return null;
+    private static int closingParenthesis(List<CMacroToken> tokens, int open) {
+        int depth = 0;
+        for (int i = open; i < tokens.size(); i++) {
+            IElementType type = tokens.get(i).type();
+            if (type == CPsiTokens.LPARENTH) {
+                depth++;
+            }
+            else if (type == CPsiTokens.RPARENTH && --depth == 0) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    /**
+     * Splits the tokens between the parentheses of a macro call at its top-level commas.
+     */
+    public static List<List<CMacroToken>> splitArguments(List<CMacroToken> tokens) {
+        List<List<CMacroToken>> arguments = new ArrayList<>();
+        if (tokens.isEmpty()) {
+            return arguments;
+        }
+        List<CMacroToken> current = new ArrayList<>();
+        int depth = 0;
+        for (CMacroToken token : tokens) {
+            if (token.type() == CPsiTokens.COMMA && depth == 0) {
+                arguments.add(current);
+                current = new ArrayList<>();
+                continue;
+            }
+            if (token.type() == CPsiTokens.LPARENTH) {
+                depth++;
+            }
+            else if (token.type() == CPsiTokens.RPARENTH) {
+                depth--;
+            }
+            current.add(token);
+        }
+        arguments.add(current);
+        return arguments;
     }
 }

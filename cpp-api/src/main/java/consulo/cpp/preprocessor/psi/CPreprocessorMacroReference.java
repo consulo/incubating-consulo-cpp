@@ -4,7 +4,7 @@ import consulo.language.psi.OuterLanguageElement;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiReference;
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.psi.CPsiElement;
+import consulo.cpp.lang.psi.CPsiElement;
 
 /**
  * @author VISTALL

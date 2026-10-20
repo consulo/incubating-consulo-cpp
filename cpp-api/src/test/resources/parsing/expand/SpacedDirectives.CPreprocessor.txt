@@ -1,0 +1,70 @@
+CPreprocessorFile:SpacedDirectives.c
+  CPreprocessorIfBlockImpl: #ifndef GUARD
+# define GUARD
+# ifdef GUARD
+#  define VALUE int
+# else
+#  define VALUE char
+# endif
+#endif
+    PsiElement(S_IFNDEF_KEYWORD)('#ifndef')
+    PsiWhiteSpace(' ')
+    CPreprocessorMacroReferenceImpl(CPreprocessorMacroReference)
+      PsiElement(IDENTIFIER)('GUARD')
+    PsiElement(NEW_LINE)('\n')
+    CPsiSharpIfBodyImpl: # define GUARD
+# ifdef GUARD
+#  define VALUE int
+# else
+#  define VALUE char
+# endif
+
+      CPreprocessorDefineDirectiveImpl: # define GUARD
+        PsiElement(S_DEFINE_KEYWORD)('# define')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('GUARD')
+        CPsiSharpDefineValueImpl: 
+          <empty list>
+      PsiElement(NEW_LINE)('\n')
+      CPreprocessorIfBlockImpl: # ifdef GUARD
+#  define VALUE int
+# else
+#  define VALUE char
+# endif
+        PsiElement(S_IFDEF_KEYWORD)('# ifdef')
+        PsiWhiteSpace(' ')
+        CPreprocessorMacroReferenceImpl(CPreprocessorMacroReference)
+          PsiElement(IDENTIFIER)('GUARD')
+        PsiElement(NEW_LINE)('\n')
+        CPsiSharpIfBodyImpl: #  define VALUE int
+
+          CPreprocessorDefineDirectiveImpl: #  define VALUE int
+            PsiElement(S_DEFINE_KEYWORD)('#  define')
+            PsiWhiteSpace(' ')
+            PsiElement(IDENTIFIER)('VALUE')
+            PsiWhiteSpace(' ')
+            CPsiSharpDefineValueImpl: int
+              PsiElement(IDENTIFIER)('int')
+          PsiElement(NEW_LINE)('\n')
+        PsiElement(S_ELSE_KEYWORD)('# else')
+        CPsiSharpIfBodyImpl: 
+#  define VALUE char
+
+          PsiElement(NEW_LINE)('\n')
+          CPreprocessorDefineDirectiveImpl: #  define VALUE char
+            PsiElement(S_DEFINE_KEYWORD)('#  define')
+            PsiWhiteSpace(' ')
+            PsiElement(IDENTIFIER)('VALUE')
+            PsiWhiteSpace(' ')
+            CPsiSharpDefineValueImpl: char
+              PsiElement(IDENTIFIER)('char')
+          PsiElement(NEW_LINE)('\n')
+        PsiElement(S_ENDIF_KEYWORD)('# endif')
+      PsiElement(NEW_LINE)('\n')
+    PsiElement(S_ENDIF_KEYWORD)('#endif')
+  PsiElement(NEW_LINE)('\n')
+  PsiElement(IDENTIFIER)('VALUE')
+  PsiWhiteSpace(' ')
+  PsiElement(IDENTIFIER)('x')
+  PsiElement(SEMICOLON)(';')
+  PsiElement(NEW_LINE)('\n')

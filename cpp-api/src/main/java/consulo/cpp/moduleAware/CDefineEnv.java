@@ -15,6 +15,8 @@
  */
 package consulo.cpp.moduleAware;
 
+import consulo.annotation.access.RequiredReadAction;
+import consulo.cpp.lang.version.CLanguageVersions;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.stub.ModuleAwareIndexOptions;
 import consulo.project.Project;
@@ -22,6 +24,7 @@ import consulo.virtualFileSystem.LocalFileSystem;
 import consulo.virtualFileSystem.VirtualFile;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Supplier;
@@ -36,14 +39,25 @@ public final class CDefineEnv {
     private CDefineEnv() {
     }
 
+    /**
+     * The defines a file starts preprocessing with: the macros its language version predefines, then the module's
+     * defines - which win, as {@code -D} does over a builtin.
+     */
+    @RequiredReadAction
     public static Map<String, String> seedFor(PsiElement context) {
-        return optionsFor(context).defines();
+        Map<String, String> seed = new LinkedHashMap<>(CLanguageVersions.of(context).getPredefinedMacros());
+        seed.putAll(optionsFor(context).defines());
+        return seed;
     }
 
     public static Map<String, String> seedFor(Project project, VirtualFile file) {
         return optionsFor(project, file).defines();
     }
 
+    /**
+     * The options a file is preprocessed with. For a header of a library - the system headers a CMake import adds -
+     * the platform answers as the module reaching it through its order entry compiles it.
+     */
     public static CPreprocessorOptions optionsFor(PsiElement context) {
         return read(() -> ModuleAwareIndexOptions.getOptions(context, PROVIDER_ID, CPreprocessorOptionsExternalizer.INSTANCE));
     }

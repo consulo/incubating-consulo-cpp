@@ -22,5 +22,9 @@ package consulo.cpp.preprocessor.psi;
  */
 public interface CPsiSharpIndepInclude extends CPsiSharpInclude
 {
-	//
+	@Override
+	default boolean isSystem()
+	{
+		return true;
+	}
 }

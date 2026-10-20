@@ -1,0 +1,37 @@
+FILE
+  PsiElement(OUTER)('#define NAME(x) #x')
+  PsiElement(OUTER)('#define VAR(n) var_ ## n')
+  PsiWhiteSpace('\n')
+  PsiWhiteSpace('\n')
+  CPsiFieldImpl: const char* s = NAME(hello);
+    CPsiModifierListImpl: const
+      PsiElement(CONST_KEYWORD)('const')
+    PsiWhiteSpace(' ')
+    CPsiTypeRefImpl: char
+      PsiElement(CHAR_KEYWORD)('char')
+    PsiElement(ASTERISK)('*')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('s')
+    PsiWhiteSpace(' ')
+    PsiElement(EQ)('=')
+    PsiWhiteSpace(' ')
+    CPsiLiteralExpressionImpl: NAME(hello)
+      CPreprocessorMacroInvocation(NAME)('NAME(hello)')
+      ForeignLeaf(STRING_LITERAL: "hello")('"hello"')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')
+  CPsiFieldImpl: int VAR(1) = 0;
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: int
+      PsiElement(INT_KEYWORD)('int')
+    PsiWhiteSpace(' ')
+    CPreprocessorMacroInvocation(VAR)('VAR(1)')
+    ForeignLeaf(IDENTIFIER: var_1)('var_1')
+    PsiWhiteSpace(' ')
+    PsiElement(EQ)('=')
+    PsiWhiteSpace(' ')
+    CPsiLiteralExpressionImpl: 0
+      PsiElement(INTEGER_LITERAL)('0')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')

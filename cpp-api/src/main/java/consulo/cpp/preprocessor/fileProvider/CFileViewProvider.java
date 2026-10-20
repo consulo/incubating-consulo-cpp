@@ -9,7 +9,7 @@ import consulo.language.psi.PsiManager;
 import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.CLanguage;
+import consulo.cpp.lang.CLanguage;
 
 import java.util.Set;
 

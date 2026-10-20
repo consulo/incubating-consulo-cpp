@@ -17,9 +17,9 @@
 package consulo.cpp.preprocessor.psi;
 
 import consulo.language.ast.ASTNode;
+import consulo.language.ast.IElementTypeAsPsiFactory;
 import consulo.language.psi.PsiElement;
-import jakarta.annotation.Nonnull;
-import org.napile.cpp4idea.lang.psi.CBaseElementType;
+import consulo.cpp.lang.psi.CBaseElementType;
 
 import java.util.function.Function;
 
@@ -27,7 +27,7 @@ import java.util.function.Function;
  * @author VISTALL
  * @since 5:34/10.12.2011
  */
-public class CPreprocessorElementType extends CBaseElementType {
+public class CPreprocessorElementType extends CBaseElementType implements IElementTypeAsPsiFactory {
     private final Function<ASTNode, ? extends PsiElement> myFactory;
 
     public CPreprocessorElementType(String debugName, Function<ASTNode, ? extends PsiElement> factory) {
@@ -35,8 +35,8 @@ public class CPreprocessorElementType extends CBaseElementType {
         myFactory = factory;
     }
 
-    @Nonnull
-    public PsiElement createPsi(ASTNode node) {
+    @Override
+    public PsiElement createElement(ASTNode node) {
         return myFactory.apply(node);
     }
 }

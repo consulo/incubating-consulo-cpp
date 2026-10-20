@@ -15,7 +15,7 @@
  */
 package consulo.cpp.msbuild.module;
 
-import consulo.cpp.module.extension.CLanguageStandard;
+import consulo.cpp.lang.version.CLanguageVersion;
 import consulo.cpp.module.extension.CModuleExtension;
 import consulo.cpp.module.extension.CMutableModuleExtension;
 import consulo.cpp.msbuild.localize.VisualCLocalize;
@@ -70,11 +70,11 @@ public class VisualCMutableModuleExtension extends VisualCModuleExtension implem
         myCompileSettings.setIncludePaths(includePaths);
     }
 
-    public void setCStandard(CLanguageStandard standard) {
+    public void setCStandard(@Nullable CLanguageVersion standard) {
         myCompileSettings.setCStandard(standard);
     }
 
-    public void setCppStandard(CLanguageStandard standard) {
+    public void setCppStandard(@Nullable CLanguageVersion standard) {
         myCompileSettings.setCppStandard(standard);
     }
 

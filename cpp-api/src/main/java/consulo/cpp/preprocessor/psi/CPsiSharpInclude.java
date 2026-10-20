@@ -16,15 +16,38 @@
 
 package consulo.cpp.preprocessor.psi;
 
+import consulo.annotation.access.RequiredReadAction;
+import consulo.cpp.preprocessor.expand.CPreprocessorExpandContext;
 import consulo.language.psi.PsiElement;
 
 /**
  * @author VISTALL
  * @date 1:53/11.12.2011
  */
-public interface CPsiSharpInclude extends CPreprocessorElement
+public interface CPsiSharpInclude extends CPreprocessorDirective
 {
 	PsiElement getIncludeElement();
 
 	String getIncludeName();
+
+	/**
+	 * Whether this is a system include, {@code #include <...>}, looked up only in the include paths.
+	 */
+	default boolean isSystem()
+	{
+		return false;
+	}
+
+	@Override
+	@RequiredReadAction
+	default void expand(CPreprocessorExpandContext context)
+	{
+		context.removeFromSource(getTextRange());
+
+		String name = getIncludeName();
+		if(name != null)
+		{
+			context.include(name, isSystem());
+		}
+	}
 }

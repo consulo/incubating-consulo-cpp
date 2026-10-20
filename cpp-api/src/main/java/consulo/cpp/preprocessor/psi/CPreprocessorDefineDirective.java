@@ -16,14 +16,37 @@
 
 package consulo.cpp.preprocessor.psi;
 
-
+import consulo.annotation.access.RequiredReadAction;
+import consulo.cpp.preprocessor.expand.CPreprocessorExpandContext;
 import consulo.language.psi.PsiNameIdentifierOwner;
 import consulo.language.psi.PsiNamedElement;
+import org.jspecify.annotations.Nullable;
+
+import java.util.List;
 
 /**
  * @author VISTALL
  * @date 7:23/11.12.2011
  */
-public interface CPreprocessorDefineDirective extends CPreprocessorElement, PsiNameIdentifierOwner, PsiNamedElement {
+public interface CPreprocessorDefineDirective extends CPreprocessorDirective, PsiNameIdentifierOwner, PsiNamedElement {
     CPsiSharpDefineValue getValue();
+
+    /**
+     * The parameters of a function-like macro - {@code __VA_ARGS__}'s {@code ...} included - or {@code null} for an
+     * object-like one.
+     */
+    @Nullable
+    List<String> getParameters();
+
+    @Override
+    @RequiredReadAction
+    default void expand(CPreprocessorExpandContext context) {
+        context.removeFromSource(getTextRange());
+
+        String name = getName();
+        if (name != null) {
+            CPsiSharpDefineValue value = getValue();
+            context.define(name, getParameters(), value == null ? "" : value.getNode().getChars(), this);
+        }
+    }
 }

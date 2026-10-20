@@ -4,7 +4,7 @@ import consulo.annotation.component.ExtensionImpl;
 import consulo.language.editor.rawHighlight.HighlightVisitor;
 import consulo.language.editor.rawHighlight.HighlightVisitorFactory;
 import consulo.language.psi.PsiFile;
-import org.napile.cpp4idea.lang.psi.CPsiFile;
+import consulo.cpp.lang.psi.CPsiFile;
 
 import jakarta.annotation.Nonnull;
 

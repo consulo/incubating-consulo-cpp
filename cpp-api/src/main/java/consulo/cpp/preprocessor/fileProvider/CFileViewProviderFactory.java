@@ -7,7 +7,7 @@ import consulo.language.file.LanguageFileViewProviderFactory;
 import consulo.language.psi.PsiManager;
 import consulo.virtualFileSystem.VirtualFile;
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.CLanguage;
+import consulo.cpp.lang.CLanguage;
 
 import jakarta.annotation.Nonnull;
 

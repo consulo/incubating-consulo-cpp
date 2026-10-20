@@ -17,7 +17,19 @@ package consulo.cpp.cmake;
 
 import consulo.cmake.externalSystem.model.CMakeCompileData;
 import consulo.cpp.module.extension.CCompileSettings;
-import consulo.cpp.module.extension.CLanguageStandard;
+import consulo.cpp.lang.version.C11LanguageVersion;
+import consulo.cpp.lang.version.C17LanguageVersion;
+import consulo.cpp.lang.version.C23LanguageVersion;
+import consulo.cpp.lang.version.C89LanguageVersion;
+import consulo.cpp.lang.version.C99LanguageVersion;
+import consulo.cpp.lang.version.CLanguageVersion;
+import consulo.cpp.lang.version.CLanguageVersions;
+import consulo.cpp.lang.version.Cpp11LanguageVersion;
+import consulo.cpp.lang.version.Cpp14LanguageVersion;
+import consulo.cpp.lang.version.Cpp17LanguageVersion;
+import consulo.cpp.lang.version.Cpp20LanguageVersion;
+import consulo.cpp.lang.version.Cpp23LanguageVersion;
+import consulo.cpp.lang.version.Cpp98LanguageVersion;
 import org.jspecify.annotations.Nullable;
 
 import java.util.ArrayList;
@@ -31,29 +43,35 @@ import java.util.Set;
  * @since 2026-10-10
  */
 final class CMakeCompileSettingsCollector {
-    private static final Map<String, CLanguageStandard> C_STANDARDS = Map.of(
-        "90", CLanguageStandard.C89,
-        "99", CLanguageStandard.C99,
-        "11", CLanguageStandard.C11,
-        "17", CLanguageStandard.C17,
-        "23", CLanguageStandard.C23
+    /**
+     * {@code CMAKE_C_STANDARD} values to language version ids.
+     */
+    private static final Map<String, String> C_STANDARDS = Map.of(
+        "90", C89LanguageVersion.ID,
+        "99", C99LanguageVersion.ID,
+        "11", C11LanguageVersion.ID,
+        "17", C17LanguageVersion.ID,
+        "23", C23LanguageVersion.ID
     );
 
-    private static final Map<String, CLanguageStandard> CPP_STANDARDS = Map.of(
-        "98", CLanguageStandard.CPP98,
-        "11", CLanguageStandard.CPP11,
-        "14", CLanguageStandard.CPP14,
-        "17", CLanguageStandard.CPP17,
-        "20", CLanguageStandard.CPP20,
-        "23", CLanguageStandard.CPP23,
-        "26", CLanguageStandard.CPP23
+    /**
+     * {@code CMAKE_CXX_STANDARD} values to language version ids.
+     */
+    private static final Map<String, String> CPP_STANDARDS = Map.of(
+        "98", Cpp98LanguageVersion.ID,
+        "11", Cpp11LanguageVersion.ID,
+        "14", Cpp14LanguageVersion.ID,
+        "17", Cpp17LanguageVersion.ID,
+        "20", Cpp20LanguageVersion.ID,
+        "23", Cpp23LanguageVersion.ID,
+        "26", Cpp23LanguageVersion.ID
     );
 
     private final Set<String> myIncludePaths = new LinkedHashSet<>();
     private final Set<String> mySystemIncludePaths = new LinkedHashSet<>();
     private final Map<String, String> myDefines = new LinkedHashMap<>();
-    private CLanguageStandard myCStandard = CLanguageStandard.DEFAULT;
-    private CLanguageStandard myCppStandard = CLanguageStandard.DEFAULT;
+    private @Nullable CLanguageVersion myCStandard;
+    private @Nullable CLanguageVersion myCppStandard;
 
     void add(CMakeCompileData data) {
         myIncludePaths.addAll(data.getIncludePaths());
@@ -62,10 +80,10 @@ final class CMakeCompileSettingsCollector {
 
         String language = data.getLanguage();
         if (CMakeCompileData.LANGUAGE_C.equals(language)) {
-            myCStandard = newer(myCStandard, find(C_STANDARDS, data.getStandard()));
+            myCStandard = CLanguageVersions.newer(myCStandard, find(C_STANDARDS, data.getStandard()));
         }
         else if (CMakeCompileData.LANGUAGE_CXX.equals(language)) {
-            myCppStandard = newer(myCppStandard, find(CPP_STANDARDS, data.getStandard()));
+            myCppStandard = CLanguageVersions.newer(myCppStandard, find(CPP_STANDARDS, data.getStandard()));
         }
     }
 
@@ -81,11 +99,7 @@ final class CMakeCompileSettingsCollector {
         return settings;
     }
 
-    private static CLanguageStandard find(Map<String, CLanguageStandard> standards, @Nullable String standard) {
-        return standard == null ? CLanguageStandard.DEFAULT : standards.getOrDefault(standard, CLanguageStandard.DEFAULT);
-    }
-
-    private static CLanguageStandard newer(CLanguageStandard current, CLanguageStandard candidate) {
-        return candidate.ordinal() > current.ordinal() ? candidate : current;
+    private static @Nullable CLanguageVersion find(Map<String, String> standards, @Nullable String standard) {
+        return standard == null ? null : CLanguageVersions.findById(standards.get(standard));
     }
 }

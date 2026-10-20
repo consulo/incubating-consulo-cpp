@@ -2,16 +2,20 @@ package consulo.cpp.lang.editor.highlight;
 
 import consulo.annotation.component.ExtensionImpl;
 import consulo.cpp.preprocessor.psi.CPreprocessorMacroReference;
+import consulo.document.util.TextRange;
 import consulo.language.editor.rawHighlight.HighlightInfo;
 import consulo.language.editor.rawHighlight.HighlightInfoHolder;
 import consulo.language.editor.rawHighlight.HighlightInfoType;
 import consulo.language.editor.rawHighlight.HighlightVisitor;
+import consulo.language.impl.psi.ForeignLeafPsiElement;
 import consulo.language.psi.PsiElement;
 import consulo.language.psi.PsiFile;
+import consulo.language.psi.util.PsiTreeUtil;
 import org.jetbrains.annotations.NotNull;
-import org.napile.cpp4idea.lang.psi.CPsiEnumConstant;
-import org.napile.cpp4idea.lang.psi.CPsiFile;
-import org.napile.cpp4idea.lang.psi.visitors.CPsiElementVisitor;
+import consulo.cpp.lang.psi.CPsiEnumConstant;
+import consulo.cpp.lang.psi.CPsiTokens;
+import consulo.cpp.lang.psi.CPsiFile;
+import consulo.cpp.lang.psi.visitor.CPsiElementVisitor;
 
 /**
  * @author VISTALL
@@ -30,9 +34,15 @@ public class CHighlightVisitor extends CPsiElementVisitor implements HighlightVi
 	@Override
 	public void visitPreprocessorMacroReference(CPreprocessorMacroReference reference)
 	{
-		PsiElement element = reference.resolve();
+		// the macro name only: the call of a function-like macro also holds its arguments
+		TextRange nameRange = reference.getRangeInElement().shiftRight(reference.getElement().getTextRange().getStartOffset());
+		if(expandsToKeywordsOnly(reference.getElement()))
+		{
+			myHolder.add(HighlightInfo.newHighlightInfo(HighlightInfoType.INFORMATION).textAttributes(CSyntaxHighlighter.KEYWORD).range(nameRange).create());
+			return;
+		}
 
-		PsiElement referenceElement = reference.getReferenceElement();
+		PsiElement element = reference.resolve();
 		if(element == null)
 		{
 			if(reference.isDefined())
@@ -40,13 +50,32 @@ public class CHighlightVisitor extends CPsiElementVisitor implements HighlightVi
 				return;
 			}
 
-			String errorText = "Not '" + referenceElement.getText() + "' resolved";
-			myHolder.add(HighlightInfo.newHighlightInfo(HighlightInfoType.WRONG_REF).descriptionAndTooltip(errorText).range(referenceElement).create());
+			String errorText = "Not '" + reference.getCanonicalText() + "' resolved";
+			myHolder.add(HighlightInfo.newHighlightInfo(HighlightInfoType.WRONG_REF).descriptionAndTooltip(errorText).range(nameRange).create());
 		}
 		else
 		{
-			HighlightUtil.highlight(element, referenceElement, myHolder);
+			HighlightUtil.highlight(element, nameRange, myHolder);
 		}
+	}
+
+	/**
+	 * Whether a macro use expands to keywords only - {@code bool} to {@code _Bool}, {@code INLINE} to {@code static inline}:
+	 * such a use reads as the keywords it stands for. The expansion follows the use in the tree as zero-length foreign
+	 * leaves, with nested macros already expanded; a use in a directive, or of a macro expanding to nothing, has none.
+	 */
+	private static boolean expandsToKeywordsOnly(PsiElement use)
+	{
+		boolean expanded = false;
+		for(PsiElement leaf = PsiTreeUtil.nextLeaf(use); leaf instanceof ForeignLeafPsiElement; leaf = PsiTreeUtil.nextLeaf(leaf))
+		{
+			if(!CPsiTokens.KEYWORD_SET.contains(leaf.getNode().getElementType()))
+			{
+				return false;
+			}
+			expanded = true;
+		}
+		return expanded;
 	}
 
 	@Override

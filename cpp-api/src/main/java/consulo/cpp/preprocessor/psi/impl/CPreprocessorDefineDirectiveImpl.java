@@ -16,6 +16,7 @@
 
 package consulo.cpp.preprocessor.psi.impl;
 
+import consulo.cpp.preprocessor.psi.CPreprocessorElementTypes;
 import consulo.cpp.preprocessor.psi.CPreprocessorDefineDirective;
 import consulo.cpp.preprocessor.psi.CPsiSharpDefineValue;
 import consulo.cpp.preprocessor.psi.stub.CPreprocessorDefineStub;
@@ -28,7 +29,10 @@ import consulo.language.psi.stub.IStubElementType;
 import consulo.language.util.IncorrectOperationException;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.napile.cpp4idea.lang.psi.CPsiTokens;
+import consulo.cpp.lang.psi.CPsiTokens;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @author VISTALL
@@ -81,6 +85,31 @@ public class CPreprocessorDefineDirectiveImpl
     public CPsiSharpDefineValue getValue()
     {
         return findChildByClass(CPsiSharpDefineValue.class);
+    }
+
+    @Override
+    @Nullable
+    public List<String> getParameters()
+    {
+        CPreprocessorDefineStub stub = getStub();
+        if (stub != null)
+        {
+            return stub.getParameters();
+        }
+        ASTNode parameterList = getNode().findChildByType(CPreprocessorElementTypes.DEFINE_PARAMETER_LIST);
+        if (parameterList == null)
+        {
+            return null;
+        }
+        List<String> parameters = new ArrayList<>();
+        for (ASTNode child = parameterList.getFirstChildNode(); child != null; child = child.getTreeNext())
+        {
+            if (child.getElementType() == CPsiTokens.IDENTIFIER || child.getElementType() == CPsiTokens.ELLIPSIS)
+            {
+                parameters.add(child.getText());
+            }
+        }
+        return parameters;
     }
 
     @Override

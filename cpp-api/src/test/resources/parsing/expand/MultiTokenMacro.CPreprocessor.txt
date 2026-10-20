@@ -1,0 +1,16 @@
+CPreprocessorFile:MultiTokenMacro.c
+  CPreprocessorDefineDirectiveImpl: #define UINT unsigned int
+    PsiElement(S_DEFINE_KEYWORD)('#define')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('UINT')
+    PsiWhiteSpace(' ')
+    CPsiSharpDefineValueImpl: unsigned int
+      PsiElement(IDENTIFIER)('unsigned')
+      PsiWhiteSpace(' ')
+      PsiElement(IDENTIFIER)('int')
+  PsiElement(NEW_LINE)('\n')
+  PsiElement(IDENTIFIER)('UINT')
+  PsiWhiteSpace(' ')
+  PsiElement(IDENTIFIER)('counter')
+  PsiElement(SEMICOLON)(';')
+  PsiElement(NEW_LINE)('\n')

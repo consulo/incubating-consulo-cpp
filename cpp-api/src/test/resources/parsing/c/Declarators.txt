@@ -1,0 +1,188 @@
+FILE
+  CPsiFieldImpl: static int counter = 0
+    CPsiModifierListImpl: static
+      PsiElement(STATIC_KEYWORD)('static')
+    PsiWhiteSpace(' ')
+    CPsiTypeRefImpl: int
+      PsiElement(INT_KEYWORD)('int')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('counter')
+    PsiWhiteSpace(' ')
+    PsiElement(EQ)('=')
+    PsiWhiteSpace(' ')
+    CPsiLiteralExpressionImpl: 0
+      PsiElement(INTEGER_LITERAL)('0')
+  PsiElement(COMMA)(',')
+  PsiWhiteSpace(' ')
+  CPsiFieldImpl: *cursor
+    PsiElement(ASTERISK)('*')
+    PsiElement(IDENTIFIER)('cursor')
+  PsiElement(COMMA)(',')
+  PsiWhiteSpace(' ')
+  CPsiFieldImpl: table[16][4];
+    PsiElement(IDENTIFIER)('table')
+    PsiElement(LBRACKET)('[')
+    CPsiLiteralExpressionImpl: 16
+      PsiElement(INTEGER_LITERAL)('16')
+    PsiElement(RBRACKET)(']')
+    PsiElement(LBRACKET)('[')
+    CPsiLiteralExpressionImpl: 4
+      PsiElement(INTEGER_LITERAL)('4')
+    PsiElement(RBRACKET)(']')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')
+  CPsiFieldImpl: const char* const names[] = { "a", "b" };
+    CPsiModifierListImpl: const
+      PsiElement(CONST_KEYWORD)('const')
+    PsiWhiteSpace(' ')
+    CPsiTypeRefImpl: char
+      PsiElement(CHAR_KEYWORD)('char')
+    PsiElement(ASTERISK)('*')
+    PsiWhiteSpace(' ')
+    PsiElement(CONST_KEYWORD)('const')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('names')
+    PsiElement(LBRACKET)('[')
+    PsiElement(RBRACKET)(']')
+    PsiWhiteSpace(' ')
+    PsiElement(EQ)('=')
+    PsiWhiteSpace(' ')
+    CPsiInitializerListImpl: { "a", "b" }
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace(' ')
+      CPsiLiteralExpressionImpl: "a"
+        PsiElement(STRING_LITERAL)('"a"')
+      PsiElement(COMMA)(',')
+      PsiWhiteSpace(' ')
+      CPsiLiteralExpressionImpl: "b"
+        PsiElement(STRING_LITERAL)('"b"')
+      PsiWhiteSpace(' ')
+      PsiElement(RBRACE)('}')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')
+  CPsiFieldImpl: unsigned long long big;
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: unsigned long long
+      PsiElement(UNSIGNED_KEYWORD)('unsigned')
+      PsiWhiteSpace(' ')
+      PsiElement(LONG_KEYWORD)('long')
+      PsiWhiteSpace(' ')
+      PsiElement(LONG_KEYWORD)('long')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('big')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')
+  CPsiDeclarationMethodImpl: char *strdup(const char *s);
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: char
+      PsiElement(CHAR_KEYWORD)('char')
+    PsiWhiteSpace(' ')
+    PsiElement(ASTERISK)('*')
+    PsiElement(IDENTIFIER)('strdup')
+    CPsiParameterListImpl: (const char *s)
+      PsiElement(LPARENTH)('(')
+      CPsiParameterImpl: const char *s
+        CPsiModifierListImpl: const
+          PsiElement(CONST_KEYWORD)('const')
+        PsiWhiteSpace(' ')
+        CPsiTypeRefImpl: char
+          PsiElement(CHAR_KEYWORD)('char')
+        PsiWhiteSpace(' ')
+        PsiElement(ASTERISK)('*')
+        PsiElement(IDENTIFIER)('s')
+      PsiElement(RPARENTH)(')')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')
+  CPsiDeclarationMethodImpl: int printf(const char *format, ...);
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: int
+      PsiElement(INT_KEYWORD)('int')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('printf')
+    CPsiParameterListImpl: (const char *format, ...)
+      PsiElement(LPARENTH)('(')
+      CPsiParameterImpl: const char *format
+        CPsiModifierListImpl: const
+          PsiElement(CONST_KEYWORD)('const')
+        PsiWhiteSpace(' ')
+        CPsiTypeRefImpl: char
+          PsiElement(CHAR_KEYWORD)('char')
+        PsiWhiteSpace(' ')
+        PsiElement(ASTERISK)('*')
+        PsiElement(IDENTIFIER)('format')
+      PsiElement(COMMA)(',')
+      PsiWhiteSpace(' ')
+      CPsiParameterImpl: ...
+        PsiElement(ELLIPSIS)('...')
+      PsiElement(RPARENTH)(')')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')
+  CPsiDeclarationMethodImpl: bool init(void);
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: bool
+      PsiElement(IDENTIFIER)('bool')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('init')
+    CPsiParameterListImpl: (void)
+      PsiElement(LPARENTH)('(')
+      CPsiParameterImpl: void
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: void
+          PsiElement(VOID_KEYWORD)('void')
+      PsiElement(RPARENTH)(')')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')
+  CPsiFieldImpl: struct node { struct node *next; int value : 4; unsigned : 0; } head;
+    CPsiStructDeclarationImpl: struct node { struct node *next; int value : 4; unsigned : 0; }
+      PsiElement(STRUCT_KEYWORD)('struct')
+      PsiWhiteSpace(' ')
+      PsiElement(IDENTIFIER)('node')
+      PsiWhiteSpace(' ')
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace(' ')
+      CPsiDeclarationFieldImpl: struct node *next;
+        CPsiTypeRefImpl: struct node
+          PsiElement(STRUCT_KEYWORD)('struct')
+          PsiWhiteSpace(' ')
+          PsiElement(IDENTIFIER)('node')
+        PsiWhiteSpace(' ')
+        PsiElement(ASTERISK)('*')
+        PsiElement(IDENTIFIER)('next')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace(' ')
+      CPsiDeclarationFieldImpl: int value : 4;
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: int
+          PsiElement(INT_KEYWORD)('int')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('value')
+        PsiWhiteSpace(' ')
+        PsiElement(COLON)(':')
+        PsiWhiteSpace(' ')
+        CPsiLiteralExpressionImpl: 4
+          PsiElement(INTEGER_LITERAL)('4')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace(' ')
+      CPsiDeclarationFieldImpl: unsigned : 0;
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: unsigned
+          PsiElement(UNSIGNED_KEYWORD)('unsigned')
+        PsiWhiteSpace(' ')
+        PsiElement(COLON)(':')
+        PsiWhiteSpace(' ')
+        CPsiLiteralExpressionImpl: 0
+          PsiElement(INTEGER_LITERAL)('0')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace(' ')
+      PsiElement(RBRACE)('}')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('head')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')

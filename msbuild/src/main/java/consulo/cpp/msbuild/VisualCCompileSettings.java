@@ -15,7 +15,15 @@
  */
 package consulo.cpp.msbuild;
 
-import consulo.cpp.module.extension.CLanguageStandard;
+import consulo.cpp.lang.version.C11LanguageVersion;
+import consulo.cpp.lang.version.C17LanguageVersion;
+import consulo.cpp.lang.version.C23LanguageVersion;
+import consulo.cpp.lang.version.CLanguageVersion;
+import consulo.cpp.lang.version.CLanguageVersions;
+import consulo.cpp.lang.version.Cpp14LanguageVersion;
+import consulo.cpp.lang.version.Cpp17LanguageVersion;
+import consulo.cpp.lang.version.Cpp20LanguageVersion;
+import consulo.cpp.lang.version.Cpp23LanguageVersion;
 import consulo.msbuild.MSBuildEvaluatedItem;
 import consulo.msbuild.MSBuildImportUtil;
 import consulo.util.io.FileUtil;
@@ -39,27 +47,33 @@ public record VisualCCompileSettings(List<String> includeDirectories,
                                      List<Path> sourceDirectories,
                                      boolean hasCpp,
                                      boolean hasC,
-                                     CLanguageStandard cppStandard,
-                                     CLanguageStandard cStandard,
+                                     @Nullable CLanguageVersion cppStandard,
+                                     @Nullable CLanguageVersion cStandard,
                                      String runtimeLibrary,
                                      boolean conformingCplusplus) {
     private static final String COMPILE_AS_C = "CompileAsC";
     private static final String COMPILE_AS_CPP = "CompileAsCpp";
     private static final String CONFORMING_CPLUSPLUS_OPTION = "/Zc:__cplusplus";
 
-    private static final Map<String, CLanguageStandard> CPP_STANDARDS = Map.of(
-        "stdcpp14", CLanguageStandard.CPP14,
-        "stdcpp17", CLanguageStandard.CPP17,
-        "stdcpp20", CLanguageStandard.CPP20,
-        "stdcpp23", CLanguageStandard.CPP23,
-        "stdcpplatest", CLanguageStandard.CPP23
+    /**
+     * {@code LanguageStandard} values to language version ids.
+     */
+    private static final Map<String, String> CPP_STANDARDS = Map.of(
+        "stdcpp14", Cpp14LanguageVersion.ID,
+        "stdcpp17", Cpp17LanguageVersion.ID,
+        "stdcpp20", Cpp20LanguageVersion.ID,
+        "stdcpp23", Cpp23LanguageVersion.ID,
+        "stdcpplatest", Cpp23LanguageVersion.ID
     );
 
-    private static final Map<String, CLanguageStandard> C_STANDARDS = Map.of(
-        "stdc11", CLanguageStandard.C11,
-        "stdc17", CLanguageStandard.C17,
-        "stdc23", CLanguageStandard.C23,
-        "stdclatest", CLanguageStandard.C23
+    /**
+     * {@code LanguageStandard_C} values to language version ids.
+     */
+    private static final Map<String, String> C_STANDARDS = Map.of(
+        "stdc11", C11LanguageVersion.ID,
+        "stdc17", C17LanguageVersion.ID,
+        "stdc23", C23LanguageVersion.ID,
+        "stdclatest", C23LanguageVersion.ID
     );
 
     public static VisualCCompileSettings of(Path projectDir, List<? extends MSBuildEvaluatedItem> items) {
@@ -134,8 +148,8 @@ public record VisualCCompileSettings(List<String> includeDirectories,
             new ArrayList<>(sourceDirectories),
             hasCpp,
             hasC,
-            hasCpp ? CPP_STANDARDS.getOrDefault(languageStandard.toLowerCase(Locale.ROOT), CLanguageStandard.CPP14) : CLanguageStandard.DEFAULT,
-            hasC ? C_STANDARDS.getOrDefault(languageStandardC.toLowerCase(Locale.ROOT), CLanguageStandard.DEFAULT) : CLanguageStandard.DEFAULT,
+            hasCpp ? CLanguageVersions.findById(CPP_STANDARDS.getOrDefault(languageStandard.toLowerCase(Locale.ROOT), Cpp14LanguageVersion.ID)) : null,
+            hasC ? CLanguageVersions.findById(C_STANDARDS.get(languageStandardC.toLowerCase(Locale.ROOT))) : null,
             runtimeLibrary,
             conformingCplusplus
         );

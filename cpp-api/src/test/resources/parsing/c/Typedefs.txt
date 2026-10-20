@@ -1,0 +1,110 @@
+FILE
+  CPsiTypeDeclarationImpl: typedef unsigned long size_type;
+    CPsiModifierListImpl: typedef
+      PsiElement(TYPEDEF_KEYWORD)('typedef')
+    PsiWhiteSpace(' ')
+    CPsiTypeRefImpl: unsigned long
+      PsiElement(UNSIGNED_KEYWORD)('unsigned')
+      PsiWhiteSpace(' ')
+      PsiElement(LONG_KEYWORD)('long')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('size_type')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')
+  CPsiTypeDeclarationImpl: typedef struct __array array;
+    CPsiModifierListImpl: typedef
+      PsiElement(TYPEDEF_KEYWORD)('typedef')
+    PsiWhiteSpace(' ')
+    CPsiTypeRefImpl: struct __array
+      PsiElement(STRUCT_KEYWORD)('struct')
+      PsiWhiteSpace(' ')
+      PsiElement(IDENTIFIER)('__array')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('array')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')
+  CPsiTypeDeclarationImpl: typedef enum {
+  MSG_INSTANCE_LIMIT, MSG_WATCH_LIMIT
+} MSG;
+    CPsiModifierListImpl: typedef
+      PsiElement(TYPEDEF_KEYWORD)('typedef')
+    PsiWhiteSpace(' ')
+    CPsiEnumImpl: enum {
+  MSG_INSTANCE_LIMIT, MSG_WATCH_LIMIT
+}
+      PsiElement(ENUM_KEYWORD)('enum')
+      PsiWhiteSpace(' ')
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n  ')
+      CPsiEnumConstantImpl: MSG_INSTANCE_LIMIT
+        PsiElement(IDENTIFIER)('MSG_INSTANCE_LIMIT')
+      PsiElement(COMMA)(',')
+      PsiWhiteSpace(' ')
+      CPsiEnumConstantImpl: MSG_WATCH_LIMIT
+        PsiElement(IDENTIFIER)('MSG_WATCH_LIMIT')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('MSG')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')
+  CPsiTypeDeclarationImpl: typedef struct {
+  int x, y;
+} point;
+    CPsiModifierListImpl: typedef
+      PsiElement(TYPEDEF_KEYWORD)('typedef')
+    PsiWhiteSpace(' ')
+    CPsiStructDeclarationImpl: struct {
+  int x, y;
+}
+      PsiElement(STRUCT_KEYWORD)('struct')
+      PsiWhiteSpace(' ')
+      PsiElement(LBRACE)('{')
+      PsiWhiteSpace('\n  ')
+      CPsiDeclarationFieldImpl: int x
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: int
+          PsiElement(INT_KEYWORD)('int')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('x')
+      PsiElement(COMMA)(',')
+      PsiWhiteSpace(' ')
+      CPsiDeclarationFieldImpl: y;
+        PsiElement(IDENTIFIER)('y')
+        PsiElement(SEMICOLON)(';')
+      PsiWhiteSpace('\n')
+      PsiElement(RBRACE)('}')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('point')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')
+  CPsiDeclarationMethodImpl: array* array_create(int initial_capacity);
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: array
+      PsiElement(IDENTIFIER)('array')
+    PsiElement(ASTERISK)('*')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('array_create')
+    CPsiParameterListImpl: (int initial_capacity)
+      PsiElement(LPARENTH)('(')
+      CPsiParameterImpl: int initial_capacity
+        CPsiModifierListImpl: 
+          <empty list>
+        CPsiTypeRefImpl: int
+          PsiElement(INT_KEYWORD)('int')
+        PsiWhiteSpace(' ')
+        PsiElement(IDENTIFIER)('initial_capacity')
+      PsiElement(RPARENTH)(')')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')
+  CPsiFieldImpl: point origin;
+    CPsiModifierListImpl: 
+      <empty list>
+    CPsiTypeRefImpl: point
+      PsiElement(IDENTIFIER)('point')
+    PsiWhiteSpace(' ')
+    PsiElement(IDENTIFIER)('origin')
+    PsiElement(SEMICOLON)(';')
+  PsiWhiteSpace('\n')
