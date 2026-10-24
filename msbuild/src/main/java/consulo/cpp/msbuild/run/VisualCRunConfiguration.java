@@ -22,12 +22,14 @@ import consulo.execution.CommonProgramRunConfigurationParameters;
 import consulo.execution.configuration.CommandLineState;
 import consulo.execution.configuration.ConfigurationFactory;
 import consulo.execution.configuration.EnvironmentVariablesData;
+import consulo.execution.configuration.LegacyRunConfigurationConverter;
 import consulo.execution.configuration.ModuleBasedConfiguration;
-import consulo.execution.configuration.RunConfiguration;
 import consulo.execution.configuration.RunConfigurationModule;
 import consulo.execution.configuration.RunProfileState;
 import consulo.execution.configuration.RuntimeConfigurationError;
-import consulo.execution.configuration.ui.SettingsEditor;
+import consulo.execution.configuration.fragment.EnvironmentFragmentState;
+import consulo.execution.configuration.fragment.ProgramParametersFragmentState;
+import consulo.execution.configuration.fragment.WorkingDirectoryFragmentState;
 import consulo.execution.executor.Executor;
 import consulo.execution.runner.ExecutionEnvironment;
 import consulo.module.Module;
@@ -43,8 +45,6 @@ import consulo.process.ProcessHandlerBuilderFactory;
 import consulo.process.cmd.GeneralCommandLine;
 import consulo.process.cmd.ParametersListUtil;
 import consulo.util.lang.StringUtil;
-import consulo.util.xml.serializer.InvalidDataException;
-import consulo.util.xml.serializer.WriteExternalException;
 import org.jdom.Element;
 import org.jspecify.annotations.Nullable;
 
@@ -68,10 +68,6 @@ public class VisualCRunConfiguration extends ModuleBasedConfiguration<RunConfigu
     private static final String ATTR_WORKING_DIRECTORY = "working-directory";
     private static final Pattern ENVIRONMENT_REFERENCE = Pattern.compile("%([^%]+)%");
 
-    private @Nullable String myProgramParameters;
-    private @Nullable String myWorkingDirectory;
-    private EnvironmentVariablesData myEnvironmentVariables = EnvironmentVariablesData.DEFAULT;
-
     public VisualCRunConfiguration(String name, RunConfigurationModule configurationModule, ConfigurationFactory factory) {
         super(name, configurationModule, factory);
     }
@@ -93,8 +89,20 @@ public class VisualCRunConfiguration extends ModuleBasedConfiguration<RunConfigu
     }
 
     @Override
-    public SettingsEditor<? extends RunConfiguration> getConfigurationEditor() {
-        return new VisualCRunConfigurationEditor(getProject());
+    protected Class<VisualCRunConfigurationOptions> getOptionsClass() {
+        return VisualCRunConfigurationOptions.class;
+    }
+
+    @Override
+    protected void convertLegacyState(LegacyRunConfigurationConverter converter) {
+        super.convertLegacyState(converter);
+
+        Element element = converter.getElement();
+        EnvironmentVariablesData environment = EnvironmentVariablesData.readExternal(element);
+        converter.setOptions(new VisualCRunConfigurationOptions());
+        converter.addFragment(new ProgramParametersFragmentState(element.getAttributeValue(ATTR_PROGRAM_PARAMETERS)));
+        converter.addFragment(new WorkingDirectoryFragmentState(element.getAttributeValue(ATTR_WORKING_DIRECTORY)));
+        converter.addFragment(new EnvironmentFragmentState(environment.getEnvs(), environment.isPassParentEnvs()));
     }
 
     @Override
@@ -152,7 +160,7 @@ public class VisualCRunConfiguration extends ModuleBasedConfiguration<RunConfigu
             .withWorkingDirectory(target.workingDirectory())
             .withEnvironment(target.environment());
         commandLine.addParameters(target.arguments());
-        commandLine.withParentEnvironmentType(myEnvironmentVariables.isPassParentEnvs()
+        commandLine.withParentEnvironmentType(isPassParentEnvs()
             ? GeneralCommandLine.ParentEnvironmentType.CONSOLE
             : GeneralCommandLine.ParentEnvironmentType.NONE);
         return commandLine;
@@ -170,10 +178,10 @@ public class VisualCRunConfiguration extends ModuleBasedConfiguration<RunConfigu
 
         Path executable = Path.of(debuggerCommand);
 
-        String programParameters = StringUtil.isEmptyOrSpaces(myProgramParameters) ? extension.getDebuggerArguments() : myProgramParameters;
+        String programParameters = StringUtil.isEmptyOrSpaces(getProgramParameters()) ? extension.getDebuggerArguments() : getProgramParameters();
         List<String> arguments = ParametersListUtil.parse(StringUtil.notNullize(programParameters));
 
-        String workingDirectory = StringUtil.isEmptyOrSpaces(myWorkingDirectory) ? extension.getDebuggerWorkingDirectory() : myWorkingDirectory;
+        String workingDirectory = StringUtil.isEmptyOrSpaces(getWorkingDirectory()) ? extension.getDebuggerWorkingDirectory() : getWorkingDirectory();
         Path executableDirectory = executable.getParent();
         Path workingDirectoryPath = !StringUtil.isEmptyOrSpaces(workingDirectory)
             ? Path.of(workingDirectory)
@@ -184,7 +192,7 @@ public class VisualCRunConfiguration extends ModuleBasedConfiguration<RunConfigu
         for (Map.Entry<String, String> entry : extension.getDebuggerEnvironment().entrySet()) {
             environment.put(entry.getKey(), expandEnvironmentReferences(entry.getValue(), os));
         }
-        environment.putAll(myEnvironmentVariables.getEnvs());
+        environment.putAll(getEnvs());
 
         return new VisualCLaunchTarget(executable, arguments, workingDirectoryPath, environment);
     }
@@ -198,65 +206,5 @@ public class VisualCRunConfiguration extends ModuleBasedConfiguration<RunConfigu
         }
         matcher.appendTail(builder);
         return builder.toString();
-    }
-
-    @Override
-    public void setProgramParameters(@Nullable String value) {
-        myProgramParameters = value;
-    }
-
-    @Override
-    public @Nullable String getProgramParameters() {
-        return myProgramParameters;
-    }
-
-    @Override
-    public void setWorkingDirectory(@Nullable String value) {
-        myWorkingDirectory = value;
-    }
-
-    @Override
-    public @Nullable String getWorkingDirectory() {
-        return myWorkingDirectory;
-    }
-
-    @Override
-    public void setEnvs(Map<String, String> envs) {
-        myEnvironmentVariables = myEnvironmentVariables.with(envs);
-    }
-
-    @Override
-    public Map<String, String> getEnvs() {
-        return myEnvironmentVariables.getEnvs();
-    }
-
-    @Override
-    public void setPassParentEnvs(boolean passParentEnvs) {
-        myEnvironmentVariables = myEnvironmentVariables.with(passParentEnvs);
-    }
-
-    @Override
-    public boolean isPassParentEnvs() {
-        return myEnvironmentVariables.isPassParentEnvs();
-    }
-
-    @Override
-    public void readExternal(Element element) throws InvalidDataException {
-        super.readExternal(element);
-        myProgramParameters = element.getAttributeValue(ATTR_PROGRAM_PARAMETERS);
-        myWorkingDirectory = element.getAttributeValue(ATTR_WORKING_DIRECTORY);
-        myEnvironmentVariables = EnvironmentVariablesData.readExternal(element);
-    }
-
-    @Override
-    public void writeExternal(Element element) throws WriteExternalException {
-        super.writeExternal(element);
-        if (myProgramParameters != null) {
-            element.setAttribute(ATTR_PROGRAM_PARAMETERS, myProgramParameters);
-        }
-        if (myWorkingDirectory != null) {
-            element.setAttribute(ATTR_WORKING_DIRECTORY, myWorkingDirectory);
-        }
-        myEnvironmentVariables.writeExternal(element);
     }
 }

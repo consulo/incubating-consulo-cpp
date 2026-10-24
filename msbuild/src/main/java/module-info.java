@@ -51,4 +51,6 @@ module consulo.cpp.msbuild {
     exports consulo.cpp.msbuild;
     exports consulo.cpp.msbuild.module;
     exports consulo.cpp.msbuild.run;
+
+    opens consulo.cpp.msbuild.run to consulo.util.xml.serializer, consulo.execution.api;
 }
